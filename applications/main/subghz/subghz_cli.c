@@ -29,7 +29,7 @@
 #include <lib/subghz/blocks/custom_btn.h>
 
 #define SUBGHZ_FREQUENCY_RANGE_STR \
-    "299999755...348000000 or 386999938...464000000 or 778999847...928000000"
+    "299999755...348000000 nebo 386999938...464000000 nebo 778999847...928000000"
 
 // Tx/Rx Carrier | only internal module
 // Tx/Rx command | both
@@ -131,7 +131,7 @@ void subghz_cli_command_rx_carrier(PipeSide* pipe, FuriString* args, void* conte
         }
         if(!furi_hal_subghz_is_frequency_valid(frequency)) {
             printf(
-                "Frequency must be in " SUBGHZ_FREQUENCY_RANGE_STR " range, not %lu\r\n",
+                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n,
                 frequency);
             return;
         }
@@ -141,7 +141,7 @@ void subghz_cli_command_rx_carrier(PipeSide* pipe, FuriString* args, void* conte
     furi_hal_subghz_load_custom_preset(subghz_device_cc1101_preset_ook_650khz_async_regs);
     frequency = furi_hal_subghz_set_frequency_and_path(frequency);
     printf("Prijimam na frekvenci %lu Hz\r\n", frequency);
-    printf("Press CTRL+C to stop\r\n");
+    printf("Stiskni CTRL+C pro zastaveni\r\n");
 
     furi_hal_power_suppress_charge_enter();
 
@@ -234,7 +234,7 @@ void subghz_cli_command_tx(PipeSide* pipe, FuriString* args, void* context) {
     const SubGhzDevice* device = subghz_cli_command_get_device(&device_ind);
     if(!subghz_devices_is_frequency_valid(device, frequency)) {
         printf(
-            "Frequency must be in " SUBGHZ_FREQUENCY_RANGE_STR " range, not %lu\r\n", frequency);
+            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n, frequency);
         subghz_devices_deinit();
         subghz_cli_radio_device_power_off();
         return;
@@ -245,7 +245,7 @@ void subghz_cli_command_tx(PipeSide* pipe, FuriString* args, void* context) {
         return;
     }
     printf(
-        "Transmitting at %lu, key %lx, te %lu, repeat %lu device %lu. Press CTRL+C to stop\r\n",
+        "Vysilam na %lu, klic %lx, TE %lu, opakovani %lu, zarizeni %lu. Stiskni CTRL+C pro zastaveni\r\n",
         frequency,
         key,
         te,
@@ -360,7 +360,7 @@ void subghz_cli_command_rx(PipeSide* pipe, FuriString* args, void* context) {
     const SubGhzDevice* device = subghz_cli_command_get_device(&device_ind);
     if(!subghz_devices_is_frequency_valid(device, frequency)) {
         printf(
-            "Frequency must be in " SUBGHZ_FREQUENCY_RANGE_STR " range, not %lu\r\n", frequency);
+            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n, frequency);
         subghz_devices_deinit();
         subghz_cli_radio_device_power_off();
         return;
@@ -443,7 +443,7 @@ void subghz_cli_command_rx_raw(PipeSide* pipe, FuriString* args, void* context) 
         }
         if(!furi_hal_subghz_is_frequency_valid(frequency)) {
             printf(
-                "Frequency must be in " SUBGHZ_FREQUENCY_RANGE_STR " range, not %lu\r\n",
+                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n,
                 frequency);
             return;
         }
@@ -466,7 +466,7 @@ void subghz_cli_command_rx_raw(PipeSide* pipe, FuriString* args, void* context) 
     furi_hal_subghz_start_async_rx(subghz_cli_command_rx_capture_callback, instance);
 
     // Wait for packets to arrive
-    printf("Listening at %lu. Press CTRL+C to stop\r\n", frequency);
+    printf("Posloucham na %lu. Stiskni CTRL+C pro zastaveni\r\n", frequency);
     LevelDuration level_duration;
     size_t counter = 0;
     while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
@@ -527,20 +527,20 @@ void subghz_cli_command_decode_raw(PipeSide* pipe, FuriString* args, void* conte
 
         if(!flipper_format_file_open_existing(fff_data_file, furi_string_get_cstr(file_name))) {
             printf(
-                "subghz decode_raw \033[0;31mError open file\033[0m %s\r\n",
+                "subghz decode_raw \033[0;31mChyba otevreni souboru\033[0m %s\r\n",
                 furi_string_get_cstr(file_name));
             break;
         }
 
         if(!flipper_format_read_header(fff_data_file, temp_str, &temp_data32)) {
-            printf("subghz decode_raw \033[0;31mMissing or incorrect header\033[0m\r\n");
+            printf("subghz decode_raw \033[0;31mChybi nebo je neplatna hlavicka\033[0m\r\n");
             break;
         }
 
         if(!strcmp(furi_string_get_cstr(temp_str), SUBGHZ_RAW_FILE_TYPE) &&
            temp_data32 == SUBGHZ_KEY_FILE_VERSION) {
         } else {
-            printf("subghz decode_raw \033[0;31mType or version mismatch\033[0m\r\n");
+            printf("subghz decode_raw \033[0;31mNesouhlasi typ nebo verze\033[0m\r\n");
             break;
         }
 
@@ -569,7 +569,7 @@ void subghz_cli_command_decode_raw(PipeSide* pipe, FuriString* args, void* conte
         }
 
         printf(
-            "Listening at \033[0;33m%s\033[0m.\r\n\r\nPress CTRL+C to stop\r\n\r\n",
+            "Posloucham na \033[0;33m%s\033[0m.\r\n\r\nStiskni CTRL+C pro zastaveni\r\n\r\n",
             furi_string_get_cstr(file_name));
 
         LevelDuration level_duration;
@@ -671,19 +671,19 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
 
         device = subghz_cli_command_get_device(&device_ind);
         if(device == NULL) {
-            printf("subghz tx_from_file: \033[0;31mError device not found\033[0m\r\n");
+            printf("subghz tx_from_file: \033[0;31mZarizeni nenalezeno\033[0m\r\n");
             break;
         }
 
         if(!flipper_format_file_open_existing(fff_data_file, furi_string_get_cstr(file_name))) {
             printf(
-                "subghz tx_from_file: \033[0;31mError open file\033[0m %s\r\n",
+                "subghz tx_from_file: \033[0;31mChyba otevreni souboru\033[0m %s\r\n",
                 furi_string_get_cstr(file_name));
             break;
         }
 
         if(!flipper_format_read_header(fff_data_file, temp_str, &temp_data32)) {
-            printf("subghz tx_from_file: \033[0;31mMissing or incorrect header\033[0m\r\n");
+            printf("subghz tx_from_file: \033[0;31mChybi nebo je neplatna hlavicka\033[0m\r\n");
             break;
         }
 
@@ -691,24 +691,24 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
             (!strcmp(furi_string_get_cstr(temp_str), SUBGHZ_RAW_FILE_TYPE))) &&
            temp_data32 == SUBGHZ_KEY_FILE_VERSION) {
         } else {
-            printf("subghz tx_from_file: \033[0;31mType or version mismatch\033[0m\r\n");
+            printf("subghz tx_from_file: \033[0;31mNesouhlasi typ nebo verze\033[0m\r\n");
             break;
         }
 
         //Load frequency
         if(!flipper_format_read_uint32(fff_data_file, "Frequency", &frequency, 1)) {
-            printf("subghz tx_from_file: \033[0;31mMissing Frequency\033[0m\r\n");
+            printf("subghz tx_from_file: \033[0;31mChybi frekvence\033[0m\r\n");
             break;
         }
 
         if(!subghz_devices_is_frequency_valid(device, frequency)) {
-            printf("subghz tx_from_file: \033[0;31mFrequency not supported\033[0m\r\n");
+            printf("subghz tx_from_file: \033[0;31mFrekvence neni podporovana\033[0m\r\n");
             break;
         }
 
         //Load preset
         if(!flipper_format_read_string(fff_data_file, "Preset", temp_str)) {
-            printf("subghz tx_from_file: \033[0;31mMissing Preset\033[0m\r\n");
+            printf("subghz tx_from_file: \033[0;31mChybi preset\033[0m\r\n");
             break;
         }
 
@@ -723,7 +723,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
             if(!flipper_format_get_value_count(fff_data_file, "Custom_preset_data", &temp_data32))
                 break;
             if(!temp_data32 || (temp_data32 % 2)) {
-                printf("subghz tx_from_file: \033[0;31mCustom_preset_data size error\033[0m\r\n");
+                printf("subghz tx_from_file: \033[0;31mCustom_preset_data: chyba velikosti\033[0m\r\n");
                 break;
             }
             custom_preset_data_size = sizeof(uint8_t) * temp_data32;
@@ -733,7 +733,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
                    "Custom_preset_data",
                    custom_preset_data,
                    custom_preset_data_size)) {
-                printf("subghz tx_from_file: \033[0;31mCustom_preset_data read error\033[0m\r\n");
+                printf("subghz tx_from_file: \033[0;31mCustom_preset_data: chyba cteni\033[0m\r\n");
                 break;
             }
             subghz_devices_load_preset(
@@ -750,7 +750,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
 
         //Load protocol
         if(!flipper_format_read_string(fff_data_file, "Protocol", temp_str)) {
-            printf("subghz tx_from_file: \033[0;31mMissing protocol\033[0m\r\n");
+            printf("subghz tx_from_file: \033[0;31mChybi protokol\033[0m\r\n");
             break;
         }
 
@@ -763,7 +763,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
             transmitter =
                 subghz_transmitter_alloc_init(environment, furi_string_get_cstr(temp_str));
             if(transmitter == NULL) {
-                printf("subghz tx_from_file: \033[0;31mError transmitter\033[0m\r\n");
+                printf("subghz tx_from_file: \033[0;31mChyba vysilace\033[0m\r\n");
                 is_init_protocol = false;
             }
 
@@ -771,7 +771,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
                 status = subghz_transmitter_deserialize(transmitter, fff_data_raw);
                 if(status != SubGhzProtocolStatusOk) {
                     printf(
-                        "subghz tx_from_file: \033[0;31mError deserialize protocol\033[0m %d\r\n",
+                        "subghz tx_from_file: \033[0;31mChyba dekodovani protokolu\033[0m %d\r\n",
                         status);
                     is_init_protocol = false;
                 }
@@ -783,14 +783,14 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
             transmitter =
                 subghz_transmitter_alloc_init(environment, furi_string_get_cstr(temp_str));
             if(transmitter == NULL) {
-                printf("subghz tx_from_file: \033[0;31mError transmitter\033[0m\r\n");
+                printf("subghz tx_from_file: \033[0;31mChyba vysilace\033[0m\r\n");
                 is_init_protocol = false;
             }
             if(is_init_protocol) {
                 status = subghz_transmitter_deserialize(transmitter, fff_data_file);
                 if(status != SubGhzProtocolStatusOk) {
                     printf(
-                        "subghz tx_from_file: \033[0;31mError deserialize protocol\033[0m %d\r\n",
+                        "subghz tx_from_file: \033[0;31mChyba dekodovani protokolu\033[0m %d\r\n",
                         status);
                     is_init_protocol = false;
                 }
@@ -816,7 +816,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
         furi_hal_power_suppress_charge_enter();
 
         printf(
-            "Listening at \033[0;33m%s\033[0m. Frequency=%lu, Protocol=%s\r\n\r\nPress CTRL+C to stop\r\n\r\n",
+            "Posloucham na \033[0;33m%s\033[0m. Frekvence=%lu, protokol=%s\r\n\r\nStiskni CTRL+C pro zastaveni\r\n\r\n",
             furi_string_get_cstr(file_name),
             frequency,
             furi_string_get_cstr(temp_str));
@@ -834,7 +834,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
                 subghz_devices_stop_async_tx(device);
 
             } else {
-                printf("Transmission on this frequency is restricted in your settings\r\n");
+                printf("V nastaveni je vysilani na teto frekvenci zakazano\r\n");
             }
 
             if(!strcmp(furi_string_get_cstr(temp_str), "RAW")) {
@@ -867,29 +867,29 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
 }
 
 static void subghz_cli_command_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("subghz <cmd> <args>\r\n");
-    printf("Cmd list:\r\n");
+    printf("Seznam prikazu:\r\n");
 
     printf(
-        "\tchat <frequency:in Hz> <device: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Chat with other Flippers\r\n");
+        "\tchat <frekvence v Hz> <zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Chat s dalsimi Flippery\r\n");
     printf(
         "\ttx <3 byte Key: in hex> <frequency: in Hz> <te: us> <repeat: count> <device: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Transmitting key\r\n");
-    printf("\trx <frequency:in Hz> <device: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Receive\r\n");
-    printf("\trx_raw <frequency:in Hz>\t - Receive RAW\r\n");
-    printf("\tdecode_raw <file_name: path_RAW_file>\t - Testing\r\n");
+    printf("\trx <frekvence v Hz> <zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Prijimat\r\n");
+    printf("\trx_raw <frekvence v Hz>\t - Prijimat RAW\r\n");
+    printf("\tdecode_raw <cesta_k_RAW_souboru>\t - Test dekodovani\r\n");
     printf(
-        "\ttx_from_file <file_name: path_file> <repeat: count> <device: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Transmitting from file\r\n");
+        "\ttx_from_file <cesta_k_souboru> <pocet opakovani> <zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Vysilat ze souboru\r\n");
 
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
         printf("\r\n");
         printf("  debug cmd:\r\n");
-        printf("\ttx_carrier <frequency:in Hz>\t - Transmitting carrier\r\n");
-        printf("\trx_carrier <frequency:in Hz>\t - Receive carrier\r\n");
+        printf("\ttx_carrier <frekvence v Hz>\t - Vysilat nosnou\r\n");
+        printf("\trx_carrier <frekvence v Hz>\t - Prijimat nosnou\r\n");
         printf(
-            "\tencrypt_keeloq <path_decrypted_file> <path_encrypted_file> <IV:16 bytes in hex>\t - Encrypt keeloq manufacture keys\r\n");
+            "\tencrypt_keeloq <cesta_vstup> <cesta_vystup> <IV:16 bajtu v hex>\t - Sifrovat vyrobni klice KeeLoq\r\n");
         printf(
-            "\tencrypt_raw <path_decrypted_file> <path_encrypted_file> <IV:16 bytes in hex>\t - Encrypt RAW data\r\n");
+            "\tencrypt_raw <cesta_vstup> <cesta_vystup> <IV:16 bajtu v hex>\t - Sifrovat data RAW\r\n");
     }
 }
 
@@ -959,7 +959,7 @@ static void subghz_cli_command_encrypt_raw(PipeSide* pipe, FuriString* args) {
 
         if(!subghz_keystore_raw_encrypted_save(
                furi_string_get_cstr(source), furi_string_get_cstr(destination), iv)) {
-            printf("Failed to save Keystore");
+            printf("Nepodarilo se ulozit uloziste klicu");
             break;
         }
 
@@ -990,7 +990,7 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
     const SubGhzDevice* device = subghz_cli_command_get_device(&device_ind);
     if(!subghz_devices_is_frequency_valid(device, frequency)) {
         printf(
-            "Frequency must be in " SUBGHZ_FREQUENCY_RANGE_STR " range, not %lu\r\n", frequency);
+            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n, frequency);
         subghz_devices_deinit();
         subghz_cli_radio_device_power_off();
         return;
@@ -999,8 +999,8 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
     // TODO
     if(!furi_hal_subghz_is_tx_allowed(frequency)) {
         printf(
-            "In your settings, only reception on this frequency (%lu) is allowed,\r\n"
-            "the actual operation of the application is not possible\r\n ",
+            "Podle nastaveni je na frekvenci %lu povolen jen prijem,\r\n"
+            "vysilani proto neni mozne\r\n ",
             frequency);
         subghz_devices_deinit();
         subghz_cli_radio_device_power_off();
@@ -1010,7 +1010,7 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
     SubGhzChatWorker* subghz_chat = subghz_chat_worker_alloc(pipe);
 
     if(!subghz_chat_worker_start(subghz_chat, device, frequency)) {
-        printf("Startup error SubGhzChatWorker\r\n");
+        printf("Chyba spusteni SubGhzChatWorker\r\n");
 
         if(subghz_chat_worker_is_running(subghz_chat)) {
             subghz_chat_worker_stop(subghz_chat);
@@ -1019,8 +1019,8 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
         return;
     }
 
-    printf("Receiving at frequency %lu Hz\r\n", frequency);
-    printf("Press CTRL+C to stop\r\n");
+    printf("Prijimam na frekvenci %lu Hz\r\n", frequency);
+    printf("Stiskni CTRL+C pro zastaveni\r\n");
 
     furi_hal_power_suppress_charge_enter();
 
@@ -1117,7 +1117,7 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
             case SubGhzChatEventUserEntrance:
                 furi_string_printf(
                     sysmsg,
-                    "\033[0;34m%s joined chat.\033[0m\r\n",
+                    "\033[0;34m%s se pripojil do chatu.\033[0m\r\n",
                     furi_hal_version_get_name_ptr());
                 subghz_chat_worker_write(
                     subghz_chat,
@@ -1126,7 +1126,7 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
                 break;
             case SubGhzChatEventUserExit:
                 furi_string_printf(
-                    sysmsg, "\033[0;31m%s left chat.\033[0m\r\n", furi_hal_version_get_name_ptr());
+                    sysmsg, "\033[0;31m%s opustil chat.\033[0m\r\n", furi_hal_version_get_name_ptr());
                 subghz_chat_worker_write(
                     subghz_chat,
                     (uint8_t*)furi_string_get_cstr(sysmsg),
