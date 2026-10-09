@@ -149,7 +149,7 @@ DisplayTest* display_test_alloc(void) {
     // Bias
     item = variable_item_list_add(
         instance->variable_item_list,
-        "Bias:",
+        "Predpeti:",
         COUNT_OF(config_bias_value),
         display_config_set_bias,
         instance);
@@ -158,7 +158,7 @@ DisplayTest* display_test_alloc(void) {
     // Regulation Ratio
     item = variable_item_list_add(
         instance->variable_item_list,
-        "Reg Ratio:",
+        "Pomer registru:",
         COUNT_OF(config_regulation_ratio_value),
         display_config_set_regulation_ratio,
         instance);
@@ -166,7 +166,7 @@ DisplayTest* display_test_alloc(void) {
     variable_item_set_current_value_text(item, config_regulation_ratio_text[5]);
     // Contrast
     item = variable_item_list_add(
-        instance->variable_item_list, "Contrast:", 64, display_config_set_contrast, instance);
+        instance->variable_item_list, "Kontrast:", 64, display_config_set_contrast, instance);
     variable_item_set_current_value_index(item, 32);
     variable_item_set_current_value_text(item, "32");
 
@@ -183,7 +183,7 @@ DisplayTest* display_test_alloc(void) {
         instance);
     submenu_add_item(
         instance->submenu,
-        "Configure",
+        "Nastavit",
         DisplayTestViewConfigure,
         display_test_submenu_callback,
         instance);
