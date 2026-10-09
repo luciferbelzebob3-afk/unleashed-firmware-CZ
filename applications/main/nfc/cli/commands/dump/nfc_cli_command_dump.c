@@ -128,7 +128,7 @@ static bool nfc_cli_dump_check_filepath_valid(FuriString* file_path, Storage* st
 
     bool result = true;
     if(!dir_exists) {
-        printf(ANSI_FG_RED "Path \'%s\' doesn't exist\r\n" ANSI_RESET, furi_string_get_cstr(buf));
+        printf(ANSI_FG_RED "Cesta \'%s\' neexistuje\r\n" ANSI_RESET, furi_string_get_cstr(buf));
         result = false;
     } else if(file_exists) {
         printf(
