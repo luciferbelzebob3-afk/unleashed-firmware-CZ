@@ -1,6 +1,6 @@
 App(
     appid="seed_capturer",
-    name="Seed Capturer",
+    name="Zachytavani seedu",
     apptype=FlipperAppType.EXTERNAL,
     targets=["f7"],
     entry_point="seed_capturer_app",
@@ -10,5 +10,5 @@ App(
     fap_category="Sub-GHz",
     fap_author="xMasterX (MMX)",
     fap_version="1.0",
-    fap_description="Collect Fix + Hop pairs from a FAAC SLH, Genius or Erreka remote and store them for offline seed recovery",
+    fap_description="Sbira dvojice Fix + Hop z ovladacu FAAC SLH, Genius nebo Erreka a uklada je pro offline obnovu seedu",
 )
