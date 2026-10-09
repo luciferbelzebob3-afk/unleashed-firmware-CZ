@@ -40,32 +40,32 @@ void nfc_render_iso14443_4a_extra(const Iso14443_4aData* data, FuriString* str) 
     furi_string_cat_printf(str, "\n::::::::::::::::[Protocol info]:::::::::::::::\n");
 
     if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRateBoth106Kbit)) {
-        furi_string_cat(str, "Bit rate PICC <-> PCD:\n  106 kBit/s supported\n");
+        furi_string_cat(str, "Prenosova rychlost PICC <-> PCD:\n  106 kBit/s podporovano\n");
     } else {
-        furi_string_cat(str, "Bit rate PICC -> PCD:\n");
+        furi_string_cat(str, "Prenosova rychlost PICC -> PCD:\n");
         if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRatePiccToPcd212Kbit)) {
-            furi_string_cat(str, "  212 kBit/s supported\n");
+            furi_string_cat(str, "  212 kBit/s podporovano\n");
         }
         if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRatePiccToPcd424Kbit)) {
-            furi_string_cat(str, "  424 kBit/s supported\n");
+            furi_string_cat(str, "  424 kBit/s podporovano\n");
         }
         if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRatePiccToPcd848Kbit)) {
-            furi_string_cat(str, "  848 kBit/s supported\n");
+            furi_string_cat(str, "  848 kBit/s podporovano\n");
         }
 
-        furi_string_cat(str, "Bit rate PICC <- PCD:\n");
+        furi_string_cat(str, "Prenosova rychlost PICC <- PCD:\n");
         if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRatePcdToPicc212Kbit)) {
-            furi_string_cat(str, "  212 kBit/s supported\n");
+            furi_string_cat(str, "  212 kBit/s podporovano\n");
         }
         if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRatePcdToPicc424Kbit)) {
-            furi_string_cat(str, "  424 kBit/s supported\n");
+            furi_string_cat(str, "  424 kBit/s podporovano\n");
         }
         if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRatePcdToPicc848Kbit)) {
-            furi_string_cat(str, "  848 kBit/s supported\n");
+            furi_string_cat(str, "  848 kBit/s podporovano\n");
         }
     }
 
-    furi_string_cat(str, "Max frame size: ");
+    furi_string_cat(str, "Maximalni velikost ramce: ");
 
     const uint16_t max_frame_size = iso14443_4a_get_frame_size_max(data);
     if(max_frame_size != 0) {
@@ -81,7 +81,7 @@ void nfc_render_iso14443_4a_extra(const Iso14443_4aData* data, FuriString* str) 
         // double to keep the soft-float calls out of the render path.
         const uint32_t fwt_us = fwt_fc * 25 / 339;
         furi_string_cat_printf(
-            str, "Max waiting time: %lu.%06lu s\n", fwt_us / 1000000UL, fwt_us % 1000000UL);
+            str, "Maximalni doba cekani: %lu.%06lu s\n", fwt_us / 1000000UL, fwt_us % 1000000UL);
     }
 
     const char* nad_support_str =
@@ -100,6 +100,6 @@ void nfc_render_iso14443_4a_extra(const Iso14443_4aData* data, FuriString* str) 
         }
     }
 
-    furi_string_cat(str, "\n\e#ISO14443-3A data");
+    furi_string_cat(str, "\n\e#Udaje ISO14443-3A");
     nfc_render_iso14443_3a_extra(iso14443_4a_get_base_data(data), str);
 }
