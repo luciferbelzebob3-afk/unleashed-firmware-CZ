@@ -48,7 +48,7 @@ static void js_callback(JsThreadEvent event, const char* msg, void* context) {
     furi_assert(app);
 
     if(event == JsThreadEventDone) {
-        FURI_LOG_I(TAG, "Script done");
+        FURI_LOG_I(TAG, "Skript dokoncen");
         console_view_print(app->console_view, "--- DOKONCENO ---");
     } else if(event == JsThreadEventPrint) {
         console_view_print(app->console_view, msg);
