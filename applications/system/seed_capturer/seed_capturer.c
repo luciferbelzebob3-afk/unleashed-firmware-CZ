@@ -135,7 +135,7 @@ static void seed_draw_callback(Canvas* canvas, void* ctx) {
         canvas_draw_str(canvas, 2, 10, "Remote type");
         break;
     case SeedSceneFreq:
-        canvas_draw_str(canvas, 2, 10, "Frequency");
+        canvas_draw_str(canvas, 2, 10, "Frekvence");
         break;
     case SeedSceneCapture:
         snprintf(
@@ -466,7 +466,7 @@ static bool seed_save(SeedCapturer* app) {
     if(ok) {
         snprintf(msg, sizeof(msg), "Saved %u hops\n%s", app->hop_count, name);
     } else {
-        snprintf(msg, sizeof(msg), "Save failed\n%s", name);
+        snprintf(msg, sizeof(msg), "Ulozeni selhalo\n%s", name);
     }
     seed_set_status(app, msg);
     return ok;
@@ -499,7 +499,7 @@ static bool seed_wipe(SeedCapturer* app) {
     if(ok) {
         snprintf(msg, sizeof(msg), "Deleted %lu capture%s", count, (count == 1) ? "" : "s");
     } else {
-        snprintf(msg, sizeof(msg), "Delete failed");
+        snprintf(msg, sizeof(msg), "Mazani selhalo");
     }
     seed_set_status(app, msg);
     return ok;
@@ -595,7 +595,7 @@ int32_t seed_capturer_app(void* p) {
                     seed_leave_capture(app, SeedSceneMenu);
                 } else if(event.key == InputKeyLeft) {
                     seed_capture_reset(app);
-                    furi_string_set(app->status, "Reset, listening");
+                    furi_string_set(app->status, "Reset, posloucham");
                 } else if((event.key == InputKeyOk) && (app->hop_count >= SEED_MIN_HOP)) {
                     seed_leave_capture(app, SeedSceneResult);
                     furi_mutex_release(app->mutex);
