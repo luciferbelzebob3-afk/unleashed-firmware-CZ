@@ -64,7 +64,7 @@ void lfrfid_scene_settings_write_targets_on_enter(void* context) {
     // honour whatever is in the settings file.
     lfrfid_text_store_set(app, "Settings plugin\nfailed to load\nerror %d", error);
     popup_set_icon(app->popup, 83, 22, &I_WarningDolphinFlip_45x42);
-    popup_set_header(app->popup, "Error", 64, 3, AlignCenter, AlignTop);
+    popup_set_header(app->popup, "Chyba", 64, 3, AlignCenter, AlignTop);
     popup_set_text(app->popup, app->text_store, 3, 19, AlignLeft, AlignTop);
     view_dispatcher_switch_to_view(app->view_dispatcher, LfRfidViewPopup);
 }
