@@ -303,13 +303,13 @@ SystemSettings* system_settings_alloc(void) {
     variable_item_set_current_value_text(item, heap_trace_mode_text[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "Sleep Method", COUNT_OF(sleep_method), sleep_method_changed, app);
+        app->var_item_list, "Rezim uspani", COUNT_OF(sleep_method), sleep_method_changed, app);
     value_index = furi_hal_rtc_is_flag_set(FuriHalRtcFlagLegacySleep) ? 1 : 0;
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, sleep_method[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "File Naming", COUNT_OF(filename_scheme), filename_scheme_changed, app);
+        app->var_item_list, "Pojmenovani souboru", COUNT_OF(filename_scheme), filename_scheme_changed, app);
     value_index = furi_hal_rtc_is_flag_set(FuriHalRtcFlagDetailedFilename) ? 1 : 0;
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, filename_scheme[value_index]);
