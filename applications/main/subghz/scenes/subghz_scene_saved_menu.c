@@ -16,21 +16,21 @@ void subghz_scene_saved_menu_on_enter(void* context) {
     SubGhz* subghz = context;
     submenu_add_item(
         subghz->submenu,
-        "Emulate",
+        "Emulovat",
         SubmenuIndexEmulate,
         subghz_scene_saved_menu_submenu_callback,
         subghz);
 
     submenu_add_item(
         subghz->submenu,
-        "Rename",
+        "Prejmenovat",
         SubmenuIndexEdit,
         subghz_scene_saved_menu_submenu_callback,
         subghz);
 
     submenu_add_item(
         subghz->submenu,
-        "Delete",
+        "Smazat",
         SubmenuIndexDelete,
         subghz_scene_saved_menu_submenu_callback,
         subghz);
@@ -38,7 +38,7 @@ void subghz_scene_saved_menu_on_enter(void* context) {
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
         submenu_add_item(
             subghz->submenu,
-            "Signal Settings",
+            "Nastaveni signalu",
             SubmenuIndexSignalSettings,
             subghz_scene_saved_menu_submenu_callback,
             subghz);
