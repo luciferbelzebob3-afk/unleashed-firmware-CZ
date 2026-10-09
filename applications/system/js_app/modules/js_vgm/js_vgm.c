@@ -85,7 +85,7 @@ static void js_vgm_delta_yaw(struct mjs* mjs) {
         mjs_prepend_errorf(
             mjs,
             MJS_BAD_ARGS_ERROR,
-            "Invalid args. Pass (angle [, timeout]). Got %d args.",
+            "Neplatne argumenty. Predavej (angle [, timeout]). Predano argumentu: %d.",
             num_args);
         mjs_return(mjs, mjs_mk_undefined());
         return;
@@ -99,7 +99,7 @@ static void js_vgm_delta_yaw(struct mjs* mjs) {
 
     double angle = mjs_get_double(mjs, mjs_arg(mjs, 0));
     if(isnan(angle)) {
-        mjs_prepend_errorf(mjs, MJS_TYPE_ERROR, "Invalid arg (angle).");
+        mjs_prepend_errorf(mjs, MJS_TYPE_ERROR, "Neplatny argument (angle).");
         mjs_return(mjs, mjs_mk_undefined());
         return;
     }

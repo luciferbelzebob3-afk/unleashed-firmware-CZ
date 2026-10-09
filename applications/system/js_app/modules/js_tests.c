@@ -26,7 +26,7 @@ static void js_tests_assert_eq(struct mjs* mjs) {
         if(expected == result) {
             FURI_LOG_T(TAG, "eq passed (exp=%ld res=%ld)", expected, result);
         } else {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "expected %d, found %d", expected, result);
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "ocekavano %d, nalezeno %d", expected, result);
         }
     } else if(mjs_is_string(expected_arg) && mjs_is_string(result_arg)) {
         const char* expected = mjs_get_string(mjs, &expected_arg, NULL);
@@ -35,7 +35,7 @@ static void js_tests_assert_eq(struct mjs* mjs) {
             FURI_LOG_T(TAG, "eq passed (exp=\"%s\" res=\"%s\")", expected, result);
         } else {
             mjs_prepend_errorf(
-                mjs, MJS_INTERNAL_ERROR, "expected \"%s\", found \"%s\"", expected, result);
+                mjs, MJS_INTERNAL_ERROR, "ocekavano \"%s\", nalezeno \"%s\"", expected, result);
         }
     } else if(mjs_is_boolean(expected_arg) && mjs_is_boolean(result_arg)) {
         bool expected = mjs_get_bool(mjs, expected_arg);
@@ -50,7 +50,7 @@ static void js_tests_assert_eq(struct mjs* mjs) {
             mjs_prepend_errorf(
                 mjs,
                 MJS_INTERNAL_ERROR,
-                "expected %s, found %s",
+                "ocekavano %s, nalezeno %s",
                 expected ? "true" : "false",
                 result ? "true" : "false");
         }
@@ -58,7 +58,7 @@ static void js_tests_assert_eq(struct mjs* mjs) {
         JS_ERROR_AND_RETURN(
             mjs,
             MJS_INTERNAL_ERROR,
-            "type mismatch (expected %s, result %s)",
+            "nesouhlasi typ (ocekavano %s, vysledek %s)",
             mjs_typeof(expected_arg),
             mjs_typeof(result_arg));
     }
@@ -83,7 +83,7 @@ static void js_tests_assert_float_close(struct mjs* mjs) {
         mjs_prepend_errorf(
             mjs,
             MJS_INTERNAL_ERROR,
-            "expected %f found %f (tolerance=%f)",
+            "ocekavano %f, nalezeno %f (tolerance=%f)",
             expected,
             result,
             epsilon);

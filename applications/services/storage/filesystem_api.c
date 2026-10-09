@@ -2,37 +2,37 @@
 #include <furi.h>
 
 const char* filesystem_api_error_get_desc(FS_Error error_id) {
-    const char* result = "unknown error";
+    const char* result = "neznama chyba";
     switch(error_id) {
     case(FSE_OK):
         result = "OK";
         break;
     case(FSE_NOT_READY):
-        result = "filesystem not ready";
+        result = "souborovy system neni pripraven";
         break;
     case(FSE_EXIST):
-        result = "file/dir already exist";
+        result = "soubor/adresar jiz existuje";
         break;
     case(FSE_NOT_EXIST):
-        result = "file/dir not exist";
+        result = "soubor/adresar neexistuje";
         break;
     case(FSE_INVALID_PARAMETER):
-        result = "invalid parameter";
+        result = "neplatny parametr";
         break;
     case(FSE_DENIED):
         result = "access denied";
         break;
     case(FSE_INVALID_NAME):
-        result = "invalid name/path";
+        result = "neplatny nazev/cesta";
         break;
     case(FSE_INTERNAL):
-        result = "internal error";
+        result = "interni chyba";
         break;
     case(FSE_NOT_IMPLEMENTED):
         result = "function not implemented";
         break;
     case(FSE_ALREADY_OPEN):
-        result = "file is already open";
+        result = "soubor je jiz otevren";
         break;
     }
     return result;
