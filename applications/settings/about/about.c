@@ -221,7 +221,7 @@ int32_t about_settings_app(void* p) {
         } else if(screen_index == 0) {
             dialog_message_set_buttons(message, NULL, NULL, "Dalsi");
         } else {
-            dialog_message_set_buttons(message, "Prev.", NULL, "Next");
+            dialog_message_set_buttons(message, "Zpet", NULL, "Dalsi");
         }
 
         screen_result = about_screens[screen_index](dialogs, message);
