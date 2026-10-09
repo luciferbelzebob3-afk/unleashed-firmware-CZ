@@ -171,7 +171,7 @@ void cli_shell_completions_render(
             }
 
         if(!position) {
-            printf(ANSI_FG_RED "no completions" ANSI_RESET);
+            printf(ANSI_FG_RED "zadne moznosti doplneni" ANSI_RESET);
         }
 
         size_t total_rows = (position / COMPLETION_COLUMNS) + 1;

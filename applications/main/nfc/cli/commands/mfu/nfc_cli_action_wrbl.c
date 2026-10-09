@@ -42,7 +42,7 @@ void nfc_cli_mfu_wrbl_execute(PipeSide* pipe, NfcCliActionContext* ctx) {
         nfc_cli_printf_array(instance->page.data, sizeof(MfUltralightPage), "Data: ");
         printf("\r\n");
     } else {
-        printf(ANSI_FG_RED "Error: %s" ANSI_RESET, nfc_cli_mf_ultralight_get_error(error));
+        printf(ANSI_FG_RED "Chyba: %s" ANSI_RESET, nfc_cli_mf_ultralight_get_error(error));
     }
 }
 

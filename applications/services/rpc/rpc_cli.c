@@ -51,7 +51,7 @@ void rpc_cli_command_start_session(PipeSide* pipe, FuriString* args, void* conte
     furi_hal_usb_lock();
     RpcSession* rpc_session = rpc_session_open(rpc, RpcOwnerUsb);
     if(rpc_session == NULL) {
-        printf("Session start error\r\n");
+        printf("Chyba pri zahajeni relace\r\n");
         furi_hal_usb_unlock();
         return;
     }

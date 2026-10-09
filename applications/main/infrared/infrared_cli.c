@@ -471,7 +471,7 @@ static void infrared_cli_brute_force_signals(
             break;
         }
         if(infrared_brute_force_calculate_messages(brute_force) != InfraredErrorCodeNone) {
-            printf("Invalid remote name.\r\n");
+            printf("Neplatny nazev ovladace.\r\n");
             break;
         }
 

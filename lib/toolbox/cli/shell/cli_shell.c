@@ -106,7 +106,7 @@ void cli_command_help(PipeSide* pipe, FuriString* args, void* context) {
 
     const size_t columns = 3;
 
-    printf("Available commands:\r\n" ANSI_FG_GREEN);
+    printf("Dostupne prikazy:\r\n" ANSI_FG_GREEN);
     cli_registry_lock(registry);
     CliCommandDict_t* commands = cli_registry_get_commands(registry);
     size_t commands_count = CliCommandDict_size(*commands);
@@ -193,7 +193,7 @@ void cli_shell_execute_command(CliShell* cli_shell, FuriString* command) {
             furi_string_free(path);
 
             if(error != PluginManagerErrorNone) {
-                printf(ANSI_FG_RED "failed to load external command" ANSI_RESET);
+                printf(ANSI_FG_RED "nepodarilo se nacist externi prikaz" ANSI_RESET);
                 break;
             }
 

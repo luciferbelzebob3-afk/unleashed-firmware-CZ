@@ -62,7 +62,7 @@ static void nfc_cli_emulate_execute(PipeSide* pipe, NfcCliActionContext* context
         }
 
         if(!nfc_device_load(instance->nfc_device, path)) {
-            printf(ANSI_FG_RED "Failed to load \'%s\'.\r\n" ANSI_RESET, path);
+            printf(ANSI_FG_RED "Nepodarilo se nacist \'%s\'.\r\n" ANSI_RESET, path);
             break;
         }
 

@@ -273,7 +273,7 @@ void crypto_cli_store_key(PipeSide* pipe, FuriString* args) {
 
         uint8_t slot;
         if(furi_hal_crypto_enclave_store_key(&key, &slot)) {
-            printf("Success. Stored to slot: %d", slot);
+            printf("Ulozeno do pozice: %d", slot);
         } else {
             printf("Chyba");
         }

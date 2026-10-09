@@ -9,8 +9,8 @@ static void nfc_cli_field(PipeSide* pipe, FuriString* args, void* context) {
     furi_hal_nfc_low_power_mode_stop();
     furi_hal_nfc_poller_field_on();
 
-    printf("Field is on. Don't leave device in this mode for too long.\r\n");
-    printf("Press Ctrl+C to abort\r\n");
+    printf("Pole je zapnute. Nenechavejte zarizeni v tomto rezimu prilis dlouho.\r\n");
+    printf("Stiskni Ctrl+C pro preruseni\r\n");
 
     while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
         furi_delay_ms(50);

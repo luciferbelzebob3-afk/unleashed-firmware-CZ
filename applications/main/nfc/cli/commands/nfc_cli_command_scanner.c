@@ -46,7 +46,7 @@ static void nfc_cli_command_scanner_format_detected_protocols(NfcCliScanner* ins
         furi_string_reset(str);
         NfcProtocol protocol = nfc_cli_scanner_get_protocol(instance, i);
         nfc_cli_command_scanner_format_protocol_tree(protocol, str);
-        printf("Protocol [%zu]: %s\r\n", i + 1, furi_string_get_cstr(str));
+        printf("Protokol [%zu]: %s\r\n", i + 1, furi_string_get_cstr(str));
     }
     furi_string_free(str);
 }
@@ -54,7 +54,7 @@ static void nfc_cli_command_scanner_format_detected_protocols(NfcCliScanner* ins
 static void nfc_cli_command_scanner_execute(PipeSide* pipe, void* context) {
     NfcCliCmdScannerContext* instance = context;
 
-    printf("Press Ctrl+C to abort\r\n\n");
+    printf("Stiskni Ctrl+C pro preruseni\r\n\n");
     nfc_cli_scanner_begin_scan(instance->scanner);
     while(!cli_is_pipe_broken_or_is_etx_next_char(pipe) &&
           !nfc_cli_scanner_wait_scan(instance->scanner, 50))

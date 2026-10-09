@@ -60,12 +60,12 @@ static void power_cli_command_print_usage(void) {
     printf("power <cmd> <args>\r\n");
     printf("Cmd list:\r\n");
 
-    printf("\toff\t - shutdown power\r\n");
+    printf("\toff\t - vypnout napajeni\r\n");
     printf("\treboot\t - reboot\r\n");
     printf("\treboot2dfu\t - reboot to dfu bootloader\r\n");
-    printf("\t5v <0 or 1>\t - enable or disable 5v ext\r\n");
+    printf("\t5v <0 or 1>\t - zapnout nebo vypnout externi 5V\r\n");
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
-        printf("\t3v3 <0 or 1>\t - enable or disable 3v3 ext\r\n");
+        printf("\t3v3 <0 or 1>\t - zapnout nebo vypnout externi 3,3V\r\n");
     }
 }
 

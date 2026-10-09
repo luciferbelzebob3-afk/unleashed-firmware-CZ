@@ -167,7 +167,7 @@ static void nfc_cli_mfu_info_print_version(const MfUltralightData* data) {
     if(!mf_ultralight_support_feature(features, MfUltralightFeatureSupportReadVersion)) return;
 
     const MfUltralightVersion* version = &data->version;
-    printf(ANSI_FG_GREEN "\r\n\n\tTag Version\r\n" ANSI_RESET);
+    printf(ANSI_FG_GREEN "\r\n\n\tVerze tagu\r\n" ANSI_RESET);
     nfc_cli_printf_array((uint8_t*)version, sizeof(MfUltralightVersion), "Surove bajty: ");
 
     FuriString* str = furi_string_alloc();
