@@ -57,9 +57,9 @@ static void speaker_app_cli(PipeSide* pipe, FuriString* args, void* context) {
         message.type = SpeakerDebugAppMessageTypeStop;
         FuriStatus status = furi_message_queue_put(app->message_queue, &message, 100);
         if(status != FuriStatusOk) {
-            printf("Failed to send message\r\n");
+            printf("Nepodarilo se odeslat zpravu\r\n");
         } else {
-            printf("Stopping\r\n");
+            printf("Zastavuji\r\n");
         }
     } else {
         printf("Usage:\r\n");
@@ -75,7 +75,7 @@ static bool speaker_app_music_play(SpeakerDebugApp* app, const char* rtttl) {
     }
 
     if(!music_worker_load_rtttl_from_string(app->music_worker, rtttl)) {
-        FURI_LOG_E(TAG, "Failed to load RTTTL");
+        FURI_LOG_E(TAG, "Nepodarilo se nacist RTTTL");
         return false;
     }
 
@@ -93,7 +93,7 @@ static void speaker_app_music_stop(SpeakerDebugApp* app) {
 
 static void speaker_app_run(SpeakerDebugApp* app, const char* arg) {
     if(!arg || !speaker_app_music_play(app, arg)) {
-        FURI_LOG_E(TAG, "Provided RTTTL is invalid");
+        FURI_LOG_E(TAG, "Zadane RTTTL neni platne");
         return;
     }
 
