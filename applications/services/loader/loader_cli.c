@@ -13,11 +13,11 @@ static void loader_cli_print_usage(void) {
     printf("Usage:\r\n");
     printf("loader <cmd> <args>\r\n");
     printf("Cmd list:\r\n");
-    printf("\tlist\t - List available applications\r\n");
-    printf("\topen <Application Name:string>\t - Open application by name\r\n");
+    printf("\tlist\t - Vypis dostupne aplikace\r\n");
+    printf("\topen <nazev aplikace:string>\t - Spust aplikaci podle nazvu\r\n");
     printf("\tinfo\t - Show loader state\r\n");
-    printf("\tclose\t - Close the current application\r\n");
-    printf("\tsignal <signal:number> [arg:hex]\t - Send a signal with an optional argument\r\n");
+    printf("\tclose\t - Ukonci aktualni aplikaci\r\n");
+    printf("\tsignal <signal:number> [arg:hex]\t - Odesli signal s volitelnym argumentem\r\n");
 }
 
 static void loader_cli_list(void) {
@@ -25,11 +25,11 @@ static void loader_cli_list(void) {
     for(size_t i = 0; i < FLIPPER_APPS_COUNT; i++) {
         printf("\t%s\r\n", FLIPPER_APPS[i].name);
     }
-    printf("Int Settings:\r\n");
+    printf("Nastaveni interni pameti:\r\n");
     for(size_t i = 0; i < FLIPPER_SETTINGS_APPS_COUNT; i++) {
         printf("\t%s\r\n", FLIPPER_SETTINGS_APPS[i].name);
     }
-    printf("Ext Settings:\r\n");
+    printf("Nastaveni SD karty:\r\n");
     for(size_t i = 0; i < FLIPPER_EXTSETTINGS_APPS_COUNT; i++) {
         printf("\t%s\r\n", FLIPPER_EXTSETTINGS_APPS[i].name);
     }
@@ -39,9 +39,9 @@ static void loader_cli_info(Loader* loader) {
     FuriString* app_name = furi_string_alloc();
 
     if(!loader_get_application_name(loader, app_name)) {
-        printf("No application is running\r\n");
+        printf("Neni spustena zadna aplikace\r\n");
     } else {
-        printf("Application \"%s\" is running\r\n", furi_string_get_cstr(app_name));
+        printf("Aplikace \"%s\" je spustena\r\n", furi_string_get_cstr(app_name));
     }
 
     furi_string_free(app_name);
@@ -53,7 +53,7 @@ static void loader_cli_open(FuriString* args, Loader* loader) {
 
     do {
         if(!args_read_probably_quoted_string_and_trim(args, app_name)) {
-            printf("No application provided\r\n");
+            printf("Nebyla zadana aplikace\r\n");
             break;
         }
 
@@ -64,7 +64,7 @@ static void loader_cli_open(FuriString* args, Loader* loader) {
         if(furi_string_size(args) > 0) {
             if(furi_string_get_char(args, 0) == '\"') {
                 if(!args_read_probably_quoted_string_and_trim(args, app_args)) {
-                    printf("Invalid application arguments\r\n");
+                    printf("Neplatne argumenty aplikace\r\n");
                     break;
                 }
                 if(furi_string_size(args) > 0) {
@@ -100,11 +100,11 @@ static void loader_cli_close(Loader* loader) {
     FuriString* app_name = furi_string_alloc();
 
     if(!loader_get_application_name(loader, app_name)) {
-        printf("No application is running\r\n");
+        printf("Neni spustena zadna aplikace\r\n");
     } else if(!loader_signal(loader, FuriSignalExit, NULL)) {
-        printf("Application \"%s\" has to be closed manually\r\n", furi_string_get_cstr(app_name));
+        printf("Aplikaci \"%s\" je nutne ukoncit rucne\r\n", furi_string_get_cstr(app_name));
     } else {
-        printf("Application \"%s\" was closed\r\n", furi_string_get_cstr(app_name));
+        printf("Aplikace \"%s\" byla ukoncena\r\n", furi_string_get_cstr(app_name));
     }
 
     furi_string_free(app_name);
@@ -119,9 +119,9 @@ static void loader_cli_signal(FuriString* args, Loader* loader) {
     parse_err |= strint_to_uint32(args_cstr, &args_cstr, &arg, 16);
 
     if(parse_err) {
-        printf("Signal must be a decimal number\r\n");
+        printf("Signal musi byt desetinne cislo\r\n");
     } else if(!loader_is_locked(loader)) {
-        printf("No application is running\r\n");
+        printf("Neni spustena zadna aplikace\r\n");
     } else {
         const bool is_handled = loader_signal(loader, signal, (void*)arg);
         printf(
