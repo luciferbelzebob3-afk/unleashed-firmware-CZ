@@ -18,7 +18,7 @@
 
 static void lfrfid_cli_print_usage(void) {
     printf("Pouziti:\r\n");
-    printf("rfid read <optional: normal | indala>         - cti v rezimu ASK/PSK\r\n");
+    printf("rfid read <nepovinne: normal | indala>         - cti v rezimu ASK/PSK\r\n");
     printf("rfid <write | emulate> <key_type> <key_data>  - zapis nebo emuluj kartu\r\n");
     printf("rfid raw_read <ask | psk> <filename>          - cti a uloz surova data do souboru\r\n");
     printf(
@@ -520,13 +520,13 @@ static void lfrfid_cli_raw_emulate(PipeSide* pipe, FuriString* args) {
 
             if(flags != (unsigned)FuriFlagErrorTimeout) {
                 if(FURI_BIT(flags, LFRFIDWorkerEmulateRawFileError)) {
-                    printf("File is not RFID raw file\r\n");
+                    printf("Soubor neni surovy RFID soubor\r\n");
                     break;
                 }
 
                 if(FURI_BIT(flags, LFRFIDWorkerEmulateRawOverrun)) {
                     if(!overrun) {
-                        printf("Overrun\r\n");
+                        printf("Preteceni bufferu\r\n");
                         overrun = true;
                     }
                 }
