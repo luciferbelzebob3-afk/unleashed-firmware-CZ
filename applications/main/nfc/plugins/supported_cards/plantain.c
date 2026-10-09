@@ -482,7 +482,7 @@ static void printf_plantain_data(FuriString* parsed_data, PlantainData* purse) {
 
     furi_string_cat_printf(
         parsed_data,
-        "\nValidator: %d\nFare: %d RUB\nRefilled on: %02d.%02d.%04d %02d:%02d\nAmount: %d RUB",
+        "\nValidator: %d\nJizdne: %d RUB\nDobito dne: %02d.%02d.%04d %02d:%02d\nCastka: %d RUB",
         purse->validator,
         purse->fare,
         purse->last_payment_date.day,
@@ -492,10 +492,10 @@ static void printf_plantain_data(FuriString* parsed_data, PlantainData* purse) {
         purse->last_payment_date.minute,
         purse->last_payment_amount);
 
-    const char* ppk_keys = (purse->ppk_keys == PlantainPpkKeysInstalled) ? "YES" :
-                           (purse->ppk_keys == PlantainPpkKeysAbsent)    ? "NO" :
-                                                                           "Unknown";
-    furi_string_cat_printf(parsed_data, "\nPPK keys installed:> %s", ppk_keys);
+    const char* ppk_keys = (purse->ppk_keys == PlantainPpkKeysInstalled) ? "ANO" :
+                           (purse->ppk_keys == PlantainPpkKeysAbsent)    ? "NE" :
+                                                                           "Neznamy";
+    furi_string_cat_printf(parsed_data, "\nKlice PPK nainstalovany:> %s", ppk_keys);
 }
 
 // Function to format and print PPK ticket data
@@ -504,39 +504,39 @@ static void printf_ppk_data(FuriString* parsed_data, PPKData* ticket, bool ticke
         furi_string_cat_printf(parsed_data, "\n\n\e#PPK Ticket:\n");
         switch(ticket->first_ticket_marker) {
         case 0x33:
-            furi_string_cat_printf(parsed_data, "Type:> 1 ride");
+            furi_string_cat_printf(parsed_data, "Typ:> 1 jizda");
             break;
         case 0x34:
-            furi_string_cat_printf(parsed_data, "Type:> 2 rides (Mon.-Fri.)");
+            furi_string_cat_printf(parsed_data, "Typ:> 2 jizdy (po-pa)");
             break;
         case 0x35:
-            furi_string_cat_printf(parsed_data, "Type:> 2 rides (Fri.-Mon.)");
+            furi_string_cat_printf(parsed_data, "Typ:> 2 jizdy (pa-po)");
             break;
         case 0x36:
             furi_string_cat_printf(parsed_data, "Type:> 2 rides (Sat.-Mon.");
             break;
         default:
             furi_string_cat_printf(
-                parsed_data, "Type:> Unknown, 0x%02X", ticket->first_ticket_marker);
+                parsed_data, "Typ:> neznamy, 0x%02X", ticket->first_ticket_marker);
         }
     } else if(ticket_number == 1) {
-        furi_string_cat_printf(parsed_data, "\n\nSecond PPK Ticket:\n");
+        furi_string_cat_printf(parsed_data, "\n\nDruhy listek PPK:\n");
         switch(ticket->second_ticket_marker) {
         case 0x33:
-            furi_string_cat_printf(parsed_data, "Type:> 1 ride");
+            furi_string_cat_printf(parsed_data, "Typ:> 1 jizda");
             break;
         case 0x34:
-            furi_string_cat_printf(parsed_data, "Type:> 2 rides (Mon.-Fri.)");
+            furi_string_cat_printf(parsed_data, "Typ:> 2 jizdy (po-pa)");
             break;
         case 0x35:
-            furi_string_cat_printf(parsed_data, "Type:> 2 rides (Fri.-Mon.)");
+            furi_string_cat_printf(parsed_data, "Typ:> 2 jizdy (pa-po)");
             break;
         case 0x36:
-            furi_string_cat_printf(parsed_data, "Type:> 2 rides (Sat.-Mon.)");
+            furi_string_cat_printf(parsed_data, "Typ:> 2 jizdy (so-po)");
             break;
         default:
             furi_string_cat_printf(
-                parsed_data, "Type:> Unknown, 0x%02X", ticket->second_ticket_marker);
+                parsed_data, "Typ:> neznamy, 0x%02X", ticket->second_ticket_marker);
         }
     }
 
@@ -549,7 +549,7 @@ static void printf_ppk_data(FuriString* parsed_data, PPKData* ticket, bool ticke
     if(ticket->valid_from.day == ticket->valid_till.day) {
         furi_string_cat_printf(
             parsed_data,
-            "\nValid On: %02d-%02d-%04d",
+            "\nPlati dne: %02d-%02d-%04d",
             ticket->valid_from.day,
             ticket->valid_from.month,
             ticket->valid_from.year);
@@ -566,18 +566,18 @@ static void printf_ppk_data(FuriString* parsed_data, PPKData* ticket, bool ticke
     }
 
     if(ticket->direction == 1) {
-        furi_string_cat_printf(parsed_data, "\nDirection: One-way ->>");
+        furi_string_cat_printf(parsed_data, "\nSmer: jednosmerny ->>");
     } else if(ticket->direction == 2) {
-        furi_string_cat_printf(parsed_data, "\nDirection: Round-trip <<-->>");
+        furi_string_cat_printf(parsed_data, "\nSmer: zpatecni <<-->>");
     }
-    furi_string_cat_printf(parsed_data, "\nRides left:> %02d", ticket->value_data);
+    furi_string_cat_printf(parsed_data, "\nZbyvajici jizdy:> %02d", ticket->value_data);
 
     if(ticket->current_status == 0) {
-        furi_string_cat_printf(parsed_data, "\nStatus:> TICKET IS READY\n");
+        furi_string_cat_printf(parsed_data, "\nStav:> LISTEK JE PRIPRAVEN\n");
     } else if(ticket->current_status == 0x80)
         furi_string_cat_printf(
             parsed_data,
-            "\nStatus:> ENTERED STATION\nSta name:> %s\nLast pass on:> %02d-%02d-%04d\nPass time:> %02d:%02d\n",
+            "\nStav:> VSTUP DO STANICE\nNazev stanice:> %s\nPosledni pruchod:> %02d-%02d-%04d\nCas pruchodu:> %02d:%02d\n",
             furi_string_get_cstr(ticket->trip_start_sta_name),
             ticket->tap_time.day,
             ticket->tap_time.month,
@@ -587,7 +587,7 @@ static void printf_ppk_data(FuriString* parsed_data, PPKData* ticket, bool ticke
     else if(ticket->current_status == 0x1E)
         furi_string_cat_printf(
             parsed_data,
-            "\nStatus:> EXITED STATION\nSta name:> %s\nLast pass on:> %02d-%02d-%04d\nPass time:> %02d:%02d\n",
+            "\nStav:> VYSTUP ZE STANICE\nNazev stanice:> %s\nPosledni pruchod:> %02d-%02d-%04d\nCas pruchodu:> %02d:%02d\n",
             furi_string_get_cstr(ticket->trip_end_sta_name),
             ticket->tap_time.day,
             ticket->tap_time.month,
@@ -595,7 +595,7 @@ static void printf_ppk_data(FuriString* parsed_data, PPKData* ticket, bool ticke
             ticket->tap_time.hour,
             ticket->tap_time.minute);
     else
-        furi_string_cat_printf(parsed_data, "\nStatus:> UNKNOWN (%02X)\n", ticket->current_status);
+        furi_string_cat_printf(parsed_data, "\nStav:> NEZNAMY (%02X)\n", ticket->current_status);
 
     furi_string_cat_printf(
         parsed_data, "SYS N:> %lld\nPPK CNT:> %03d", ticket->sys_n, ticket->ppk_cnt);

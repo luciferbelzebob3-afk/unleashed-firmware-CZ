@@ -41,23 +41,23 @@ static const MfDesfireApplicationId opal_app_id = {.data = {0x31, 0x45, 0x53}};
 static const MfDesfireFileId opal_file_id = 0x07;
 
 static const char* opal_modes[5] =
-    {"Rail / Metro", "Ferry / Light Rail", "Bus", "Unknown mode", "Manly Ferry"};
+    {"Vlak / metro", "Trajekt / lehka kolej", "Autobus", "Neznamy rezim", "Manly Ferry"};
 
 static const char* opal_usages[14] = {
-    "New / Unused",
-    "Tap on: new journey",
-    "Tap on: transfer from same mode",
-    "Tap on: transfer from other mode",
+    "Nova / nepouzita",
+    "Prilozeni: nova jizda",
+    "Prilozeni: prestup ve stejnem rezimu",
+    "Prilozeni: prestup z jineho rezimu",
     NULL, // Manly Ferry: new journey
     NULL, // Manly Ferry: transfer from ferry
     NULL, // Manly Ferry: transfer from other
-    "Tap off: distance fare",
-    "Tap off: flat fare",
-    "Automated tap off: failed to tap off",
-    "Tap off: end of trip without start",
-    "Tap off: reversal",
-    "Tap on: rejected",
-    "Unknown usage",
+    "Odpojeni: tarif podle vzdalenosti",
+    "Odpojeni: pausalni tarif",
+    "Automaticke odpojeni: odhlaseni selhalo",
+    "Odpojeni: konec jizdy bez zacatku",
+    "Odpojeni: storno",
+    "Prilozeni: odmitnuto",
+    "Neznama operace",
 };
 
 // Opal file 0x7 structure. Assumes a little-endian CPU.
