@@ -25,7 +25,7 @@ bool subghz_tx_start(SubGhz* subghz, FlipperFormat* flipper_format) {
     switch(subghz_txrx_tx_start(subghz->txrx, flipper_format)) {
     case SubGhzTxRxStartTxStateErrorParserOthers:
         dialog_message_show_storage_error(
-            subghz->dialogs, "Error in protocol\nparameters\ndescription");
+            subghz->dialogs, "Chyba v popisu\nparametru\nprotokolu");
         break;
     case SubGhzTxRxStartTxStateErrorOnlyRx:
         subghz_dialog_message_freq_error(subghz, true);
@@ -193,13 +193,13 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
     switch(load_key_state) {
     case SubGhzLoadKeyStateParseErr:
         if(show_dialog) {
-            dialog_message_show_storage_error(subghz->dialogs, "Cannot parse\nfile");
+            dialog_message_show_storage_error(subghz->dialogs, "Nelze zpracovat\nsoubor");
         }
         return false;
     case SubGhzLoadKeyStateProtocolDescriptionErr:
         if(show_dialog) {
             dialog_message_show_storage_error(
-                subghz->dialogs, "Error in protocol\nparameters\ndescription");
+                subghz->dialogs, "Chyba v popisu\nparametru\nprotokolu");
         }
         return false;
 
