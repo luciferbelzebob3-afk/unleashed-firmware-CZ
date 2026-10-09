@@ -933,7 +933,7 @@ void felica_get_ic_name(const FelicaData* data, FuriString* ic_name) {
     default:
         furi_string_printf(
             ic_name,
-            "Unknown IC %02X ROM %02X:\nPlease submit an issue on\nGitHub and help us identify.",
+            "Neznamy obvod IC %02X ROM %02X:\nNahlaste prosim problem na\nGitHubu a pomozte s identifikaci.",
             ic_type,
             rom_type);
         break;
@@ -945,34 +945,34 @@ void felica_service_get_attribute_string(const FelicaService* service, FuriStrin
     furi_check(str);
 
     bool is_public = (service->attr & FELICA_SERVICE_ATTRIBUTE_UNAUTH_READ) != 0;
-    furi_string_cat_str(str, is_public ? "| Public  " : "| Private ");
+    furi_string_cat_str(str, is_public ? "| Verejne " :"| Soukr.  ");
 
     bool is_purse = (service->attr & FELICA_SERVICE_ATTRIBUTE_PURSE) != 0;
     // Subfield bitwise attributes are applicable depending on is PURSE or not
 
     if(is_purse) {
-        furi_string_cat_str(str, "| Purse  |");
+        furi_string_cat_str(str, "| Kredit |");
         switch((service->attr & FELICA_SERVICE_ATTRIBUTE_PURSE_SUBFIELD) >> 1) {
         case 0:
-            furi_string_cat_str(str, " Direct     |");
+            furi_string_cat_str(str, " Primy      |");
             break;
         case 1:
             furi_string_cat_str(str, " Cashback   |");
             break;
         case 2:
-            furi_string_cat_str(str, " Decrement  |");
+            furi_string_cat_str(str, " Odecteni   |");
             break;
         case 3:
-            furi_string_cat_str(str, " Read Only  |");
+            furi_string_cat_str(str, " Jen cteni  |");
             break;
         default:
-            furi_string_cat_str(str, " Unknown    |");
+            furi_string_cat_str(str, " Neznamy    |");
             break;
         }
     } else {
         bool is_random = (service->attr & FELICA_SERVICE_ATTRIBUTE_RANDOM_ACCESS) != 0;
-        furi_string_cat_str(str, is_random ? "| Random |" : "| Cyclic |");
+        furi_string_cat_str(str, is_random ? "| Nahodne|" : "| Cyklicky|");
         bool is_readonly = (service->attr & FELICA_SERVICE_ATTRIBUTE_READ_ONLY) != 0;
-        furi_string_cat_str(str, is_readonly ? " Read Only  |" : " Read/Write |");
+        furi_string_cat_str(str, is_readonly ? " Jen cteni  |" : " Cteni/zapis|");
     }
 }

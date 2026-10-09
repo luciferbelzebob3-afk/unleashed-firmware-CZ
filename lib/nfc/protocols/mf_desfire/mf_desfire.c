@@ -347,7 +347,7 @@ const char* mf_desfire_get_device_name(const MfDesfireData* data, NfcDeviceNameT
     const MfDesfireSize size = mf_desfire_get_size_from_version(&data->version);
 
     if(type == MfDesfireTypeUnknown) {
-        furi_string_printf(data->device_name, "Unknown %s", MF_DESFIRE_PROTOCOL_NAME);
+        furi_string_printf(data->device_name, "Neznamy %s", MF_DESFIRE_PROTOCOL_NAME);
         return furi_string_get_cstr(data->device_name);
     }
 

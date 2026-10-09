@@ -281,8 +281,8 @@ void subghz_protocol_decoder_holtek_get_string(void* context, FuriString* output
         instance->generic.btn >> 4);
 
     if((instance->generic.btn & 0xF) == 0xE) {
-        furi_string_cat_printf(output, "ON\r\n");
+        furi_string_cat_printf(output, "ZAPNUTO\r\n");
     } else if((instance->generic.btn & 0xF) == 0xB) {
-        furi_string_cat_printf(output, "OFF\r\n");
+        furi_string_cat_printf(output, "VYPNUTO\r\n");
     }
 }

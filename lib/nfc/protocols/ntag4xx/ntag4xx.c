@@ -161,7 +161,7 @@ const char* ntag4xx_get_device_name(const Ntag4xxData* data, NfcDeviceNameType n
     const Ntag4xxType type = ntag4xx_get_type_from_version(&data->version);
 
     if(type == Ntag4xxTypeUnknown) {
-        furi_string_printf(data->device_name, "Unknown %s", NTAG4XX_PROTOCOL_NAME);
+        furi_string_printf(data->device_name, "Neznamy %s", NTAG4XX_PROTOCOL_NAME);
     } else {
         furi_string_printf(data->device_name, "%s", ntag4xx_type_strings[type]);
         if(name_type == NfcDeviceNameTypeShort) {
