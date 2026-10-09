@@ -94,7 +94,7 @@ bool csc_parse(const NfcDevice* device, FuriString* parsed_data) {
         if(!lives_read) FURI_LOG_D(TAG, "Card lives block %u holds no data", card_lives_block_num);
         char card_lives_str[12];
         snprintf(
-            card_lives_str, sizeof(card_lives_str), lives_read ? "%lu" : "Unknown", card_lives);
+            card_lives_str, sizeof(card_lives_str), lives_read ? "%lu" : "Nezname", card_lives);
 
         uint32_t refill_times = bit_lib_bytes_to_num_le(refill_times_block_start_ptr, 2);
         // This is zero when you buy the card. but after refilling it, the refilling machine will leave a non-zero signature here
@@ -118,7 +118,7 @@ bool csc_parse(const NfcDevice* device, FuriString* parsed_data) {
                 "\e#CSC Service Works\n"
                 "UID: %lu\n"
                 "New Card\n"
-                "Card Value: %lu.%02u USD\n"
+                "Hodnota karty: %lu.%02u USD\n"
                 "Card Usages Left: %s",
                 card_uid,
                 refilled_balance_dollar,
@@ -133,7 +133,7 @@ bool csc_parse(const NfcDevice* device, FuriString* parsed_data) {
                 parsed_data,
                 "\e#CSC Service Works\n"
                 "UID: %lu\n"
-                "Balance: %lu.%02u USD\n"
+                "Zustatek: %lu.%02u USD\n"
                 "Last Top-up: %lu.%02u USD\n"
                 "Top-up Count: %lu\n"
                 "Card Usages Left: %s",

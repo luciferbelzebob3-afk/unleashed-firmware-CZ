@@ -140,55 +140,55 @@ static const struct {
         .stage = UpdateTaskStageRadioBusy,
         .percent_min = 11,
         .percent_max = 20,
-        .descr = "C2 FUS switch failed",
+        .descr = "Prepnuti C2 FUS selhalo",
     },
     {
         .stage = UpdateTaskStageRadioBusy,
         .percent_min = 21,
         .percent_max = 30,
-        .descr = "FUS operation failed",
+        .descr = "Operace FUS selhala",
     },
     {
         .stage = UpdateTaskStageRadioBusy,
         .percent_min = 31,
         .percent_max = 100,
-        .descr = "C2 Stach switch failed",
+        .descr = "Prepnuti C2 Stach selhalo",
     },
     {
         .stage = UpdateTaskStageOBValidation,
         .percent_min = 0,
         .percent_max = 100,
-        .descr = "Uncorr. value mismatch",
+        .descr = "Nesoulad neopr. hodnoty",
     },
     {
         .stage = UpdateTaskStageValidateDFUImage,
         .percent_min = 0,
         .percent_max = 1,
-        .descr = "Failed to open DFU file",
+        .descr = "Soubor DFU se nepodarilo otevrit",
     },
     {
         .stage = UpdateTaskStageValidateDFUImage,
         .percent_min = 1,
         .percent_max = 97,
-        .descr = "DFU file read error",
+        .descr = "Chyba pri cteni souboru DFU",
     },
     {
         .stage = UpdateTaskStageValidateDFUImage,
         .percent_min = 98,
         .percent_max = 100,
-        .descr = "DFU file CRC mismatch",
+        .descr = "Nesouhlasi CRC souboru DFU",
     },
     {
         .stage = UpdateTaskStageFlashWrite,
         .percent_min = 0,
         .percent_max = 100,
-        .descr = "Flash write error",
+        .descr = "Chyba zapisu do flash pameti",
     },
     {
         .stage = UpdateTaskStageFlashValidate,
         .percent_min = 0,
         .percent_max = 100,
-        .descr = "Flash compare error",
+        .descr = "Chyba porovnani flash pameti",
     },
 #endif
 #ifndef FURI_RAM_EXEC
@@ -196,25 +196,25 @@ static const struct {
         .stage = UpdateTaskStageIntRestore,
         .percent_min = 0,
         .percent_max = 100,
-        .descr = "SD card I/O error",
+        .descr = "Chyba vstupu/vystupu SD karty",
     },
     {
         .stage = UpdateTaskStageResourcesFileCleanup,
         .percent_min = 0,
         .percent_max = 100,
-        .descr = "SD card I/O error",
+        .descr = "Chyba vstupu/vystupu SD karty",
     },
     {
         .stage = UpdateTaskStageResourcesDirCleanup,
         .percent_min = 0,
         .percent_max = 100,
-        .descr = "SD card I/O error",
+        .descr = "Chyba vstupu/vystupu SD karty",
     },
     {
         .stage = UpdateTaskStageResourcesFileUnpack,
         .percent_min = 0,
         .percent_max = 100,
-        .descr = "SD card I/O error",
+        .descr = "Chyba vstupu/vystupu SD karty",
     },
 #endif
 };
@@ -227,7 +227,7 @@ static const char* update_task_get_error_message(UpdateTaskStage stage, uint8_t 
             return update_task_error_detail[i].descr;
         }
     }
-    return "Unknown error";
+    return "Neznama chyba";
 }
 
 typedef struct {

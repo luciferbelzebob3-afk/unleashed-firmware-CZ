@@ -312,15 +312,15 @@ static bool bip_parse(const NfcDevice* device, FuriString* parsed_data) {
         furi_string_printf(parsed_data, "\e#Tarjeta Bip!\nCard Number: %lu\n", bip_data.card_id);
         if(balance_read) {
             furi_string_cat_printf(
-                parsed_data, "Balance: $%hu (flags %hu)\n", bip_data.balance, bip_data.flags);
+                parsed_data, "Zustatek: $%hu (priznaky %hu)\n", bip_data.balance, bip_data.flags);
         } else {
-            furi_string_cat(parsed_data, "Balance: Unknown\n");
+            furi_string_cat(parsed_data, "Zustatek: neznamy\n");
         }
         if(trip_window_read) {
-            furi_string_cat(parsed_data, "Current Trip Window Ends:\n  @");
+            furi_string_cat(parsed_data, "Konec aktualni jizdy:\n  @");
             bip_print_datetime(&bip_data.trip_time_window, parsed_data);
         } else {
-            furi_string_cat(parsed_data, "Current Trip Window Ends: Unknown");
+            furi_string_cat(parsed_data, "Konec aktualni jizdy: neznamy");
         }
 
         // Find newest top-up
@@ -342,7 +342,7 @@ static bool bip_parse(const NfcDevice* device, FuriString* parsed_data) {
                 bip_print_datetime(&top_up->datetime, parsed_data);
             }
         } else {
-            furi_string_cat(parsed_data, "\n\e#Last Top-ups\nUnknown");
+            furi_string_cat(parsed_data, "\n\e#Posledni dobijeni\nNezname");
         }
 
         // Find newest charge
@@ -364,7 +364,7 @@ static bool bip_parse(const NfcDevice* device, FuriString* parsed_data) {
                 bip_print_datetime(&charge->datetime, parsed_data);
             }
         } else {
-            furi_string_cat(parsed_data, "\n\e#Last Charges (Trips)\nUnknown");
+            furi_string_cat(parsed_data, "\n\e#Posledni jizdy\nNezname");
         }
 
         parsed = true;

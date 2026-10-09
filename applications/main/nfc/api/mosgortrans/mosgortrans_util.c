@@ -519,7 +519,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             card_use_before_date_s.year);
 
         if(data_block.valid_from_date == 0 || data_block.valid_to_date == 0) {
-            furi_string_cat(result, "\e#No ticket");
+            furi_string_cat(result, "\e#Zadny listek");
             return false;
         }
         //remaining_trips

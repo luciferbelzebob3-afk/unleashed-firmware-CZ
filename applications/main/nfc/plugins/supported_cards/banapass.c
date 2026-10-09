@@ -192,11 +192,11 @@ static bool banapass_parse(const NfcDevice* device, FuriString* parsed_data) {
         // but an unread block looks identical, and the advice below would then be invented
         if(!mf_classic_parser_block_has_data(data, 2)) {
             FURI_LOG_D(TAG, "Block 2 holds no data");
-            furi_string_cat_str(parsed_data, "\nAccess Code: Unknown\n");
+            furi_string_cat_str(parsed_data, "\nPristupovy kod: neznamy\n");
         } else if(is_block_2_null) {
             furi_string_cat_str(
                 parsed_data,
-                "\nPlease scan the clone at the\nnearest CHUNITHM or\nmaimai Cabinet for the\nAccess Code.\n");
+                "\nNaskenujte kopii u\nnejblizsiho automatu\nCHUNITHM nebo maimai\npro pristupovy kod.\n");
             furi_string_cat_str(
                 parsed_data, "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
         } else {
@@ -209,11 +209,11 @@ static bool banapass_parse(const NfcDevice* device, FuriString* parsed_data) {
                 if(value_found) {
                     furi_string_cat_printf(parsed_data, "\nValue: %08lX", value);
                 } else {
-                    furi_string_cat_str(parsed_data, "\nPotential clone:\nInvalid value block.");
+                    furi_string_cat_str(parsed_data, "\nMozny klon:\nNeplatny blok hodnoty.");
                 }
                 furi_string_cat_str(
                     parsed_data,
-                    "\nPlease check the back of\nyour Bandai Namco Passport\nfor the Access Code.\n");
+                    "\nZkontrolujte zadni stranu\nkarty Bandai Namco Passport\nkvuli pristupovemu kodu.\n");
                 furi_string_cat_str(
                     parsed_data, "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
                 break;
@@ -239,7 +239,7 @@ static bool banapass_parse(const NfcDevice* device, FuriString* parsed_data) {
                 if((access_code[0] >> 4) != 3) {
                     furi_string_cat_printf(
                         parsed_data,
-                        "Potential clone:\nAccess Code preamble\nexpected 3, got %d\n",
+                        "Mozny klon:\nPredpona pristupoveho kodu\nma byt 3, nacteno %d\n",
                         (access_code[0] >> 4));
                 }
                 furi_string_cat_str(

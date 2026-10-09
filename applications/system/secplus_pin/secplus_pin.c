@@ -166,7 +166,7 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
             break;
         }
         if(furi_string_cmp_str(tmp, SUBGHZ_PROTOCOL_SECPLUS_V2_NAME) != 0) {
-            furi_string_printf(app->status, "Not Security+ 2.0: %s", furi_string_get_cstr(tmp));
+            furi_string_printf(app->status, "Neni Security+ 2.0: %s", furi_string_get_cstr(tmp));
             break;
         }
         if(!flipper_format_rewind(fff)) break;
@@ -200,7 +200,7 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
             app->preset.custom_preset_size = count;
             if(!flipper_format_read_hex(
                    fff, "Custom_preset_data", app->preset.custom_preset, count)) {
-                furi_string_set(app->status, "Bad custom preset");
+                furi_string_set(app->status, "Vlastni preset je chybny");
                 break;
             }
         }
@@ -221,7 +221,7 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
         if(!flipper_format_rewind(fff)) break;
         if(!flipper_format_read_hex(
                fff, "Secplus_packet_1", app->packet_1, sizeof(app->packet_1))) {
-            furi_string_set(app->status, "Missing packet 1");
+            furi_string_set(app->status, "Chybi paket 1");
             break;
         }
 
@@ -236,7 +236,7 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
         }
 
         furi_string_set(app->file_path, path);
-        furi_string_printf(app->status, "%luMHz  ready", app->preset.frequency / 1000000);
+        furi_string_printf(app->status, "%lu MHz pripraveno", app->preset.frequency / 1000000);
         ok = true;
     } while(false);
 
@@ -418,7 +418,7 @@ int32_t secplus_pin_app(void* p) {
                 if(app->sweeping && ((event.key == InputKeyOk) || (event.key == InputKeyBack)) &&
                    (event.type == InputTypeShort)) {
                     app->sweeping = false;
-                    furi_string_printf(app->status, "Stopped at %04u", app->pin);
+                    furi_string_printf(app->status, "Zastaveno na %04u", app->pin);
                 } else if(event.type == InputTypeShort) {
                     switch(event.key) {
                     case InputKeyLeft:
@@ -434,16 +434,16 @@ int32_t secplus_pin_app(void* p) {
                         secplus_pin_pin_step(app, -1);
                         break;
                     case InputKeyOk:
-                        furi_string_printf(app->status, "Odeslating %04u...", app->pin);
+                        furi_string_printf(app->status, "Odesilam %04u...", app->pin);
                         view_port_update(app->view_port);
                         furi_mutex_release(app->mutex);
                         SecPlusPinTxStatus sent = secplus_pin_transmit(app);
                         furi_mutex_acquire(app->mutex, FuriWaitForever);
                         if(sent == SecPlusPinTxOk) {
-                            furi_string_printf(app->status, "Sent %04u", app->pin);
+                            furi_string_printf(app->status, "Odeslano %04u", app->pin);
                         } else if(sent == SecPlusPinTxNotAllowed) {
                             furi_string_printf(
-                                app->status, "%luMHz TX blocked", app->preset.frequency / 1000000);
+                                app->status, "%lu MHz: vysilani blokovano", app->preset.frequency / 1000000);
                         } else {
                             furi_string_set(app->status, "Vysilani selhalo");
                         }
@@ -465,14 +465,14 @@ int32_t secplus_pin_app(void* p) {
                     if(event.key == InputKeyOk) {
                         app->sweeping = true;
                         app->sweep_from = app->pin;
-                        furi_string_set(app->status, "Sweeping...");
+                        furi_string_set(app->status, "Prohledavam...");
                     } else if(event.key == InputKeyLeft) {
                         furi_mutex_release(app->mutex);
                         bool saved = secplus_pin_save(app);
                         furi_mutex_acquire(app->mutex, FuriWaitForever);
                         if(saved) app->pin_saved = true;
                         furi_string_printf(
-                            app->status, saved ? "Saved PIN %04u" : "Save failed", app->pin);
+                            app->status, saved ? "PIN %04u ulozen" : "Ulozeni selhalo", app->pin);
                         notification_message(
                             app->notifications, saved ? &sequence_success : &sequence_error);
                     }
@@ -496,15 +496,15 @@ int32_t secplus_pin_app(void* p) {
                 furi_string_set(
                     app->status,
                     (sent == SecPlusPinTxNotAllowed) ? "TX blocked, sweep stopped" :
-                                                       "TX failed, sweep stopped");
+                                                       "Vysilani selhalo, prohledavani zastaveno");
                 notification_message(app->notifications, &sequence_error);
             } else if(pin >= PIN_MAX) {
                 app->pin = 0;
                 app->sweeping = false;
-                furi_string_set(app->status, "Sweep finished");
+                furi_string_set(app->status, "Prohledavani dokonceno");
             } else {
                 app->pin = pin + 1;
-                furi_string_printf(app->status, "Sweeping %04u", app->pin);
+                furi_string_printf(app->status, "Prohledavam %04u", app->pin);
             }
             furi_mutex_release(app->mutex);
             view_port_update(app->view_port);

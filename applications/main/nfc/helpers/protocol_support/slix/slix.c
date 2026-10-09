@@ -170,7 +170,7 @@ static NfcCommand nfc_scene_write_poller_callback_slix(NfcGenericEvent event, vo
                 const char* err_name;
                 switch(error) {
                 case SlixErrorTimeout:
-                    err_name = "Timeout";
+                    err_name = "Casovy limit";
                     break;
                 case SlixErrorFormat:
                     err_name = "BadCRC";
@@ -185,7 +185,7 @@ static NfcCommand nfc_scene_write_poller_callback_slix(NfcGenericEvent event, vo
                     err_name = "WrongPwd";
                     break;
                 default:
-                    err_name = "Unknown";
+                    err_name = "Nezname";
                     break;
                 }
                 furi_string_printf(

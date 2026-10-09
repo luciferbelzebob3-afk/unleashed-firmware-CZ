@@ -26,12 +26,12 @@ void nfc_render_type_4_tag_info(
             str, "Velikost APDU: cteni %u, zapis %u\n", data->chunk_max_read, data->chunk_max_write);
         furi_string_cat_printf(
             str,
-            "Read Lock: %02X%s\n",
+            "Zamek cteni: %02X%s\n",
             data->ndef_read_lock,
             data->ndef_read_lock == 0 ? " (odemceno)" : "");
         furi_string_cat_printf(
             str,
-            "Write Lock: %02X%s",
+            "Zamek zapisu: %02X%s",
             data->ndef_write_lock,
             data->ndef_write_lock == 0 ? " (odemceno)" : "");
     }

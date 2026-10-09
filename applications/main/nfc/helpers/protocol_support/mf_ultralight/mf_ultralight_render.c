@@ -116,7 +116,7 @@ static void nfc_render_mf_ultralight_aes_config(const MfUltralightData* data, Fu
     }
     if(auth0 <= 0x3B) {
         furi_string_cat_printf(
-            str, "\nOvereni od stranky 0x%02X (%s)", auth0, prot_rw ? "r+w" : "write");
+            str, "\nOvereni od stranky 0x%02X (%s)", auth0, prot_rw ? "r+w" : "zapis");
     } else {
         furi_string_cat_printf(str, "\nOvereni: vypnuto (otevreno)");
     }

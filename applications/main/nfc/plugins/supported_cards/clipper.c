@@ -275,7 +275,7 @@ static bool clipper_parse(const NfcDevice* device, FuriString* parsed_data) {
             "Serial: %" PRIu32 "\n"
             "Balance: $%d.%02u\n"
             "Type: %s\n"
-            "\e#Last Update\n",
+            "\e#Posledni aktualizace\n",
             info.serial_number,
             balance_usd,
             balance_cents,
@@ -453,7 +453,7 @@ static bool dump_ride_event(const uint8_t* record, FuriString* parsed_data) {
         return false;
     const char* agency_name;
     bool ok = get_map_item(agency_id, agency_names, kNumAgencies, &agency_name);
-    if(!ok) agency_name = "Unknown";
+    if(!ok) agency_name = "Nezname";
 
     uint16_t vehicle_id = get_u16be(&record[0x0a]);
 
@@ -470,10 +470,10 @@ static bool dump_ride_event(const uint8_t* record, FuriString* parsed_data) {
 
     const char *zone_on, *zone_off;
     if(!get_agency_zone_name(agency_id, zone_id_on, &zone_on)) {
-        zone_on = "Unknown";
+        zone_on = "Nezname";
     }
     if(!get_agency_zone_name(agency_id, zone_id_off, &zone_off)) {
-        zone_off = "Unknown";
+        zone_off = "Nezname";
     }
 
     furi_string_cat_str(parsed_data, "\e#Ride Record\n");
