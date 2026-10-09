@@ -663,7 +663,7 @@ void subghz_cli_command_tx_from_file(PipeSide* pipe, FuriString* args, void* con
             if(parse_err) {
                 cli_print_usage(
                     "subghz tx_from_file:",
-                    "<file_name: path_file> <Repeat count> <Device: 0 - CC1101_INT, 1 - CC1101_EXT>",
+                    "<cesta_k_souboru> <pocet opakovani> <zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>",
                     furi_string_get_cstr(args));
                 break;
             }
