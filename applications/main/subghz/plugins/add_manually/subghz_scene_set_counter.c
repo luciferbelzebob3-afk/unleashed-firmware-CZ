@@ -97,7 +97,7 @@ void subghz_scene_set_counter_on_enter(void* context) {
 
     // Setup view
     ByteInput* byte_input = subghz->byte_input;
-    byte_input_set_header_text(byte_input, "Enter COUNTER in hex");
+    byte_input_set_header_text(byte_input, "Zadejte COUNTER v hexu");
 
     byte_input_set_result_callback(
         byte_input,
