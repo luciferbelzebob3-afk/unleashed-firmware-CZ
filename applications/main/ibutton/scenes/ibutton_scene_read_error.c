@@ -10,9 +10,9 @@ void ibutton_scene_read_error_on_enter(void* context) {
     FuriString* tmp = furi_string_alloc();
 
     widget_add_button_element(
-        widget, GuiButtonTypeLeft, "Retry", ibutton_widget_callback, context);
+        widget, GuiButtonTypeLeft, "Znovu", ibutton_widget_callback, context);
     widget_add_button_element(
-        widget, GuiButtonTypeRight, "More", ibutton_widget_callback, context);
+        widget, GuiButtonTypeRight, "Vice", ibutton_widget_callback, context);
 
     ibutton_protocols_render_error(ibutton->protocols, key, tmp);
 
