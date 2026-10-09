@@ -43,7 +43,7 @@ void nfc_render_ntag4xx_info(
         furi_string_cat_printf(str, "Pouzitelna velikost NDEF: %zu bajtu\n", size_ndef - sizeof(uint16_t));
         furi_string_cat_printf(str, "Kontejner schopnosti: %zu bajtu\n", size_cc);
         if(size_proprietary) {
-            furi_string_cat_printf(str, "Proprietary File: %zu bytes\n", size_proprietary);
+            furi_string_cat_printf(str, "Privatni soubor: %zu bajtu\n", size_proprietary);
         }
         furi_string_cat_printf(str, "TagTamper: %spodporovano", has_tagtamper ? "" : "ne");
     }

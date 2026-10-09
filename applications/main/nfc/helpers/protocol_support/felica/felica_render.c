@@ -132,10 +132,10 @@ void nfc_more_info_render_felica_dir(const FelicaSystem* system, FuriString* str
     const size_t area_count = simple_array_get_count(system->areas);
     const size_t service_count = simple_array_get_count(system->services);
 
-    furi_string_cat_printf(str, "\e#Directory Tree:\n");
+    furi_string_cat_printf(str, "\e#Strom adresaru:\n");
 
     if(area_count == 0 || service_count == 0) {
-        furi_string_cat_printf(str, "No services or areas found.\n");
+        furi_string_cat_printf(str, "Nebyly nalezeny zadne sluzby ani oblasti.\n");
     } else {
         furi_string_cat_printf(
             str, "Pocet oblasti: %zu.\nPocet sluzeb: %zu.\n\n", area_count, service_count);

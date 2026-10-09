@@ -24,8 +24,8 @@ void nfc_render_mf_desfire_info(
             }
         }
 
-        furi_string_cat_printf(str, "\n%lu Application%s", app_count, app_count != 1 ? "s" : "");
-        furi_string_cat_printf(str, ", %lu File%s", file_count, file_count != 1 ? "s" : "");
+        furi_string_cat_printf(str, "\nPocet aplikaci: %lu", app_count);
+        furi_string_cat_printf(str, ", pocet souboru: %lu", file_count);
     } else if(mf_desfire_get_type_from_version(&data->version) == MfDesfireTypeLight) {
         // Light has one fixed application that GetApplicationIDs never lists, so no key reveals more
         furi_string_cat(str, "\nJedna pevna aplikace");
@@ -140,12 +140,12 @@ void nfc_render_mf_desfire_key_version(
     const MfDesfireKeyVersion* data,
     uint32_t index,
     FuriString* str) {
-    furi_string_cat_printf(str, "key %lu version %u\n", index, *data);
+    furi_string_cat_printf(str, "klic %lu, verze %u\n", index, *data);
 }
 
 void nfc_render_mf_desfire_application_id(const MfDesfireApplicationId* data, FuriString* str) {
     const uint8_t* app_id = data->data;
-    furi_string_cat_printf(str, "Application %02x%02x%02x\n", app_id[2], app_id[1], app_id[0]);
+    furi_string_cat_printf(str, "Aplikace %02x%02x%02x\n", app_id[2], app_id[1], app_id[0]);
 }
 
 void nfc_render_mf_desfire_application(const MfDesfireApplication* data, FuriString* str) {
@@ -159,7 +159,7 @@ void nfc_render_mf_desfire_application(const MfDesfireApplication* data, FuriStr
 }
 
 void nfc_render_mf_desfire_file_id(const MfDesfireFileId* data, FuriString* str) {
-    furi_string_cat_printf(str, "File %d\n", *data);
+    furi_string_cat_printf(str, "Soubor %d\n", *data);
 }
 
 void nfc_render_mf_desfire_file_settings_data(
@@ -264,7 +264,7 @@ void nfc_render_mf_desfire_file_settings_data(
         }
     }
     if(is_auth_required) {
-        furi_string_cat_printf(str, "Auth required to read file data\n");
+        furi_string_cat_printf(str, "Pro cteni dat souboru je nutne overeni\n");
         return;
     }
 

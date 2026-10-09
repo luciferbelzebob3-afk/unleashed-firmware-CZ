@@ -54,7 +54,7 @@ void nfc_render_emv_application_interchange_profile(const EmvApplication* apl, F
     uint16_t data = bit_lib_bytes_to_num_be(apl->application_interchange_profile, 2);
 
     if(!data) {
-        furi_string_cat_printf(str, "No Interchange profile found\n");
+        furi_string_cat_printf(str, "Nebyl nalezen profil vymeny\n");
         return;
     }
 
@@ -66,13 +66,13 @@ void nfc_render_emv_application_interchange_profile(const EmvApplication* apl, F
 
 void nfc_render_emv_transactions(const EmvApplication* apl, FuriString* str) {
     if(apl->transaction_counter)
-        furi_string_cat_printf(str, "Transactions count: %d\n", apl->transaction_counter);
+        furi_string_cat_printf(str, "Pocet transakci: %d\n", apl->transaction_counter);
     if(apl->last_online_atc)
-        furi_string_cat_printf(str, "Last Online ATC: %d\n", apl->last_online_atc);
+        furi_string_cat_printf(str, "Posledni online ATC: %d\n", apl->last_online_atc);
 
     const uint8_t len = apl->active_tr;
     if(!len) {
-        furi_string_cat_printf(str, "No transactions info\n");
+        furi_string_cat_printf(str, "Nejsou dostupne informace o transakcich\n");
         return;
     }
 

@@ -335,7 +335,7 @@ static void mf_plus_scene_show_keys_on_enter(NfcApp* instance) {
 
     furi_string_reset(str);
     nfc_append_filename_string_when_present(instance, str);
-    furi_string_cat_printf(str, "\e#Found MFP Keys:");
+    furi_string_cat_printf(str, "\e#Nalezene klice MFP:");
 
     // Sector keys: list only sectors with a recovered key, omitting unknown ones (as MIFARE Classic
     // does), so the screen stays compact on a partially-read card.

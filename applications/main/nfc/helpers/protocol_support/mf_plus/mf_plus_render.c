@@ -13,8 +13,8 @@ static void nfc_render_mf_plus_recovery_stats(const MfPlusData* data, FuriString
     uint8_t keys_found = 0;
     mf_plus_get_read_sectors_and_keys(data, &sectors_read, &keys_found);
 
-    furi_string_cat_printf(str, "\nKeys Found: %u/%u", keys_found, sectors_total * 2);
-    furi_string_cat_printf(str, "\nSectors Read: %u/%u", sectors_read, sectors_total);
+    furi_string_cat_printf(str, "\nNalezene klice: %u/%u", keys_found, sectors_total * 2);
+    furi_string_cat_printf(str, "\nNactene sektory: %u/%u", sectors_read, sectors_total);
 }
 
 void nfc_render_mf_plus_info(
