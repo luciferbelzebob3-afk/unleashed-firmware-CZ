@@ -1,6 +1,6 @@
 App(
     appid="input_settings",
-    name="Input",
+    name="Vstup",
     apptype=FlipperAppType.EXTSETTINGS,
     entry_point="input_settings_app",
     requires=["input"],
