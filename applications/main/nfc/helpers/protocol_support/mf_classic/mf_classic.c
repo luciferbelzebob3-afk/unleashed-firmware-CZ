@@ -371,7 +371,7 @@ static NfcCommand
 static void nfc_scene_write_on_enter_mf_classic(NfcApp* instance) {
     instance->poller = nfc_poller_alloc(instance->nfc, NfcProtocolMfClassic);
     nfc_poller_start(instance->poller, nfc_scene_write_poller_callback_mf_classic, instance);
-    furi_string_set(instance->text_box_store, "Use the source\ncard only");
+    furi_string_set(instance->text_box_store, "Pouzijte jen\nzdrojovou kartu");
 }
 
 const NfcProtocolSupportBase nfc_protocol_support_mf_classic = {
