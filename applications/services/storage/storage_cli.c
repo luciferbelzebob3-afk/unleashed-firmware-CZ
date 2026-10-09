@@ -19,7 +19,7 @@
 static void storage_cli_print_usage(void);
 
 static void storage_cli_print_error(FS_Error error) {
-    printf("Storage error: %s\r\n", storage_error_get_desc(error));
+    printf("Chyba uloziste: %s\r\n", storage_error_get_desc(error));
 }
 
 static void storage_cli_info(PipeSide* pipe, FuriString* path, FuriString* args) {
@@ -37,8 +37,8 @@ static void storage_cli_info(PipeSide* pipe, FuriString* path, FuriString* args)
             storage_cli_print_error(error);
         } else {
             printf(
-                "Label: %s\r\nType: Virtual\r\n%luKiB total\r\n%luKiB free\r\n",
-                furi_hal_version_get_name_ptr() ? furi_hal_version_get_name_ptr() : "Unknown",
+                "Nazev: %s\r\nTyp: virtualni\r\nCelkem %lu KiB\r\nVolno %lu KiB\r\n",
+                furi_hal_version_get_name_ptr() ? furi_hal_version_get_name_ptr() : "Neznamy",
                 (uint32_t)(total_space / 1024),
                 (uint32_t)(free_space / 1024));
         }
@@ -50,7 +50,7 @@ static void storage_cli_info(PipeSide* pipe, FuriString* path, FuriString* args)
             storage_cli_print_error(error);
         } else {
             printf(
-                "Label: %s\r\nType: %s\r\n%luKiB total\r\n%luKiB free\r\n"
+                "Nazev: %s\r\nTyp: %s\r\nCelkem %lu KiB\r\nVolno %lu KiB\r\n"
                 "%02x%s %s v%i.%i\r\nSN:%04lx %02i/%i\r\n",
                 sd_info.label,
                 sd_api_get_fs_type_text(sd_info.fs_type),
@@ -78,22 +78,22 @@ static void storage_cli_format(PipeSide* pipe, FuriString* path, FuriString* arg
     if(furi_string_cmp_str(path, STORAGE_INT_PATH_PREFIX) == 0) {
         storage_cli_print_error(FSE_NOT_IMPLEMENTED);
     } else if(furi_string_cmp_str(path, STORAGE_EXT_PATH_PREFIX) == 0) {
-        printf("Formatting SD card, All data will be lost! Are you sure (y/n)?\r\n");
+        printf("Formatuji SD kartu. Vsechna data budou ztracena! Pokracovat (y/n)?\r\n");
         char answer = getchar();
         if(answer == 'y' || answer == 'Y') {
             Storage* api = furi_record_open(RECORD_STORAGE);
-            printf("Formatting, please wait...\r\n");
+            printf("Formatuji, cekej...\r\n");
 
             FS_Error error = storage_sd_format(api);
 
             if(error != FSE_OK) {
                 storage_cli_print_error(error);
             } else {
-                printf("SD card was successfully formatted.\r\n");
+                printf("SD karta byla uspesne naformatovana.\r\n");
             }
             furi_record_close(RECORD_STORAGE);
         } else {
-            printf("Cancelled.\r\n");
+            printf("Zruseno.\r\n");
         }
     } else {
         storage_cli_print_usage();
@@ -126,7 +126,7 @@ static void storage_cli_list(PipeSide* pipe, FuriString* path, FuriString* args)
             }
 
             if(!read_done) {
-                printf("\tEmpty\r\n");
+                printf("\tPrazdne\r\n");
             }
         } else {
             storage_cli_print_error(storage_file_get_error(file));
@@ -168,7 +168,7 @@ static void storage_cli_tree(PipeSide* pipe, FuriString* path, FuriString* args)
             }
 
             if(!read_done) {
-                printf("\tEmpty\r\n");
+                printf("\tPrazdne\r\n");
             }
         } else {
             storage_cli_print_error(dir_walk_get_error(dir_walk));
@@ -191,7 +191,7 @@ static void storage_cli_read(PipeSide* pipe, FuriString* path, FuriString* args)
         size_t read_size = 0;
         uint8_t* data = malloc(buffer_size);
 
-        printf("Size: %lu\r\n", (uint32_t)storage_file_size(file));
+        printf("Velikost: %lu\r\n", (uint32_t)storage_file_size(file));
 
         do {
             read_size = storage_file_read(file, data, buffer_size);
@@ -222,7 +222,7 @@ static void storage_cli_write(PipeSide* pipe, FuriString* path, FuriString* args
     uint8_t* buffer = malloc(buffer_size);
 
     if(storage_file_open(file, furi_string_get_cstr(path), FSAM_WRITE, FSOM_OPEN_APPEND)) {
-        printf("Just write your text data. New line by Ctrl+Enter, exit by Ctrl+C.\r\n");
+        printf("Zadej text. Novy radek pomoci Ctrl+Enter, konec pomoci Ctrl+C.\r\n");
 
         uint32_t read_index = 0;
 
@@ -280,12 +280,12 @@ static void storage_cli_read_chunks(PipeSide* pipe, FuriString* path, FuriString
     } else if(storage_file_open(file, furi_string_get_cstr(path), FSAM_READ, FSOM_OPEN_EXISTING)) {
         uint64_t file_size = storage_file_size(file);
 
-        printf("Size: %llu\r\n", file_size);
+        printf("Velikost: %llu\r\n", file_size);
 
         if(buffer_size) {
             uint8_t* data = malloc(buffer_size);
             while(file_size > 0) {
-                printf("\r\nReady?\r\n");
+                printf("\r\nPripraveno?\r\n");
                 getchar();
 
                 size_t read_size = storage_file_read(file, data, buffer_size);
@@ -318,7 +318,7 @@ static void storage_cli_write_chunk(PipeSide* pipe, FuriString* path, FuriString
         storage_cli_print_usage();
     } else {
         if(storage_file_open(file, furi_string_get_cstr(path), FSAM_WRITE, FSOM_OPEN_APPEND)) {
-            printf("Ready\r\n");
+            printf("Pripraveno\r\n");
             const size_t buffer_size = 1024;
             uint8_t* buffer = malloc(buffer_size);
 
@@ -352,7 +352,7 @@ static void storage_cli_stat(PipeSide* pipe, FuriString* path, FuriString* args)
     Storage* api = furi_record_open(RECORD_STORAGE);
 
     if(furi_string_cmp_str(path, "/") == 0) {
-        printf("Storage\r\n");
+        printf("Uloziste\r\n");
     } else if(
         furi_string_cmp_str(path, STORAGE_EXT_PATH_PREFIX) == 0 ||
         furi_string_cmp_str(path, STORAGE_INT_PATH_PREFIX) == 0 ||
@@ -366,7 +366,7 @@ static void storage_cli_stat(PipeSide* pipe, FuriString* path, FuriString* args)
             storage_cli_print_error(error);
         } else {
             printf(
-                "Storage, %luKiB total, %luKiB free\r\n",
+                "Uloziste: celkem %lu KiB, volno %lu KiB\r\n",
                 (uint32_t)(total_space / 1024),
                 (uint32_t)(free_space / 1024));
         }
@@ -376,9 +376,9 @@ static void storage_cli_stat(PipeSide* pipe, FuriString* path, FuriString* args)
 
         if(error == FSE_OK) {
             if(file_info_is_dir(&fileinfo)) {
-                printf("Directory\r\n");
+                printf("Adresar\r\n");
             } else {
-                printf("File, size: %lub\r\n", (uint32_t)(fileinfo.size));
+                printf("Soubor, velikost: %lub\r\n", (uint32_t)(fileinfo.size));
             }
         } else {
             storage_cli_print_error(error);
@@ -397,9 +397,9 @@ static void storage_cli_timestamp(PipeSide* pipe, FuriString* path, FuriString* 
     FS_Error error = storage_common_timestamp(api, furi_string_get_cstr(path), &timestamp);
 
     if(error != FSE_OK) {
-        printf("Invalid arguments\r\n");
+        printf("Neplatne argumenty\r\n");
     } else {
-        printf("Timestamp %lu\r\n", timestamp);
+        printf("Casove razitko %lu\r\n", timestamp);
     }
 
     furi_record_close(RECORD_STORAGE);
@@ -516,17 +516,17 @@ static void storage_cli_extract(PipeSide* pipe, FuriString* old_path, FuriString
     TarOpenMode tar_mode = tar_archive_get_mode_for_path(furi_string_get_cstr(old_path));
     do {
         if(!tar_archive_open(archive, furi_string_get_cstr(old_path), tar_mode)) {
-            printf("Failed to open archive\r\n");
+            printf("Archiv se nepodarilo otevrit\r\n");
             break;
         }
         uint32_t start_tick = furi_get_tick();
         tar_archive_set_file_callback(archive, tar_extract_file_callback, NULL);
-        printf("Unpacking to %s\r\n", furi_string_get_cstr(new_path));
+        printf("Rozbaluji do %s\r\n", furi_string_get_cstr(new_path));
         bool success = tar_archive_unpack_to(archive, furi_string_get_cstr(new_path), NULL);
         uint32_t end_tick = furi_get_tick();
         printf(
             "Decompression %s in %lu ticks \r\n",
-            success ? "success" : "failed",
+            success ? "uspesne" : "selhalo",
             end_tick - start_tick);
     } while(false);
 
@@ -551,86 +551,86 @@ static const StorageCliCommand storage_cli_commands[] = {
     },
     {
         "read_chunks",
-        "read data from file and print file size and content to cli, <args> should contain how many bytes you want to read in block",
+        "cti data ze souboru a vypis velikost i obsah do CLI, <args> udava pocet bajtu v bloku",
         &storage_cli_read_chunks,
     },
     {
         "list",
-        "list files and dirs",
+        "vypis soubory a adresare",
         &storage_cli_list,
     },
     {
         "md5",
-        "md5 hash of the file",
+        "hash MD5 souboru",
         &storage_cli_md5,
     },
     {
         "stat",
-        "info about file or dir",
+        "informace o souboru nebo adresari",
         &storage_cli_stat,
     },
     {
         "info",
-        "get FS info",
+        "ziskej informace o souborovem systemu",
         &storage_cli_info,
     },
     {
         "tree",
-        "list files and dirs, recursive",
+        "rekurzivne vypis soubory a adresare",
         &storage_cli_tree,
     },
     {
         "read",
-        "read text from file and print file size and content to cli",
+        "cti text ze souboru a vypis velikost i obsah do CLI",
         &storage_cli_read,
     },
     {
         "write",
-        "read text from cli and append it to file, stops by ctrl+c",
+        "cti text z CLI a pridej ho do souboru, ukonci pomoci Ctrl+C",
         &storage_cli_write,
     },
     {
         "copy",
-        "copy file to new file, <args> must contain new path",
+        "zkopiruj soubor, <args> musi obsahovat novou cestu",
         &storage_cli_copy,
     },
     {
         "remove",
-        "delete the file or directory",
+        "smaz soubor nebo adresar",
         &storage_cli_remove,
     },
     {
         "rename",
-        "move file to new file, <args> must contain new path",
+        "presun soubor, <args> musi obsahovat novou cestu",
         &storage_cli_rename,
     },
     {
         "mkdir",
-        "creates a new directory",
+        "vytvori novy adresar",
         &storage_cli_mkdir,
     },
     {
         "timestamp",
-        "last modification timestamp",
+        "cas posledni upravy",
         &storage_cli_timestamp,
     },
     {
         "extract",
-        "extract tar archive to destination",
+        "rozbal archiv TAR do cilove slozky",
         &storage_cli_extract,
     },
     {
         "format",
-        "format filesystem",
+        "naformatuje souborovy system",
         &storage_cli_format,
     },
 };
 
 static void storage_cli_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("storage <cmd> <path> <args>\r\n");
-    printf("The path must start with /int or /ext\r\n");
-    printf("Cmd list:\r\n");
+    printf("Cesta musi zacinat /int nebo /ext\r\n");
+    printf("Seznam prikazu:\r\n");
 
     for(size_t i = 0; i < COUNT_OF(storage_cli_commands); ++i) {
         const StorageCliCommand* command_descr = &storage_cli_commands[i];
@@ -680,10 +680,10 @@ static void storage_cli_factory_reset(PipeSide* pipe, FuriString* args, void* co
     UNUSED(pipe);
     UNUSED(args);
     UNUSED(context);
-    printf("All data will be lost! Are you sure (y/n)?\r\n");
+    printf("Vsechna data budou ztracena! Opravdu pokracovat (y/n)?\r\n");
     char c = getchar();
     if(c == 'y' || c == 'Y') {
-        printf("Data will be wiped after reboot.\r\n");
+        printf("Data budou smazana po restartu.\r\n");
 
         furi_hal_rtc_reset_registers();
         furi_hal_rtc_set_flag(FuriHalRtcFlagStorageFormatInternal);
@@ -691,7 +691,7 @@ static void storage_cli_factory_reset(PipeSide* pipe, FuriString* args, void* co
         Power* power = furi_record_open(RECORD_POWER);
         power_reboot(power, PowerBootModeNormal);
     } else {
-        printf("Safe choice.\r\n");
+        printf("Bezpecna volba.\r\n");
     }
 }
 
