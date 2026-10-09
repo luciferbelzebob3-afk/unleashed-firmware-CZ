@@ -62,7 +62,7 @@ void lfrfid_scene_settings_write_targets_on_enter(void* context) {
     // The code is a breadcrumb for the log, not a diagnosis: plugin_manager collapses missing,
     // corrupt and API-mismatched into one value. Only editing is lost either way - writes still
     // honour whatever is in the settings file.
-    lfrfid_text_store_set(app, "Settings plugin\nfailed to load\nerror %d", error);
+    lfrfid_text_store_set(app, "Nastaveni pluginu\nse nepodarilo nacist\nchyba %d", error);
     popup_set_icon(app->popup, 83, 22, &I_WarningDolphinFlip_45x42);
     popup_set_header(app->popup, "Chyba", 64, 3, AlignCenter, AlignTop);
     popup_set_text(app->popup, app->text_store, 3, 19, AlignLeft, AlignTop);
@@ -77,7 +77,7 @@ bool lfrfid_scene_settings_write_targets_on_event(void* context, SceneManagerEve
     // blocking on a modal would be wrong.
     if(event.type == SceneManagerEventTypeBack && settings_plugin) {
         if(!settings_plugin->write_targets->on_save()) {
-            dialog_message_show_storage_error(app->dialogs, "Cannot save\nsettings");
+            dialog_message_show_storage_error(app->dialogs, "Nelze ulozit\nnastaveni");
         }
     }
 
