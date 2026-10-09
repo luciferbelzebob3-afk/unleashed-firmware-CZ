@@ -80,7 +80,7 @@ const char*
 static void nfc_cli_mfu_info_print_common(const MfUltralightData* data) {
     FuriString* str = furi_string_alloc();
 
-    printf(ANSI_FG_GREEN "\r\n\tTag information\r\n" ANSI_RESET);
+    printf(ANSI_FG_GREEN "\r\n\tInformace o karte\r\n" ANSI_RESET);
     printf(
         "Typ: " ANSI_FG_YELLOW "%s\r\n" ANSI_RESET,
         mf_ultralight_get_device_name(data, NfcDeviceNameTypeFull));
