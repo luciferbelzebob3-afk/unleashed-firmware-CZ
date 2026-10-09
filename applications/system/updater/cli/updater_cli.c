@@ -25,7 +25,7 @@ static void updater_cli_install(FuriString* manifest_path) {
     UpdatePrepareResult result = update_operation_prepare(furi_string_get_cstr(manifest_path));
     if(result != UpdatePrepareResultOK) {
         printf(
-            "Error: %s. Stopping update.\r\n",
+            "Chyba: %s. Zastavuji aktualizaci.\r\n",
             update_operation_describe_preparation_result(result));
         return;
     }
@@ -53,9 +53,9 @@ static void updater_cli_restore(FuriString* args) {
 static void updater_cli_help(FuriString* args) {
     UNUSED(args);
     printf("Commands:\r\n"
-           "\tinstall /ext/path/to/update.fuf - verify & apply update package\r\n"
-           "\tbackup /ext/path/to/backup.tar - create internal storage backup\r\n"
-           "\trestore /ext/path/to/backup.tar - restore internal storage backup\r\n");
+           "\tinstall /ext/path/to/update.fuf - overit a pouzit aktualizacni balicek\r\n"
+           "\tbackup /ext/path/to/backup.tar - vytvorit zalohu interniho uloziste\r\n"
+           "\trestore /ext/path/to/backup.tar - obnovit zalohu interniho uloziste\r\n");
 }
 
 static const CliSubcommand update_cli_subcommands[] = {
