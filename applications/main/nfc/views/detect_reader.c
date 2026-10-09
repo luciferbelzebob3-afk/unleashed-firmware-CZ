@@ -24,17 +24,17 @@ static void detect_reader_draw_callback(Canvas* canvas, void* model) {
     // Draw header and icon
     canvas_draw_icon(canvas, 0, 16, &I_Modern_reader_18x34);
     if(m->state == DetectReaderStateStart) {
-        snprintf(text, sizeof(text), "Touch the reader");
+        snprintf(text, sizeof(text), "Prilozte ke ctecce");
         canvas_draw_icon(canvas, 21, 13, &I_Move_flipper_26x39);
         if(furi_string_size(m->uid_str)) {
             elements_multiline_text_aligned(
                 canvas, 64, 64, AlignCenter, AlignBottom, furi_string_get_cstr(m->uid_str));
         }
     } else if(m->state == DetectReaderStateReaderDetected) {
-        snprintf(text, sizeof(text), "Move the Flipper away");
+        snprintf(text, sizeof(text), "Oddalte Flipper");
         canvas_draw_icon(canvas, 24, 25, &I_Release_arrow_18x15);
     } else if(m->state == DetectReaderStateReaderLost) {
-        snprintf(text, sizeof(text), "Touch the reader again");
+        snprintf(text, sizeof(text), "Znovu prilozte ctecce");
         canvas_draw_icon(canvas, 21, 13, &I_Move_flipper_26x39);
     }
 
