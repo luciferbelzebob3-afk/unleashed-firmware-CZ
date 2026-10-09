@@ -162,7 +162,7 @@ static void loader_show_gui_error(
             break;
         default:
             // Generic error
-            dialog_message_set_header(message, "Error", 64, 0, AlignCenter, AlignTop);
+            dialog_message_set_header(message, "Chyba", 64, 0, AlignCenter, AlignTop);
 
             furi_string_replace(error_message, ":", "\n");
             furi_string_replace(error_message, "/ext/apps/", "");
