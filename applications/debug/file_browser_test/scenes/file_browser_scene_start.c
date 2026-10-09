@@ -31,7 +31,7 @@ void file_browser_scene_start_on_enter(void* context) {
     FileBrowserApp* app = context;
 
     widget_add_string_multiline_element(
-        app->widget, 64, 20, AlignCenter, AlignTop, FontSecondary, "Press OK to start");
+        app->widget, 64, 20, AlignCenter, AlignTop, FontSecondary, "Stiskni OK pro spusteni");
 
     widget_add_button_element(
         app->widget, GuiButtonTypeCenter, "Ok", file_browser_scene_start_ok_callback, app);
