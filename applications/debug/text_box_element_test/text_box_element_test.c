@@ -7,7 +7,7 @@
 
 static void text_box_center_top_secondary_128x22(Canvas* canvas) {
     canvas_draw_frame(canvas, 0, 0, 128, 22);
-    elements_text_box(canvas, 0, 0, 128, 22, AlignCenter, AlignTop, "secondary font test", false);
+    elements_text_box(canvas, 0, 0, 128, 22, AlignCenter, AlignTop, "Test sekundarniho pisma", false);
 }
 
 static void text_box_right_bottom_bold_128x22(Canvas* canvas) {
@@ -40,7 +40,7 @@ static void text_box_center_center_secondary_110x44(Canvas* canvas) {
         30,
         AlignCenter,
         AlignCenter,
-        "Loooooooooooooo0000000ooong file name from happy 100500 Flipper 0wners",
+        "Dlouhy nazev souboru od spokojenych majitelu Flipperu",
         true);
 }
 
