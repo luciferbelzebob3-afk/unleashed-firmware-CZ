@@ -28,12 +28,12 @@ let cuteDolphinWithWatch = icon.getBuiltin("DolphinWait_59x54");
 let jsLogo = icon.getBuiltin("js_script_10px");
 let stopwatchWidgetElements = [
     { element: "string", x: 67, y: 44, align: "bl", font: "big_numbers", text: "00 00" },
-    { element: "string", x: 77, y: 22, align: "bl", font: "primary", text: "Stopwatch" },
+    { element: "string", x: 77, y: 22, align: "bl", font: "primary", text: "Stopky" },
     { element: "rect", x: 64, y: 27, w: 28, h: 20, radius: 3, fill: false },
     { element: "rect", x: 100, y: 27, w: 28, h: 20, radius: 3, fill: false },
     { element: "icon", x: 0, y: 5, iconData: cuteDolphinWithWatch },
     { element: "icon", x: 64, y: 13, iconData: jsLogo },
-    { element: "button", button: "right", text: "Back" },
+    { element: "button", button: "right", text: "Zpet" },
 ];
 
 // icons for the button panel
@@ -46,7 +46,7 @@ let views = {
     loading: loadingView.make(),
     empty: emptyView.make(),
     keyboard: textInputView.makeWith({
-        header: "Enter your name",
+        header: "Zadej sve jmeno",
         minLength: 0,
         maxLength: 32,
         defaultText: flipper.getName(),
@@ -54,7 +54,7 @@ let views = {
     }),
     helloDialog: dialogView.make(),
     bytekb: byteInputView.makeWith({
-        header: "Look ma, I'm a header text!",
+        header: "Hele, tohle je text hlavicky!",
         length: 8,
         defaultData: Uint8Array([0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88]),
     }),
@@ -63,10 +63,10 @@ let views = {
     }),
     stopwatchWidget: widget.makeWith({}, stopwatchWidgetElements),
     buttonMenu: buttonMenuView.makeWith({
-        header: "Header"
+        header: "Hlavicka"
     }, [
         { type: "common", label: "Test" },
-        { type: "control", label: "Test2" },
+        { type: "control", label: "Test 2" },
     ]),
     buttonPanel: buttonPanelView.makeWith({
         matrixSizeX: 2,
@@ -74,44 +74,44 @@ let views = {
     }, [
         { type: "button", x: 0, y: 0, matrixX: 0, matrixY: 0, icon: offIcons[0], iconSelected: offIcons[1] },
         { type: "button", x: 30, y: 30, matrixX: 1, matrixY: 1, icon: powerIcons[0], iconSelected: powerIcons[1] },
-        { type: "label", x: 0, y: 50, text: "Label", font: "primary" },
+        { type: "label", x: 0, y: 50, text: "Popisek", font: "primary" },
     ]),
     menu: menuView.makeWith({}, [
-        { label: "One", icon: settingsIcon },
-        { label: "Two", icon: settingsIcon },
-        { label: "three", icon: settingsIcon },
+        { label: "Jedna", icon: settingsIcon },
+        { label: "Dva", icon: settingsIcon },
+        { label: "Tri", icon: settingsIcon },
     ]),
     numberKbd: numberInputView.makeWith({
-        header: "Number input",
+        header: "Ciselny vstup",
         defaultValue: 100,
         minValue: 0,
         maxValue: 200,
     }),
     popup: popupView.makeWith({
-        header: "Hello",
-        text: "I'm going to be gone\nin 2 seconds",
+        header: "Ahoj",
+        text: "Zmizim za\n2 sekundy",
     }),
     viList: viListView.makeWith({}, [
-        { label: "One", variants: ["1", "1.0"] },
-        { label: "Two", variants: ["2", "2.0"] },
+        { label: "Jedna", variants: ["1", "1.0"] },
+        { label: "Dva", variants: ["2", "2.0"] },
     ]),
     demos: submenuView.makeWith({
-        header: "Choose a demo",
+        header: "Vyber ukazku",
     }, [
-        "Hourglass screen",
-        "Empty screen",
-        "Text input & Dialog",
-        "Byte input",
-        "Text box",
-        "File picker",
-        "Widget",
-        "Button menu",
-        "Button panel",
+        "Presypaci hodiny",
+        "Prazdna obrazovka",
+        "Textovy vstup a dialog",
+        "Bajtovy vstup",
+        "Textove pole",
+        "Vyber souboru",
+        "Prvek",
+        "Nabidka tlacitek",
+        "Panel tlacitek",
         "Menu",
-        "Number input",
-        "Popup",
-        "Var. item list",
-        "Exit app",
+        "Ciselny vstup",
+        "Vyskakovaci okno",
+        "Seznam promennych polozek",
+        "Ukoncit aplikaci",
     ]),
 };
 
@@ -141,11 +141,11 @@ eventLoop.subscribe(views.demos.chosen, function (_sub, index, gui, eventLoop, v
     } else if (index === 5) {
         let path = filePicker.pickFile("/ext", "*");
         if (path) {
-            views.helloDialog.set("text", "You selected:\n" + path);
+            views.helloDialog.set("text", "Vybral jsi:\n" + path);
         } else {
-            views.helloDialog.set("text", "You didn't select a file");
+            views.helloDialog.set("text", "Nevybral jsi zadny soubor");
         }
-        views.helloDialog.set("center", "Nice!");
+        views.helloDialog.set("center", "Prima!");
         gui.viewDispatcher.switchTo(views.helloDialog);
     } else if (index === 6) {
         gui.viewDispatcher.switchTo(views.stopwatchWidget);
@@ -170,8 +170,8 @@ eventLoop.subscribe(views.demos.chosen, function (_sub, index, gui, eventLoop, v
 // say hi after keyboard input
 eventLoop.subscribe(views.keyboard.input, function (_sub, name, gui, views) {
     views.keyboard.set("defaultText", name); // Remember for next usage
-    views.helloDialog.set("text", "Hi " + name + "! :)");
-    views.helloDialog.set("center", "Hi Flipper! :)");
+    views.helloDialog.set("text", "Ahoj " + name + "! :)");
+    views.helloDialog.set("center", "Ahoj, Flippere! :)");
     gui.viewDispatcher.switchTo(views.helloDialog);
 }, gui, views);
 
@@ -188,8 +188,8 @@ eventLoop.subscribe(views.bytekb.input, function (_sub, data, gui, views) {
     for (let i = 0; i < data_view.length; i++) {
         text += data_view[i].toString(16);
     }
-    views.helloDialog.set("text", "You typed:\n" + text);
-    views.helloDialog.set("center", "Cool!");
+    views.helloDialog.set("text", "Zadal jsi:\n" + text);
+    views.helloDialog.set("center", "Super!");
     gui.viewDispatcher.switchTo(views.helloDialog);
 }, gui, views);
 
@@ -234,29 +234,29 @@ eventLoop.subscribe(views.popup.timeout, function (_sub, _item, gui, views) {
 
 // button menu callback
 eventLoop.subscribe(views.buttonMenu.input, function (_sub, input, gui, views) {
-    views.helloDialog.set("text", "You selected #" + input.index.toString());
-    views.helloDialog.set("center", "Cool!");
+    views.helloDialog.set("text", "Vybral jsi #" + input.index.toString());
+    views.helloDialog.set("center", "Super!");
     gui.viewDispatcher.switchTo(views.helloDialog);
 }, gui, views);
 
 // button panel callback
 eventLoop.subscribe(views.buttonPanel.input, function (_sub, input, gui, views) {
-    views.helloDialog.set("text", "You selected #" + input.index.toString());
-    views.helloDialog.set("center", "Cool!");
+    views.helloDialog.set("text", "Vybral jsi #" + input.index.toString());
+    views.helloDialog.set("center", "Super!");
     gui.viewDispatcher.switchTo(views.helloDialog);
 }, gui, views);
 
 // menu callback
 eventLoop.subscribe(views.menu.chosen, function (_sub, index, gui, views) {
-    views.helloDialog.set("text", "You selected #" + index.toString());
-    views.helloDialog.set("center", "Cool!");
+    views.helloDialog.set("text", "Vybral jsi #" + index.toString());
+    views.helloDialog.set("center", "Super!");
     gui.viewDispatcher.switchTo(views.helloDialog);
 }, gui, views);
 
 // menu callback
 eventLoop.subscribe(views.numberKbd.input, function (_sub, number, gui, views) {
-    views.helloDialog.set("text", "You typed " + number.toString());
-    views.helloDialog.set("center", "Cool!");
+    views.helloDialog.set("text", "Zadal jsi " + number.toString());
+    views.helloDialog.set("center", "Super!");
     gui.viewDispatcher.switchTo(views.helloDialog);
 }, gui, views);
 

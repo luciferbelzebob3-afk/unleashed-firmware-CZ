@@ -18,12 +18,12 @@ let ctx = {
 
 let views = {
     dialog: dialog.makeWith({
-        header: "Interactive Console",
-        text: "Press OK to Start",
-        center: "Run Some JS"
+        header: "Interaktivni konzole",
+        text: "Stiskni OK pro spusteni",
+        center: "Spustit JS"
     }),
     textInput: textInput.makeWith({
-        header: "Type JavaScript Code:",
+        header: "Zadej kod JavaScriptu:",
         minLength: 0,
         maxLength: 256,
         defaultText: "2+2",
@@ -75,7 +75,7 @@ eventLoop.subscribe(views.textInput.input, function (_sub, text, gui, views, ctx
     }
 
     gui.viewDispatcher.sendTo("front");
-    views.dialog.set("header", "JS Returned:");
+    views.dialog.set("header", "Vysledek JS:");
     views.dialog.set("text", result);
     gui.viewDispatcher.switchTo(views.dialog);
     views.textInput.set("defaultText", text);
@@ -88,6 +88,6 @@ eventLoop.subscribe(gui.viewDispatcher.navigation, function (_sub, _, eventLoop)
 gui.viewDispatcher.switchTo(views.dialog);
 
 // Message behind GUI if something breaks
-print("If you're stuck here, something went wrong, re-run the script")
+print("Pokud se zde zaseknes, neco se pokazilo. Spust skript znovu.")
 eventLoop.run();
-print("\n\nFinished correctly :)")
+print("\n\nUspešne dokonceno :)")
