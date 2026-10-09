@@ -6,7 +6,7 @@ void nfc_render_iso14443_3b_info(
     FuriString* str) {
     if(format_type == NfcProtocolFormatTypeFull) {
         const char iso_type = iso14443_3b_supports_iso14443_4(data) ? '4' : '3';
-        furi_string_cat_printf(str, "Tech: ISO 14443-%c (NFC-B)\n", iso_type);
+        furi_string_cat_printf(str, "Technologie: ISO 14443-%c (NFC-B)\n", iso_type);
     }
 
     furi_string_cat_printf(str, "UID:");
@@ -20,7 +20,7 @@ void nfc_render_iso14443_3b_info(
 
     if(format_type != NfcProtocolFormatTypeFull) return;
 
-    furi_string_cat_printf(str, "\n::::::::::::::::[Protocol info]:::::::::::::::\n");
+    furi_string_cat_printf(str, "\n::::::::::::::::[Informace o protokolu]:::::::::::::::\n");
 
     if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRateBoth106Kbit)) {
         furi_string_cat(str, "Prenosova rychlost PICC <-> PCD:\n  106 kBit/s podporovano\n");
@@ -52,7 +52,7 @@ void nfc_render_iso14443_3b_info(
 
     const uint16_t max_frame_size = iso14443_3b_get_frame_size_max(data);
     if(max_frame_size != 0) {
-        furi_string_cat_printf(str, "%u bytes\n", max_frame_size);
+        furi_string_cat_printf(str, "%u bajtu\n", max_frame_size);
     } else {
         furi_string_cat(str, "? (RFU)\n");
     }
@@ -65,14 +65,14 @@ void nfc_render_iso14443_3b_info(
         str, "Maximalni doba cekani: %lu.%06lu s\n", fwt_us / 1000000UL, fwt_us % 1000000UL);
 
     const char* nad_support_str =
-        iso14443_3b_supports_frame_option(data, Iso14443_3bFrameOptionNad) ? "" : "not ";
+        iso14443_3b_supports_frame_option(data, Iso14443_3bFrameOptionNad) ? "" : "ne";
     furi_string_cat_printf(str, "NAD: %ssupported\n", nad_support_str);
 
     const char* cid_support_str =
-        iso14443_3b_supports_frame_option(data, Iso14443_3bFrameOptionCid) ? "" : "not ";
+        iso14443_3b_supports_frame_option(data, Iso14443_3bFrameOptionCid) ? "" : "ne";
     furi_string_cat_printf(str, "CID: %ssupported", cid_support_str);
 
-    furi_string_cat_printf(str, "\n::::::::::::[Application data]::::::::::::\nRaw:");
+    furi_string_cat_printf(str, "\n::::::::::::[Data aplikace]::::::::::::\nSurova data:");
 
     size_t app_data_size;
     const uint8_t* app_data = iso14443_3b_get_application_data(data, &app_data_size);

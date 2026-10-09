@@ -5,10 +5,10 @@ void nfc_render_felica_blocks_count(
     FuriString* str,
     bool render_auth_notification) {
     if(data->workflow_type == FelicaLite) {
-        furi_string_cat_printf(str, "Blocks: %u\n", data->blocks_total);
-        furi_string_cat_printf(str, "\nBlocks Read: %u/%u", data->blocks_read, data->blocks_total);
+        furi_string_cat_printf(str, "Bloky: %u\n", data->blocks_total);
+        furi_string_cat_printf(str, "\nPrectene bloky: %u/%u", data->blocks_read, data->blocks_total);
         if(render_auth_notification && data->blocks_read != data->blocks_total) {
-            furi_string_cat_printf(str, "\nAuth-protected blocks!");
+            furi_string_cat_printf(str, "\nBloky chranene overenim!");
         }
     }
 }
@@ -32,12 +32,12 @@ void nfc_render_felica_info(
     NfcProtocolFormatType format_type,
     FuriString* str) {
     if(format_type == NfcProtocolFormatTypeFull) {
-        furi_string_cat_printf(str, "Tech: JIS X 6319-4,\nISO 18092 [NFC-F]\n");
+        furi_string_cat_printf(str, "Technologie: JIS X 6319-4,\nISO 18092 [NFC-F]\n");
     }
 
     FuriString* ic_type_str = furi_string_alloc();
     felica_get_ic_name(data, ic_type_str);
-    furi_string_cat_printf(str, "IC Type:\n%s\n", furi_string_get_cstr(ic_type_str));
+    furi_string_cat_printf(str, "Typ IC:\n%s\n", furi_string_get_cstr(ic_type_str));
     furi_string_free(ic_type_str);
 
     nfc_render_felica_idm(data, format_type, str);
@@ -50,7 +50,7 @@ void nfc_render_felica_info(
     }
 
     furi_string_cat_printf(str, "\n");
-    furi_string_cat_printf(str, "Systems found: %lu \n", simple_array_get_count(data->systems));
+    furi_string_cat_printf(str, "Nalezene systemy: %lu \n", simple_array_get_count(data->systems));
 
     nfc_render_felica_blocks_count(data, str, true);
 }
@@ -96,9 +96,9 @@ static void nfc_render_felica_block(
 void nfc_more_info_render_felica_lite_dump(const FelicaData* data, FuriString* str) {
     FuriString* name = furi_string_alloc();
 
-    furi_string_cat_printf(str, "\e#Blocks read:\n");
+    furi_string_cat_printf(str, "\e#Prectene bloky:\n");
 
-    furi_string_cat_printf(str, "Blocks: %u\n", data->blocks_total);
+    furi_string_cat_printf(str, "Bloky: %u\n", data->blocks_total);
 
     for(size_t i = 0; i < 14; i++) {
         furi_string_printf(name, "S_PAD%d", i);
@@ -152,7 +152,7 @@ void nfc_more_info_render_felica_blocks(
     const uint16_t service_code_key) {
     furi_string_cat_printf(str, "\n");
     if(data->workflow_type == FelicaLite) {
-        furi_string_cat_printf(str, "Blocks: %u\n", data->blocks_total);
+        furi_string_cat_printf(str, "Bloky: %u\n", data->blocks_total);
         FuriString* name = furi_string_alloc();
 
         for(size_t i = 0; i < 14; i++) {

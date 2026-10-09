@@ -8,7 +8,7 @@ void nfc_render_iso14443_3a_format_bytes(FuriString* str, const uint8_t* data, s
 
 void nfc_render_iso14443_tech_type(const Iso14443_3aData* data, FuriString* str) {
     const char iso_type = iso14443_3a_supports_iso14443_4(data) ? '4' : '3';
-    furi_string_cat_printf(str, "Tech: ISO 14443-%c (NFC-A)\n", iso_type);
+    furi_string_cat_printf(str, "Technologie: ISO 14443-%c (NFC-A)\n", iso_type);
 }
 
 void nfc_render_iso14443_3a_info(

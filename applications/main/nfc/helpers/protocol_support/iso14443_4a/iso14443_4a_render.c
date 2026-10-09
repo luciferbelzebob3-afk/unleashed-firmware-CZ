@@ -37,7 +37,7 @@ void nfc_render_iso14443_4a_extra(const Iso14443_4aData* data, FuriString* str) 
         }
     }
 
-    furi_string_cat_printf(str, "\n::::::::::::::::[Protocol info]:::::::::::::::\n");
+    furi_string_cat_printf(str, "\n::::::::::::::::[Informace o protokolu]:::::::::::::::\n");
 
     if(iso14443_4a_supports_bit_rate(data, Iso14443_4aBitRateBoth106Kbit)) {
         furi_string_cat(str, "Prenosova rychlost PICC <-> PCD:\n  106 kBit/s podporovano\n");
@@ -69,7 +69,7 @@ void nfc_render_iso14443_4a_extra(const Iso14443_4aData* data, FuriString* str) 
 
     const uint16_t max_frame_size = iso14443_4a_get_frame_size_max(data);
     if(max_frame_size != 0) {
-        furi_string_cat_printf(str, "%u bytes\n", max_frame_size);
+        furi_string_cat_printf(str, "%u bajtu\n", max_frame_size);
     } else {
         furi_string_cat(str, "? (RFU)\n");
     }
@@ -85,11 +85,11 @@ void nfc_render_iso14443_4a_extra(const Iso14443_4aData* data, FuriString* str) 
     }
 
     const char* nad_support_str =
-        iso14443_4a_supports_frame_option(data, Iso14443_4aFrameOptionNad) ? "" : "not ";
+        iso14443_4a_supports_frame_option(data, Iso14443_4aFrameOptionNad) ? "" : "ne";
     furi_string_cat_printf(str, "NAD: %ssupported\n", nad_support_str);
 
     const char* cid_support_str =
-        iso14443_4a_supports_frame_option(data, Iso14443_4aFrameOptionCid) ? "" : "not ";
+        iso14443_4a_supports_frame_option(data, Iso14443_4aFrameOptionCid) ? "" : "ne";
     furi_string_cat_printf(str, "CID: %ssupported", cid_support_str);
 
     if(hist_bytes_count > 0) {
