@@ -1037,19 +1037,19 @@ void type_format_cat(FuriString* out, uint16_t type) {
     const char* s;
     if(!get_map_item(type, charliecard_types, kNumTypes, &s)) {
         s = "";
-        furi_string_cat_printf(out, "Unknown-%u", type);
+        furi_string_cat_printf(out, "Neznamy-%u", type);
     }
 
     furi_string_cat_str(out, s);
 }
 
 void pass_format_cat(FuriString* out, Pass pass) {
-    furi_string_cat_printf(out, "\n-Pre: %b", pass.pre);
+    furi_string_cat_printf(out, "\n-Pred: %b", pass.pre);
     // type_format_cat(out, pass.type);
-    furi_string_cat_printf(out, "\n-Post: ");
+    furi_string_cat_printf(out, "\n-Po: ");
     type_format_cat(out, pass.post);
     // locale_format_dt_cat(out, &pass.start);
-    furi_string_cat_printf(out, "\n-Date: ");
+    furi_string_cat_printf(out, "\n-Datum: ");
     locale_format_dt_cat(out, &pass.date);
 }
 
@@ -1068,10 +1068,10 @@ void passes_format_cat(FuriString* out, Pass* passes) {
         return;
     }
 
-    furi_string_cat_printf(out, "\nPasses (DEBUG / WIP):");
+    furi_string_cat_printf(out, "\nPruchody (DEBUG / WIP):");
     for(size_t i = 0; i < CHARLIE_N_PASSES; i++) {
         if(passes[i].valid) {
-            furi_string_cat_printf(out, "\nPass %u", i + 1);
+            furi_string_cat_printf(out, "\nPruchod %u", i + 1);
             pass_format_cat(out, passes[i]);
             furi_string_cat_printf(out, "\n");
         }
@@ -1109,7 +1109,7 @@ void transaction_format_cat(FuriString* out, Transaction transaction) {
 }
 
 void transactions_format_cat(FuriString* out, Transaction* transactions) {
-    furi_string_cat_printf(out, "\nTransactions:");
+    furi_string_cat_printf(out, "\nTransakce:");
     for(size_t i = 0; i < CHARLIE_N_TRANSACTION_HISTORY; i++) {
         furi_string_cat_printf(out, "\n");
         transaction_format_cat(out, transactions[i]);
@@ -1190,45 +1190,45 @@ static bool charliecard_parse(const NfcDevice* device, FuriString* parsed_data) 
 
         // print/append card data
         furi_string_cat_printf(parsed_data, "\e#CharlieCard");
-        furi_string_cat_printf(parsed_data, "\nSerial: 5-%lu", card_number);
+        furi_string_cat_printf(parsed_data, "\nSeriove cislo: 5-%lu", card_number);
 
         // Type and balance 0 on some (Perq) cards
         // (ie no "main" type / balance / end validity,
         //  essentially only pass & trip info)
         // skip/change formatting for that case?
         if(balance_read) {
-            furi_string_cat_printf(parsed_data, "\nBal: ");
+            furi_string_cat_printf(parsed_data, "\nZustatek: ");
             money_format_cat(parsed_data, balance_sector.balance);
 
-            furi_string_cat_printf(parsed_data, "\nType: ");
+            furi_string_cat_printf(parsed_data, "\nTyp: ");
             type_format_cat(parsed_data, balance_sector.type);
         } else {
-            furi_string_cat(parsed_data, "\nBal: Unknown\nType: Unknown");
+            furi_string_cat(parsed_data, "\nZustatek: neznamy\nTyp: neznamy");
         }
 
         if(counter_read) {
-            furi_string_cat_printf(parsed_data, "\nTrip Count: %u", counter_sector.n_uses);
+            furi_string_cat_printf(parsed_data, "\nPocet jizd: %u", counter_sector.n_uses);
         } else {
-            furi_string_cat(parsed_data, "\nTrip Count: Unknown");
+            furi_string_cat(parsed_data, "\nPocet jizd: neznamy");
         }
 
         if(balance_read) {
-            furi_string_cat_printf(parsed_data, "\nIssued: ");
+            furi_string_cat_printf(parsed_data, "\nVydano: ");
             locale_format_dt_cat(parsed_data, &balance_sector.issued);
         } else {
-            furi_string_cat(parsed_data, "\nIssued: Unknown");
+            furi_string_cat(parsed_data, "\nVydano: nezname");
         }
 
         // three states, all named: not read, no validity field (seen on Perq cards, where it
         // is all zero and so equals CHARLIE_EPOCH), or a real date
         if(!balance_read) {
-            furi_string_cat(parsed_data, "\nExpiry: Unknown");
+            furi_string_cat(parsed_data, "\nPlatnost do: neznamy");
         } else if(
             dt_eq(balance_sector.end_validity, CHARLIE_EPOCH) ||
             !dt_ge(balance_sector.end_validity, balance_sector.issued)) {
-            furi_string_cat(parsed_data, "\nExpiry: None");
+            furi_string_cat(parsed_data, "\nPlatnost do: neuvedeno");
         } else {
-            furi_string_cat_printf(parsed_data, "\nExpiry: ");
+            furi_string_cat_printf(parsed_data, "\nPlatnost do: ");
             locale_format_dt_cat(parsed_data, &balance_sector.end_validity);
         }
 
@@ -1238,7 +1238,7 @@ static bool charliecard_parse(const NfcDevice* device, FuriString* parsed_data) 
         if(transactions_read) {
             transactions_format_cat(parsed_data, transactions);
         } else {
-            furi_string_cat(parsed_data, "\nTransactions: Unknown");
+            furi_string_cat(parsed_data, "\nTransakce: nezname");
         }
         free(transactions);
 

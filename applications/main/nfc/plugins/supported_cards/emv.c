@@ -96,7 +96,7 @@ static bool emv_parse(const NfcDevice* device, FuriString* parsed_data) {
         }
 
         if(strlen(app.cardholder_name)) {
-            furi_string_cat_printf(parsed_data, "Cardholder name: %s\n", app.cardholder_name);
+            furi_string_cat_printf(parsed_data, "Jmeno drzitele karty: %s\n", app.cardholder_name);
             parsed = true;
         }
 
@@ -130,7 +130,7 @@ static bool emv_parse(const NfcDevice* device, FuriString* parsed_data) {
         if(app.effective_month) {
             furi_string_cat_printf(
                 parsed_data,
-                "Effective: %s\n",
+                "Platne od: %s\n",
                 app.effective_day ? furi_string_get_cstr(effective_date_str) :
                                     furi_string_get_cstr(effective_date_str) + 3);
 
@@ -140,7 +140,7 @@ static bool emv_parse(const NfcDevice* device, FuriString* parsed_data) {
         if(app.exp_month) {
             furi_string_cat_printf(
                 parsed_data,
-                "Expires: %s\n",
+                "Platnost do: %s\n",
                 app.exp_day ? furi_string_get_cstr(expiration_date_str) :
                               furi_string_get_cstr(expiration_date_str) + 3);
 
@@ -151,27 +151,27 @@ static bool emv_parse(const NfcDevice* device, FuriString* parsed_data) {
         bool storage_readed = emv_get_country_name(app.country_code, str);
 
         if(storage_readed) {
-            furi_string_cat_printf(parsed_data, "Country: %s\n", furi_string_get_cstr(str));
+            furi_string_cat_printf(parsed_data, "Zeme: %s\n", furi_string_get_cstr(str));
             parsed = true;
         }
 
         storage_readed = emv_get_currency_name(app.currency_code, str);
         if(storage_readed) {
-            furi_string_cat_printf(parsed_data, "Currency: %s\n", furi_string_get_cstr(str));
+            furi_string_cat_printf(parsed_data, "Mena: %s\n", furi_string_get_cstr(str));
             parsed = true;
         }
 
         if(app.pin_try_counter != 0xFF) {
-            furi_string_cat_printf(parsed_data, "PIN attempts left: %d\n", app.pin_try_counter);
+            furi_string_cat_printf(parsed_data, "Zbyvajici pokusy o PIN: %d\n", app.pin_try_counter);
             parsed = true;
         }
 
         if((app.application_interchange_profile[1] >> 6) & 0b1) {
-            furi_string_cat_printf(parsed_data, "Mobile: yes\n");
+            furi_string_cat_printf(parsed_data, "Mobilni: ano\n");
             parsed = true;
         }
 
-        if(!parsed) furi_string_cat_printf(parsed_data, "No data was parsed\n");
+        if(!parsed) furi_string_cat_printf(parsed_data, "Nebyla dekodovana zadna data\n");
 
         furi_string_free(str);
         furi_string_free(effective_date_str);
