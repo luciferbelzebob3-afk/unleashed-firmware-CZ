@@ -439,28 +439,28 @@ bool saflok_parse(const NfcDevice* device, FuriString* parsed_data) {
 #elif SL_PROTO == SL_PROTO_UL
         furi_string_cat_printf(parsed_data, "\e#Saflok UL-C Card\n");
 #endif
-        furi_string_cat_printf(parsed_data, "Property Number: %u\n", property_id);
+        furi_string_cat_printf(parsed_data, "Cislo objektu: %u\n", property_id);
         furi_string_cat_printf(
             parsed_data,
-            "Key Level: %u, %s\n",
+            "Uroven klice: %u, %s\n",
             key_levels[key_level].level_num,
             key_levels[key_level].level_name);
-        furi_string_cat_printf(parsed_data, "Key ID: %02X\n", key_id);
-        furi_string_cat_printf(parsed_data, "Key Record: %04X\n", key_record);
+        furi_string_cat_printf(parsed_data, "ID klice: %02X\n", key_id);
+        furi_string_cat_printf(parsed_data, "Zaznam klice: %04X\n", key_record);
         furi_string_cat_printf(
-            parsed_data, "Seq. & Combination: %04X\n", sequence_combination_number);
-        furi_string_cat_printf(parsed_data, "Pass Level: %04X\n", pass_level);
-        furi_string_cat_printf(parsed_data, "Opening Key: %s\n", opening_key ? "Yes" : "No");
+            parsed_data, "Sekvence a kombinace: %04X\n", sequence_combination_number);
+        furi_string_cat_printf(parsed_data, "Uroven pruchodu: %04X\n", pass_level);
+        furi_string_cat_printf(parsed_data, "Oteviraci klic: %s\n", opening_key ? "Yes" : "No");
         furi_string_cat_printf(
-            parsed_data, "Override Deadbolt: %s\n", override_deadbolt ? "Yes" : "No");
-        furi_string_cat_printf(parsed_data, "LED Exp. Warning: %s\n", led_warning ? "Yes" : "No");
+            parsed_data, "Prekonani zavory: %s\n", override_deadbolt ? "Yes" : "No");
+        furi_string_cat_printf(parsed_data, "Upozorneni LED na expiraci: %s\n", led_warning ? "Yes" : "No");
         furi_string_cat_printf(
             parsed_data,
-            "Restricted Weekday: %s\n",
+            "Omezeny den v tydnu: %s\n",
             furi_string_get_cstr(restricted_weekday_string));
         furi_string_cat_printf(
             parsed_data,
-            "Valid Start Date: \n%u-%02d-%02d\n%02d:%02d:00\n",
+            "Platnost od: \n%u-%02d-%02d\n%02d:%02d:00\n",
             creation_year,
             creation_month,
             creation_day,
@@ -468,13 +468,13 @@ bool saflok_parse(const NfcDevice* device, FuriString* parsed_data) {
             creation_minute);
         furi_string_cat_printf(
             parsed_data,
-            "Expiration Date: \n%u-%02d-%02d\n%02d:%02d:00\n",
+            "Datum expirace: \n%u-%02d-%02d\n%02d:%02d:00\n",
             expire_year,
             expire_month,
             expire_day,
             expire_hour,
             expire_minute);
-        furi_string_cat_printf(parsed_data, "Checksum Valid: %s", checksum_valid ? "Yes" : "No");
+        furi_string_cat_printf(parsed_data, "Kontrolni soucet platny: %s", checksum_valid ? "Yes" : "No");
 #if SL_PROTO == SL_PROTO_MFC
         // MFC returns parsed = true since we have proper verify and read functions
         parsed = true;
