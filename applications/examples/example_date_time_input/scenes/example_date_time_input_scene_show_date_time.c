@@ -11,7 +11,7 @@ static void example_date_time_input_scene_update_view(void* context) {
     ExampleDateTimeInput* app = context;
     DialogEx* dialog_ex = app->dialog_ex;
 
-    dialog_ex_set_header(dialog_ex, "The date and time are", 64, 0, AlignCenter, AlignTop);
+    dialog_ex_set_header(dialog_ex, "Aktualni datum a cas jsou", 64, 0, AlignCenter, AlignTop);
 
     uint8_t hour = app->date_time.hour;
     char label_hour[4] = "";

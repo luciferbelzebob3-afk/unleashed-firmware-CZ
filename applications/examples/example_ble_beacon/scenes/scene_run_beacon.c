@@ -40,7 +40,7 @@ static void update_status_text(BleBeaconApp* ble_beacon) {
 
     dialog_ex_set_left_button_text(dialog_ex, "Config");
 
-    dialog_ex_set_center_button_text(dialog_ex, ble_beacon->is_beacon_active ? "Stop" : "Start");
+    dialog_ex_set_center_button_text(dialog_ex, ble_beacon->is_beacon_active ? "Zastavit" : "Spustit");
 
     dialog_ex_set_result_callback(
         dialog_ex, ble_beacon_app_scene_run_beacon_confirm_dialog_callback);
