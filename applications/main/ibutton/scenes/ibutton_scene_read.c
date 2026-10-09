@@ -13,7 +13,7 @@ void ibutton_scene_read_on_enter(void* context) {
     iButtonWorker* worker = ibutton->worker;
 
     popup_set_header(popup, "Ctu", 95, 26, AlignCenter, AlignBottom);
-    popup_set_text(popup, "Connect key\nwith pogo pins", 95, 30, AlignCenter, AlignTop);
+    popup_set_text(popup, "Pripoj klic\npomoci pogo pinu", 95, 30, AlignCenter, AlignTop);
     popup_set_icon(popup, 0, 10, &I_DolphinWait_59x54);
 
     view_dispatcher_switch_to_view(ibutton->view_dispatcher, iButtonViewPopup);

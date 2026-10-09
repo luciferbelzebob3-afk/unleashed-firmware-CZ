@@ -9,7 +9,7 @@ void nfc_scene_key_dict_add_on_enter(void* context) {
 
     // Setup view
     ByteInput* byte_input = instance->byte_input;
-    byte_input_set_header_text(byte_input, "Enter the key in hex");
+    byte_input_set_header_text(byte_input, "Zadej klic v hexadecimalnim formatu");
     byte_input_set_result_callback(
         byte_input,
         nfc_protocol_support_common_byte_input_done_callback,
@@ -39,7 +39,7 @@ bool nfc_scene_key_dict_add_on_event(void* context, SceneManagerEvent event) {
             } else {
                 // Full SD, missing /ext/nfc/assets, read-only card: the user would otherwise just
                 // land back on an unchanged counter.
-                FURI_LOG_E(TAG, "Failed to add a key to %s", dict->user_path);
+                FURI_LOG_E(TAG, "Nepodarilo se pridat klic do %s", dict->user_path);
                 notification_message(instance->notifications, &sequence_error);
                 scene_manager_previous_scene(instance->scene_manager);
             }

@@ -22,31 +22,31 @@ void nfc_scene_extra_actions_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Read Specific Card Type",
+        "Cist konkretni typ karty",
         SubmenuIndexReadCardType,
         nfc_scene_extra_actions_submenu_callback,
         instance);
     submenu_add_item(
         submenu,
-        "MIFARE Classic Keys",
+        "Klice MIFARE Classic",
         SubmenuIndexMfClassicKeys,
         nfc_scene_extra_actions_submenu_callback,
         instance);
     submenu_add_item(
         submenu,
-        "MIFARE Plus Keys",
+        "Klice MIFARE Plus",
         SubmenuIndexMfPlusKeys,
         nfc_scene_extra_actions_submenu_callback,
         instance);
     submenu_add_item(
         submenu,
-        "MIFARE Ultralight C Keys",
+        "Klice MIFARE Ultralight C",
         SubmenuIndexMfUltralightCKeys,
         nfc_scene_extra_actions_submenu_callback,
         instance);
     submenu_add_item(
         submenu,
-        "MIFARE UL AES Keys",
+        "Klice MIFARE UL AES",
         SubmenuIndexMfUltralightAesKeys,
         nfc_scene_extra_actions_submenu_callback,
         instance);
@@ -58,7 +58,7 @@ void nfc_scene_extra_actions_on_enter(void* context) {
         instance);
     submenu_add_item(
         submenu,
-        "Unlock SLIX-L",
+        "Odemknout SLIX-L",
         SubmenuIndexSlixUnlock,
         nfc_scene_extra_actions_submenu_callback,
         instance);

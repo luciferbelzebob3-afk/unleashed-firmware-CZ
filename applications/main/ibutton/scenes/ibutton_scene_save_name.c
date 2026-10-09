@@ -70,7 +70,7 @@ bool ibutton_scene_save_name_on_event(void* context, SceneManagerEvent event) {
                            furi_string_get_cstr(replaced_path),
                            furi_string_get_cstr(ibutton->file_path)) &&
                        !storage_simply_remove(storage, furi_string_get_cstr(replaced_path))) {
-                        FURI_LOG_E(TAG, "Failed to remove replaced key file");
+                        FURI_LOG_E(TAG, "Nepodarilo se odstranit nahrazeny soubor klice");
                     }
                     furi_record_close(RECORD_STORAGE);
                 }

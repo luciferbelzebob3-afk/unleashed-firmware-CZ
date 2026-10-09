@@ -33,11 +33,11 @@ void nfc_scene_key_dict_delete_on_enter(void* context) {
         AlignCenter,
         AlignTop,
         FontPrimary,
-        key_loaded ? "Delete this key?" : "Key Not Found");
+        key_loaded ? "Smazat tento klic?" : "Klic nenalezen");
     widget_add_button_element(
         instance->widget,
         GuiButtonTypeLeft,
-        key_loaded ? "Cancel" : "Back",
+        key_loaded ? "Zrusit" : "Zpet",
         nfc_protocol_support_common_widget_callback,
         instance);
 
@@ -47,7 +47,7 @@ void nfc_scene_key_dict_delete_on_enter(void* context) {
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeRight,
-            "Delete",
+            "Smazat",
             nfc_protocol_support_common_widget_callback,
             instance);
 
@@ -65,7 +65,7 @@ void nfc_scene_key_dict_delete_on_enter(void* context) {
             furi_string_get_cstr(key_str));
         furi_string_free(key_str);
     } else {
-        FURI_LOG_W(TAG, "Key %lu is gone from %s", key_index, dict->user_path);
+        FURI_LOG_W(TAG, "Klic %lu byl odebran z %s", key_index, dict->user_path);
     }
 
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewWidget);
@@ -91,7 +91,7 @@ bool nfc_scene_key_dict_delete_on_event(void* context, SceneManagerEvent event) 
             if(deleted) {
                 scene_manager_next_scene(instance->scene_manager, NfcSceneDeleteSuccess);
             } else {
-                FURI_LOG_E(TAG, "Failed to delete key %lu from %s", key_index, dict->user_path);
+                FURI_LOG_E(TAG, "Nepodarilo se smazat klic %lu z %s", key_index, dict->user_path);
                 notification_message(instance->notifications, &sequence_error);
                 scene_manager_previous_scene(instance->scene_manager);
             }

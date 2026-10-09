@@ -9,7 +9,7 @@ void nfc_scene_des_auth_unlock_warn_dialog_callback(DialogExResult result, void*
 void nfc_scene_des_auth_unlock_warn_on_enter(void* context) {
     NfcApp* nfc = context;
 
-    const char* message = "Risky Action!";
+    const char* message = "Rizikova akce!";
     DialogEx* dialog_ex = nfc->dialog_ex;
     dialog_ex_set_context(dialog_ex, nfc);
     dialog_ex_set_result_callback(dialog_ex, nfc_scene_des_auth_unlock_warn_dialog_callback);
@@ -17,7 +17,7 @@ void nfc_scene_des_auth_unlock_warn_on_enter(void* context) {
     dialog_ex_set_header(dialog_ex, message, 64, 0, AlignCenter, AlignTop);
 
     FuriString* str = furi_string_alloc();
-    furi_string_cat_printf(str, "Unlock with key: ");
+    furi_string_cat_printf(str, "Odemknout klicem: ");
 
     NfcProtocol protocol = nfc_device_get_protocol(nfc->nfc_device);
     uint8_t* key;
@@ -39,8 +39,8 @@ void nfc_scene_des_auth_unlock_warn_on_enter(void* context) {
 
     dialog_ex_set_text(dialog_ex, nfc->text_store, 0, 12, AlignLeft, AlignTop);
 
-    dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-    dialog_ex_set_right_button_text(dialog_ex, "Unlock");
+    dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+    dialog_ex_set_right_button_text(dialog_ex, "Odemknout");
 
     view_dispatcher_switch_to_view(nfc->view_dispatcher, NfcViewDialogEx);
 }
