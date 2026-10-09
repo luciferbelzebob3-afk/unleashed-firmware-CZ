@@ -422,7 +422,7 @@ void subghz_cli_command_rx(PipeSide* pipe, FuriString* args, void* context) {
 
     furi_hal_power_suppress_charge_exit();
 
-    printf("\r\nPackets received %zu\r\n", instance->packet_count);
+    printf("\r\nPrijato paketu: %zu\r\n", instance->packet_count);
 
     // Cleanup
     subghz_receiver_free(receiver);
