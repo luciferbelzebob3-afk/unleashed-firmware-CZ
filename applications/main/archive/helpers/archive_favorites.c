@@ -352,7 +352,7 @@ void archive_favorites_handle_setting_pin_unpin(const char* app_name, const char
     bool is_favorite = archive_is_favorite("/app:setting/%s", setting_path_str);
     dialog_message_set_header(
         message,
-        is_favorite ? "Unpin This Setting?" : "Pin This Setting?",
+        is_favorite ? "Odepnout toto nastaveni?" : "Pripnout toto nastaveni?",
         64,
         0,
         AlignCenter,
@@ -366,7 +366,7 @@ void archive_favorites_handle_setting_pin_unpin(const char* app_name, const char
         AlignCenter,
         AlignCenter);
     dialog_message_set_buttons(
-        message, is_favorite ? "Unpin" : "Go back", NULL, is_favorite ? "Keep pinned" : "Pin");
+        message, is_favorite ? "Odepnout" : "Zpet", NULL, is_favorite ? "Ponechat" : "Pripnout");
 
     DialogsApp* dialogs = furi_record_open(RECORD_DIALOGS);
     DialogMessageButton button = dialog_message_show(dialogs, message);
