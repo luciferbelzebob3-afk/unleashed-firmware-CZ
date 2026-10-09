@@ -42,7 +42,7 @@ static const char* parse_nrf_connect(FindMy* app, const char* path) {
         furi_string_right(line, pos + strlen(marker));
         furi_string_trim(line);
 
-        error = "Wrong payload size";
+        error = "Nespravna velikost dat";
         size_t line_size = furi_string_size(line);
         uint8_t data_size = findmy_state_data_size(app->state.tag_type);
         FURI_LOG_I("ImportPayload", "Line Size: %d", line_size);
