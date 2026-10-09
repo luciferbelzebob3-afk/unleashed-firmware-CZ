@@ -45,7 +45,7 @@ void infrared_scene_edit_delete_on_enter(void* context) {
             const char* format =
                 (INFRARED_ERROR_CHECK(error, InfraredErrorCodeSignalRawUnableToReadTooLongData)) ?
                     "Failed to delete\n\"%s\" is too long.\nTry to edit file from pc" :
-                    "Failed to load\n\"%s\"";
+                    "Nelze nacist\n\"%s\"";
             infrared_show_error_message(
                 infrared, format, infrared_remote_get_signal_name(remote, current_button_index));
             scene_manager_previous_scene(infrared->scene_manager);
@@ -129,9 +129,9 @@ bool infrared_scene_edit_delete_on_event(void* context, SceneManagerEvent event)
                         infrared_remote_get_signal_name(infrared->remote, index));
                 } else {
                     const char* edit_target_text =
-                        app_state->edit_target == InfraredEditTargetButton ? "button" : "file";
+                        app_state->edit_target == InfraredEditTargetButton ? "tlacitko" : "soubor";
                     infrared_show_error_message(
-                        infrared, "Failed to\ndelete %s", edit_target_text);
+                        infrared, "Nelze smazat\n%s", edit_target_text);
                 }
 
                 const uint32_t possible_scenes[] = {InfraredSceneRemoteList, InfraredSceneRemote};
