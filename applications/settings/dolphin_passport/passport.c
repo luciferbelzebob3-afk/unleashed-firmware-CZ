@@ -42,13 +42,13 @@ static void render_callback(Canvas* canvas, void* ctx) {
 
     if(stats->butthurt <= 4) {
         mood = 0;
-        snprintf(mood_str, 20, "Mood: Happy");
+        snprintf(mood_str, 20, "Nalada: Stastny");
     } else if(stats->butthurt <= 9) {
         mood = 1;
-        snprintf(mood_str, 20, "Mood: Ok");
+        snprintf(mood_str, 20, "Nalada: V pohode");
     } else {
         mood = 2;
-        snprintf(mood_str, 20, "Mood: Angry");
+        snprintf(mood_str, 20, "Nalada: Nastvany");
     }
 
     uint32_t xp_progress = 0;
@@ -76,8 +76,8 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_draw_line(canvas, 58, 44, 123, 44);
 
     const char* my_name = furi_hal_version_get_name_ptr();
-    snprintf(level_str, 20, "Level: %hu", stats->level);
-    canvas_draw_str(canvas, 58, 12, my_name ? my_name : "Unknown");
+    snprintf(level_str, 20, "Uroven: %hu", stats->level);
+    canvas_draw_str(canvas, 58, 12, my_name ? my_name : "Neznamy");
     canvas_draw_str(canvas, 58, 26, mood_str);
     canvas_draw_str(canvas, 58, 40, level_str);
 

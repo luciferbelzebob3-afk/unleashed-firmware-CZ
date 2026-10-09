@@ -27,8 +27,8 @@ static void desktop_settings_view_pin_setup_howto2_draw(Canvas* canvas, void* mo
         0,
         AlignCenter,
         AlignTop,
-        "Forgotten PIN can only be\n"
-        "reset with entire device.\n"
+        "Zapomenuty PIN lze jen\n"
+        "obnovit resetem zarizeni.\n"
         "Precti si dokumentaci: Jak resetovat PIN.");
 
     elements_button_right(canvas, "OK");
