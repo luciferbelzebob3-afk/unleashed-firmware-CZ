@@ -532,9 +532,9 @@ static void night_shift_changed(VariableItem* item) {
     for(int i = 4; i < 6; i++) {
         VariableItem* t_item = variable_item_list_get(app->variable_item_list, i);
         if(index == 0) {
-            variable_item_set_locked(t_item, true, "Night Shift\nOFF!");
+            variable_item_set_locked(t_item, true, "Nocni rezim\nVYPNUTY!");
         } else {
-            variable_item_set_locked(t_item, false, "Night Shift\nOFF!");
+            variable_item_set_locked(t_item, false, "Nocni rezim\nVYPNUTY!");
         }
     }
 
@@ -668,13 +668,13 @@ static NotificationAppSettings* alloc_settings(void) {
     variable_item_set_current_value_text(item, backlight_text[value_index]);
 
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode)) {
-        item = variable_item_list_add(app->variable_item_list, "Volume", 1, NULL, app);
+        item = variable_item_list_add(app->variable_item_list, "Hlasitost", 1, NULL, app);
         value_index = 0;
         variable_item_set_current_value_index(item, value_index);
         variable_item_set_current_value_text(item, "Tichy rezim");
     } else {
         item = variable_item_list_add(
-            app->variable_item_list, "Volume", VOLUME_COUNT, volume_changed, app);
+            app->variable_item_list, "Hlasitost", VOLUME_COUNT, volume_changed, app);
         value_index = value_index_float(
             app->notification->settings.speaker_volume, volume_value, VOLUME_COUNT);
         variable_item_set_current_value_index(item, value_index);
