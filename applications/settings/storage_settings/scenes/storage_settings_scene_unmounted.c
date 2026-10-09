@@ -15,12 +15,12 @@ void storage_settings_scene_unmounted_on_enter(void* context) {
     if(sd_status == FSE_NOT_READY) {
         FS_Error error = storage_sd_mount(app->fs_api);
         if(error == FSE_OK) {
-            dialog_ex_set_header(dialog_ex, "SD Card Mounted", 64, 3, AlignCenter, AlignTop);
+            dialog_ex_set_header(dialog_ex, "SD karta pripojena", 64, 3, AlignCenter, AlignTop);
             dialog_ex_set_text(
-                dialog_ex, "Flipper can use\nSD card now.", 3, 22, AlignLeft, AlignTop);
+                dialog_ex, "Flipper ted muze\npouzivat SD kartu.", 3, 22, AlignLeft, AlignTop);
             notification_message(app->notification, &sequence_blink_green_100);
         } else {
-            dialog_ex_set_header(dialog_ex, "Cannot Mount SD Card", 64, 3, AlignCenter, AlignTop);
+            dialog_ex_set_header(dialog_ex, "SD kartu nelze pripojit", 64, 3, AlignCenter, AlignTop);
             dialog_ex_set_text(
                 dialog_ex, storage_error_get_desc(error), 3, 22, AlignLeft, AlignTop);
             notification_message(app->notification, &sequence_blink_red_100);
@@ -28,13 +28,13 @@ void storage_settings_scene_unmounted_on_enter(void* context) {
     } else {
         FS_Error error = storage_sd_unmount(app->fs_api);
         if(error == FSE_OK) {
-            dialog_ex_set_header(dialog_ex, "SD Card Unmounted", 64, 3, AlignCenter, AlignTop);
+            dialog_ex_set_header(dialog_ex, "SD karta odpojena", 64, 3, AlignCenter, AlignTop);
             dialog_ex_set_text(
-                dialog_ex, "You can remove\nSD card now.", 3, 22, AlignLeft, AlignTop);
+                dialog_ex, "Nyni muzes SD kartu\nbezpecne vyjmout.", 3, 22, AlignLeft, AlignTop);
             notification_message(app->notification, &sequence_blink_green_100);
         } else {
             dialog_ex_set_header(
-                dialog_ex, "Cannot Unmount SD Card", 64, 3, AlignCenter, AlignTop);
+                dialog_ex, "SD kartu nelze odpojit", 64, 3, AlignCenter, AlignTop);
             dialog_ex_set_text(
                 dialog_ex, storage_error_get_desc(error), 3, 22, AlignLeft, AlignTop);
             notification_message(app->notification, &sequence_blink_red_100);
