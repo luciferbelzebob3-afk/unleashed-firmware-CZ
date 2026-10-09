@@ -70,10 +70,10 @@ static void view_port_draw_callback(Canvas* canvas, void* context) {
         canvas_height(canvas),
         AlignCenter,
         AlignCenter,
-        "\e#Event Loop Timers Test\e#\n"
-        "Press buttons\n"
-        "to enable or disable timers\n"
-        "\e#Exit\e# = long press \e#Back\e#",
+        "\e#Test casovacu smycky udalosti\e#\n"
+        "Stiskni tlacitka\n"
+        "pro zapnuti nebo vypnuti casovacu\n"
+        "\e#Konec\e# = dlouze stiskni \e#Zpet\e#",
         false);
 }
 
