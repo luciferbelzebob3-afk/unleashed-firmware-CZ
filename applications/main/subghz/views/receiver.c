@@ -271,7 +271,7 @@ void subghz_view_receiver_draw(Canvas* canvas, SubGhzViewReceiverModel* model) {
     canvas_set_font(canvas, FontSecondary);
 
     if(model->mode == SubGhzViewReceiverModeLive) {
-        elements_button_left(canvas, "Config");
+        elements_button_left(canvas, "Nastav.");
         //canvas_draw_line(canvas, 46, 51, 125, 51);
     } else {
         canvas_draw_line(canvas, 2, 52, 125, 52);
@@ -326,9 +326,9 @@ void subghz_view_receiver_draw(Canvas* canvas, SubGhzViewReceiverModel* model) {
                                                                         &I_Fishing_123x52);
             canvas_set_font(canvas, FontPrimary);
             if(model->hopping_enabled) {
-                canvas_draw_str(canvas, 59, 46, "Hopper scan...");
+                canvas_draw_str(canvas, 59, 46, "Prohledavani...");
             } else {
-                canvas_draw_str(canvas, 59, 46, "Fixed scan...");
+                canvas_draw_str(canvas, 59, 46, "Pevne ladeni...");
             }
             //canvas_draw_line(canvas, 46, 51, 125, 51);
             canvas_set_font(canvas, FontSecondary);
@@ -346,7 +346,7 @@ void subghz_view_receiver_draw(Canvas* canvas, SubGhzViewReceiverModel* model) {
                 (model->device_type == SubGhzRadioDeviceTypeInternal) ? &I_Scanning_123x52 :
                                                                         &I_Fishing_123x52);
             canvas_set_font(canvas, FontPrimary);
-            canvas_draw_str(canvas, 63, 46, "Decoding...");
+            canvas_draw_str(canvas, 63, 46, "Dekodovani...");
             canvas_set_font(canvas, FontSecondary);
         }
     }
@@ -357,7 +357,7 @@ void subghz_view_receiver_draw(Canvas* canvas, SubGhzViewReceiverModel* model) {
     switch(model->bar_show) {
     case SubGhzViewReceiverBarShowLock:
         canvas_draw_icon(canvas, 64, 55, &I_Lock_7x8);
-        canvas_draw_str(canvas, 74, 62, "Locked");
+        canvas_draw_str(canvas, 74, 62, "Zamceno");
         break;
     case SubGhzViewReceiverBarShowToUnlockPress:
         canvas_draw_str(canvas, 44, 62, furi_string_get_cstr(model->frequency_str));
@@ -386,7 +386,7 @@ void subghz_view_receiver_draw(Canvas* canvas, SubGhzViewReceiverModel* model) {
         canvas_draw_str(canvas, 96, 62, furi_string_get_cstr(model->history_stat_str));
         canvas_set_font(canvas, FontSecondary);
         elements_bold_rounded_frame(canvas, 14, 8, 99, 48);
-        elements_multiline_text(canvas, 65, 26, "To unlock\npress:");
+        elements_multiline_text(canvas, 65, 26, "Pro odemceni\nstiskni:");
         canvas_draw_icon(canvas, 65, 42, &I_Pin_back_arrow_10x8);
         canvas_draw_icon(canvas, 80, 42, &I_Pin_back_arrow_10x8);
         canvas_draw_icon(canvas, 95, 42, &I_Pin_back_arrow_10x8);
@@ -395,7 +395,7 @@ void subghz_view_receiver_draw(Canvas* canvas, SubGhzViewReceiverModel* model) {
         break;
     case SubGhzViewReceiverBarShowUnlock:
         canvas_draw_icon(canvas, 64, 55, &I_Unlock_7x8);
-        canvas_draw_str(canvas, 74, 62, "Unlocked");
+        canvas_draw_str(canvas, 74, 62, "Odemceno");
         break;
     default: {
         const char* frequency_str = furi_string_get_cstr(model->frequency_str);
