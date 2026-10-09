@@ -10,7 +10,7 @@ void rpc_debug_app_scene_start_dummy_on_enter(void* context) {
         64,
         AlignCenter,
         AlignCenter,
-        "This application\nis meant to be run\nin \e#RPC\e# mode.",
+        "Tato aplikace\nse ma spoustet\nv rezimu \e#RPC\e#.",
         false);
     view_dispatcher_switch_to_view(app->view_dispatcher, RpcDebugAppViewWidget);
 }
