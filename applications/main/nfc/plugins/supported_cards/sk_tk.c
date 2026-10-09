@@ -269,7 +269,7 @@ static void
 
         furi_string_cat_printf(
             parsed_data,
-            "\nFrom:>%s\nTo:>%s\nValid From: %02d-%02d-%04d\nValid thru:  %02d-%02d-%04d\n",
+            "\nOdkud:>%s\nKam:>%s\nPlati od: %02d-%02d-%04d\nPlati do: %02d-%02d-%04d\n",
             furi_string_get_cstr(ticket->departure_name),
             furi_string_get_cstr(ticket->destination_name),
             ticket->valid_from.day,

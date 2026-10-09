@@ -291,10 +291,10 @@ static void
                 break;
             default:
                 furi_string_cat_printf(
-                    parsed_data, "Type: Unknown, 0x%02X\n", ticket->first_ticket_marker);
+                    parsed_data, "Typ: neznamy, 0x%02X\n", ticket->first_ticket_marker);
             }
         } else {
-            furi_string_cat_printf(parsed_data, "\e#Second Ticket:\n");
+            furi_string_cat_printf(parsed_data, "\e#Druhy listek:\n");
             switch(ticket->second_ticket_marker) {
             case 0x02:
                 furi_string_cat_printf(parsed_data, "Typ:> neomezene 5 dni");
@@ -316,7 +316,7 @@ static void
 
         furi_string_cat_printf(
             parsed_data,
-            "\nFrom:>%s\nTo:>%s\nValid From: %02d-%02d-%04d\nValid thru:  %02d-%02d-%04d",
+            "\nOdkud:>%s\nKam:>%s\nPlati od: %02d-%02d-%04d\nPlati do: %02d-%02d-%04d",
             furi_string_get_cstr(ticket->departure_name),
             furi_string_get_cstr(ticket->destination_name),
             ticket->valid_from.day,
@@ -338,7 +338,7 @@ static void
         case 0x80:
             furi_string_cat_printf(
                 parsed_data,
-                "\nStatus:> ENTERED STATION\nSta name:> %s\nLast pass on:> %02d-%02d-%04d\nPass time:> %02d:%02d\nPPK CNT: %03d\n",
+                "\nStav:> VSTUP DO STANICE\nNazev stanice:> %s\nPosledni pruchod:> %02d-%02d-%04d\nCas pruchodu:> %02d:%02d\nPPK CNT: %03d\n",
                 furi_string_get_cstr(ticket->trip_start_sta_name),
                 ticket->tap_time.day,
                 ticket->tap_time.month,
@@ -350,7 +350,7 @@ static void
         case 0x1E:
             furi_string_cat_printf(
                 parsed_data,
-                "\nStatus:> EXITED STATION\nSta name:> %s\nLast pass on:> %02d-%02d-%04d\nPass time:> %02d:%02d\nPPK CNT: %03d\n",
+                "\nStav:> VYSTUP ZE STANICE\nNazev stanice:> %s\nPosledni pruchod:> %02d-%02d-%04d\nCas pruchodu:> %02d:%02d\nPPK CNT: %03d\n",
                 furi_string_get_cstr(ticket->trip_end_sta_name),
                 ticket->tap_time.day,
                 ticket->tap_time.month,

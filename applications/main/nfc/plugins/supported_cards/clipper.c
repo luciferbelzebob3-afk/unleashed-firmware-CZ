@@ -282,7 +282,7 @@ static bool clipper_parse(const NfcDevice* device, FuriString* parsed_data) {
             device_description);
         if(info.last_updated_tm_1900 != 0)
             furi_string_cat_timestamp(
-                parsed_data, "Datum: ", "\nTime: ", info.last_updated_tm_1900);
+                parsed_data, "Datum: ", "\nCas: ", info.last_updated_tm_1900);
         else
             furi_string_cat_str(parsed_data, "Never");
         furi_string_cat_printf(
@@ -476,14 +476,14 @@ static bool dump_ride_event(const uint8_t* record, FuriString* parsed_data) {
         zone_off = "Nezname";
     }
 
-    furi_string_cat_str(parsed_data, "\e#Ride Record\n");
-    furi_string_cat_timestamp(parsed_data, "Datum: ", "\nTime: ", time_on_raw);
+    furi_string_cat_str(parsed_data, "\e#Zaznam jizdy\n");
+    furi_string_cat_timestamp(parsed_data, "Datum: ", "\nCas: ", time_on_raw);
     furi_string_cat_printf(
         parsed_data,
         "\n"
-        "Fare: $%d.%02u\n"
-        "Agency: %s (%04x)\n"
-        "On: %s (%04x)\n",
+        "Jizdne: $%d.%02u\n"
+        "Dopravce: %s (%04x)\n"
+        "Nastup: %s (%04x)\n",
         fare_usd,
         fare_cents,
         agency_name,
@@ -491,11 +491,11 @@ static bool dump_ride_event(const uint8_t* record, FuriString* parsed_data) {
         zone_on,
         zone_id_on);
     if(vehicle_id != 0) {
-        furi_string_cat_printf(parsed_data, "Vehicle id: %d\n", vehicle_id);
+        furi_string_cat_printf(parsed_data, "ID vozidla: %d\n", vehicle_id);
     }
     if(time_off_raw != 0) {
-        furi_string_cat_printf(parsed_data, "Off: %s (%04x)\n", zone_off, zone_id_off);
-        furi_string_cat_timestamp(parsed_data, "Date Off: ", "\nTime Off: ", time_off_raw);
+        furi_string_cat_printf(parsed_data, "Vystup: %s (%04x)\n", zone_off, zone_id_off);
+        furi_string_cat_timestamp(parsed_data, "Datum vystupu: ", "\nCas vystupu: ", time_off_raw);
         furi_string_cat_str(parsed_data, "\n");
     }
 

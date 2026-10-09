@@ -542,7 +542,7 @@ static void printf_ppk_data(FuriString* parsed_data, PPKData* ticket, bool ticke
 
     furi_string_cat_printf(
         parsed_data,
-        "\nFrom:> %s\nTo:> %s",
+        "\nOdkud:> %s\nKam:> %s",
         furi_string_get_cstr(ticket->departure_name),
         furi_string_get_cstr(ticket->destination_name));
 
@@ -556,7 +556,7 @@ static void printf_ppk_data(FuriString* parsed_data, PPKData* ticket, bool ticke
     } else {
         furi_string_cat_printf(
             parsed_data,
-            "\nValid From: %02d-%02d-%04d\nValid thru:  %02d-%02d-%04d",
+            "\nPlati od: %02d-%02d-%04d\nPlati do: %02d-%02d-%04d",
             ticket->valid_from.day,
             ticket->valid_from.month,
             ticket->valid_from.year,
