@@ -184,12 +184,12 @@ FS_Error archive_rename_copy_file_or_dir(
 
     if(error == FSE_OK) {
         FURI_LOG_I(
-            TAG, "%s z %s do %s: HOTOVO", copy ? "Copy" : "Rename/Move", src_path, dst_path);
+            TAG, "%s z %s do %s: HOTOVO", copy ? "Kopirovani" : "Prejmenovani/presun", src_path, dst_path);
     } else {
         FURI_LOG_E(
             TAG,
             "%s selhalo: %s, kod: %d",
-            copy ? "Copy" : "Rename/Move",
+            copy ? "Kopirovani" : "Prejmenovani/presun",
             filesystem_api_error_get_desc(error),
             error);
     }

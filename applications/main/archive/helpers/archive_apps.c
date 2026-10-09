@@ -3,7 +3,7 @@
 
 static const char* const known_apps[] = {
     [ArchiveAppTypeU2f] = "u2f",
-    [ArchiveAppTypeSetting] = "setting",
+    [ArchiveAppTypeSetting] = "nastaveni",
 };
 
 ArchiveAppTypeEnum archive_get_app_type(const char* path) {
