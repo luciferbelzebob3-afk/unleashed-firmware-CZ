@@ -539,7 +539,7 @@ static void hid_ptt_populate_help(HidPushToTalk* hid_ptt, uint32_t appIndex) {
                             "1. Otevri Settings > Keyboard Shortcuts.\n"
                             "2. Najdi zkratku 'Mute/Unmute' a klikni na 'Edit'.\n"
                             "3. Stiskni tlacitko Mute v aplikaci a prirad ho.\n"
-                            "4. Repeat for video and hand shortcuts.\n"
+                            "4. Opakuj to pro zkratky videa a ruky.\n"
                             "5. Podrz < pro odeslani klavesy Enter.\n\n";
         break;
     }
