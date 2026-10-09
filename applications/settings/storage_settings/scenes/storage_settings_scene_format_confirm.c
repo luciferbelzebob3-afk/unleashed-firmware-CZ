@@ -17,7 +17,7 @@ void storage_settings_scene_format_confirm_on_enter(void* context) {
         dialog_ex_set_icon(dialog_ex, 83, 22, &I_WarningDolphinFlip_45x42);
         dialog_ex_set_header(dialog_ex, "SD karta neni pripojena", 64, 3, AlignCenter, AlignTop);
         dialog_ex_set_text(
-            dialog_ex, "Try to reinsert\nor format SD\ncard.", 3, 19, AlignLeft, AlignTop);
+            dialog_ex, "Znovu vloz SD kartu,\npripadne ji\nnaformatuj.", 3, 19, AlignLeft, AlignTop);
         dialog_ex_set_center_button_text(dialog_ex, "OK");
     } else {
         dialog_ex_set_header(dialog_ex, "Formatovat SD kartu?", 64, 0, AlignCenter, AlignTop);
