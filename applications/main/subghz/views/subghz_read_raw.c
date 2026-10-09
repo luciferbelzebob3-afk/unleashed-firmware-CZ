@@ -325,7 +325,7 @@ void subghz_read_raw_draw(Canvas* canvas, SubGhzReadRAWModel* model) {
             elements_button_left(canvas, "Novy");
             elements_button_right(canvas, "Dalsi");
         }
-        elements_button_center(canvas, "Send");
+        elements_button_center(canvas, "Odeslat");
         elements_text_box(
             canvas,
             4,

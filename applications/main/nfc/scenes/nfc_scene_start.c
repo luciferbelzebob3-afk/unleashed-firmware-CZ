@@ -27,22 +27,22 @@ void nfc_scene_start_on_enter(void* context) {
     // Reset detected protocols list
     nfc_detected_protocols_reset(nfc->detected_protocols);
 
-    submenu_add_item(submenu, "Read", SubmenuIndexRead, nfc_scene_start_submenu_callback, nfc);
+    submenu_add_item(submenu, "Cist", SubmenuIndexRead, nfc_scene_start_submenu_callback, nfc);
     submenu_add_item(
         submenu,
-        "Extract MFC Keys",
+        "Ziskat klice MFC",
         SubmenuIndexDetectReader,
         nfc_scene_start_submenu_callback,
         nfc);
-    submenu_add_item(submenu, "Saved", SubmenuIndexSaved, nfc_scene_start_submenu_callback, nfc);
+    submenu_add_item(submenu, "Ulozene", SubmenuIndexSaved, nfc_scene_start_submenu_callback, nfc);
     submenu_add_item(
-        submenu, "Extra Actions", SubmenuIndexExtraAction, nfc_scene_start_submenu_callback, nfc);
+        submenu, "Dalsi akce", SubmenuIndexExtraAction, nfc_scene_start_submenu_callback, nfc);
     submenu_add_item(
-        submenu, "Add Manually", SubmenuIndexAddManually, nfc_scene_start_submenu_callback, nfc);
+        submenu, "Pridat rucne", SubmenuIndexAddManually, nfc_scene_start_submenu_callback, nfc);
 
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
         submenu_add_item(
-            submenu, "Debug", SubmenuIndexDebug, nfc_scene_start_submenu_callback, nfc);
+            submenu, "Ladeni", SubmenuIndexDebug, nfc_scene_start_submenu_callback, nfc);
     }
 
     submenu_set_selected_item(

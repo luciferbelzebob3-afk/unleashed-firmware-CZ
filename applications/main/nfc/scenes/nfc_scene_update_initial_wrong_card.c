@@ -17,7 +17,7 @@ void nfc_scene_update_initial_wrong_card_on_enter(void* context) {
     notification_message(instance->notifications, &sequence_error);
 
     widget_add_icon_element(widget, 83, 22, &I_WarningDolphinFlip_45x42);
-    widget_add_string_element(widget, 3, 4, AlignLeft, AlignTop, FontPrimary, "Wrong Card!");
+    widget_add_string_element(widget, 3, 4, AlignLeft, AlignTop, FontPrimary, "Spatna karta!");
     widget_add_string_multiline_element(
         widget,
         4,
@@ -25,11 +25,11 @@ void nfc_scene_update_initial_wrong_card_on_enter(void* context) {
         AlignLeft,
         AlignTop,
         FontSecondary,
-        "Data management\nis only possible\nwith source card");
+        "Sprava dat je mozna\npouze se zdrojovou\nkartou");
     widget_add_button_element(
         widget,
         GuiButtonTypeLeft,
-        "Retry",
+        "Opakovat",
         nfc_scene_update_initial_wrong_card_widget_callback,
         instance);
 

@@ -12,7 +12,7 @@ void subghz_frequency_analyzer_plugin_load(SubGhz* subghz) {
         &subghz->freq_analyzer_plugin_manager,
         SUBGHZ_FREQUENCY_ANALYZER_PLUGIN_APP_ID,
         SUBGHZ_FREQUENCY_ANALYZER_PLUGIN_PATH,
-        "Analyzer plugin\nis missing or\noutdated. Update\nresources.");
+        "Plugin analyzatoru\nchybi nebo je\nzastaraly. Aktualizuj\nzdroje.");
     if(subghz->freq_analyzer_plugin) {
         subghz->freq_analyzer_plugin->on_enter(subghz);
     }

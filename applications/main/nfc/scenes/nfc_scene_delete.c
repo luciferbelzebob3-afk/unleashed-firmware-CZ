@@ -14,13 +14,13 @@ void nfc_scene_delete_on_enter(void* context) {
     FuriString* temp_str;
     temp_str = furi_string_alloc();
 
-    furi_string_printf(temp_str, "\e#Delete %s?\e#", furi_string_get_cstr(nfc->file_name));
+    furi_string_printf(temp_str, "\e#Smazat %s?\e#", furi_string_get_cstr(nfc->file_name));
     widget_add_text_box_element(
         nfc->widget, 0, 0, 128, 23, AlignCenter, AlignCenter, furi_string_get_cstr(temp_str), false);
     widget_add_button_element(
-        nfc->widget, GuiButtonTypeLeft, "Cancel", nfc_scene_delete_widget_callback, nfc);
+        nfc->widget, GuiButtonTypeLeft, "Zrusit", nfc_scene_delete_widget_callback, nfc);
     widget_add_button_element(
-        nfc->widget, GuiButtonTypeRight, "Delete", nfc_scene_delete_widget_callback, nfc);
+        nfc->widget, GuiButtonTypeRight, "Smazat", nfc_scene_delete_widget_callback, nfc);
 
     size_t uid_len;
     const uint8_t* uid = nfc_device_get_uid(nfc->nfc_device, &uid_len);

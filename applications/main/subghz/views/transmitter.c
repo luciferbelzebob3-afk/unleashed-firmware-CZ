@@ -142,7 +142,7 @@ bool subghz_view_transmitter_input(InputEvent* event, void* context) {
             },
             false);
         return false;
-    } // Finish "Back" key processing
+    } // Finish "Zpet" key processing
 
     with_view_model(
         subghz_transmitter->view,
