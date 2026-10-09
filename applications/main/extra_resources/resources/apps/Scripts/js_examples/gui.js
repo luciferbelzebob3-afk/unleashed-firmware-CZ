@@ -59,7 +59,7 @@ let views = {
         defaultData: Uint8Array([0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88]),
     }),
     longText: textBoxView.makeWith({
-        text: "This is a very long string that demonstrates the TextBox view. Use the D-Pad to scroll backwards and forwards.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus est malesuada quam egestas ultrices. Maecenas non eros a nulla eleifend vulputate et ut risus. Quisque in mauris mattis, venenatis risus eget, aliquam diam. Fusce pretium feugiat mauris, ut faucibus ex volutpat in. Phasellus volutpat ex sed gravida consectetur. Aliquam sed lectus feugiat, tristique lectus et, bibendum lacus. Ut sit amet augue eu sapien elementum aliquam quis vitae tortor. Vestibulum quis commodo odio. In elementum fermentum massa, eu pellentesque nibh cursus at. Integer eleifend lacus nec purus elementum sodales. Nulla elementum neque urna, non vulputate massa semper sed. Fusce ut nisi vitae dui blandit congue pretium vitae turpis.",
+        text: "Tohle je dlouhy text pro ukazku textoveho pole. Pomoci sipky nahoru a dolu muzes posouvat obsah.\nTato ukazka obsahuje nekolik delších odstavcu, aby slo vyzkouset posouvani textu na obrazovce. Prvni odstavec ukazuje, jak se radky automaticky zalamuji a jak se lze pohybovat po delsim obsahu. Druhy odstavec obsahuje dalsi vety, aby bylo jasne, ze text pokracuje i mimo aktualne viditelnou cast obrazovky. Treti odstavec slouzi jako doplneni ukazky a pomaha overit, ze posouvani funguje spravne v obou smerech. Pri prochazeni muzes pouzit sipky na ovladaci a vratit se zpet stejnym zpusobem.",
     }),
     stopwatchWidget: widget.makeWith({}, stopwatchWidgetElements),
     buttonMenu: buttonMenuView.makeWith({
