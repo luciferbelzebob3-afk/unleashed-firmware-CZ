@@ -161,7 +161,7 @@ static DialogMessageButton fw_version_screen(DialogsApp* dialogs, DialogMessage*
     //#endif
 
     if(!ver) { //-V1051
-        furi_string_cat_printf(buffer, "No info\n");
+        furi_string_cat_printf(buffer, "Bez informaci\n");
     } else {
         uint16_t api_major, api_minor;
         furi_hal_info_get_api_version(&api_major, &api_minor);
@@ -174,7 +174,7 @@ static DialogMessageButton fw_version_screen(DialogsApp* dialogs, DialogMessage*
             version_get_githash(ver),
             api_major,
             api_minor,
-            c2_ver ? c2_ver->StackTypeString : "<none>",
+            c2_ver ? c2_ver->StackTypeString : "<zadne>",
             version_get_target(ver),
             version_get_gitbranch(ver));
     }
