@@ -67,22 +67,22 @@ typedef struct {
 } LoaderError;
 
 static const LoaderError err_app_not_found =
-    {"App Not Found", "Update firmware or app", "err_01", &I_err_01};
-static const LoaderError err_invalid_flie = {"Invalid File", "Update the app", "err_02", &I_err_02};
+    {"Aplikace nenalezena", "Aktualizuj firmware nebo aplikaci", "err_01", &I_err_01};
+static const LoaderError err_invalid_flie = {"Neplatny soubor", "Aktualizuj aplikaci", "err_02", &I_err_02};
 static const LoaderError err_invalid_manifest =
-    {"Invalid Manifest", "Update firmware or app", "err_03", &I_err_03};
+    {"Neplatny manifest", "Aktualizuj firmware nebo aplikaci", "err_03", &I_err_03};
 static const LoaderError err_missing_imports =
-    {"Missing Imports", "Update firmware or app", "err_04", &I_err_04};
+    {"Chybi importy", "Aktualizuj firmware nebo aplikaci", "err_04", &I_err_04};
 static const LoaderError err_hw_target_mismatch =
-    {"HW Target\nMismatch", "App not supported", "err_05", &I_err_05};
+    {"Nesoulad ciloveho\nHW", "Aplikace neni podporovana", "err_05", &I_err_05};
 /*static const LoaderError err_outdated_app = {"Outdated App", "Update the app", "err_06", &I_err_06};
 static const LoaderError err_outdated_firmware =
     {"Outdated\nFirmware", "Update firmware", "err_07", &I_err_07};*/
 
 static void loader_dialog_prepare_and_show(DialogsApp* dialogs, const LoaderError* err) {
-    FuriString* header = furi_string_alloc_printf("Error: %s", err->error);
+    FuriString* header = furi_string_alloc_printf("Chyba: %s", err->error);
     FuriString* text =
-        furi_string_alloc_printf("%s\nLearn more:\nr.flipper.net/%s", err->description, err->url);
+        furi_string_alloc_printf("%s\nVice informaci:\nr.flipper.net/%s", err->description, err->url);
     DialogMessage* message = dialog_message_alloc();
 
     dialog_message_set_header(message, furi_string_get_cstr(header), 64, 0, AlignCenter, AlignTop);
@@ -110,11 +110,11 @@ static void loader_show_gui_error(
         const char* text = NULL;
         Storage* storage = furi_record_open(RECORD_STORAGE);
         if(storage_sd_status(storage) == FSE_OK) {
-            header = "Update needed";
-            text = "Update firmware\nto run this app";
+            header = "Nutna aktualizace";
+            text = "Aktualizuj firmware\npro spusteni aplikace";
         } else {
-            header = "SD card needed";
-            text = "Install SD card\nto run this app";
+            header = "Nutna SD karta";
+            text = "Vloz SD kartu\npro spusteni aplikace";
         }
         furi_record_close(RECORD_STORAGE);
         dialog_message_set_header(message, header, 64, 3, AlignCenter, AlignTop);
@@ -575,19 +575,19 @@ static LoaderMessageLoaderStatusResult loader_start_external_app(
                         flipper_application_get_manifest(loader->app.fap);
 
                     bool app_newer = preload_res == FlipperApplicationPreloadStatusApiTooNew;
-                    const char* header = app_newer ? "App Too New" : "App Too Old";
+                    const char* header = app_newer ? "Aplikace prilis nova" : "Aplikace prilis stara";
                     char text[63];
                     snprintf(
                         text,
                         sizeof(text),
-                        "APP:%i %c FW:%i\nThis app might not work\nContinue anyways?",
+                        "APP:%i %c FW:%i\nAplikace nemusi fungovat\nPokracovat i tak?",
                         manifest->base.api_version.major,
                         app_newer ? '>' : '<',
                         firmware_api_interface->api_version_major);
 
                     DialogMessage* message = dialog_message_alloc();
                     dialog_message_set_header(message, header, 64, 0, AlignCenter, AlignTop);
-                    dialog_message_set_buttons(message, NULL, NULL, "Continue");
+                    dialog_message_set_buttons(message, NULL, NULL, "Pokracovat");
                     dialog_message_set_text(message, text, 64, 32, AlignCenter, AlignCenter);
                     if(dialog_message_show(dialogs, message) == DialogMessageButtonRight) {
                         result.value = loader_make_status_error(
@@ -926,7 +926,7 @@ static LoaderMessageLoaderStatusResult loader_do_start_by_name(
         }
 
         status.value = loader_make_status_error(
-            LoaderStatusErrorUnknownApp, error_message, "Application \"%s\" not found", name);
+            LoaderStatusErrorUnknownApp, error_message, "Aplikace \"%s\" nenalezena", name);
     } while(false);
 
     if(status.value == LoaderStatusOk) {
