@@ -559,7 +559,7 @@ static NfcCommand
                        "OVERWRITE with source key (pages 44-47 WILL be written)",
             (int)instance->mf_ultralight_c_write_context.copy_key);
     } else if(mf_ultralight_event->type == MfUltralightPollerEventTypeCardMismatch) {
-        furi_string_set(instance->text_box_store, "Card of the same\ntype should be\n presented");
+        furi_string_set(instance->text_box_store, "Prilozte kartu\nstejneho typu");
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventWrongCard);
         command = NfcCommandStop;
     } else if(mf_ultralight_event->type == MfUltralightPollerEventTypeCardLocked) {
@@ -589,7 +589,7 @@ static void nfc_scene_write_on_enter_mf_ultralight(NfcApp* instance) {
     }
     instance->mf_ultralight_c_dict_context.dict = NULL;
     instance->mf_ultralight_c_write_context.dict_state = NfcMfUltralightCWriteDictIdle;
-    furi_string_set(instance->text_box_store, "\nApply the\ntarget\ncard now");
+    furi_string_set(instance->text_box_store, "\nPrilozte\ncilovou\nkartu");
     instance->poller = nfc_poller_alloc(instance->nfc, NfcProtocolMfUltralight);
     nfc_poller_start(instance->poller, nfc_scene_write_poller_callback_mf_ultralight, instance);
 }
