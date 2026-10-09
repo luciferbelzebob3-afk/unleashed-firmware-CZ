@@ -26,7 +26,7 @@ void infrared_scene_rpc_on_enter(void* context) {
 static void infrared_scene_rpc_show(InfraredApp* infrared) {
     Popup* popup = infrared->popup;
 
-    popup_set_header(popup, "Infrared", 89, 42, AlignCenter, AlignBottom);
+    popup_set_header(popup, "Infracervene", 89, 42, AlignCenter, AlignBottom);
     popup_set_text(popup, "Rezim RPC", 89, 44, AlignCenter, AlignTop);
     popup_set_text(popup, infrared->text_store[0], 89, 44, AlignCenter, AlignTop);
 
@@ -97,7 +97,7 @@ bool infrared_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                         infrared_tx_start_button_index(infrared, app_state->current_button_index);
                     if(!INFRARED_ERROR_PRESENT(error)) {
                         const char* remote_name = infrared_remote_get_name(infrared->remote);
-                        infrared_text_store_set(infrared, 0, "emulating\n%s", remote_name);
+                        infrared_text_store_set(infrared, 0, "emuluji\n%s", remote_name);
 
                         infrared_scene_rpc_show(infrared);
                         result = true;
@@ -148,7 +148,7 @@ bool infrared_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                         infrared, app_state->current_button_index);
                     if(!INFRARED_ERROR_PRESENT(error)) {
                         const char* remote_name = infrared_remote_get_name(infrared->remote);
-                        infrared_text_store_set(infrared, 0, "emulating\n%s", remote_name);
+                        infrared_text_store_set(infrared, 0, "emuluji\n%s", remote_name);
 
                         infrared_scene_rpc_show(infrared);
                         result = true;
@@ -156,7 +156,7 @@ bool infrared_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                         rpc_system_app_set_error_code(
                             infrared->rpc_ctx, RpcAppSystemErrorCodeInternalParse);
                         rpc_system_app_set_error_text(
-                            infrared->rpc_ctx, "Cannot load button data");
+                            infrared->rpc_ctx, "Nelze nacist data tlacitka");
                         result = false;
                     }
                 }

@@ -177,7 +177,7 @@ static void
         uint8_t h12;
         bool pm;
         to_12h(h24, &h12, &pm);
-        snprintf(buf, n, "%u:%.2u %s", h12, minute, pm ? "PM" : "AM");
+        snprintf(buf, n, "%u:%.2u %s", h12, minute, pm ? "odp" : "dop");
     } else {
         snprintf(buf, n, "%.2u:%.2u", h24, minute);
     }
@@ -466,7 +466,7 @@ static void alarm_time_draw(Canvas* canvas, void* ctx) {
     canvas_draw_str_aligned(canvas, mx, 32, AlignCenter, AlignCenter, mm);
     if(h12mode) {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 104, 32, AlignCenter, AlignCenter, pm ? "PM" : "AM");
+        canvas_draw_str_aligned(canvas, 104, 32, AlignCenter, AlignCenter, pm ? "odp" : "dop");
     }
 
     // Underline whichever field Up/Down currently changes.
