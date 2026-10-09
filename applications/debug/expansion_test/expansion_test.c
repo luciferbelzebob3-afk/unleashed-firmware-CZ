@@ -47,7 +47,7 @@
 #include <notification/notification_messages.h>
 #include <expansion/expansion_protocol.h>
 
-#define TAG "ExpansionTest"
+#define TAG "Test rozsireni"
 
 #define TEST_DIR_PATH  EXT_PATH(TAG)
 #define TEST_FILE_NAME "test.txt"
