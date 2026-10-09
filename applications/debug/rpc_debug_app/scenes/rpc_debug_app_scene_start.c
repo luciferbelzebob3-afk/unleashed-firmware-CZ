@@ -16,13 +16,13 @@ void rpc_debug_app_scene_start_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Test App Error",
+        "Chyba testovaci aplikace",
         SubmenuIndexTestAppError,
         rpc_debug_app_scene_start_submenu_callback,
         app);
     submenu_add_item(
         submenu,
-        "Test Data Exchange",
+        "Test vymeny dat",
         SubmenuIndexTestDataExchange,
         rpc_debug_app_scene_start_submenu_callback,
         app);
