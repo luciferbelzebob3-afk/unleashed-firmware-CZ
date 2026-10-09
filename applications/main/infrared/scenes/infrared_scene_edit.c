@@ -21,37 +21,37 @@ void infrared_scene_edit_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Add Button",
+        "Pridat tlacitko",
         SubmenuIndexAddButton,
         infrared_scene_edit_submenu_callback,
         context);
     submenu_add_item(
         submenu,
-        "Rename Button",
+        "Prejmenovat tlacitko",
         SubmenuIndexRenameButton,
         infrared_scene_edit_submenu_callback,
         context);
     submenu_add_item(
         submenu,
-        "Move Button",
+        "Presunout tlacitko",
         SubmenuIndexMoveButton,
         infrared_scene_edit_submenu_callback,
         context);
     submenu_add_item(
         submenu,
-        "Delete Button",
+        "Smazat tlacitko",
         SubmenuIndexDeleteButton,
         infrared_scene_edit_submenu_callback,
         context);
     submenu_add_item(
         submenu,
-        "Rename Remote",
+        "Prejmenovat ovladac",
         SubmenuIndexRenameRemote,
         infrared_scene_edit_submenu_callback,
         context);
     submenu_add_item(
         submenu,
-        "Delete Remote",
+        "Smazat ovladac",
         SubmenuIndexDeleteRemote,
         infrared_scene_edit_submenu_callback,
         context);
