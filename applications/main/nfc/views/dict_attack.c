@@ -70,7 +70,7 @@ static void dict_attack_draw_mf_classic(Canvas* canvas, DictAttackViewModel* m) 
         if(m->nested_phase != MfClassicNestedPhaseNone) {
             furi_string_cat(m->header, " (Backdoor)");
         } else {
-            furi_string_set(m->header, "Backdoor Read");
+            furi_string_set(m->header, "Cteni pres backdoor");
         }
     }
 
@@ -138,7 +138,7 @@ static void dict_attack_draw_mf_classic(Canvas* canvas, DictAttackViewModel* m) 
         m->keys_found,
         m->sectors_total * NFC_CLASSIC_KEYS_PER_SECTOR);
     canvas_draw_str_aligned(canvas, 0, 33, AlignLeft, AlignTop, draw_str);
-    snprintf(draw_str, sizeof(draw_str), "Sectors Read: %d/%d", m->sectors_read, m->sectors_total);
+    snprintf(draw_str, sizeof(draw_str), "Sektory: %d/%d", m->sectors_read, m->sectors_total);
     canvas_draw_str_aligned(canvas, 0, 43, AlignLeft, AlignTop, draw_str);
 }
 
@@ -164,10 +164,10 @@ static void dict_attack_draw_mf_ultralight_c(Canvas* canvas, DictAttackViewModel
     elements_progress_bar_with_text(canvas, 0, 20, 128, dict_progress, draw_str);
 
     canvas_set_font(canvas, FontSecondary);
-    snprintf(draw_str, sizeof(draw_str), "Key found: %s", m->key_found ? "Yes" : "No");
+    snprintf(draw_str, sizeof(draw_str), "Klic nalezen: %s", m->key_found ? "Ano" : "No");
     canvas_draw_str_aligned(canvas, 0, 33, AlignLeft, AlignTop, draw_str);
 
-    snprintf(draw_str, sizeof(draw_str), "Pages read: %d/%d", m->pages_read, m->pages_total);
+    snprintf(draw_str, sizeof(draw_str), "Stranky: %d/%d", m->pages_read, m->pages_total);
     canvas_draw_str_aligned(canvas, 0, 43, AlignLeft, AlignTop, draw_str);
 }
 
@@ -175,7 +175,7 @@ static void dict_attack_draw_callback(Canvas* canvas, void* model) {
     DictAttackViewModel* m = model;
     if(!m->card_detected) {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 4, AlignCenter, AlignTop, "Lost the tag!");
+        canvas_draw_str_aligned(canvas, 64, 4, AlignCenter, AlignTop, "Karta se ztratila!");
         canvas_set_font(canvas, FontSecondary);
         elements_multiline_text_aligned(
             canvas, 64, 23, AlignCenter, AlignTop, "Make sure the tag is\npositioned correctly.");
