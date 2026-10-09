@@ -244,7 +244,7 @@ void dallas_common_render_brief_data(
 }
 
 void dallas_common_render_crc_error(FuriString* result, const DallasCommonRomData* rom_data) {
-    furi_string_set(result, "\e#CRC Error\e#\n");
+    furi_string_set(result, "\e#Chyba CRC\e#\n");
 
     const size_t data_size = sizeof(DallasCommonRomData);
 

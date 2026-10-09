@@ -176,7 +176,7 @@ void protocol_awid_render_data(ProtocolAwid* protocol, FuriString* result) {
         furi_string_cat_printf(
             result,
             "FC: %hhu\n"
-            "Card: %hu",
+            "Karta: %hu",
             facility,
             card_id);
     } else {
@@ -204,11 +204,11 @@ void protocol_awid_render_brief_data(ProtocolAwid* protocol, FuriString* result)
         furi_string_cat_printf(
             result,
             "; FC: %hhu\n"
-            "Card: %hu",
+            "Karta: %hu",
             facility,
             card_id);
     } else {
-        furi_string_cat(result, "\nData: Unknown");
+        furi_string_cat(result, "\nData: neznamy");
     }
 }
 

@@ -183,7 +183,7 @@ void protocol_paradox_render_data(ProtocolParadox* protocol, FuriString* result)
         calc_crc);
 
     if(card_crc != calc_crc) {
-        furi_string_cat(result, "\nCRC Mismatch, Invalid Card!");
+        furi_string_cat(result, "\nNeshoda CRC, neplatna karta!");
     }
 }
 
@@ -198,7 +198,7 @@ void protocol_paradox_render_brief_data(ProtocolParadox* protocol, FuriString* r
     furi_string_printf(result, "FC: %hhu; Card: %hu", fc, card_id);
 
     if(calc_crc != card_crc) {
-        furi_string_cat(result, "\nCRC Mismatch, Invalid Card!");
+        furi_string_cat(result, "\nNeshoda CRC, neplatna karta!");
     }
 }
 

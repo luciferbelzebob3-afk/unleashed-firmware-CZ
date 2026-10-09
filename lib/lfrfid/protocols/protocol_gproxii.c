@@ -271,7 +271,7 @@ void protocol_gproxii_render_data(ProtocolGProxII* protocol, FuriString* result)
             crc_code,
             bit_lib_get_bits_16(protocol->decoded_data, 16, 16));
     } else {
-        furi_string_cat_printf(result, "Read Error\n");
+        furi_string_cat_printf(result, "Chyba cteni\n");
     }
 }
 

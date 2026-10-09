@@ -182,7 +182,7 @@ void dallas_ds1992_render_uid(FuriString* result, const iButtonProtocolData* pro
 void dallas_ds1992_render_data(FuriString* result, const iButtonProtocolData* protocol_data) {
     const DS1992ProtocolData* data = protocol_data;
 
-    furi_string_cat_printf(result, "\e#Memory Data\n--------------------\n");
+    furi_string_cat_printf(result, "\e#Data pameti\n--------------------\n");
 
     pretty_format_bytes_hex_canonical(
         result,
