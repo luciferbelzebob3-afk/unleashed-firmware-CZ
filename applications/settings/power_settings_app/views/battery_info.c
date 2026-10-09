@@ -44,8 +44,8 @@ static void draw_battery(Canvas* canvas, BatteryInfoModel* data, int x, int y) {
 
     // Set text
     if(current > 0) {
-        snprintf(emote, sizeof(emote), "%s", "Yummy!");
-        snprintf(header, sizeof(header), "%s", "Charging at");
+        snprintf(emote, sizeof(emote), "%s", "Mnam!");
+        snprintf(header, sizeof(header), "%s", "Nabijeni");
         snprintf(
             value,
             sizeof(value),
@@ -59,8 +59,8 @@ static void draw_battery(Canvas* canvas, BatteryInfoModel* data, int x, int y) {
             emote,
             sizeof(emote),
             "%s",
-            current < HIGH_DRAIN_CURRENT_THRESHOLD ? "Oh no!" : "Om-nom-nom!");
-        snprintf(header, sizeof(header), "%s", "Consumption is");
+            current < HIGH_DRAIN_CURRENT_THRESHOLD ? "Jejda!" : "Mnam!");
+        snprintf(header, sizeof(header), "%s", "Spotreba");
         snprintf(
             value,
             sizeof(value),
@@ -70,8 +70,8 @@ static void draw_battery(Canvas* canvas, BatteryInfoModel* data, int x, int y) {
     } else if(data->vbus_voltage > 0) {
         if(data->charge_voltage_limit < 4.2f) {
             // Non-default battery charging limit, mention it
-            snprintf(emote, sizeof(emote), "Charged!");
-            snprintf(header, sizeof(header), "Limited to");
+            snprintf(emote, sizeof(emote), "Nabito!");
+            snprintf(header, sizeof(header), "Limit");
             snprintf(
                 value,
                 sizeof(value),
@@ -79,10 +79,10 @@ static void draw_battery(Canvas* canvas, BatteryInfoModel* data, int x, int y) {
                 (uint32_t)(data->charge_voltage_limit),
                 (uint32_t)(data->charge_voltage_limit * 10) % 10);
         } else {
-            snprintf(header, sizeof(header), "Charged!");
+            snprintf(header, sizeof(header), "Nabito!");
         }
     } else {
-        snprintf(header, sizeof(header), "Napping...");
+        snprintf(header, sizeof(header), "Spi...");
     }
 
     canvas_draw_str_aligned(canvas, 92, y + 3, AlignCenter, AlignCenter, emote);
