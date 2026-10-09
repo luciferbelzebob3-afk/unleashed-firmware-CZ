@@ -4,9 +4,9 @@ void lfrfid_scene_wipe_t5577_confirm_on_enter(void* context) {
     LfRfid* app = context;
     Widget* widget = app->widget;
 
-    widget_add_button_element(widget, GuiButtonTypeLeft, "Exit", lfrfid_widget_callback, app);
-    widget_add_button_element(widget, GuiButtonTypeRight, "Wipe", lfrfid_widget_callback, app);
-    widget_add_string_element(widget, 64, 3, AlignCenter, AlignTop, FontPrimary, "Wipe T5577");
+    widget_add_button_element(widget, GuiButtonTypeLeft, "Zpet", lfrfid_widget_callback, app);
+    widget_add_button_element(widget, GuiButtonTypeRight, "Vymazat", lfrfid_widget_callback, app);
+    widget_add_string_element(widget, 64, 3, AlignCenter, AlignTop, FontPrimary, "Vymazat T5577");
     widget_add_string_multiline_element(
         widget,
         64,
@@ -14,7 +14,7 @@ void lfrfid_scene_wipe_t5577_confirm_on_enter(void* context) {
         AlignCenter,
         AlignTop,
         FontSecondary,
-        "Erases all data. Tag won't\nread until re-written.\nHold still while running");
+        "Smaze vsechna data. Tag\nnepujde cist do noveho zapisu.\nBehem procesu nehybej");
 
     view_dispatcher_switch_to_view(app->view_dispatcher, LfRfidViewWidget);
 }

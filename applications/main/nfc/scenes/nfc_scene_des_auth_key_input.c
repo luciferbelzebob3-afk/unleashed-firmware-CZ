@@ -23,7 +23,7 @@ void nfc_scene_des_auth_key_input_on_enter(void* context) {
     }
 
     ByteInput* byte_input = nfc->byte_input;
-    byte_input_set_header_text(byte_input, "Enter key in hex");
+    byte_input_set_header_text(byte_input, "Zadej klic v sestnactkove soustave");
     byte_input_set_result_callback(
         byte_input,
         nfc_scene_des_auth_key_input_byte_input_callback,

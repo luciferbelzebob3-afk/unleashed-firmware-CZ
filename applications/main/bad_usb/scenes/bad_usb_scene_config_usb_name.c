@@ -19,13 +19,13 @@ void bad_usb_scene_config_usb_name_on_enter(void* context) {
             bad_usb->usb_name_buf,
             bad_usb->script_hid_cfg.usb.manuf,
             sizeof(bad_usb->usb_name_buf));
-        text_input_set_header_text(text_input, "Set USB manufacturer name");
+        text_input_set_header_text(text_input, "Nastavit vyrobce USB");
     } else {
         strlcpy(
             bad_usb->usb_name_buf,
             bad_usb->script_hid_cfg.usb.product,
             sizeof(bad_usb->usb_name_buf));
-        text_input_set_header_text(text_input, "Set USB product name");
+        text_input_set_header_text(text_input, "Nastavit nazev USB zarizeni");
     }
 
     text_input_set_result_callback(

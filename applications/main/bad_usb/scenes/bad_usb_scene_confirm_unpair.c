@@ -14,16 +14,16 @@ void bad_usb_scene_confirm_unpair_on_enter(void* context) {
     Widget* widget = bad_usb->widget;
 
     widget_add_button_element(
-        widget, GuiButtonTypeLeft, "Cancel", bad_usb_scene_confirm_unpair_widget_callback, context);
+        widget, GuiButtonTypeLeft, "Zrusit", bad_usb_scene_confirm_unpair_widget_callback, context);
     widget_add_button_element(
         widget,
         GuiButtonTypeRight,
-        "Unpair",
+        "Zrusit parovani",
         bad_usb_scene_confirm_unpair_widget_callback,
         context);
 
     widget_add_text_box_element(
-        widget, 0, 0, 128, 64, AlignCenter, AlignTop, "\e#Unpair the Device?\e#\n", false);
+        widget, 0, 0, 128, 64, AlignCenter, AlignTop, "\e#Zrusit parovani zarizeni?\e#\n", false);
 
     view_dispatcher_switch_to_view(bad_usb->view_dispatcher, BadUsbAppViewWidget);
 }

@@ -42,7 +42,7 @@ void archive_scene_rename_on_enter(void* context) {
     } /*else {
         path_extract_filename(current->path, path_name, false);
         strlcpy(archive->text_store, furi_string_get_cstr(path_name), MAX_NAME_LEN);
-        text_input_set_header_text(text_input, "Rename unknown file:");
+        text_input_set_header_text(text_input, "Prejmenovat neznamy soubor:");
     }*/
 
     // Get current folder (for file) or previous folder (for folder) for validator

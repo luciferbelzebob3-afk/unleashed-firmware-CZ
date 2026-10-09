@@ -16,7 +16,7 @@ void lfrfid_scene_settings_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Write Chips",
+        "Zapisyvat cipy",
         SubmenuIndexWriteTargets,
         lfrfid_scene_settings_submenu_callback,
         app);

@@ -46,12 +46,12 @@ static void lfrfid_wipe_t5577(void) {
     t5577_write(&data);
 }
 
-// Render the "Wiping" screen with a progress bar filled to the given tick.
+// Render the "Mazu" screen with a progress bar filled to the given tick.
 static void lfrfid_wipe_t5577_draw_progress(LfRfid* app, uint16_t ticks) {
     Widget* widget = app->widget;
     widget_reset(widget);
 
-    widget_add_string_element(widget, 64, 7, AlignCenter, AlignTop, FontPrimary, "Wiping T5577");
+    widget_add_string_element(widget, 64, 7, AlignCenter, AlignTop, FontPrimary, "Mazu T5577");
     widget_add_rect_element(widget, WIPE_BAR_X, WIPE_BAR_Y, WIPE_BAR_W, WIPE_BAR_H, 2, false);
 
     uint8_t fill = (uint8_t)(((uint32_t)WIPE_BAR_FILL_W * ticks) / WIPE_T5577_TICK_COUNT);
@@ -62,7 +62,7 @@ static void lfrfid_wipe_t5577_draw_progress(LfRfid* app, uint16_t ticks) {
     }
 
     widget_add_string_element(
-        widget, 64, 47, AlignCenter, AlignTop, FontSecondary, "Keep tag still");
+        widget, 64, 47, AlignCenter, AlignTop, FontSecondary, "Nehybej s tagem");
 }
 
 static void lfrfid_wipe_t5577_show_result(LfRfid* app, bool wiped) {
@@ -70,15 +70,15 @@ static void lfrfid_wipe_t5577_show_result(LfRfid* app, bool wiped) {
     popup_reset(popup);
 
     if(wiped) {
-        popup_set_header(popup, "Wiped!", 75, 10, AlignLeft, AlignTop);
+        popup_set_header(popup, "Vymazano!", 75, 10, AlignLeft, AlignTop);
         popup_set_icon(popup, 0, 9, &I_DolphinSuccess_91x55);
         notification_message(app->notifications, &sequence_single_vibro);
     } else {
-        popup_set_header(popup, "Not Wiped", 64, 3, AlignCenter, AlignTop);
+        popup_set_header(popup, "Nevymazano", 64, 3, AlignCenter, AlignTop);
         popup_set_icon(popup, 83, 22, &I_WarningDolphinFlip_45x42);
         popup_set_text(
             popup,
-            "Tag still reads.\nNot a T5577, or\nlocked/protected",
+            "Tag se stale cte.\nNeni to T5577 nebo\nje zamceny/chraneny",
             3,
             19,
             AlignLeft,
@@ -94,7 +94,7 @@ static void lfrfid_wipe_t5577_read_callback(
     ProtocolId protocol,
     void* context) {
     LfRfid* app = context;
-    UNUSED(protocol); // which protocol decoded is irrelevant - any decode means "still readable"
+    UNUSED(protocol); // which protocol decoded is irrelevant - any decode means "stale citelny"
     // Only a confirmed decode matters here - the tag is still readable, so the wipe failed.
     if(result == LFRFIDWorkerReadDone) {
         view_dispatcher_send_custom_event(app->view_dispatcher, LfRfidEventReadDone);

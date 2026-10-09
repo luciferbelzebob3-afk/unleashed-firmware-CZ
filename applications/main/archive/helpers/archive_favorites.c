@@ -359,8 +359,8 @@ void archive_favorites_handle_setting_pin_unpin(const char* app_name, const char
         AlignTop);
     dialog_message_set_text(
         message,
-        is_favorite ? "It will no longer be\naccessible from the\nFavorites menu" :
-                      "It will be accessible from the\nFavorites menu",
+        is_favorite ? "Toto nastaveni uz\nnebude dostupne v\nnabidce Oblibene" :
+                      "Nastaveni bude dostupne v nabidce\nOblibene",
         64,
         32,
         AlignCenter,

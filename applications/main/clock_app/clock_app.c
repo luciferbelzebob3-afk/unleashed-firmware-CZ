@@ -273,7 +273,7 @@ static void clock_render_callback(Canvas* const canvas, void* ctx) {
             date_pct_string, sizeof(date_pct_string), "%s   %u%%", date_string, state->battery_pct);
         canvas_draw_str_aligned(
             canvas, 64, 20, AlignCenter, AlignTop, date_pct_string); // DRAW DATE + BATTERY
-        elements_button_left(canvas, "Reset");
+        elements_button_left(canvas, "Vynulovat");
     } else {
         canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignCenter, time_string);
         canvas_set_font(canvas, FontSecondary);
@@ -294,9 +294,9 @@ static void clock_render_callback(Canvas* const canvas, void* ctx) {
         }
     }
     if(timer_running) {
-        elements_button_center(canvas, "Stop");
+        elements_button_center(canvas, "Zastavit");
     } else if(timer_start_timestamp != 0 && !timer_running) {
-        elements_button_center(canvas, "Start");
+        elements_button_center(canvas, "Spustit");
     }
 
     // A small bell + alarm time on the left when armed, so the user can see the
@@ -409,12 +409,12 @@ static bool clock_input_callback(InputEvent* event, void* context) {
 static void alarm_toggle_changed(VariableItem* item) {
     AppState* app = variable_item_get_context(item);
     app->settings.alarm_enabled = variable_item_get_current_value_index(item) == 1;
-    variable_item_set_current_value_text(item, app->settings.alarm_enabled ? "ON" : "OFF");
+    variable_item_set_current_value_text(item, app->settings.alarm_enabled ? "ON" : "VYPNUTO");
     ns_settings_save(app);
 }
 
 static void refresh_time_menu_item(AppState* app) {
-    // Keep the "Set time" row's value text in step with the chosen alarm time.
+    // Keep the "Nastavit cas" row's value text in step with the chosen alarm time.
     char buf[12];
     format_alarm_time(
         buf, sizeof(buf), app->settings.alarm_hour, app->settings.alarm_minute, app->time_format);
@@ -442,7 +442,7 @@ static void alarm_time_draw(Canvas* canvas, void* ctx) {
     canvas_clear(canvas);
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, 64, 4, AlignCenter, AlignTop, "Alarm time");
+    canvas_draw_str_aligned(canvas, 64, 4, AlignCenter, AlignTop, "Cas budiku");
 
     char hh[4], mm[4];
     bool pm = false;
@@ -683,7 +683,7 @@ int32_t clock_app(void* p) {
     // Alarm menu
     app->alarm_menu = variable_item_list_alloc();
     app->alarm_toggle_item =
-        variable_item_list_add(app->alarm_menu, "Alarm", 2, alarm_toggle_changed, app);
+        variable_item_list_add(app->alarm_menu, "Budik", 2, alarm_toggle_changed, app);
     variable_item_set_current_value_index(app->alarm_toggle_item, app->settings.alarm_enabled);
     variable_item_set_current_value_text(
         app->alarm_toggle_item, app->settings.alarm_enabled ? "ON" : "OFF");

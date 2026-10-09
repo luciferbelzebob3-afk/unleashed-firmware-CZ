@@ -109,7 +109,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
 
         if(selected->type == ArchiveFileTypeFolder) {
             // Folder
-            //FURI_LOG_D(TAG, "Directory type");
+            //FURI_LOG_D(TAG, "Typ slozky");
 
             //model->menu_file_manage = true;
             model->menu_can_switch = true;
@@ -131,7 +131,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
             }
         } else if(!archive_is_known_app(selected->type)) {
             // UnKnown app type
-            //FURI_LOG_D(TAG, "Unknown type");
+            //FURI_LOG_D(TAG, "Neznamy typ");
             model->menu_can_switch = true;
             if(model->menu_file_manage) {
                 // { Copy/Cut, Paste } NewDir, Rename, Delete
@@ -176,7 +176,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
             // Run, Info, [Show], Pin, Delete
             model->menu_file_manage = false;
 
-            //FURI_LOG_D(TAG, "3 types");
+            //FURI_LOG_D(TAG, "3 typy");
             archive_menu_add_item(
                 menu_array_push_raw(model->context_menu), "Spustit", ArchiveBrowserEventFileMenuRun);
             archive_menu_add_item(
@@ -198,7 +198,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
                 ArchiveBrowserEventFileMenuDelete);
         } else {
             // Other
-            //FURI_LOG_D(TAG, "All menu");
+            //FURI_LOG_D(TAG, "Cela nabidka");
 
             model->menu_can_switch = true;
             if(model->menu_file_manage) {
@@ -252,7 +252,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
     if(model->menu_file_manage) {
         canvas_draw_str(canvas, 82, menu_y + line_height - 1, "Sprava");
     } else {
-        canvas_draw_str(canvas, 82, menu_y + line_height - 1, "Actions");
+        canvas_draw_str(canvas, 82, menu_y + line_height - 1, "Akce");
     }
     if(model->menu_can_switch) {
         canvas_draw_icon(canvas, 74, menu_y + 2, &I_ButtonLeft_4x7);

@@ -23,7 +23,7 @@ void infrared_scene_universal_ac_on_enter(void* context) {
         infrared_scene_universal_common_item_callback,
         context);
     button_panel_add_icon(button_panel, 10, 37, &I_off_text_12x5);
-    infrared_brute_force_add_record(brute_force, i++, "Off");
+    infrared_brute_force_add_record(brute_force, i++, "Vypnout");
     button_panel_add_item(
         button_panel,
         i,
@@ -48,7 +48,7 @@ void infrared_scene_universal_ac_on_enter(void* context) {
         &I_max_hover_24x23,
         infrared_scene_universal_common_item_callback,
         context);
-    infrared_brute_force_add_record(brute_force, i++, "Cool_hi");
+    infrared_brute_force_add_record(brute_force, i++, "Chlazeni silne");
     button_panel_add_item(
         button_panel,
         i,
@@ -60,7 +60,7 @@ void infrared_scene_universal_ac_on_enter(void* context) {
         &I_max_hover_24x23,
         infrared_scene_universal_common_item_callback,
         context);
-    infrared_brute_force_add_record(brute_force, i++, "Heat_hi");
+    infrared_brute_force_add_record(brute_force, i++, "Topeni silne");
     if(furi_hal_rtc_get_locale_units() == FuriHalRtcLocaleUnitsMetric) {
         button_panel_add_item(
             button_panel,
@@ -86,7 +86,7 @@ void infrared_scene_universal_ac_on_enter(void* context) {
             infrared_scene_universal_common_item_callback,
             context);
     }
-    infrared_brute_force_add_record(brute_force, i++, "Cool_lo");
+    infrared_brute_force_add_record(brute_force, i++, "Chlazeni slabe");
 
     if(furi_hal_rtc_get_locale_units() == FuriHalRtcLocaleUnitsMetric) {
         button_panel_add_item(
@@ -113,7 +113,7 @@ void infrared_scene_universal_ac_on_enter(void* context) {
             infrared_scene_universal_common_item_callback,
             context);
     }
-    infrared_brute_force_add_record(brute_force, i++, "Heat_lo");
+    infrared_brute_force_add_record(brute_force, i++, "Topeni slabe");
 
     button_panel_add_icon(button_panel, 0, 60, &I_cool_30x51);
     button_panel_add_icon(button_panel, 34, 60, &I_heat_30x51);

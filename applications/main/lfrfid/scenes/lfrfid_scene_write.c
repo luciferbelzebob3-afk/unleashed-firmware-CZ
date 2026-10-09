@@ -30,8 +30,8 @@ static void lfrfid_write_callback(LFRFIDWorkerWriteResult result, void* context)
     view_dispatcher_send_custom_event(app->view_dispatcher, event);
 }
 
-// Compose the "Writing" popup text: "[<proto>]\n<source>", with "\n(<target>)" appended while a
-// specific chip is being attempted. <source> is the file name, or "Unsaved Tag" when there is no
+// Compose the "Zapisuji" popup text: "[<proto>]\n<source>", with "\n(<target>)" appended while a
+// specific chip is being attempted. <source> is the file name, or "Neulozeny tag" when there is no
 // file (mid-attempt with no file, only the protocol and target are shown - no source line).
 static void lfrfid_scene_write_set_status(LfRfid* app, const char* target) {
     const char* proto = protocol_dict_get_name(app->dict, app->protocol_id);
@@ -55,7 +55,7 @@ static void lfrfid_scene_write_show_error(LfRfid* app, const char* text) {
     lfrfid_write_warning_shown = true;
 
     popup_set_icon(app->popup, 83, 22, &I_WarningDolphinFlip_45x42);
-    popup_set_header(app->popup, "Error", 64, 3, AlignCenter, AlignTop);
+    popup_set_header(app->popup, "Chyba", 64, 3, AlignCenter, AlignTop);
     popup_set_text(app->popup, text, 3, 17, AlignLeft, AlignTop);
     notification_message(app->notifications, &sequence_blink_start_red);
 }
@@ -107,7 +107,7 @@ bool lfrfid_scene_write_on_event(void* context, SceneManagerEvent event) {
             scene_manager_next_scene(app->scene_manager, LfRfidSceneWriteSuccess);
             consumed = true;
         } else if(event.event == LfRfidEventWriteProtocolCannotBeWritten) {
-            lfrfid_scene_write_show_error(app, "This protocol\ncannot be written");
+            lfrfid_scene_write_show_error(app, "Tento protokol\nnelze zapisovat");
             consumed = true;
         } else if(event.event == LfRfidEventWriteNoEnabledTarget) {
             // Same remedy either way, but naming the emptier case saves a puzzled trip to a
@@ -116,20 +116,20 @@ bool lfrfid_scene_write_on_event(void* context, SceneManagerEvent event) {
                 scene_manager_get_scene_state(app->scene_manager, LfRfidSceneWrite) == 0;
             lfrfid_scene_write_show_error(
                 app,
-                none_enabled ? "No write chips\nenabled. Enable\none in Settings" :
-                               "No enabled chip\ncan write this\nprotocol");
+                none_enabled ? "Neni povolen zadny\nzapisovaci cip. Povol\nho v Nastaveni" :
+                               "Zadny povoleny cip\nnemuze zapsat tento\nprotokol");
             consumed = true;
         } else if(
             (event.event == LfRfidEventWriteFobCannotBeWritten) ||
             (event.event == LfRfidEventWriteTooLongToWrite)) {
             lfrfid_write_warning_shown = true;
             popup_set_icon(popup, 83, 22, &I_WarningDolphinFlip_45x42);
-            popup_set_header(popup, "Still Trying to Write...", 64, 0, AlignCenter, AlignTop);
+            popup_set_header(popup, "Stale se pokousim zapisovat...", 64, 0, AlignCenter, AlignTop);
             popup_set_text(
                 popup,
-                "Make sure this\n"
-                "card is writable\n"
-                "and not protected",
+                "Ujisti se, ze tato\n"
+                "karta umoznuje zapis\n"
+                "a neni chranena",
                 0,
                 13,
                 AlignLeft,

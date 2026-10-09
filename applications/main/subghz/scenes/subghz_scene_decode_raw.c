@@ -80,13 +80,13 @@ bool subghz_scene_decode_raw_start(SubGhz* subghz) {
     bool success = false;
     do {
         if(!flipper_format_rewind(subghz_txrx_get_fff_data(subghz->txrx))) {
-            FURI_LOG_E(TAG, "Rewind error");
+            FURI_LOG_E(TAG, "Chyba pretaceni");
             break;
         }
 
         if(!flipper_format_read_string(
                subghz_txrx_get_fff_data(subghz->txrx), "File_name", file_name)) {
-            FURI_LOG_E(TAG, "Missing File_name");
+            FURI_LOG_E(TAG, "Chybi nazev souboru");
             break;
         }
 
@@ -94,7 +94,7 @@ bool subghz_scene_decode_raw_start(SubGhz* subghz) {
     } while(false);
 
     if(success) {
-        //FURI_LOG_I(TAG, "Listening at \033[0;33m%s\033[0m.", furi_string_get_cstr(file_name));
+        //FURI_LOG_I(TAG, "Nasloucham na \033[0;33m%s\033[0m.", furi_string_get_cstr(file_name));
 
         subghz->decode_raw_file_worker_encoder = subghz_file_encoder_worker_alloc();
         //no radio device: the samples are fed to the decoders, not transmitted
@@ -243,7 +243,7 @@ bool subghz_scene_decode_raw_on_event(void* context, SceneManagerEvent event) {
             consumed = true;
             break;
         case SubGhzCustomEventViewReceiverConfig:
-            FURI_LOG_W(TAG, "No config options");
+            FURI_LOG_W(TAG, "Zadne moznosti nastaveni");
             consumed = true;
             break;
         case SubGhzCustomEventViewReceiverOffDisplay:

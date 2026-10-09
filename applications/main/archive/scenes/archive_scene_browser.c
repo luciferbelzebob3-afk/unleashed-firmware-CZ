@@ -20,11 +20,11 @@ static const char* archive_get_flipper_app_name(ArchiveFileTypeEnum file_type) {
     case ArchiveFileTypeSubGhz:
         return "Sub-GHz";
     case ArchiveFileTypeSubGhzRemote:
-        return "Sub-GHz Remote";
+        return "Dalkove ovladace Sub-GHz";
     case ArchiveFileTypeLFRFID:
-        return "125 kHz RFID";
+        return "RFID 125 kHz";
     case ArchiveFileTypeInfrared:
-        return "Infrared";
+        return "Infracervene";
     case ArchiveFileTypeBadUsb:
         return "Bad USB";
     case ArchiveFileTypeU2f:

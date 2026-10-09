@@ -128,7 +128,7 @@ FS_Error archive_rename_copy_file_or_dir(
     bool copy) {
     furi_assert(context);
 
-    FURI_LOG_I(TAG, "%s from %s to %s", copy ? "Copy" : "Rename/Move", src_path, dst_path);
+    FURI_LOG_I(TAG, "%s from %s to %s", copy ? "Kopirovat" : "Prejmenovat/presunout", src_path, dst_path);
 
     Storage* fs_api = furi_record_open(RECORD_STORAGE);
 
@@ -184,11 +184,11 @@ FS_Error archive_rename_copy_file_or_dir(
 
     if(error == FSE_OK) {
         FURI_LOG_I(
-            TAG, "%s from %s to %s is DONE", copy ? "Copy" : "Rename/Move", src_path, dst_path);
+            TAG, "%s z %s do %s: HOTOVO", copy ? "Copy" : "Rename/Move", src_path, dst_path);
     } else {
         FURI_LOG_E(
             TAG,
-            "%s failed: %s, Code: %d",
+            "%s selhalo: %s, kod: %d",
             copy ? "Copy" : "Rename/Move",
             filesystem_api_error_get_desc(error),
             error);

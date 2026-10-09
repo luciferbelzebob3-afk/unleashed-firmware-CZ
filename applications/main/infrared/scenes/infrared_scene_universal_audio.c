@@ -23,7 +23,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         infrared_scene_universal_common_item_callback,
         context);
     button_panel_add_icon(button_panel, 4, 35, &I_power_text_24x5);
-    infrared_brute_force_add_record(brute_force, i++, "Power");
+    infrared_brute_force_add_record(brute_force, i++, "Napajeni");
     button_panel_add_item(
         button_panel,
         i,
@@ -36,7 +36,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         infrared_scene_universal_common_item_callback,
         context);
     button_panel_add_icon(button_panel, 39, 35, &I_mute_text_19x5);
-    infrared_brute_force_add_record(brute_force, i++, "Mute");
+    infrared_brute_force_add_record(brute_force, i++, "Ztlumit");
     button_panel_add_item(
         button_panel,
         i,
@@ -49,7 +49,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         infrared_scene_universal_common_item_callback,
         context);
     button_panel_add_icon(button_panel, 6, 64, &I_play_text_19x5);
-    infrared_brute_force_add_record(brute_force, i++, "Play");
+    infrared_brute_force_add_record(brute_force, i++, "Prehrat");
     button_panel_add_item(
         button_panel,
         i,
@@ -62,7 +62,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         infrared_scene_universal_common_item_callback,
         context);
     button_panel_add_icon(button_panel, 4, 93, &I_pause_text_23x5);
-    infrared_brute_force_add_record(brute_force, i++, "Pause");
+    infrared_brute_force_add_record(brute_force, i++, "Pauza");
     button_panel_add_item(
         button_panel,
         i,
@@ -75,7 +75,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         infrared_scene_universal_common_item_callback,
         context);
     button_panel_add_icon(button_panel, 6, 123, &I_prev_text_19x5);
-    infrared_brute_force_add_record(brute_force, i++, "Prev");
+    infrared_brute_force_add_record(brute_force, i++, "Predchozi");
     button_panel_add_item(
         button_panel,
         i,
@@ -88,7 +88,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         infrared_scene_universal_common_item_callback,
         context);
     button_panel_add_icon(button_panel, 39, 123, &I_next_text_19x6);
-    infrared_brute_force_add_record(brute_force, i++, "Next");
+    infrared_brute_force_add_record(brute_force, i++, "Dalsi");
     button_panel_add_item(
         button_panel,
         i,
@@ -100,7 +100,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         &I_voldown_hover_24x21,
         infrared_scene_universal_common_item_callback,
         context);
-    infrared_brute_force_add_record(brute_force, i++, "Vol_dn");
+    infrared_brute_force_add_record(brute_force, i++, "Hlasitost dolu");
     button_panel_add_item(
         button_panel,
         i,
@@ -112,7 +112,7 @@ void infrared_scene_universal_audio_on_enter(void* context) {
         &I_volup_hover_24x21,
         infrared_scene_universal_common_item_callback,
         context);
-    infrared_brute_force_add_record(brute_force, i++, "Vol_up");
+    infrared_brute_force_add_record(brute_force, i++, "Hlasitost nahoru");
 
     button_panel_add_label(button_panel, 1, 10, FontPrimary, "Prehravac audia");
     button_panel_add_icon(button_panel, 34, 56, &I_vol_ac_text_30x30);

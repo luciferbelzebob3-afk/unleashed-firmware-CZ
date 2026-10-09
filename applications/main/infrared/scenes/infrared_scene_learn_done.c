@@ -9,7 +9,7 @@ void infrared_scene_learn_done_on_enter(void* context) {
         popup_set_header(popup, "Uspech!", 10, 12, AlignLeft, AlignTop);
     } else {
         popup_set_icon(popup, 36, 5, &I_DolphinUlozeno_92x58);
-        popup_set_header(popup, "Saved", 15, 19, AlignLeft, AlignBottom);
+        popup_set_header(popup, "Ulozeno", 15, 19, AlignLeft, AlignBottom);
     }
 
     popup_set_callback(popup, infrared_popup_closed_callback);
