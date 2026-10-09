@@ -16,34 +16,34 @@ static const TextBoxViewTestContent text_box_view_test_content_arr[] = {
     {
         .font = TextBoxFontText,
         .focus = TextBoxFocusStart,
-        .text = "Hello, let's test text box. Press Right and Left to switch content",
+        .text = "Ahoj, testujeme textove pole. Obsah men sipkami vpravo a vlevo",
     },
     {
         .font = TextBoxFontText,
         .focus = TextBoxFocusEnd,
-        .text = "First test to add dynamically lines with EndFocus set\nLine 0",
+        .text = "Test pridavani radku za behu s nastavenym EndFocus\nRadek 0",
     },
     {
         .font = TextBoxFontText,
         .focus = TextBoxFocusEnd,
-        .text = "First test to add dynamically lines with EndFocus set\nLine 0\nLine 1",
+        .text = "Test pridavani radku za behu s nastavenym EndFocus\nRadek 0\nRadek 1",
     },
     {
         .font = TextBoxFontText,
         .focus = TextBoxFocusEnd,
-        .text = "First test to add dynamically lines with EndFocus set\nLine 0\nLine 1\nLine 2",
-    },
-    {
-        .font = TextBoxFontText,
-        .focus = TextBoxFocusEnd,
-        .text =
-            "First test to add dynamically lines with EndFocus set\nLine 0\nLine 1\nLine 2\nLine 3",
+        .text = "Test pridavani radku za behu s nastavenym EndFocus\nRadek 0\nRadek 1\nRadek 2",
     },
     {
         .font = TextBoxFontText,
         .focus = TextBoxFocusEnd,
         .text =
-            "First test to add dynamically lines with EndFocus set\nLine 0\nLine 1\nLine 2\nLine 3\nLine 4",
+            "Test pridavani radku za behu s nastavenym EndFocus\nRadek 0\nRadek 1\nRadek 2\nRadek 3",
+    },
+    {
+        .font = TextBoxFontText,
+        .focus = TextBoxFocusEnd,
+        .text =
+            "Test pridavani radku za behu s nastavenym EndFocus\nRadek 0\nRadek 1\nRadek 2\nRadek 3\nRadek 4",
     },
     {
         .font = TextBoxFontText,
@@ -55,7 +55,7 @@ static const TextBoxViewTestContent text_box_view_test_content_arr[] = {
         .font = TextBoxFontText,
         .focus = TextBoxFocusStart,
         .text =
-            "\n\n\n Start from several newline chars. Verify that scrolling doesn't break.\n\n\n\n\nThe end",
+            "\n\n\n Zacni nekolika znaky noveho radku. Over, ze posouvani funguje spravne.\n\n\n\n\nKonec",
     },
     {
         .font = TextBoxFontText,
