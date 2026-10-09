@@ -8,14 +8,14 @@
 #include <toolbox/cli/cli_ansi.h>
 
 void crypto_cli_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("crypto <cmd> <args>\r\n");
-    printf("Cmd list:\r\n");
+    printf("Seznam prikazu:\r\n");
     printf(
         "\tencrypt <key_slot:int> <iv:hex>\t - Using key from secure enclave and IV encrypt plain text with AES256CBC and encode to hex\r\n");
     printf(
         "\tdecrypt <key_slot:int> <iv:hex>\t - Using key from secure enclave and IV decrypt hex encoded encrypted with AES256CBC data to plain text\r\n");
-    printf("\thas_key <key_slot:int>\t - Check if secure enclave has key in slot\r\n");
+    printf("\thas_key <key_slot:int>\t - Overit, zda zabezpeceny modul obsahuje klic ve slotu\r\n");
     printf(
         "\tstore_key <key_slot:int> <key_type:str> <key_size:int> <key_data:hex>\t - Store key in secure enclave. !!! NON-REVERSIBLE OPERATION - READ MANUAL FIRST !!!\r\n");
 }
@@ -27,12 +27,12 @@ void crypto_cli_encrypt(PipeSide* pipe, FuriString* args) {
 
     do {
         if(!args_read_int_and_trim(args, &key_slot) || !(key_slot > 0 && key_slot <= 100)) {
-            printf("Incorrect or missing slot, expected int 1-100");
+            printf("Chybejici nebo neplatny slot, ocekava se cele cislo 1-100");
             break;
         }
 
         if(!args_read_hex_bytes(args, iv, 16)) {
-            printf("Incorrect or missing IV, expected 16 bytes in hex");
+            printf("Chybejici nebo neplatne IV, ocekava se 16 bajtu v hex formatu");
             break;
         }
 
@@ -42,7 +42,7 @@ void crypto_cli_encrypt(PipeSide* pipe, FuriString* args) {
         }
         key_loaded = true;
 
-        printf("Enter plain text and press Ctrl+C to complete encryption:\r\n");
+        printf("Zadej prosty text a stiskni Ctrl+C pro dokonceni sifrovani:\r\n");
 
         FuriString* input;
         input = furi_string_alloc();
@@ -73,9 +73,9 @@ void crypto_cli_encrypt(PipeSide* pipe, FuriString* args) {
             uint8_t* output = malloc(size);
             if(!furi_hal_crypto_encrypt(
                    (const uint8_t*)furi_string_get_cstr(input), output, size)) {
-                printf("Failed to encrypt input");
+                printf("Nepodarilo se zasifrovat vstup");
             } else {
-                printf("Hex-encoded encrypted data:\r\n");
+                printf("Zasifrovana data v hex formatu:\r\n");
                 for(size_t i = 0; i < size; i++) {
                     if(i % 80 == 0) printf("\r\n");
                     printf("%02x", output[i]);
@@ -84,7 +84,7 @@ void crypto_cli_encrypt(PipeSide* pipe, FuriString* args) {
             }
             free(output);
         } else {
-            printf("No input");
+            printf("Zadny vstup");
         }
 
         furi_string_free(input);
@@ -102,12 +102,12 @@ void crypto_cli_decrypt(PipeSide* pipe, FuriString* args) {
 
     do {
         if(!args_read_int_and_trim(args, &key_slot) || !(key_slot > 0 && key_slot <= 100)) {
-            printf("Incorrect or missing slot, expected int 1-100");
+            printf("Chybejici nebo neplatny slot, ocekava se cele cislo 1-100");
             break;
         }
 
         if(!args_read_hex_bytes(args, iv, 16)) {
-            printf("Incorrect or missing IV, expected 16 bytes in hex");
+            printf("Chybejici nebo neplatne IV, ocekava se 16 bajtu v hex formatu");
             break;
         }
 
@@ -117,7 +117,7 @@ void crypto_cli_decrypt(PipeSide* pipe, FuriString* args) {
         }
         key_loaded = true;
 
-        printf("Enter Hex-encoded data and press Ctrl+C to complete decryption:\r\n");
+        printf("Zadej data v hex formatu a stiskni Ctrl+C pro dokonceni desifrovani:\r\n");
 
         FuriString* hex_input;
         hex_input = furi_string_alloc();
@@ -144,19 +144,19 @@ void crypto_cli_decrypt(PipeSide* pipe, FuriString* args) {
 
             if(args_read_hex_bytes(hex_input, input, size)) {
                 if(furi_hal_crypto_decrypt(input, output, size)) {
-                    printf("Decrypted data:\r\n");
+                    printf("Desifrovana data:\r\n");
                     printf("%s\r\n", output); //-V576
                 } else {
-                    printf("Failed to decrypt\r\n");
+                    printf("Desifrovani selhalo\r\n");
                 }
             } else {
-                printf("Failed to parse input");
+                printf("Nepodarilo se zpracovat vstup");
             }
 
             free(input);
             free(output);
         } else {
-            printf("Invalid or empty input");
+            printf("Neplatny nebo prazdny vstup");
         }
 
         furi_string_free(hex_input);
@@ -174,7 +174,7 @@ void crypto_cli_has_key(PipeSide* pipe, FuriString* args) {
 
     do {
         if(!args_read_int_and_trim(args, &key_slot) || !(key_slot > 0 && key_slot <= 100)) {
-            printf("Incorrect or missing slot, expected int 1-100");
+            printf("Chybejici nebo neplatny slot, ocekava se cele cislo 1-100");
             break;
         }
 
@@ -203,23 +203,23 @@ void crypto_cli_store_key(PipeSide* pipe, FuriString* args) {
 
     do {
         if(!args_read_int_and_trim(args, &key_slot)) {
-            printf("Incorrect or missing key type, expected master, simple or encrypted");
+            printf("Chybejici nebo neplatny typ klice, ocekava se master, simple nebo encrypted");
             break;
         }
         if(!args_read_string_and_trim(args, key_type)) {
-            printf("Incorrect or missing key type, expected master, simple or encrypted");
+            printf("Chybejici nebo neplatny typ klice, ocekava se master, simple nebo encrypted");
             break;
         }
 
         if(furi_string_cmp_str(key_type, "master") == 0) {
             if(key_slot != 0) {
-                printf("Master keyslot must be is 0");
+                printf("Slot hlavniho klice musi byt 0");
                 break;
             }
             key.type = FuriHalCryptoKeyTypeMaster;
         } else if(furi_string_cmp_str(key_type, "simple") == 0) {
             if(key_slot < 1 || key_slot > 99) {
-                printf("Simple keyslot must be in range");
+                printf("Slot jednoducheho klice je mimo povoleny rozsah");
                 break;
             }
             key.type = FuriHalCryptoKeyTypeSimple;
@@ -227,12 +227,12 @@ void crypto_cli_store_key(PipeSide* pipe, FuriString* args) {
             key.type = FuriHalCryptoKeyTypeEncrypted;
             data_size += 12;
         } else {
-            printf("Incorrect or missing key type, expected master, simple or encrypted");
+            printf("Chybejici nebo neplatny typ klice, ocekava se master, simple nebo encrypted");
             break;
         }
 
         if(!args_read_int_and_trim(args, &key_size)) {
-            printf("Incorrect or missing key size, expected 128 or 256");
+            printf("Chybejici nebo neplatna delka klice, ocekava se 128 nebo 256");
             break;
         }
 
@@ -243,11 +243,11 @@ void crypto_cli_store_key(PipeSide* pipe, FuriString* args) {
             key.size = FuriHalCryptoKeySize256;
             data_size += 32;
         } else {
-            printf("Incorrect or missing key size, expected 128 or 256");
+            printf("Chybejici nebo neplatna delka klice, ocekava se 128 nebo 256");
         }
 
         if(!args_read_hex_bytes(args, data, data_size)) {
-            printf("Incorrect or missing key data, expected hex encoded key with or without IV.");
+            printf("Chybejici nebo neplatna data klice, ocekava se klic v hex formatu s IV nebo bez nej.");
             break;
         }
 
@@ -275,7 +275,7 @@ void crypto_cli_store_key(PipeSide* pipe, FuriString* args) {
         if(furi_hal_crypto_enclave_store_key(&key, &slot)) {
             printf("Success. Stored to slot: %d", slot);
         } else {
-            printf("Failure");
+            printf("Chyba");
         }
     } while(0);
 
