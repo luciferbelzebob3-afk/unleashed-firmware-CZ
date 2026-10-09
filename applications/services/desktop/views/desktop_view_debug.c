@@ -49,7 +49,7 @@ void desktop_debug_render(Canvas* canvas, void* model) {
         furi_hal_version_get_hw_body(),
         furi_hal_version_get_hw_connect(),
         furi_hal_version_get_hw_region_name_otp(),
-        my_name ? my_name : "Unknown");
+        my_name ? my_name : "Neznamy");
     canvas_draw_str(canvas, 0, 19 + STATUS_BAR_Y_SHIFT, buffer);
 
     ver = furi_hal_version_get_firmware_version();
@@ -58,7 +58,7 @@ void desktop_debug_render(Canvas* canvas, void* model) {
     c2_ver = ble_glue_get_c2_info();
 #endif
     if(!ver) { //-V1051
-        canvas_draw_str(canvas, 0, 30 + STATUS_BAR_Y_SHIFT, "No info");
+        canvas_draw_str(canvas, 0, 30 + STATUS_BAR_Y_SHIFT, "Bez informaci");
         return;
     }
 
@@ -76,7 +76,7 @@ void desktop_debug_render(Canvas* canvas, void* model) {
         version_get_githash(ver),
         api_major,
         api_minor,
-        c2_ver ? c2_ver->StackTypeString : "<none>");
+        c2_ver ? c2_ver->StackTypeString : "<zadne>");
     canvas_draw_str(canvas, 0, 40 + STATUS_BAR_Y_SHIFT, buffer);
 
     snprintf(
