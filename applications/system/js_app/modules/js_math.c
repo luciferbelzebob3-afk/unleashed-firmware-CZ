@@ -58,7 +58,7 @@ void js_math_acos(struct mjs* mjs) {
 
     double x = mjs_get_double(mjs, mjs_arg(mjs, 0));
     if(x < (double)-1. || x > (double)1.) {
-        ret_bad_args(mjs, "Invalid input value for math.acos");
+        ret_bad_args(mjs, "Neplatna vstupni hodnota pro math.acos");
         return;
     }
 
@@ -72,7 +72,7 @@ void js_math_acosh(struct mjs* mjs) {
 
     double x = mjs_get_double(mjs, mjs_arg(mjs, 0));
     if(x < (double)1.) {
-        ret_bad_args(mjs, "Invalid input value for math.acosh");
+        ret_bad_args(mjs, "Neplatna vstupni hodnota pro math.acosh");
         return;
     }
 
@@ -127,7 +127,7 @@ void js_math_atanh(struct mjs* mjs) {
 
     double x = mjs_get_double(mjs, mjs_arg(mjs, 0));
     if(x < (double)-1. || x > (double)1.) {
-        ret_bad_args(mjs, "Invalid input value for math.atanh");
+        ret_bad_args(mjs, "Neplatna vstupni hodnota pro math.atanh");
         return;
     }
 
@@ -205,7 +205,7 @@ void js_math_log(struct mjs* mjs) {
 
     double x = mjs_get_double(mjs, mjs_arg(mjs, 0));
     if(x <= 0) {
-        ret_bad_args(mjs, "Invalid input value for math.log");
+        ret_bad_args(mjs, "Neplatna vstupni hodnota pro math.log");
         return;
     }
 
@@ -288,7 +288,7 @@ void js_math_sqrt(struct mjs* mjs) {
 
     double x = mjs_get_double(mjs, mjs_arg(mjs, 0));
     if(x < (double)0.) {
-        ret_bad_args(mjs, "Invalid input value for math.sqrt");
+        ret_bad_args(mjs, "Neplatna vstupni hodnota pro math.sqrt");
         return;
     }
 

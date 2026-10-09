@@ -115,7 +115,7 @@ static void js_widget_button_callback(GuiButtonType result, InputType type, JsWi
 
 #define DESTRUCTURE_OR_RETURN(mjs, child_obj, part, ...) \
     if(!element_get_##part(mjs, child_obj, __VA_ARGS__)) \
-        JS_ERROR_AND_RETURN_VAL(mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element " #part);
+        JS_ERROR_AND_RETURN_VAL(mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek " #part);
 
 static bool js_widget_add_child(
     struct mjs* mjs,
@@ -162,7 +162,7 @@ static bool js_widget_add_child(
         mjs_val_t strip_to_dots_in = mjs_get(mjs, child_obj, "stripToDots", ~0);
         if(!mjs_is_boolean(strip_to_dots_in))
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element stripToDots");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek stripToDots");
         bool strip_to_dots = mjs_get_bool(mjs, strip_to_dots_in);
         widget_add_text_box_element(
             widget, x, y, w, h, align_h, align_v, mjs_get_string(mjs, &text, NULL), strip_to_dots);
@@ -180,7 +180,7 @@ static bool js_widget_add_child(
         const char* btn_name = mjs_get_string(mjs, &btn_in, NULL);
         if(!btn_name)
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element button");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek button");
         GuiButtonType btn_type;
         if(strcmp(btn_name, "left") == 0) {
             btn_type = GuiButtonTypeLeft;
@@ -206,7 +206,7 @@ static bool js_widget_add_child(
         mjs_val_t icon_data_in = mjs_get(mjs, child_obj, "iconData", ~0);
         if(!mjs_is_foreign(icon_data_in))
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element iconData");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek iconData");
         const Icon* icon = mjs_get_ptr(mjs, icon_data_in);
         widget_add_icon_element(widget, x, y, icon);
 
@@ -217,12 +217,12 @@ static bool js_widget_add_child(
         mjs_val_t radius_in = mjs_get(mjs, child_obj, "radius", ~0);
         if(!mjs_is_number(radius_in))
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element radius");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek radius");
         int32_t radius = mjs_get_int32(mjs, radius_in);
         mjs_val_t fill_in = mjs_get(mjs, child_obj, "fill", ~0);
         if(!mjs_is_boolean(fill_in))
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element fill");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek fill");
         int32_t fill = mjs_get_bool(mjs, fill_in);
         widget_add_rect_element(widget, x, y, w, h, radius, fill);
 
@@ -232,12 +232,12 @@ static bool js_widget_add_child(
         mjs_val_t radius_in = mjs_get(mjs, child_obj, "radius", ~0);
         if(!mjs_is_number(radius_in))
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element radius");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek radius");
         int32_t radius = mjs_get_int32(mjs, radius_in);
         mjs_val_t fill_in = mjs_get(mjs, child_obj, "fill", ~0);
         if(!mjs_is_boolean(fill_in))
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element fill");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek fill");
         int32_t fill = mjs_get_bool(mjs, fill_in);
         widget_add_circle_element(widget, x, y, radius, fill);
 
@@ -250,7 +250,7 @@ static bool js_widget_add_child(
         if(!mjs_is_number(x1_in) || !mjs_is_number(y1_in) || !mjs_is_number(x2_in) ||
            !mjs_is_number(y2_in))
             JS_ERROR_AND_RETURN_VAL(
-                mjs, MJS_BAD_ARGS_ERROR, false, "failed to fetch element positions");
+                mjs, MJS_BAD_ARGS_ERROR, false, "Nepodarilo se ziskat prvek positions");
         x1 = mjs_get_int32(mjs, x1_in);
         y1 = mjs_get_int32(mjs, y1_in);
         x2 = mjs_get_int32(mjs, x2_in);

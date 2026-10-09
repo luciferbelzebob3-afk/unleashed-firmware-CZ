@@ -309,7 +309,7 @@ static void js_gpio_pwm_write(struct mjs* mjs) {
 
     JsGpioPinInst* manager_data = JS_GET_CONTEXT(mjs);
     if(manager_data->pwm_output == FuriHalPwmOutputIdNone) {
-        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "PWM is not supported on this pin");
+        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "PWM neni na tomto pinu podporovano");
     }
 
     if(furi_hal_pwm_is_running(manager_data->pwm_output)) {
@@ -332,7 +332,7 @@ static void js_gpio_pwm_write(struct mjs* mjs) {
 static void js_gpio_is_pwm_running(struct mjs* mjs) {
     JsGpioPinInst* manager_data = JS_GET_CONTEXT(mjs);
     if(manager_data->pwm_output == FuriHalPwmOutputIdNone) {
-        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "PWM is not supported on this pin");
+        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "PWM neni na tomto pinu podporovano");
     }
 
     mjs_return(mjs, mjs_mk_boolean(mjs, furi_hal_pwm_is_running(manager_data->pwm_output)));
@@ -353,7 +353,7 @@ static void js_gpio_is_pwm_running(struct mjs* mjs) {
 static void js_gpio_pwm_stop(struct mjs* mjs) {
     JsGpioPinInst* manager_data = JS_GET_CONTEXT(mjs);
     if(manager_data->pwm_output == FuriHalPwmOutputIdNone) {
-        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "PWM is not supported on this pin");
+        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "PWM neni na tomto pinu podporovano");
     }
 
     furi_hal_pwm_stop(manager_data->pwm_output);
@@ -387,10 +387,10 @@ static void js_gpio_get(struct mjs* mjs) {
         int name_int = mjs_get_int(mjs, name_arg);
         pin_record = furi_hal_resources_pin_by_number(name_int);
     } else {
-        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "Must be either a string or a number");
+        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "Musi jit o retezec nebo cislo");
     }
 
-    if(!pin_record) JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "Pin not found on device");
+    if(!pin_record) JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "Pin nebyl na zarizeni nalezen");
     if(pin_record->debug)
         JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "Pin is used for debugging");
 

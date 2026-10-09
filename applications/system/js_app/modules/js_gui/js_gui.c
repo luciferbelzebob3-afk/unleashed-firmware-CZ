@@ -267,14 +267,14 @@ static bool
 
         if(expected_type) {
             mjs_prepend_errorf(
-                mjs, MJS_BAD_ARGS_ERROR, "view prop \"%s\" requires %s value", name, expected_type);
+                mjs, MJS_BAD_ARGS_ERROR, "vlastnost pohledu \"%s\" vyzaduje hodnotu typu %s", name, expected_type);
             return false;
         } else {
             return prop.assign(mjs, data->specific_view, c_value, data->custom_data);
         }
     }
 
-    mjs_prepend_errorf(mjs, MJS_BAD_ARGS_ERROR, "view has no prop named \"%s\"", name);
+    mjs_prepend_errorf(mjs, MJS_BAD_ARGS_ERROR, "pohled nema vlastnost s nazvem \"%s\"", name);
     return false;
 }
 

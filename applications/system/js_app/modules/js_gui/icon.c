@@ -65,7 +65,7 @@ static void js_gui_icon_get_builtin(struct mjs* mjs) {
         }
     }
 
-    JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "no such built-in icon");
+    JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "Takova vestavena ikona neexistuje");
 }
 
 static void js_gui_icon_load_fxbm(struct mjs* mjs) {
@@ -111,7 +111,7 @@ static void js_gui_icon_load_fxbm(struct mjs* mjs) {
     furi_record_close(RECORD_STORAGE);
 
     if(!fxbm) {
-        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "could not load .fxbm icon");
+        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "Nepodarilo se nacist ikonu .fxbm");
     }
 
     JsGuiIconInst* js_icon = JS_GET_CONTEXT(mjs);

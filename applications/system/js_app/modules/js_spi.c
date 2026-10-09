@@ -61,7 +61,7 @@ static void js_spi_write(struct mjs* mjs) {
     if(mjs_is_array(tx_buf_arg)) {
         tx_len = mjs_array_length(mjs, tx_buf_arg);
         if(tx_len == 0) {
-            ret_bad_args(mjs, "Data array must not be empty");
+            ret_bad_args(mjs, "Pole dat nesmi byt prazdne");
             return;
         }
         tx_buf = malloc(tx_len);
@@ -88,11 +88,11 @@ static void js_spi_write(struct mjs* mjs) {
         }
         tx_buf = (uint8_t*)mjs_array_buf_get_ptr(mjs, array_buf, &tx_len);
         if(tx_len == 0) {
-            ret_bad_args(mjs, "Data array must not be empty");
+            ret_bad_args(mjs, "Pole dat nesmi byt prazdne");
             return;
         }
     } else {
-        ret_bad_args(mjs, "Data must be an array, arraybuf or dataview");
+        ret_bad_args(mjs, "Data musi byt pole typu Array, ArrayBuffer nebo DataView");
         return;
     }
 
@@ -100,7 +100,7 @@ static void js_spi_write(struct mjs* mjs) {
     if(mjs_nargs(mjs) > 1) { // Timeout is optional argument
         mjs_val_t timeout_arg = mjs_arg(mjs, 1);
         if(!mjs_is_number(timeout_arg)) {
-            ret_bad_args(mjs, "Timeout must be a number");
+            ret_bad_args(mjs, "Casovy limit musi byt cislo");
             if(tx_buf_was_allocated) free(tx_buf);
             return;
         }
@@ -129,7 +129,7 @@ static void js_spi_read(struct mjs* mjs) {
     }
     size_t rx_len = mjs_get_int32(mjs, rx_len_arg);
     if(rx_len == 0) {
-        ret_bad_args(mjs, "Length must not zero");
+        ret_bad_args(mjs, "Delka nesmi byt nulova");
         return;
     }
 
@@ -139,7 +139,7 @@ static void js_spi_read(struct mjs* mjs) {
     if(mjs_nargs(mjs) > 1) { // Timeout is optional argument
         mjs_val_t timeout_arg = mjs_arg(mjs, 1);
         if(!mjs_is_number(timeout_arg)) {
-            ret_bad_args(mjs, "Timeout must be a number");
+            ret_bad_args(mjs, "Casovy limit musi byt cislo");
             free(rx_buf);
             return;
         }
@@ -172,7 +172,7 @@ static void js_spi_write_read(struct mjs* mjs) {
     if(mjs_is_array(tx_buf_arg)) {
         data_len = mjs_array_length(mjs, tx_buf_arg);
         if(data_len == 0) {
-            ret_bad_args(mjs, "Data array must not be empty");
+            ret_bad_args(mjs, "Pole dat nesmi byt prazdne");
             return;
         }
         tx_buf = malloc(data_len);
@@ -199,11 +199,11 @@ static void js_spi_write_read(struct mjs* mjs) {
         }
         tx_buf = (uint8_t*)mjs_array_buf_get_ptr(mjs, array_buf, &data_len);
         if(data_len == 0) {
-            ret_bad_args(mjs, "Data array must not be empty");
+            ret_bad_args(mjs, "Pole dat nesmi byt prazdne");
             return;
         }
     } else {
-        ret_bad_args(mjs, "Data must be an array, arraybuf or dataview");
+        ret_bad_args(mjs, "Data musi byt pole typu Array, ArrayBuffer nebo DataView");
         return;
     }
 
@@ -213,7 +213,7 @@ static void js_spi_write_read(struct mjs* mjs) {
     if(mjs_nargs(mjs) > 1) { // Timeout is optional argument
         mjs_val_t timeout_arg = mjs_arg(mjs, 1);
         if(!mjs_is_number(timeout_arg)) {
-            ret_bad_args(mjs, "Timeout must be a number");
+            ret_bad_args(mjs, "Casovy limit musi byt cislo");
             if(tx_buf_was_allocated) free(tx_buf);
             free(rx_buf);
             return;

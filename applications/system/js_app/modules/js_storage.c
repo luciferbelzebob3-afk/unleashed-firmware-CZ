@@ -81,7 +81,7 @@ static void js_storage_file_write(struct mjs* mjs) {
     } else if(mjs_is_array_buf(data)) {
         buf = mjs_array_buf_get_ptr(mjs, data, &len);
     } else {
-        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "argument 0: expected string or ArrayBuffer");
+        JS_ERROR_AND_RETURN(mjs, MJS_BAD_ARGS_ERROR, "argument 0: ocekava se retezec nebo ArrayBuffer");
     }
     File* file = JS_GET_CONTEXT(mjs);
     mjs_return(mjs, mjs_mk_number(mjs, storage_file_write(file, buf, len)));

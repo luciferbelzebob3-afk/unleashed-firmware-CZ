@@ -113,7 +113,7 @@ static void js_blebeacon_set_config(struct mjs* mjs) {
         }
     }
     if(!furi_hal_bt_extra_beacon_set_config(&config)) {
-        ret_int_err(mjs, "Failed setting beacon config");
+        ret_int_err(mjs, "Nepodarilo se nastavit konfiguraci BLE majaku");
         return;
     }
 
@@ -143,7 +143,7 @@ static void js_blebeacon_set_data(struct mjs* mjs) {
         blebeacon->prev_data_len = furi_hal_bt_extra_beacon_get_data(blebeacon->prev_data);
     }
     if(!furi_hal_bt_extra_beacon_set_data((uint8_t*)data, data_len)) {
-        ret_int_err(mjs, "Failed setting beacon data");
+        ret_int_err(mjs, "Nepodarilo se nastavit data BLE majaku");
         return;
     }
 
@@ -159,7 +159,7 @@ static void js_blebeacon_start(struct mjs* mjs) {
         blebeacon->prev_active = furi_hal_bt_extra_beacon_is_active();
     }
     if(!furi_hal_bt_extra_beacon_start()) {
-        ret_int_err(mjs, "Failed starting beacon");
+        ret_int_err(mjs, "Nepodarilo se spustit BLE majak");
         return;
     }
 
@@ -176,7 +176,7 @@ static void js_blebeacon_stop(struct mjs* mjs) {
         blebeacon->prev_active = furi_hal_bt_extra_beacon_is_active();
     }
     if(!furi_hal_bt_extra_beacon_stop()) {
-        ret_int_err(mjs, "Failed stopping beacon");
+        ret_int_err(mjs, "Nepodarilo se zastavit BLE majak");
         return;
     }
 

@@ -34,7 +34,7 @@ static bool
     } else if(strcasecmp(value.string, "end") == 0) {
         focus = TextBoxFocusEnd;
     } else {
-        mjs_prepend_errorf(mjs, MJS_BAD_ARGS_ERROR, "must be one of: \"start\", \"end\"");
+        mjs_prepend_errorf(mjs, MJS_BAD_ARGS_ERROR, "hodnota musi byt \"start\" nebo \"end\"");
         return false;
     }
     text_box_set_focus(text_box, focus);

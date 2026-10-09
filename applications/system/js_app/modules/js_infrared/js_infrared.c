@@ -84,7 +84,7 @@ void js_send_raw_signal(struct mjs* mjs) {
 
         mjs_val_t frequency_val = mjs_get(mjs, options_obj, "frequency", ~0);
         if(!mjs_is_number(frequency_val)) {
-            ret_bad_args(mjs, "Wrong 'frequency' option type");
+            ret_bad_args(mjs, "Nespravny typ volby 'frequency'");
             return;
         }
 
