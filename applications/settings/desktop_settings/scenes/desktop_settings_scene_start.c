@@ -82,7 +82,7 @@ static void desktop_settings_scene_start_menu_style_changed(VariableItem* item) 
     uint8_t index = variable_item_get_current_value_index(item);
 
     if(index == 0) {
-        variable_item_set_current_value_text(item, "Default");
+        variable_item_set_current_value_text(item, "Vychozi");
         app->settings.menu_style[0] = '\0';
     } else {
         const DesktopSettingsMenuStyleEntry* style = &app->menu_styles[index - 1];
@@ -147,11 +147,11 @@ void desktop_settings_scene_start_on_enter(void* context) {
         desktop_settings_menu_styles_load(app);
     }
 
-    variable_item_list_add(variable_item_list, "PIN Setup", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Nastavit PIN", 1, NULL, NULL);
 
     item = variable_item_list_add(
         variable_item_list,
-        "Auto Lock Time",
+        "Cas automatickeho zamceni",
         AUTO_LOCK_DELAY_COUNT,
         desktop_settings_scene_start_auto_lock_delay_changed,
         app);
@@ -164,7 +164,7 @@ void desktop_settings_scene_start_on_enter(void* context) {
     // USB connection Inhibit autolock OFF|ON|with opened RPC session
     item = variable_item_list_add(
         variable_item_list,
-        "Auto Lock disarm by active USB session",
+        "Odemknout pri aktivnim USB",
         USB_INHIBIT_AUTO_LOCK_DELAY_COUNT,
         desktop_settings_scene_start_usb_inhibit_auto_lock_delay_changed,
         app);
@@ -178,7 +178,7 @@ void desktop_settings_scene_start_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Battery View",
+        "Zobrazeni baterie",
         BATTERY_VIEW_COUNT,
         desktop_settings_scene_start_battery_view_changed,
         app);
@@ -192,7 +192,7 @@ void desktop_settings_scene_start_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Show Clock",
+        "Zobrazit hodiny",
         CLOCK_ENABLE_COUNT,
         desktop_settings_scene_start_clock_enable_changed,
         app);
@@ -204,7 +204,7 @@ void desktop_settings_scene_start_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Menu Style",
+        "Styl menu",
         app->menu_styles_count + 1, // Plus "Default"; MENU_STYLES_MAX keeps this in a uint8_t
         desktop_settings_scene_start_menu_style_changed,
         app);
@@ -223,29 +223,29 @@ void desktop_settings_scene_start_on_enter(void* context) {
     } else if(app->settings.menu_style[0]) {
         // Configured style is not in the list - but say so only if we actually got to look, since
         // neither "it was deleted" nor "we chose the built-in one" is true when the scan failed
-        menu_style_text = app->menu_styles_loaded ? "Missing" : "Unknown";
+        menu_style_text = app->menu_styles_loaded ? "Chybi" : "Neznamy";
     }
     variable_item_set_current_value_text(item, menu_style_text);
 
-    variable_item_list_add(variable_item_list, "Change Flipper Name", 0, NULL, app);
+    variable_item_list_add(variable_item_list, "Zmenit jmeno Flipperu", 0, NULL, app);
 
-    variable_item_list_add(variable_item_list, "Happy Mode", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Vesely rezim", 1, NULL, NULL);
 
-    variable_item_list_add(variable_item_list, "Favorite App - Left Short", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Favorite App - Left Long", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Favorite App - Right Short", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Favorite App - Right Long", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Favorite App - Ok Long", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Oblibena aplikace - kratce vlevo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Oblibena aplikace - dlouze vlevo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Oblibena aplikace - kratce vpravo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Oblibena aplikace - dlouze vpravo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Oblibena aplikace - dlouze OK", 1, NULL, NULL);
 
-    variable_item_list_add(variable_item_list, "DummyMode - Left", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Left Long", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Right", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Right Long", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Up Long", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Down", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Down Long", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Ok", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "DummyMode - Ok Long", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - vlevo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - dlouze vlevo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - vpravo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - dlouze vpravo", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - dlouze nahoru", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - dolu", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - dlouze dolu", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - OK", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Dummy rezim - dlouze OK", 1, NULL, NULL);
 
     variable_item_list_set_enter_callback(
         variable_item_list, desktop_settings_scene_start_var_list_enter_callback, app);
