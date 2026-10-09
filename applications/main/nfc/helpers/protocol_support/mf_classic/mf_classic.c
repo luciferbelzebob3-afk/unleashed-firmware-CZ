@@ -334,7 +334,7 @@ static NfcCommand
             mfc_event->data->poller_mode.mode = MfClassicPollerModeWrite;
         } else {
             furi_string_set(
-                instance->text_box_store, "Use source card!\nTo write blanks\nuse NFC Magic app");
+                instance->text_box_store, "Pouzijte zdrojovou kartu!\nPro zapis prazdnych karet\npouzijte aplikaci NFC Magic");
             view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventWrongCard);
             command = NfcCommandStop;
         }
