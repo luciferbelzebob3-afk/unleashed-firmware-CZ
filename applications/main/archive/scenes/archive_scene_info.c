@@ -16,7 +16,7 @@ void archive_scene_info_on_enter(void* context) {
     ArchiveApp* instance = context;
 
     widget_add_button_element(
-        instance->widget, GuiButtonTypeLeft, "Back", archive_scene_info_widget_callback, instance);
+        instance->widget, GuiButtonTypeLeft, "Zpet", archive_scene_info_widget_callback, instance);
 
     FuriString* filename;
     FuriString* dirname;
