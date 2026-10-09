@@ -211,52 +211,52 @@ static void
     if(!ticket->blocks_read) {
         furi_string_cat_printf(
             parsed_data,
-            "\e#Unknown SevPPK Card\n  TICKET BLOCKS NOT READ \n\nRUN A DICTIONARY ATTACK\nTO READ THE TICKET SECTORS\n");
+            "\e#Neznama karta SevPPK\n  BLOKY LISTKU NEJSOU NACTENE \n\nPOUZIT SLOVNIKOVY UTOK\nPRO NACTENI SEKTORU LISTKU\n");
         return;
     }
     if(ticket->departure_uic == 0x0000) {
         furi_string_cat_printf(
             parsed_data,
-            "\e#Unknown SevPPK Card\n   NO TICKET DATA FOUND \n\nTHE TICKET IS NOT ISSUED\nOR LAYOUT IS UNKNOWN\n");
+            "\e#Neznama karta SevPPK\n   DATA LISTKU NENALEZENA \n\nLISTEK NENI VYDANY\nNEBO MA NEZNAME ROZLOZENI\n");
         return;
     } else {
         if(ticket_number == 0) {
             furi_string_cat_printf(parsed_data, "\e#SevPPK Transport Card\n");
             switch(ticket->first_ticket_marker) {
             case 0x02:
-                furi_string_cat_printf(parsed_data, "Type:> 5 days unlim.");
+                furi_string_cat_printf(parsed_data, "Typ:> neomezene 5 dni");
                 break;
             case 0x06:
-                furi_string_cat_printf(parsed_data, "Type:> 10 rides");
+                furi_string_cat_printf(parsed_data, "Typ:> 10 jizd");
                 break;
             case 0x18:
-                furi_string_cat_printf(parsed_data, "Type:> 30 days unlim.");
+                furi_string_cat_printf(parsed_data, "Typ:> neomezene 30 dni");
                 break;
             case 0x1B:
-                furi_string_cat_printf(parsed_data, "Type:> 20 rides");
+                furi_string_cat_printf(parsed_data, "Typ:> 20 jizd");
                 break;
             default:
                 furi_string_cat_printf(
-                    parsed_data, "Type: Unknown, 0x%02X", ticket->first_ticket_marker);
+                    parsed_data, "Typ: neznamy, 0x%02X", ticket->first_ticket_marker);
             }
         } else {
-            furi_string_cat_printf(parsed_data, "\e#Second Ticket:");
+            furi_string_cat_printf(parsed_data, "\e#Druhy listek:");
             switch(ticket->second_ticket_marker) {
             case 0x02:
-                furi_string_cat_printf(parsed_data, "Type:> 5 days unlim.");
+                furi_string_cat_printf(parsed_data, "Typ:> neomezene 5 dni");
                 break;
             case 0x06:
-                furi_string_cat_printf(parsed_data, "Type:> 10 rides");
+                furi_string_cat_printf(parsed_data, "Typ:> 10 jizd");
                 break;
             case 0x18:
-                furi_string_cat_printf(parsed_data, "Type:> 30 days unlim.");
+                furi_string_cat_printf(parsed_data, "Typ:> neomezene 30 dni");
                 break;
             case 0x1B:
-                furi_string_cat_printf(parsed_data, "Type:> 20 rides");
+                furi_string_cat_printf(parsed_data, "Typ:> 20 jizd");
                 break;
             default:
                 furi_string_cat_printf(
-                    parsed_data, "Type: Unknown, 0x%02X", ticket->second_ticket_marker);
+                    parsed_data, "Typ: neznamy, 0x%02X", ticket->second_ticket_marker);
             }
         }
     }
@@ -274,17 +274,17 @@ static void
         ticket->valid_till.year);
 
     if(ticket->value_data > 0) {
-        furi_string_cat_printf(parsed_data, "Rides remain: %02d\n", ticket->value_data);
+        furi_string_cat_printf(parsed_data, "Zbyvajici jizdy: %02d\n", ticket->value_data);
     }
 
     switch(ticket->current_status) {
     case 0x00:
-        furi_string_cat_printf(parsed_data, "Status:> NOT USED\n");
+        furi_string_cat_printf(parsed_data, "Stav:> NEPOUZITO\n");
         break;
     case 0x80:
         furi_string_cat_printf(
             parsed_data,
-            "Status:> ENTERED STATION\nSta name:> %s\nLast pass on:> %02d-%02d-%04d\nPass time:> %02d:%02d\nPPK CNT: %03d\n",
+            "Stav:> VSTUP DO STANICE\nNazev stanice:> %s\nPosledni pruchod:> %02d-%02d-%04d\nCas pruchodu:> %02d:%02d\nPPK CNT: %03d\n",
             furi_string_get_cstr(ticket->trip_start_sta_name),
             ticket->tap_time.day,
             ticket->tap_time.month,
@@ -296,7 +296,7 @@ static void
     case 0x1F:
         furi_string_cat_printf(
             parsed_data,
-            "Status:> EXITED STATION\nSta name:> %s\nLast pass on:> %02d-%02d-%04d\nPass time:> %02d:%02d\nPPK CNT: %03d\n",
+            "Stav:> VYSTUP ZE STANICE\nNazev stanice:> %s\nPosledni pruchod:> %02d-%02d-%04d\nCas pruchodu:> %02d:%02d\nPPK CNT: %03d\n",
             furi_string_get_cstr(ticket->trip_end_sta_name),
             ticket->tap_time.day,
             ticket->tap_time.month,
@@ -308,7 +308,7 @@ static void
     default:
         furi_string_cat_printf(
             parsed_data,
-            "Status:> UNKNOWN (%02X)\nPPK CNT: %03d",
+            "Stav:> NEZNAMY (%02X)\nPPK CNT: %03d",
             ticket->current_status,
             ticket->ppk_cnt);
         break;
