@@ -35,10 +35,10 @@
 
 static const char* nfc_cli_dump_error_names[NfcCliDumpErrorNum] = {
     [NfcCliDumpErrorNone] = "",
-    [NfcCliDumpErrorNotPresent] = "card not present",
-    [NfcCliDumpErrorAuthFailed] = "authentication failed",
-    [NfcCliDumpErrorTimeout] = "timeout",
-    [NfcCliDumpErrorFailedToRead] = "failed to read",
+    [NfcCliDumpErrorNotPresent] = "karta neni pritomna",
+    [NfcCliDumpErrorAuthFailed] = "autentizace selhala",
+    [NfcCliDumpErrorTimeout] = "casovy limit",
+    [NfcCliDumpErrorFailedToRead] = "cteni selhalo",
 };
 
 static NfcCliActionContext* nfc_cli_dump_alloc_ctx(Nfc* nfc) {
@@ -132,7 +132,7 @@ static bool nfc_cli_dump_check_filepath_valid(FuriString* file_path, Storage* st
         result = false;
     } else if(file_exists) {
         printf(
-            ANSI_FG_RED "File \'%s\' already exists\r\n" ANSI_RESET,
+            ANSI_FG_RED "Soubor \'%s\' uz existuje\r\n" ANSI_RESET,
             furi_string_get_cstr(file_path));
         result = false;
     }
@@ -159,7 +159,7 @@ static size_t nfc_cli_dump_set_protocol(NfcCliDumpContext* instance) {
     } else {
         if(!nfc_cli_scanner_detect_protocol(instance->scanner, instance->timeout)) {
             NfcCliDumpError error = NfcCliDumpErrorTimeout;
-            printf(ANSI_FG_RED "Error: %s\r\n" ANSI_RESET, nfc_cli_dump_error_names[error]);
+            printf(ANSI_FG_RED "Chyba: %s\r\n" ANSI_RESET, nfc_cli_dump_error_names[error]);
         } else {
             nfc_cli_scanner_list_detected_protocols(instance->scanner);
             protocol_count = nfc_cli_scanner_detected_protocol_num(instance->scanner);
@@ -194,17 +194,17 @@ static void nfc_cli_dump_execute(PipeSide* pipe, NfcCliActionContext* context) {
         size_t protocol_count = nfc_cli_dump_set_protocol(instance);
         if(instance->desired_protocol == NfcProtocolInvalid) break;
 
-        printf("Dumping as \"%s\"\r\n", nfc_cli_get_protocol_name(instance->desired_protocol));
-        if(protocol_count > 1) printf("Use \'-p\' key to specify another protocol\r\n");
+        printf("Ukladam jako \"%s\"\r\n", nfc_cli_get_protocol_name(instance->desired_protocol));
+        if(protocol_count > 1) printf("Pro jiny protokol pouzij parametr \'-p\'\r\n");
 
         if(nfc_cli_dump_card(instance)) {
             const char* path = furi_string_get_cstr(instance->file_path);
             if(nfc_device_save(instance->nfc_device, path)) {
-                printf("Dump saved to \'%s\'\r\n", path);
+                printf("Zaznam ulozen do \'%s\'\r\n", path);
             }
         } else {
             printf(
-                ANSI_FG_RED "Error: %s\r\n" ANSI_RESET,
+                ANSI_FG_RED "Chyba: %s\r\n" ANSI_RESET,
                 nfc_cli_dump_error_names[instance->result]);
         }
     } while(false);
@@ -255,7 +255,7 @@ static bool nfc_cli_dump_parse_key(FuriString* value, void* output) {
 
         if(data_length != MF_ULTRALIGHT_AUTH_PASSWORD_SIZE &&
            data_length != MF_ULTRALIGHT_C_AUTH_DES_KEY_SIZE) {
-            printf(ANSI_FG_RED "Error: Wrong key size" ANSI_RESET);
+            printf(ANSI_FG_RED "Chyba: nespravna delka klice" ANSI_RESET);
             break;
         }
 
@@ -279,14 +279,14 @@ const NfcCliKeyDescriptor dump_keys[] = {
     {
         .long_name = "key",
         .short_name = "k",
-        .description = "key to path auth in protocols which requires it",
+        .description = "klic pro overeni cest v protokolech, ktere jej vyzaduji",
         .features = {.required = false, .parameter = true},
         .parse = nfc_cli_dump_parse_key,
     },
     {
         .long_name = "protocol",
         .short_name = "p",
-        .description = "desired protocol",
+        .description = "pozadovany protokol",
         .features = {.required = false, .parameter = true},
         .parse = nfc_cli_dump_parse_protocol,
     },
@@ -294,21 +294,21 @@ const NfcCliKeyDescriptor dump_keys[] = {
         .features = {.required = false, .parameter = true},
         .long_name = "file",
         .short_name = "f",
-        .description = "path to new file",
+        .description = "cesta k novemu souboru",
         .parse = nfc_cli_dump_parse_filename_key,
     },
     {
         .features = {.required = false, .parameter = true},
-        .long_name = "timeout",
+        .long_name = "casovy limit",
         .short_name = "t",
-        .description = "timeout value in milliseconds",
+        .description = "casovy limit v milisekundach",
         .parse = nfc_cli_dump_parse_timeout,
     },
 };
 
 const NfcCliActionDescriptor dump_action = {
     .name = "dump",
-    .description = "Dump tag to .nfc file",
+    .description = "Ulozi kartu do souboru .nfc",
     .alloc = nfc_cli_dump_alloc_ctx,
     .free = nfc_cli_dump_free_ctx,
     .execute = nfc_cli_dump_execute,
