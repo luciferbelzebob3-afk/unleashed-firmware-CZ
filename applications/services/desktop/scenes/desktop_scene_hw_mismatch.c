@@ -21,7 +21,7 @@ void desktop_scene_hw_mismatch_on_enter(void* context) {
     snprintf(
         text_buffer,
         256,
-        "HW target: %d\nFW target: %d",
+        "Cil HW: %d\nCil FW: %d",
         furi_hal_version_get_hw_target(),
         version_get_target(NULL));
     popup_set_context(popup, desktop);

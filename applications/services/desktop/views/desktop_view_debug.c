@@ -30,7 +30,7 @@ void desktop_debug_render(Canvas* canvas, void* model) {
     snprintf(
         buffer,
         sizeof(buffer),
-        "Uptime: %luh%lum%lus",
+        "Provoz: %luh%lum%lus",
         uptime / 60 / 60,
         uptime / 60 % 60,
         uptime % 60);
@@ -83,7 +83,7 @@ void desktop_debug_render(Canvas* canvas, void* model) {
         buffer,
         sizeof(buffer),
         "[D:%s] %s",
-        furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug) ? "ON" : "OFF",
+        furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug) ? "ZAP" : "VYP",
         version_get_gitbranch(ver));
     canvas_draw_str(canvas, 0, 50 + STATUS_BAR_Y_SHIFT, buffer);
 }

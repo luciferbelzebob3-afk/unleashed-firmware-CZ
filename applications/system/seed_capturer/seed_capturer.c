@@ -595,7 +595,7 @@ int32_t seed_capturer_app(void* p) {
                     seed_leave_capture(app, SeedSceneMenu);
                 } else if(event.key == InputKeyLeft) {
                     seed_capture_reset(app);
-                    furi_string_set(app->status, "Reset, posloucham");
+                    furi_string_set(app->status, "Vynulovano, nasloucham");
                 } else if((event.key == InputKeyOk) && (app->hop_count >= SEED_MIN_HOP)) {
                     seed_leave_capture(app, SeedSceneResult);
                     furi_mutex_release(app->mutex);

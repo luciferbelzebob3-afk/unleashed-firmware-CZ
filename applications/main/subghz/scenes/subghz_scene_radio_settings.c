@@ -37,7 +37,7 @@ const char* const debug_counter_text[DEBUG_COUNTER_COUNT] = {
     "+50",
     "OVFL",
     "OFEX",
-    "No",
+    "Ne",
     "-1",
     "-2",
     "-3",
