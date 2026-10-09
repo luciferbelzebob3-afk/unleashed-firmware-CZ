@@ -31,7 +31,7 @@ void hid_scene_start_on_enter(void* context) {
         app->submenu, "Keynote", HidSubmenuIndexKeynote, hid_scene_start_submenu_callback, app);
     submenu_add_item(
         app->submenu,
-        "Keynote Vertical",
+        "Keynote na vysku",
         HidSubmenuIndexKeynoteVertical,
         hid_scene_start_submenu_callback,
         app);

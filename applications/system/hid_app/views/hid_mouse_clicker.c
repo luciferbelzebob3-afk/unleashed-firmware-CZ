@@ -56,7 +56,7 @@ static void hid_mouse_clicker_draw_callback(Canvas* canvas, void* context) {
 #endif
 
     canvas_set_font(canvas, FontPrimary);
-    elements_multiline_text_aligned(canvas, 17, 3, AlignLeft, AlignTop, "Mouse Clicker");
+    elements_multiline_text_aligned(canvas, 17, 3, AlignLeft, AlignTop, "Klikac mysi");
     canvas_set_font(canvas, FontSecondary);
 
     // Ok
@@ -68,13 +68,13 @@ static void hid_mouse_clicker_draw_callback(Canvas* canvas, void* context) {
     const char* btn_label;
     switch(model->btn) {
     case HID_MOUSE_BTN_LEFT:
-        btn_label = "Left";
+        btn_label = "Leve";
         break;
     case HID_MOUSE_BTN_WHEEL:
-        btn_label = "Middle";
+        btn_label = "Prostredni";
         break;
     case HID_MOUSE_BTN_RIGHT:
-        btn_label = "Right";
+        btn_label = "Prave";
         break;
     default:
         furi_crash();
@@ -101,7 +101,7 @@ static void hid_mouse_clicker_draw_callback(Canvas* canvas, void* context) {
     if(model->rate) {
         snprintf(label, sizeof(label), "%d clicks/s", model->rate);
     } else {
-        snprintf(label, sizeof(label), "max clicks/s");
+        snprintf(label, sizeof(label), "max. kliku/s");
     }
     elements_multiline_text_aligned(canvas, 28, 37, AlignCenter, AlignBottom, label);
 
@@ -110,7 +110,7 @@ static void hid_mouse_clicker_draw_callback(Canvas* canvas, void* context) {
 
     // Back
     canvas_draw_icon(canvas, 0, 54, &I_Pin_back_arrow_10x8);
-    elements_multiline_text_aligned(canvas, 13, 62, AlignLeft, AlignBottom, "Exit");
+    elements_multiline_text_aligned(canvas, 13, 62, AlignLeft, AlignBottom, "Konec");
 }
 
 static void hid_mouse_clicker_timer_callback(void* context) {
