@@ -25,7 +25,7 @@ void power_settings_scene_reboot_confirm_on_enter(void* context) {
     } else if(reboot_type == RebootTypeNormal) {
         dialog_ex_set_header(dialog, "Restartovat Flipper?", 64, 0, AlignCenter, AlignTop);
         dialog_ex_set_text(
-            dialog, "May help with some firmware\n issues", 64, 14, AlignCenter, AlignTop);
+            dialog, "Muze pomoci pri nekterych\nproblemech s firmwarem", 64, 14, AlignCenter, AlignTop);
     } else {
         furi_crash("Invalid reboot type");
     }
