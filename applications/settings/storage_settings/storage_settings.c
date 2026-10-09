@@ -1,16 +1,16 @@
 #include "storage_settings.h"
 
 const SubmenuSettingsHelperDescriptor descriptor_template = {
-    .app_name = "Storage",
+    .app_name = "Uloziste",
     .options_cnt = 6,
     .options =
         {
-            {.name = "About Internal Storage", .scene_id = StorageSettingsInternalInfo},
-            {.name = "About SD Card", .scene_id = StorageSettingsSDInfo},
-            {.name = "Unmount SD Card", .scene_id = StorageSettingsUnmountConfirm},
-            {.name = "Format SD Card", .scene_id = StorageSettingsFormatConfirm},
-            {.name = "Benchmark SD Card", .scene_id = StorageSettingsBenchmarkConfirm},
-            {.name = "Factory Reset", .scene_id = StorageSettingsFactoryReset},
+            {.name = "Informace o interni pameti", .scene_id = StorageSettingsInternalInfo},
+            {.name = "Informace o SD karte", .scene_id = StorageSettingsSDInfo},
+            {.name = "Odpojit SD kartu", .scene_id = StorageSettingsUnmountConfirm},
+            {.name = "Formatovat SD kartu", .scene_id = StorageSettingsFormatConfirm},
+            {.name = "Otestovat rychlost SD karty", .scene_id = StorageSettingsBenchmarkConfirm},
+            {.name = "Tovarni nastaveni", .scene_id = StorageSettingsFactoryReset},
         },
 };
 
