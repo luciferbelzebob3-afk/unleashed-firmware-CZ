@@ -53,9 +53,9 @@ void subghz_scene_delete_raw_on_enter(void* context) {
     furi_string_free(modulation_str);
 
     widget_add_button_element(
-        subghz->widget, GuiButtonTypeRight, "Delete", subghz_scene_delete_raw_callback, subghz);
+        subghz->widget, GuiButtonTypeRight, "Smazat", subghz_scene_delete_raw_callback, subghz);
     widget_add_button_element(
-        subghz->widget, GuiButtonTypeLeft, "Back", subghz_scene_delete_raw_callback, subghz);
+        subghz->widget, GuiButtonTypeLeft, "Zpet", subghz_scene_delete_raw_callback, subghz);
 
     view_dispatcher_switch_to_view(subghz->view_dispatcher, SubGhzViewIdWidget);
 }
