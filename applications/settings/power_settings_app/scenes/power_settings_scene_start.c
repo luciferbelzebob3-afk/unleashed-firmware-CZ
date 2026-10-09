@@ -10,14 +10,14 @@ enum PowerSettingsSubmenuIndex {
 
 #define AUTO_POWEROFF_DELAY_COUNT 8
 const char* const auto_poweroff_delay_text[AUTO_POWEROFF_DELAY_COUNT] =
-    {"OFF", "5min", "10min", "15min", "30min", "45min", "60min", "90min"};
+    {"VYP", "5min", "10min", "15min", "30min", "45min", "60min", "90min"};
 
 const uint32_t auto_poweroff_delay_value[AUTO_POWEROFF_DELAY_COUNT] =
     {0, 300000, 600000, 900000, 1800000, 2700000, 3600000, 5400000};
 
 #define CHARGE_SUPRESS_PERCENT_COUNT 6
 const char* const charge_supress_percent_text[CHARGE_SUPRESS_PERCENT_COUNT] =
-    {"OFF", "90%", "85%", "80%", "75%", "70%"};
+    {"VYP", "90%", "85%", "80%", "75%", "70%"};
 
 const uint32_t charge_supress_percent_value[CHARGE_SUPRESS_PERCENT_COUNT] = {0, 90, 85, 80, 75, 70};
 
