@@ -9,7 +9,7 @@
 #include <one_wire/one_wire_host.h>
 
 static void onewire_cli_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("onewire search\r\n");
 }
 
@@ -20,18 +20,18 @@ static void onewire_cli_search(PipeSide* pipe) {
     uint8_t address[8];
     bool done = false;
 
-    printf("Search started\r\n");
+    printf("Hledani zahajeno\r\n");
 
     onewire_host_start(onewire);
     power_enable_otg(power, true);
 
     while(!done) { //-V1044
         if(onewire_host_search(onewire, address, OneWireHostSearchModeNormal) != 1) {
-            printf("Search finished\r\n");
+            printf("Hledani dokonceno\r\n");
             onewire_host_reset_search(onewire);
             done = true;
         } else {
-            printf("Found: ");
+            printf("Nalezeno: ");
             for(uint8_t i = 0; i < 8; i++) {
                 printf("%02X", address[i]);
             }
