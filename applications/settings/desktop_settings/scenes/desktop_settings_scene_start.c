@@ -33,7 +33,7 @@ typedef enum {
 
 #define AUTO_LOCK_DELAY_COUNT 9
 const char* const auto_lock_delay_text[AUTO_LOCK_DELAY_COUNT] = {
-    "OFF",
+    "VYP",
     "10s",
     "15s",
     "30s",
@@ -50,16 +50,16 @@ const uint32_t auto_lock_delay_value[AUTO_LOCK_DELAY_COUNT] =
 #define USB_INHIBIT_AUTO_LOCK_DELAY_COUNT 2
 
 const char* const usb_inhibit_auto_lock_delay_text[USB_INHIBIT_AUTO_LOCK_DELAY_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 
 const uint32_t usb_inhibit_auto_lock_delay_value[USB_INHIBIT_AUTO_LOCK_DELAY_COUNT] = {0, 1};
 
 #define CLOCK_ENABLE_COUNT 2
 const char* const clock_enable_text[CLOCK_ENABLE_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 
 const uint32_t clock_enable_value[CLOCK_ENABLE_COUNT] = {0, 1};
@@ -205,7 +205,7 @@ void desktop_settings_scene_start_on_enter(void* context) {
     item = variable_item_list_add(
         variable_item_list,
         "Styl menu",
-        app->menu_styles_count + 1, // Plus "Default"; MENU_STYLES_MAX keeps this in a uint8_t
+        app->menu_styles_count + 1, // Plus "Vychozi"; MENU_STYLES_MAX keeps this in a uint8_t
         desktop_settings_scene_start_menu_style_changed,
         app);
 
@@ -217,7 +217,7 @@ void desktop_settings_scene_start_on_enter(void* context) {
         }
     }
     variable_item_set_current_value_index(item, value_index);
-    const char* menu_style_text = "Default";
+    const char* menu_style_text = "Vychozi";
     if(value_index) {
         menu_style_text = furi_string_get_cstr(app->menu_styles[value_index - 1].name);
     } else if(app->settings.menu_style[0]) {
