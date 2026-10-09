@@ -201,7 +201,7 @@ static NfcCommand nfc_scene_write_poller_callback_slix(NfcGenericEvent event, vo
 }
 
 static void nfc_scene_write_on_enter_slix(NfcApp* instance) {
-    furi_string_set(instance->text_box_store, "Apply the\ntarget card now");
+    furi_string_set(instance->text_box_store, "Prilozte\ncilovou kartu");
     instance->poller = nfc_poller_alloc(instance->nfc, NfcProtocolSlix);
     nfc_poller_start(instance->poller, nfc_scene_write_poller_callback_slix, instance);
 }
