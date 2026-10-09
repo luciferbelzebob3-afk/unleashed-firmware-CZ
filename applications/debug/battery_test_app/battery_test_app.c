@@ -57,9 +57,9 @@ BatteryTestApp* battery_test_alloc(void) {
         battery_info_get_view(app->battery_info));
 
     app->dialog = dialog_ex_alloc();
-    dialog_ex_set_header(app->dialog, "Close Battery Test?", 64, 12, AlignCenter, AlignTop);
-    dialog_ex_set_left_button_text(app->dialog, "Exit");
-    dialog_ex_set_right_button_text(app->dialog, "Stay");
+    dialog_ex_set_header(app->dialog, "Ukoncit test baterie?", 64, 12, AlignCenter, AlignTop);
+    dialog_ex_set_left_button_text(app->dialog, "Odejit");
+    dialog_ex_set_right_button_text(app->dialog, "Zustat");
     dialog_ex_set_result_callback(app->dialog, battery_test_dialog_callback);
     dialog_ex_set_context(app->dialog, app);
 
