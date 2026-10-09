@@ -162,7 +162,7 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
             break;
         }
         if(!flipper_format_read_string(fff, "Protokol", tmp)) {
-            furi_string_set(app->status, "No Protokol key");
+            furi_string_set(app->status, "Chybi klic protokolu");
             break;
         }
         if(furi_string_cmp_str(tmp, SUBGHZ_PROTOCOL_SECPLUS_V2_NAME) != 0) {
@@ -171,11 +171,11 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
         }
         if(!flipper_format_rewind(fff)) break;
         if(!flipper_format_read_uint32(fff, "Frequency", &app->preset.frequency, 1)) {
-            furi_string_set(app->status, "No Frequency key");
+            furi_string_set(app->status, "Chybi frekvence");
             break;
         }
         if(!flipper_format_read_string(fff, "Preset", app->preset.preset_name)) {
-            furi_string_set(app->status, "No Preset key");
+            furi_string_set(app->status, "Chybi preset");
             break;
         }
 
@@ -207,15 +207,15 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
 
         if(!flipper_format_rewind(fff)) break;
         if(!flipper_format_read_uint32(fff, "Bit", &app->bit_count, 1)) {
-            furi_string_set(app->status, "No Bit key");
+            furi_string_set(app->status, "Chybi bit");
             break;
         }
         if(app->bit_count != 86) {
-            furi_string_set(app->status, "Not an 86-bit keypad");
+            furi_string_set(app->status, "Neni to 86bitova klavesnice");
             break;
         }
         if(!flipper_format_read_hex(fff, "Key", app->key, sizeof(app->key))) {
-            furi_string_set(app->status, "No Key value");
+            furi_string_set(app->status, "Chybi hodnota klice");
             break;
         }
         if(!flipper_format_rewind(fff)) break;
@@ -304,7 +304,7 @@ static bool secplus_pin_save(SecPlusPin* app) {
 /* Tell the user, in a modal they have to dismiss, why the file was rejected. */
 static void secplus_pin_show_error(SecPlusPin* app, const char* reason) {
     DialogMessage* message = dialog_message_alloc();
-    dialog_message_set_header(message, "Wrong file", 64, 3, AlignCenter, AlignTop);
+    dialog_message_set_header(message, "Chybny soubor", 64, 3, AlignCenter, AlignTop);
     dialog_message_set_text(message, reason, 64, 32, AlignCenter, AlignCenter);
     dialog_message_set_buttons(message, NULL, "OK", NULL);
     dialog_message_show(app->dialogs, message);
@@ -319,7 +319,7 @@ static void secplus_pin_open_file(SecPlusPin* app) {
 
     FuriString* path = furi_string_alloc_set(SECPLUS_PIN_FOLDER);
     if(dialog_file_browser_show(app->dialogs, path, path, &options)) {
-        furi_string_set(app->status, "Unreadable file");
+        furi_string_set(app->status, "Soubor nelze precist");
         if(secplus_pin_load(app, furi_string_get_cstr(path))) {
             app->loaded = true;
             app->pin_saved = false;
@@ -355,7 +355,7 @@ int32_t secplus_pin_app(void* p) {
     app->dialogs = furi_record_open(RECORD_DIALOGS);
     app->notifications = furi_record_open(RECORD_NOTIFICATION);
     app->file_path = furi_string_alloc();
-    app->status = furi_string_alloc_set("No file loaded");
+    app->status = furi_string_alloc_set("Neni nacten zadny soubor");
     app->preset.preset_name = furi_string_alloc_set("FuriHalSubGhzPresetOok650Async");
     app->preset.custom_preset = NULL;
     app->preset.custom_preset_size = 0;
@@ -445,7 +445,7 @@ int32_t secplus_pin_app(void* p) {
                             furi_string_printf(
                                 app->status, "%luMHz TX blocked", app->preset.frequency / 1000000);
                         } else {
-                            furi_string_set(app->status, "TX failed");
+                            furi_string_set(app->status, "Vysilani selhalo");
                         }
                         notification_message(
                             app->notifications,
