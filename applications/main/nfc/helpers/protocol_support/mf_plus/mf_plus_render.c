@@ -56,7 +56,7 @@ static void nfc_render_mf_plus_blocks(const MfPlusData* data, FuriString* str) {
     const uint8_t sectors = mf_plus_get_sector_count(data->size);
     if(sectors == 0) return;
 
-    furi_string_cat(str, "\e#Blocks\n");
+    furi_string_cat(str, "\e#Bloky\n");
     for(uint8_t s = 0; s < sectors; s++) {
         const uint16_t first = mf_plus_sector_get_first_block(s);
         const uint16_t trailer = first + mf_plus_sector_get_block_count(s) - 1;
@@ -90,7 +90,7 @@ static void nfc_render_mf_plus_blocks(const MfPlusData* data, FuriString* str) {
 
 void nfc_render_mf_plus_dump(const MfPlusData* data, FuriString* str) {
     if(data->security_level != MfPlusSecurityLevel3) {
-        furi_string_cat(str, "No block data: only an SL3 card exposes keys/blocks here.\n");
+        furi_string_cat(str, "Zadna data bloku: klice a bloky jsou zde dostupne jen u karty SL3.\n");
         return;
     }
 
@@ -102,7 +102,7 @@ void nfc_render_mf_plus_dump(const MfPlusData* data, FuriString* str) {
 
     nfc_render_mf_plus_blocks(data, str);
 
-    furi_string_cat(str, "\n\e#Admin Keys\n");
+    furi_string_cat(str, "\n\e#Spravcovske klice\n");
     for(uint8_t a = 0; a < MfPlusAdminKeyNum; a++) {
         const MfPlusAdminKeyType type = (MfPlusAdminKeyType)a;
         furi_string_cat_printf(str, "%s:\n", mf_plus_get_admin_key_name(type));
@@ -111,7 +111,7 @@ void nfc_render_mf_plus_dump(const MfPlusData* data, FuriString* str) {
         furi_string_cat(str, "\n");
     }
 
-    furi_string_cat(str, "\n\e#Config Blocks\n");
+    furi_string_cat(str, "\n\e#Konfiguracni bloky\n");
     for(uint8_t c = 0; c < MF_PLUS_CONFIG_BLOCK_NUM; c++) {
         furi_string_cat_printf(str, "B00%u:", c);
         nfc_render_mf_plus_hex_or_unknown(
@@ -123,14 +123,14 @@ void nfc_render_mf_plus_dump(const MfPlusData* data, FuriString* str) {
     }
 
     if(data->signature_present) {
-        furi_string_cat(str, "\n\e#Signature\n");
+        furi_string_cat(str, "\n\e#Podpis\n");
         nfc_render_mf_plus_hex_or_unknown(data->signature, MF_PLUS_SIGNATURE_SIZE, true, str);
         furi_string_cat(str, "\n");
     }
 }
 
 void nfc_render_mf_plus_iso14443_4(const MfPlusData* data, FuriString* str) {
-    furi_string_cat(str, "\e#ISO14443-4 data");
+    furi_string_cat(str, "\e#Udaje ISO14443-4");
     nfc_render_iso14443_4a_extra(mf_plus_get_base_data(data), str);
 }
 
@@ -146,7 +146,7 @@ void nfc_render_mf_plus_version_info(const MfPlusData* data, FuriString* str) {
             furi_string_cat(str, device_name);
         }
         furi_string_replace(str, "Mifare", "MIFARE");
-        furi_string_cat(str, " does not support the GetVersion command, extra info unavailable\n");
+        furi_string_cat(str, " nepodporuje prikaz GetVersion, dalsi informace nejsou dostupne\n");
     } else {
         nfc_render_mf_plus_version(&data->version, str);
     }

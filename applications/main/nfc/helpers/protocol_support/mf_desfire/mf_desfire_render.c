@@ -28,7 +28,7 @@ void nfc_render_mf_desfire_info(
         furi_string_cat_printf(str, ", %lu File%s", file_count, file_count != 1 ? "s" : "");
     } else if(mf_desfire_get_type_from_version(&data->version) == MfDesfireTypeLight) {
         // Light has one fixed application that GetApplicationIDs never lists, so no key reveals more
-        furi_string_cat(str, "\nSingle fixed application");
+        furi_string_cat(str, "\nJedna pevna aplikace");
     } else {
         furi_string_cat_printf(str, "\nAuth required to read apps!");
     }
@@ -42,7 +42,7 @@ void nfc_render_mf_desfire_info(
 
     if(format_type != NfcProtocolFormatTypeFull) return;
 
-    furi_string_cat(str, "\n\e#ISO14443-4 data");
+    furi_string_cat(str, "\n\e#Udaje ISO14443-4");
     nfc_render_iso14443_4a_extra(mf_desfire_get_base_data(data), str);
 }
 
@@ -169,40 +169,40 @@ void nfc_render_mf_desfire_file_settings_data(
     const char* type;
     switch(settings->type) {
     case MfDesfireFileTypeStandard:
-        type = "standard";
+        type = "standardni";
         break;
     case MfDesfireFileTypeBackup:
-        type = "backup";
+        type = "zalohovaci";
         break;
     case MfDesfireFileTypeValue:
-        type = "value";
+        type = "hodnotovy";
         break;
     case MfDesfireFileTypeLinearRecord:
-        type = "linear";
+        type = "linearni";
         break;
     case MfDesfireFileTypeCyclicRecord:
-        type = "cyclic";
+        type = "cyklicky";
         break;
     case MfDesfireFileTypeTransactionMac:
         type = "txn-mac";
         break;
     default:
-        type = "unknown";
+        type = "nezname";
     }
 
     const char* comm;
     switch(settings->comm) {
     case MfDesfireFileCommunicationSettingsPlaintext:
-        comm = "plain";
+        comm = "bez sifrovani";
         break;
     case MfDesfireFileCommunicationSettingsAuthenticated:
-        comm = "auth";
+        comm = "overeni";
         break;
     case MfDesfireFileCommunicationSettingsEnciphered:
-        comm = "enciphered";
+        comm = "sifrovane";
         break;
     default:
-        comm = "unknown";
+        comm = "nezname";
     }
 
     furi_string_cat_printf(str, "%s %s\n", type, comm);
