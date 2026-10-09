@@ -129,7 +129,7 @@ static void js_serial_end(struct mjs* mjs) {
     furi_assert(serial);
 
     if(!serial->setup_done)
-        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial is not configured");
+        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial neni nakonfigurovany");
 
     js_serial_deinit(serial);
 }
@@ -138,7 +138,7 @@ static void js_serial_write(struct mjs* mjs) {
     JsSerialInst* serial = JS_GET_CONTEXT(mjs);
     furi_assert(serial);
     if(!serial->setup_done)
-        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial is not configured");
+        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial neni nakonfigurovany");
 
     bool args_correct = true;
 
@@ -232,7 +232,7 @@ static void js_serial_read(struct mjs* mjs) {
     JsSerialInst* serial = JS_GET_CONTEXT(mjs);
     furi_assert(serial);
     if(!serial->setup_done)
-        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial is not configured");
+        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial neni nakonfigurovany");
 
     int32_t read_len, timeout;
     JS_VALUE_PARSE_ARGS_OR_RETURN(mjs, &js_serial_read_args, &read_len, &timeout);
@@ -252,7 +252,7 @@ static void js_serial_readln(struct mjs* mjs) {
     JsSerialInst* serial = JS_GET_CONTEXT(mjs);
     furi_assert(serial);
     if(!serial->setup_done)
-        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial is not configured");
+        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial neni nakonfigurovany");
 
     static const JsValueDeclaration js_serial_readln_arg_list[] = {
         JS_VALUE_SIMPLE(JsValueTypeInt32),
@@ -291,7 +291,7 @@ static void js_serial_read_bytes(struct mjs* mjs) {
     JsSerialInst* serial = JS_GET_CONTEXT(mjs);
     furi_assert(serial);
     if(!serial->setup_done)
-        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial is not configured");
+        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial neni nakonfigurovany");
 
     int32_t read_len, timeout;
     JS_VALUE_PARSE_ARGS_OR_RETURN(mjs, &js_serial_read_args, &read_len, &timeout);
@@ -326,7 +326,7 @@ static void js_serial_read_any(struct mjs* mjs) {
     JsSerialInst* serial = JS_GET_CONTEXT(mjs);
     furi_assert(serial);
     if(!serial->setup_done)
-        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial is not configured");
+        JS_ERROR_AND_RETURN(mjs, MJS_INTERNAL_ERROR, "Serial neni nakonfigurovany");
 
     static const JsValueDeclaration js_serial_read_any_arg_list[] = {
         JS_VALUE_SIMPLE_W_DEFAULT(JsValueTypeInt32, int32_val, INT32_MAX),
@@ -462,7 +462,7 @@ static void js_serial_expect(struct mjs* mjs) {
     JsSerialInst* serial = mjs_get_ptr(mjs, obj_inst);
     furi_assert(serial);
     if(!serial->setup_done) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Serial is not configured");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Serial neni nakonfigurovany");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
