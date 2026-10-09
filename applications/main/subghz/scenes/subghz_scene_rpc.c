@@ -68,14 +68,14 @@ bool subghz_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                         subghz->rpc_ctx, RpcAppSystemErrorCodeRegionLock);
                     rpc_system_app_set_error_text(
                         subghz->rpc_ctx,
-                        "Transmission on this frequency is restricted in your settings");
+                        "Vysilani na teto frekvenci je ve vasem nastaveni zakazano");
                     break;
                 case SubGhzTxRxStartTxStateErrorParserOthers:
                     subghz_block_generic_global.endless_tx = false;
                     rpc_system_app_set_error_code(
                         subghz->rpc_ctx, RpcAppSystemErrorCodeInternalParse);
                     rpc_system_app_set_error_text(
-                        subghz->rpc_ctx, "Error in protocol parameters description");
+                        subghz->rpc_ctx, "Chyba v popisu parametru protokolu");
                     break;
 
                 default: //if(SubGhzTxRxStartTxStateOk)
@@ -109,7 +109,7 @@ bool subghz_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                     result = true;
                 } else {
                     rpc_system_app_set_error_code(subghz->rpc_ctx, RpcAppSystemErrorCodeParseFile);
-                    rpc_system_app_set_error_text(subghz->rpc_ctx, "Cannot parse file");
+                    rpc_system_app_set_error_text(subghz->rpc_ctx, "Nelze nacist soubor");
                 }
             }
             rpc_system_app_confirm(subghz->rpc_ctx, result);
