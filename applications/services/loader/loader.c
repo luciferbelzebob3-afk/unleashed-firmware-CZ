@@ -580,7 +580,7 @@ static LoaderMessageLoaderStatusResult loader_start_external_app(
                     snprintf(
                         text,
                         sizeof(text),
-                        "APP:%i %c FW:%i\nAplikace nemusi fungovat\nPokracovat i tak?",
+                        "APP:%i %c FW:%i\nAplikace nemusi bezet\nPokracovat?",
                         manifest->base.api_version.major,
                         app_newer ? '>' : '<',
                         firmware_api_interface->api_version_major);
