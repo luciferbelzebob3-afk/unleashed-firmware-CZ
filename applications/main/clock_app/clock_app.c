@@ -409,7 +409,7 @@ static bool clock_input_callback(InputEvent* event, void* context) {
 static void alarm_toggle_changed(VariableItem* item) {
     AppState* app = variable_item_get_context(item);
     app->settings.alarm_enabled = variable_item_get_current_value_index(item) == 1;
-    variable_item_set_current_value_text(item, app->settings.alarm_enabled ? "ON" : "VYPNUTO");
+    variable_item_set_current_value_text(item, app->settings.alarm_enabled ? "ZAPNUTO" : "VYPNUTO");
     ns_settings_save(app);
 }
 
