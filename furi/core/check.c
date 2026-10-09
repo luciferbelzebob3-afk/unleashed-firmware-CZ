@@ -141,7 +141,7 @@ FURI_NORETURN void __furi_crash_implementation(void) {
     bool isr = FURI_IS_IRQ_MODE();
 
     if(__furi_check_message == NULL) {
-        __furi_check_message = "Fatal Error";
+        __furi_check_message = "Kriticka chyba";
     } else if(__furi_check_message == (void*)__FURI_ASSERT_MESSAGE_FLAG) {
         __furi_check_message = "furi_assert failed";
     } else if(__furi_check_message == (void*)__FURI_CHECK_MESSAGE_FLAG) {
@@ -174,7 +174,7 @@ FURI_NORETURN void __furi_crash_implementation(void) {
     } else {
         uint32_t ptr = (uint32_t)__furi_check_message;
         if(ptr < FLASH_BASE || ptr > (FLASH_BASE + FLASH_SIZE)) {
-            ptr = (uint32_t) "Check serial logs";
+            ptr = (uint32_t) "Zkontrolujte seriove zaznamy";
         }
         furi_hal_rtc_set_fault_data(ptr);
         furi_log_puts("\r\nRebooting system.\r\n");
@@ -192,7 +192,7 @@ FURI_NORETURN void __furi_halt_implementation(void) {
     bool isr = FURI_IS_IRQ_MODE();
 
     if(__furi_check_message == NULL) {
-        __furi_check_message = "System halt requested.";
+        __furi_check_message = "Pozadovano zastaveni systemu.";
     }
 
     furi_log_puts("\r\n\033[0;31m[HALT]");

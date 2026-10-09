@@ -26,16 +26,16 @@ static void findmy_main_draw_callback(Canvas* canvas, void* _model) {
     const char* network_text = "";
     switch(model->type) {
     case FindMyTypeApple:
-        network_text = "Apple Network";
+        network_text = "Sit Apple";
         break;
     case FindMyTypeSamsung:
-        network_text = "Samsung Network";
+        network_text = "Sit Samsung";
         break;
     case FindMyTypeTile:
-        network_text = "Tile Network";
+        network_text = "Sit Tile";
         break;
     case FindMyTypeGoogle:
-        network_text = "Google Network";
+        network_text = "Sit Google";
         break;
     default:
         break;
