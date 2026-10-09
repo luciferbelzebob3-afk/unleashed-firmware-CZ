@@ -11,7 +11,7 @@ static void nfc_render_mf_ultralight_pages_count(const MfUltralightData* data, F
 
 static void nfc_render_mf_ultralight_counters(const MfUltralightData* data, FuriString* str) {
     for(uint8_t i = 0; i < MF_ULTRALIGHT_COUNTER_NUM; i++)
-        furi_string_cat_printf(str, "\nCounter %u: %lu", i, data->counter[i].counter);
+        furi_string_cat_printf(str, "\nPocitadlo %u: %lu", i, data->counter[i].counter);
 }
 
 static void nfc_render_mf_ultralight_pwd_pack_lines(
@@ -74,7 +74,7 @@ static void nfc_render_mf_ultralight_aes_key(const MfUltralightData* data, FuriS
         }
     }
     if(has_key) {
-        furi_string_cat_printf(str, "\nDataProtKey: ");
+        furi_string_cat_printf(str, "\nKlic DataProt: ");
         nfc_render_iso14443_3a_format_bytes(str, key, MF_ULTRALIGHT_AES_KEY_SIZE);
     }
 }
@@ -125,14 +125,14 @@ static void nfc_render_mf_ultralight_aes_config(const MfUltralightData* data, Fu
     } else {
         furi_string_cat_printf(str, "\nLimit overeni: %u (zamkne!)", authlim);
     }
-    furi_string_cat_printf(str, "\nUser cfg: %s", user_cfg_locked ? "zamceno" : "otevreno");
+    furi_string_cat_printf(str, "\nUzivatelska konfigurace: %s", user_cfg_locked ? "zamceno" : "otevreno");
     furi_string_cat_printf(
         str,
         "\nCounter 2: rd %s / inc %s",
         cnt2_rd_open ? "otevreno" : "autentizace",
         cnt2_inc_open ? "otevreno" : "autentizace");
-    furi_string_cat_printf(str, "\nRandom ID: %s", random_id ? "zapnuto" : "vypnuto");
-    furi_string_cat_printf(str, "\nSecure msg: %s", secure_msg ? "zapnuto" : "vypnuto");
+    furi_string_cat_printf(str, "\nNahodne ID: %s", random_id ? "zapnuto" : "vypnuto");
+    furi_string_cat_printf(str, "\nZabezpecena zprava: %s", secure_msg ? "zapnuto" : "vypnuto");
     furi_string_cat_printf(
         str, "\nZamek klice: DP %s / UID %s", dp_key_locked ? "A" : "N", uid_key_locked ? "A" : "N");
 }

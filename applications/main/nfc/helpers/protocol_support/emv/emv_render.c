@@ -32,13 +32,13 @@ void nfc_render_emv_uid(const uint8_t* uid, const uint8_t uid_len, FuriString* s
 void nfc_render_emv_currency(uint16_t cur_code, FuriString* str) {
     if(!cur_code) return;
 
-    furi_string_cat_printf(str, "Currency code: %04X\n", cur_code);
+    furi_string_cat_printf(str, "Kod meny: %04X\n", cur_code);
 }
 
 void nfc_render_emv_country(uint16_t country_code, FuriString* str) {
     if(!country_code) return;
 
-    furi_string_cat_printf(str, "Country code: %04X\n", country_code);
+    furi_string_cat_printf(str, "Kod zeme: %04X\n", country_code);
 }
 
 void nfc_render_emv_application(const EmvApplication* apl, FuriString* str) {
@@ -79,7 +79,7 @@ void nfc_render_emv_transactions(const EmvApplication* apl, FuriString* str) {
     Storage* storage = furi_record_open(RECORD_STORAGE);
     FuriString* tmp = furi_string_alloc();
 
-    furi_string_cat_printf(str, "Transactions:\n");
+    furi_string_cat_printf(str, "Transakce:\n");
     for(int i = 0; i < len; i++) {
         // If no date and amount - skip
         if((!apl->trans[i].date) && (!apl->trans[i].amount)) continue;
@@ -110,7 +110,7 @@ void nfc_render_emv_transactions(const EmvApplication* apl, FuriString* str) {
         if(apl->trans[i].country) {
             furi_string_set_str(tmp, "UNK");
             nfc_emv_parser_get_country_name(storage, apl->trans[i].country, tmp);
-            furi_string_cat_printf(str, "Country: %s\n", furi_string_get_cstr(tmp));
+            furi_string_cat_printf(str, "Zeme: %s\n", furi_string_get_cstr(tmp));
         }
 
         if(apl->trans[i].date)

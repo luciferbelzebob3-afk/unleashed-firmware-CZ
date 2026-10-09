@@ -21,7 +21,7 @@ void nfc_render_type_4_tag_info(
         furi_string_cat_printf(
             str, "Verze mapovani T4T: %u.%u\n", data->t4t_version.major, data->t4t_version.minor);
         furi_string_cat_printf(str, "ID souboru NDEF: %04X\n", data->ndef_file_id);
-        furi_string_cat_printf(str, "Max NDEF Size: %u\n", data->ndef_max_len);
+        furi_string_cat_printf(str, "Max. velikost NDEF: %u\n", data->ndef_max_len);
         furi_string_cat_printf(
             str, "Velikost APDU: cteni %u, zapis %u\n", data->chunk_max_read, data->chunk_max_write);
         furi_string_cat_printf(

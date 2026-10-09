@@ -93,8 +93,8 @@ void nfc_render_mf_desfire_version(const MfDesfireVersion* data, FuriString* str
         data->sw_proto);
     furi_string_cat_printf(
         str,
-        "batch %02x:%02x:%02x:%02x:%02x\n"
-        "week %02x year 20%02x\n",
+        "sada %02x:%02x:%02x:%02x:%02x\n"
+        "tyden %02x rok 20%02x\n",
         data->batch[0],
         data->batch[1],
         data->batch[2],
@@ -106,33 +106,33 @@ void nfc_render_mf_desfire_version(const MfDesfireVersion* data, FuriString* str
 
 void nfc_render_mf_desfire_free_memory(const MfDesfireFreeMemory* data, FuriString* str) {
     if(data->is_present) {
-        furi_string_cat_printf(str, "freeMem %lu\n", data->bytes_free);
+        furi_string_cat_printf(str, "Volna pamet: %lu\n", data->bytes_free);
     }
 }
 
 void nfc_render_mf_desfire_key_settings(const MfDesfireKeySettings* data, FuriString* str) {
     if(data->is_free_directory_list) {
-        furi_string_cat_printf(str, "changeKeyID %d\n", data->change_key_id);
-        furi_string_cat_printf(str, "configChangeable %d\n", data->is_config_changeable);
-        furi_string_cat_printf(str, "freeCreateDelete %d\n", data->is_free_create_delete);
-        furi_string_cat_printf(str, "freeDirectoryList %d\n", data->is_free_directory_list);
-        furi_string_cat_printf(str, "masterChangeable %d\n", data->is_master_key_changeable);
+        furi_string_cat_printf(str, "ID klice pro zmenu: %d\n", data->change_key_id);
+        furi_string_cat_printf(str, "Lze menit konfiguraci: %d\n", data->is_config_changeable);
+        furi_string_cat_printf(str, "Volne vytvareni a mazani: %d\n", data->is_free_create_delete);
+        furi_string_cat_printf(str, "Volny seznam aplikaci: %d\n", data->is_free_directory_list);
+        furi_string_cat_printf(str, "Lze menit hlavni klic: %d\n", data->is_master_key_changeable);
     } else {
-        furi_string_cat_printf(str, "changeKeyID ??\n");
-        furi_string_cat_printf(str, "configChangeable ??\n");
-        furi_string_cat_printf(str, "freeCreateDelete ??\n");
-        furi_string_cat_printf(str, "freeDirectoryList 0\n");
-        furi_string_cat_printf(str, "masterChangeable ??\n");
+        furi_string_cat_printf(str, "ID klice pro zmenu: ??\n");
+        furi_string_cat_printf(str, "Lze menit konfiguraci: ??\n");
+        furi_string_cat_printf(str, "Volne vytvareni a mazani: ??\n");
+        furi_string_cat_printf(str, "Volny seznam aplikaci: 0\n");
+        furi_string_cat_printf(str, "Lze menit hlavni klic: ??\n");
     }
 
     if(data->flags) {
-        furi_string_cat_printf(str, "flags %d\n", data->flags);
+        furi_string_cat_printf(str, "Priznaky: %d\n", data->flags);
     }
 
     if(data->is_free_directory_list) {
-        furi_string_cat_printf(str, "maxKeys %d\n", data->max_keys);
+        furi_string_cat_printf(str, "Max. pocet klicu: %d\n", data->max_keys);
     } else {
-        furi_string_cat_printf(str, "maxKeys ??\n");
+        furi_string_cat_printf(str, "Max. pocet klicu: ??\n");
     }
 }
 
@@ -224,15 +224,15 @@ void nfc_render_mf_desfire_file_settings_data(
     case MfDesfireFileTypeStandard:
     case MfDesfireFileTypeBackup:
         record_size = settings->data.size;
-        furi_string_cat_printf(str, "size %lu\n", record_size);
+        furi_string_cat_printf(str, "Velikost: %lu\n", record_size);
         break;
     case MfDesfireFileTypeValue:
         record_size = MF_DESFIRE_VALUE_SIZE;
         furi_string_cat_printf(
-            str, "lo %lu hi %lu\n", settings->value.lo_limit, settings->value.hi_limit);
+            str, "Dolni limit: %lu, horni limit: %lu\n", settings->value.lo_limit, settings->value.hi_limit);
         furi_string_cat_printf(
             str,
-            "limit %lu enabled %d\n",
+            "Limit: %lu, povolen: %d\n",
             settings->value.limited_credit_value,
             settings->value.limited_credit_enabled);
         break;
@@ -240,17 +240,17 @@ void nfc_render_mf_desfire_file_settings_data(
     case MfDesfireFileTypeCyclicRecord:
         record_count = settings->record.cur;
         record_size = settings->record.size;
-        furi_string_cat_printf(str, "size %lu\n", record_size);
-        furi_string_cat_printf(str, "num %lu max %lu\n", record_count, settings->record.max);
+        furi_string_cat_printf(str, "Velikost: %lu\n", record_size);
+        furi_string_cat_printf(str, "Pocet: %lu, maximum: %lu\n", record_count, settings->record.max);
         break;
     case MfDesfireFileTypeTransactionMac:
         record_count = 0;
         furi_string_cat_printf(
             str,
-            "key opt %02X ver %02X\n",
+            "Volby klice: %02X, verze: %02X\n",
             settings->transaction_mac.key_option,
             settings->transaction_mac.key_version);
-        furi_string_cat_printf(str, "cnt limit %lu\n", settings->transaction_mac.counter_limit);
+        furi_string_cat_printf(str, "Limit pocitadla: %lu\n", settings->transaction_mac.counter_limit);
         break;
     }
 
@@ -279,7 +279,7 @@ void nfc_render_mf_desfire_file_settings_data(
     }
 
     for(uint32_t rec = 0; rec < record_count; rec++) {
-        furi_string_cat_printf(str, "record %lu\n", rec);
+        furi_string_cat_printf(str, "Zaznam %lu\n", rec);
 
         for(uint32_t ch = 0; ch < record_size; ch += 4) {
             furi_string_cat_printf(str, "%03lx|", ch);

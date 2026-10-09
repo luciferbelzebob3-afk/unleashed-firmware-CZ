@@ -189,7 +189,7 @@ void nfc_more_info_render_felica_blocks(
             if(public_block->service_code != service_code_key) {
                 continue; // Skip blocks not matching the requested service code
             }
-            furi_string_cat_printf(str, "-----Block 0x%02X-----\n", public_block->block_idx);
+            furi_string_cat_printf(str, "-----Blok 0x%02X-----\n", public_block->block_idx);
             nfc_render_felica_block_data_simple(&public_block->block, str);
             furi_string_cat_printf(str, "\n");
         }
