@@ -16,13 +16,13 @@ void rpc_debug_app_scene_test_app_error_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Set Error Code",
+        "Nastavit kod chyby",
         SubmenuIndexSetErrorCode,
         rpc_debug_app_scene_test_app_error_submenu_callback,
         app);
     submenu_add_item(
         submenu,
-        "Set Error Text",
+        "Nastavit text chyby",
         SubmenuIndexSetErrorText,
         rpc_debug_app_scene_test_app_error_submenu_callback,
         app);
