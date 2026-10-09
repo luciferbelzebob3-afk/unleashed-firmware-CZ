@@ -51,7 +51,7 @@ static void lfrfid_view_read_draw_callback(Canvas* canvas, void* _model) {
     }
 
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 61, 56, "Don't move card");
+    canvas_draw_str(canvas, 61, 56, "Nehybejte kartou");
 }
 
 void lfrfid_view_read_enter(void* context) {
