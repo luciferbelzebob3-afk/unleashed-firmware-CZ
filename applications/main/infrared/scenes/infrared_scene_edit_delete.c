@@ -58,7 +58,7 @@ void infrared_scene_edit_delete_on_enter(void* context) {
             infrared_text_store_set(
                 infrared,
                 0,
-                "%s\nRAW\n%zu samples",
+                "%s\nRAW\n%zu vzorku",
                 infrared_remote_get_signal_name(remote, current_button_index),
                 raw->timings_size);
 
@@ -81,7 +81,7 @@ void infrared_scene_edit_delete_on_enter(void* context) {
         infrared_text_store_set(
             infrared,
             0,
-            "%s\n with %zu buttons",
+            "%s\nPocet tlacitek: %zu",
             infrared_remote_get_name(remote),
             infrared_remote_get_signal_count(remote));
     } else {
@@ -122,7 +122,7 @@ bool infrared_scene_edit_delete_on_event(void* context, SceneManagerEvent event)
                        task_error, InfraredErrorCodeSignalRawUnableToReadTooLongData)) {
                     const uint8_t index = INFRARED_ERROR_GET_INDEX(task_error);
                     const char* format =
-                        "Failed to delete\n\"%s\" is too long.\nTry to edit file from pc";
+                        "Nelze smazat\n\"%s\" je prilis dlouhy.\nUprav soubor v pocitaci";
                     infrared_show_error_message(
                         infrared,
                         format,
