@@ -586,7 +586,7 @@ static void mf_ultralight_scene_unlock_warn_on_enter(NfcApp* nfc) {
     } else {
         dialog_ex_set_header(dialog_ex, "Rizikova akce!", 64, 4, AlignCenter, AlignTop);
         dialog_ex_set_text(
-            dialog_ex, "Wrong password\ncan block your\ncard.", 4, 18, AlignLeft, AlignTop);
+            dialog_ex, "Spatne heslo muze\nzablokovat vasi\nkartu.", 4, 18, AlignLeft, AlignTop);
         dialog_ex_set_icon(dialog_ex, 83, 22, &I_WarningDolphinFlip_45x42);
         dialog_ex_set_center_button_text(dialog_ex, "OK");
     }
