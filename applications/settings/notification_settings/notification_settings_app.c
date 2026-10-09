@@ -57,7 +57,7 @@ const float volume_value[VOLUME_COUNT] = {
 
 #define DELAY_COUNT 12
 const char* const delay_text[DELAY_COUNT] = {
-    "Always ON",
+    "Vzdy zapnuto",
     "2s",
     "5s",
     "10s",
@@ -75,8 +75,8 @@ const uint32_t delay_value[DELAY_COUNT] =
 
 #define VIBRO_COUNT 2
 const char* const vibro_text[VIBRO_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 const bool vibro_value[VIBRO_COUNT] = {false, true};
 
@@ -84,16 +84,16 @@ const bool vibro_value[VIBRO_COUNT] = {false, true};
 
 #define RGB_BACKLIGHT_INSTALLED_COUNT 2
 const char* const rgb_backlight_installed_text[RGB_BACKLIGHT_INSTALLED_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 const bool rgb_backlight_installed_value[RGB_BACKLIGHT_INSTALLED_COUNT] = {false, true};
 
 #define RGB_BACKLIGHT_RAINBOW_MODE_COUNT 3
 const char* const rgb_backlight_rainbow_mode_text[RGB_BACKLIGHT_RAINBOW_MODE_COUNT] = {
-    "OFF",
-    "Rainbow",
-    "Wave",
+    "VYP",
+    "Duhovy",
+    "Vlna",
 };
 const uint32_t rgb_backlight_rainbow_mode_value[RGB_BACKLIGHT_RAINBOW_MODE_COUNT] = {0, 1, 2};
 
@@ -158,7 +158,7 @@ typedef enum {
 // --- NIGHT SHIFT ---
 #define NIGHT_SHIFT_COUNT 7
 const char* const night_shift_text[NIGHT_SHIFT_COUNT] =
-    {"OFF", "-10%", "-20%", "-30%", "-40%", "-50%", "-60%"
+    {"VYP", "-10%", "-20%", "-30%", "-40%", "-50%", "-60%"
 
 };
 const float night_shift_value[NIGHT_SHIFT_COUNT] = {
@@ -245,8 +245,8 @@ const uint32_t night_shift_end_value[NIGHT_SHIFT_END_COUNT] = {
 
 #define LCD_INVERSION_COUNT 2
 const char* const lcd_inversion_text[LCD_INVERSION_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 const bool lcd_inversion_value[LCD_INVERSION_COUNT] = {false, true};
 
@@ -373,9 +373,9 @@ static void rgb_backlight_installed_changed(VariableItem* item) {
     for(int i = 1; i < 9; i++) {
         VariableItem* t_item = variable_item_list_get(app->variable_item_list_rgb, i);
         if(index == 0) {
-            variable_item_set_locked(t_item, true, "RGB\nOFF!");
+            variable_item_set_locked(t_item, true, "RGB\nVYPNUTO");
         } else {
-            variable_item_set_locked(t_item, false, "RGB\nOFF!");
+            variable_item_set_locked(t_item, false, "RGB\nVYPNUTO");
         }
     }
     notification_message_save_settings(app->notification);
@@ -532,9 +532,9 @@ static void night_shift_changed(VariableItem* item) {
     for(int i = 4; i < 6; i++) {
         VariableItem* t_item = variable_item_list_get(app->variable_item_list, i);
         if(index == 0) {
-            variable_item_set_locked(t_item, true, "Night Shift\nOFF!");
+            variable_item_set_locked(t_item, true, "Nocni rezim\nVYPNUTY!");
         } else {
-            variable_item_set_locked(t_item, false, "Night Shift\nOFF!");
+            variable_item_set_locked(t_item, false, "Nocni rezim\nVYPNUTY!");
         }
     }
 
@@ -606,21 +606,21 @@ static NotificationAppSettings* alloc_settings(void) {
         app->variable_item_list, variable_item_list_enter_callback, app);
 
     item = variable_item_list_add(
-        app->variable_item_list, "LCD Contrast", CONTRAST_COUNT, contrast_changed, app);
+        app->variable_item_list, "Kontrast LCD", CONTRAST_COUNT, contrast_changed, app);
     value_index =
         value_index_int32(app->notification->settings.contrast, contrast_value, CONTRAST_COUNT);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, contrast_text[value_index]);
 
     item = variable_item_list_add(
-        app->variable_item_list, "LCD Backlight", BACKLIGHT_COUNT, backlight_changed, app);
+        app->variable_item_list, "Podsviceni LCD", BACKLIGHT_COUNT, backlight_changed, app);
     value_index = value_index_float(
         app->notification->settings.display_brightness, backlight_value, BACKLIGHT_COUNT);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, backlight_text[value_index]);
 
     item = variable_item_list_add(
-        app->variable_item_list, "Backlight Time", DELAY_COUNT, screen_changed, app);
+        app->variable_item_list, "Doba podsviceni", DELAY_COUNT, screen_changed, app);
     value_index = value_index_uint32(
         app->notification->settings.display_off_delay_ms, delay_value, DELAY_COUNT);
     variable_item_set_current_value_index(item, value_index);
@@ -628,7 +628,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     // --- NIGHT SHIFT ---
     item = variable_item_list_add(
-        app->variable_item_list, "Night Shift", NIGHT_SHIFT_COUNT, night_shift_changed, app);
+        app->variable_item_list, "Nocni rezim", NIGHT_SHIFT_COUNT, night_shift_changed, app);
     value_index = value_index_float(
         app->notification->settings.night_shift, night_shift_value, NIGHT_SHIFT_COUNT);
     variable_item_set_current_value_index(item, value_index);
@@ -636,7 +636,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     item = variable_item_list_add(
         app->variable_item_list,
-        " . Start",
+        " . Zacatek",
         NIGHT_SHIFT_START_COUNT,
         night_shift_start_changed,
         app);
@@ -647,34 +647,34 @@ static NotificationAppSettings* alloc_settings(void) {
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, night_shift_start_text[value_index]);
     variable_item_set_locked(
-        item, (app->notification->settings.night_shift == 1), "Night Shift \nOFF!");
+        item, (app->notification->settings.night_shift == 1), "Nocni rezim \nVYPNUTY!");
 
     item = variable_item_list_add(
-        app->variable_item_list, " . End", NIGHT_SHIFT_END_COUNT, night_shift_end_changed, app);
+        app->variable_item_list, " . Konec", NIGHT_SHIFT_END_COUNT, night_shift_end_changed, app);
     value_index = value_index_uint32(
         app->notification->settings.night_shift_end, night_shift_end_value, NIGHT_SHIFT_END_COUNT);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, night_shift_end_text[value_index]);
     variable_item_set_locked(
-        item, (app->notification->settings.night_shift == 1), "Night Shift \nOFF!");
+        item, (app->notification->settings.night_shift == 1), "Nocni rezim \nVYPNUTY!");
 
     // --- NIGHT SHIFT END---
 
     item = variable_item_list_add(
-        app->variable_item_list, "LED Brightness", BACKLIGHT_COUNT, led_changed, app);
+        app->variable_item_list, "Jas LED", BACKLIGHT_COUNT, led_changed, app);
     value_index = value_index_float(
         app->notification->settings.led_brightness, backlight_value, BACKLIGHT_COUNT);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, backlight_text[value_index]);
 
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode)) {
-        item = variable_item_list_add(app->variable_item_list, "Volume", 1, NULL, app);
+        item = variable_item_list_add(app->variable_item_list, "Hlasitost", 1, NULL, app);
         value_index = 0;
         variable_item_set_current_value_index(item, value_index);
-        variable_item_set_current_value_text(item, "Stealth");
+        variable_item_set_current_value_text(item, "Tichy rezim");
     } else {
         item = variable_item_list_add(
-            app->variable_item_list, "Volume", VOLUME_COUNT, volume_changed, app);
+            app->variable_item_list, "Hlasitost", VOLUME_COUNT, volume_changed, app);
         value_index = value_index_float(
             app->notification->settings.speaker_volume, volume_value, VOLUME_COUNT);
         variable_item_set_current_value_index(item, value_index);
@@ -682,13 +682,13 @@ static NotificationAppSettings* alloc_settings(void) {
     }
 
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode)) {
-        item = variable_item_list_add(app->variable_item_list, "Vibro", 1, NULL, app);
+        item = variable_item_list_add(app->variable_item_list, "Vibrace", 1, NULL, app);
         value_index = 0;
         variable_item_set_current_value_index(item, value_index);
-        variable_item_set_current_value_text(item, "Stealth");
+        variable_item_set_current_value_text(item, "Tichy rezim");
     } else {
         item = variable_item_list_add(
-            app->variable_item_list, "Vibro", VIBRO_COUNT, vibro_changed, app);
+            app->variable_item_list, "Vibrace", VIBRO_COUNT, vibro_changed, app);
         value_index =
             value_index_bool(app->notification->settings.vibro_on, vibro_value, VIBRO_COUNT);
         variable_item_set_current_value_index(item, value_index);
@@ -696,14 +696,14 @@ static NotificationAppSettings* alloc_settings(void) {
     }
 
     item = variable_item_list_add(
-        app->variable_item_list, "LCD Inversion", LCD_INVERSION_COUNT, lcd_inversion_changed, app);
+        app->variable_item_list, "Invertovat LCD", LCD_INVERSION_COUNT, lcd_inversion_changed, app);
     value_index = value_index_bool(
         app->notification->settings.lcd_inversion, lcd_inversion_value, LCD_INVERSION_COUNT);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, lcd_inversion_text[value_index]);
 
     //--- RGB BACKLIGHT ---
-    item = variable_item_list_add(app->variable_item_list, "RGB Mod Settings", 0, NULL, app);
+    item = variable_item_list_add(app->variable_item_list, "Nastaveni RGB modu", 0, NULL, app);
     //--- RGB BACKLIGHT END ---
 
     app->variable_item_list_rgb = variable_item_list_alloc();
@@ -714,7 +714,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        "RGB backlight installed",
+        "RGB podsviceni nainstalovano",
         RGB_BACKLIGHT_INSTALLED_COUNT,
         rgb_backlight_installed_changed,
         app);
@@ -729,7 +729,7 @@ static NotificationAppSettings* alloc_settings(void) {
     // led_1 color
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        "LED 1 Color",
+        "Barva LED 1",
         rgb_backlight_get_color_count(),
         led_2_color_changed,
         app);
@@ -742,7 +742,7 @@ static NotificationAppSettings* alloc_settings(void) {
     // led_2 color
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        "LED 2 Color",
+        "Barva LED 2",
         rgb_backlight_get_color_count(),
         led_1_color_changed,
         app);
@@ -755,7 +755,7 @@ static NotificationAppSettings* alloc_settings(void) {
     // led 3 color
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        "LED 3 Color",
+        "Barva LED 3",
         rgb_backlight_get_color_count(),
         led_0_color_changed,
         app);
@@ -768,7 +768,7 @@ static NotificationAppSettings* alloc_settings(void) {
     // Efects
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        "Effects",
+        "Efekty",
         RGB_BACKLIGHT_RAINBOW_MODE_COUNT,
         rgb_backlight_rainbow_changed,
         app);
@@ -783,7 +783,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        " . Speed",
+        " . Rychlost",
         RGB_BACKLIGHT_RAINBOW_SPEED_COUNT,
         rgb_backlight_rainbow_speed_changed,
         app);
@@ -798,7 +798,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        " . Color step",
+        " . Krok barvy",
         RGB_BACKLIGHT_RAINBOW_STEP_COUNT,
         rgb_backlight_rainbow_step_changed,
         app);
@@ -813,7 +813,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        " . Saturation",
+        " . Sytost",
         255,
         rgb_backlight_rainbow_saturation_changed,
         app);
@@ -827,7 +827,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     item = variable_item_list_add(
         app->variable_item_list_rgb,
-        " . Wave wide",
+        " . Sirka vlny",
         RGB_BACKLIGHT_RAINBOW_WIDE_COUNT,
         rgb_backlight_rainbow_wide_changed,
         app);

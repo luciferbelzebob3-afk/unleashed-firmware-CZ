@@ -31,16 +31,16 @@ void hid_scene_start_on_enter(void* context) {
         app->submenu, "Keynote", HidSubmenuIndexKeynote, hid_scene_start_submenu_callback, app);
     submenu_add_item(
         app->submenu,
-        "Keynote Vertical",
+        "Keynote na vysku",
         HidSubmenuIndexKeynoteVertical,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
-        app->submenu, "Keyboard", HidSubmenuIndexKeyboard, hid_scene_start_submenu_callback, app);
+        app->submenu, "Klavesnice", HidSubmenuIndexKeyboard, hid_scene_start_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Numpad", HidSubmenuIndexNumpad, hid_scene_start_submenu_callback, app);
+        app->submenu, "Ciselnik", HidSubmenuIndexNumpad, hid_scene_start_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Media", HidSubmenuIndexMedia, hid_scene_start_submenu_callback, app);
+        app->submenu, "Media ovladani", HidSubmenuIndexMedia, hid_scene_start_submenu_callback, app);
     submenu_add_item(
         app->submenu,
         "Apple Music macOS",
@@ -48,49 +48,49 @@ void hid_scene_start_on_enter(void* context) {
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
-        app->submenu, "Movie", HidSubmenuIndexMovie, hid_scene_start_submenu_callback, app);
+        app->submenu, "Video", HidSubmenuIndexMovie, hid_scene_start_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Mouse", HidSubmenuIndexMouse, hid_scene_start_submenu_callback, app);
+        app->submenu, "Mys", HidSubmenuIndexMouse, hid_scene_start_submenu_callback, app);
     submenu_add_item(
         app->submenu,
-        "TikTok / YT Shorts",
+        "TikTok / YouTube Shorts",
         HidSubmenuIndexTikTok,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "Mouse Clicker",
+        "Automaticke klikani mysi",
         HidSubmenuIndexMouseClicker,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "Mouse Jiggler",
+        "Pohyb kurzoru mysi",
         HidSubmenuIndexMouseJiggler,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "Mouse Jiggler Stealth",
+        "Skryty pohyb kurzoru",
         HidSubmenuIndexMouseJigglerStealth,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "PushToTalk",
+        "Stiskni a mluv",
         HidSubmenuIndexPushToTalk,
         hid_scene_start_submenu_callback,
         app);
 #ifdef HID_TRANSPORT_BLE
     submenu_add_item(
         app->submenu,
-        "Bluetooth Remote Name",
+        "Nazev Bluetooth ovladace",
         HidSubmenuIndexRename,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "Bluetooth Unpairing",
+        "Zrusit parovani Bluetooth",
         HidSubmenuIndexRemovePairing,
         hid_scene_start_submenu_callback,
         app);

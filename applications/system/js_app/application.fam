@@ -1,6 +1,6 @@
 App(
     appid="js_app",
-    name="JS Runner",
+    name="Spoustec JS",
     apptype=FlipperAppType.EXTERNAL,
     cdefines=["JS_RUNNER_FAP"],
     fap_icon="icon.png",

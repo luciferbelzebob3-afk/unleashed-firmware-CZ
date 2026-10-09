@@ -18,7 +18,7 @@ static DialogMessageButton product_screen(DialogsApp* dialogs, DialogMessage* me
     DialogMessageButton result;
 
     FuriString* screen_header = furi_string_alloc_printf(
-        "Product: %s\n"
+        "Produkt: %s\n"
         "Model: %s",
         furi_hal_version_get_model_name(),
         furi_hal_version_get_model_code());
@@ -61,8 +61,8 @@ static DialogMessageButton address_screen(DialogsApp* dialogs, DialogMessage* me
 static DialogMessageButton compliance_screen(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
-    const char* screen_text = "For all compliance\n"
-                              "certificates, please visit:\n"
+    const char* screen_text = "Certifikaty shody najdes na:\n"
+                              ""
                               "www.flipp.dev/compliance";
 
     dialog_message_set_text(message, screen_text, 0, 0, AlignLeft, AlignTop);
@@ -77,9 +77,9 @@ static DialogMessageButton unleashed_info_screen(DialogsApp* dialogs, DialogMess
 
     const char* screen_header = "Unleashed Firmware\n";
 
-    const char* screen_text = "Is for experimental purposes\nonly "
-                              "and is not meant for any\nillegal use! "
-                              "We do not condone\nany illegal activity.";
+    const char* screen_text = "Je urcen pouze pro\nexperimentovani a "
+                              "neni urcen k zadnemu\nnezakonnemu pouziti! "
+                              "Nepodporujeme zadne\nnezakonne cinnosti.";
 
     dialog_message_set_header(message, screen_header, 0, 0, AlignLeft, AlignTop);
     dialog_message_set_text(message, screen_text, 0, 11, AlignLeft, AlignTop);
@@ -94,8 +94,8 @@ static DialogMessageButton unleashed_info_screen2(DialogsApp* dialogs, DialogMes
     DialogMessageButton result;
 
     const char* screen_text =
-        "This firmware is free and\ndistributed under\nthe OpenSource license.\n"
-        "If you paid any money for it\n- you got scammed.";
+        "Tento firmware je zdarma a\nje siren pod licenci\nOpen Source.\n"
+        "Pokud jsi za nej platil,\nnekdo te podvedl.";
 
     dialog_message_set_text(message, screen_text, 0, 0, AlignLeft, AlignTop);
     result = dialog_message_show(dialogs, message);
@@ -107,8 +107,8 @@ static DialogMessageButton unleashed_info_screen2(DialogsApp* dialogs, DialogMes
 static DialogMessageButton unleashed_info_screen3(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
-    const char* screen_text = "Community apps included in\nall builds except `c` build\n"
-                              "For updates and more visit:\n"
+    const char* screen_text = "Komunitni aplikace jsou ve\nvsech sestavenich krome `c`\n"
+                              "Aktualizace a vice najdes na:\n"
                               "github.com/DarkFlippers";
 
     dialog_message_set_text(message, screen_text, 0, 0, AlignLeft, AlignTop);
@@ -132,15 +132,15 @@ static DialogMessageButton hw_version_screen(DialogsApp* dialogs, DialogMessage*
         furi_hal_version_get_hw_body(),
         furi_hal_version_get_hw_connect(),
         furi_hal_version_get_hw_region_name_otp(),
-        my_name ? my_name : "Unknown");
+        my_name ? my_name : "Neznamy");
 
-    furi_string_cat_printf(buffer, "Serial Number:\n");
+    furi_string_cat_printf(buffer, "Seriove cislo:\n");
     const uint8_t* uid = furi_hal_version_uid();
     for(size_t i = 0; i < furi_hal_version_uid_size(); i++) {
         furi_string_cat_printf(buffer, "%02X", uid[i]);
     }
 
-    dialog_message_set_header(message, "HW Version Info:", 0, 0, AlignLeft, AlignTop);
+    dialog_message_set_header(message, "Informace o HW:", 0, 0, AlignLeft, AlignTop);
     dialog_message_set_text(message, furi_string_get_cstr(buffer), 0, 13, AlignLeft, AlignTop);
     result = dialog_message_show(dialogs, message);
     dialog_message_set_text(message, NULL, 0, 0, AlignLeft, AlignTop);
@@ -161,7 +161,7 @@ static DialogMessageButton fw_version_screen(DialogsApp* dialogs, DialogMessage*
     //#endif
 
     if(!ver) { //-V1051
-        furi_string_cat_printf(buffer, "No info\n");
+        furi_string_cat_printf(buffer, "Bez informaci\n");
     } else {
         uint16_t api_major, api_minor;
         furi_hal_info_get_api_version(&api_major, &api_minor);
@@ -179,7 +179,7 @@ static DialogMessageButton fw_version_screen(DialogsApp* dialogs, DialogMessage*
             version_get_gitbranch(ver));
     }
 
-    dialog_message_set_header(message, "FW Version Info:", 0, 0, AlignLeft, AlignTop);
+    dialog_message_set_header(message, "Informace o FW:", 0, 0, AlignLeft, AlignTop);
     dialog_message_set_text(message, furi_string_get_cstr(buffer), 0, 13, AlignLeft, AlignTop);
     result = dialog_message_show(dialogs, message);
     dialog_message_set_text(message, NULL, 0, 0, AlignLeft, AlignTop);
@@ -217,11 +217,11 @@ int32_t about_settings_app(void* p) {
 
     while(1) {
         if(screen_index >= COUNT_OF(about_screens) - 1) {
-            dialog_message_set_buttons(message, "Prev.", NULL, NULL);
+            dialog_message_set_buttons(message, "Zpet", NULL, NULL);
         } else if(screen_index == 0) {
-            dialog_message_set_buttons(message, NULL, NULL, "Next");
+            dialog_message_set_buttons(message, NULL, NULL, "Dalsi");
         } else {
-            dialog_message_set_buttons(message, "Prev.", NULL, "Next");
+            dialog_message_set_buttons(message, "Zpet", NULL, "Dalsi");
         }
 
         screen_result = about_screens[screen_index](dialogs, message);

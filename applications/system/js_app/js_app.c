@@ -49,18 +49,18 @@ static void js_callback(JsThreadEvent event, const char* msg, void* context) {
 
     if(event == JsThreadEventDone) {
         FURI_LOG_I(TAG, "Script done");
-        console_view_print(app->console_view, "--- DONE ---");
+        console_view_print(app->console_view, "--- HOTOVO ---");
     } else if(event == JsThreadEventPrint) {
         console_view_print(app->console_view, msg);
     } else if(event == JsThreadEventError) {
-        console_view_print(app->console_view, "--- ERROR ---");
+        console_view_print(app->console_view, "--- CHYBA ---");
         console_view_print(app->console_view, msg);
     } else if(event == JsThreadEventErrorTrace) {
         FuriString* compact_trace = furi_string_alloc_set_str(msg);
         js_app_compact_trace(compact_trace);
         console_view_print(app->console_view, furi_string_get_cstr(compact_trace));
         furi_string_free(compact_trace);
-        console_view_print(app->console_view, "See logs for full trace");
+        console_view_print(app->console_view, "Podrobnosti najdes v logu");
     }
 }
 
@@ -114,7 +114,7 @@ int32_t js_app(void* arg) {
         FuriString* name = furi_string_alloc();
         path_extract_filename(script_path, name, false);
         FuriString* start_text =
-            furi_string_alloc_printf("Running %s", furi_string_get_cstr(name));
+            furi_string_alloc_printf("Spoustim %s", furi_string_get_cstr(name));
         console_view_print(app->console_view, furi_string_get_cstr(start_text));
         console_view_print(app->console_view, "-------------");
         furi_string_free(name);
@@ -151,12 +151,12 @@ static void js_cli_callback(JsThreadEvent event, const char* msg, void* context)
     JsCliContext* ctx = context;
     switch(event) {
     case JsThreadEventError:
-        js_cli_print(ctx, "---- ERROR ----\r\n");
+        js_cli_print(ctx, "---- CHYBA ----\r\n");
         js_cli_print(ctx, msg);
         js_cli_print(ctx, "\r\n");
         break;
     case JsThreadEventErrorTrace:
-        js_cli_print(ctx, "Trace:\r\n");
+        js_cli_print(ctx, "Trasovani:\r\n");
         js_cli_print(ctx, msg);
         js_cli_print(ctx, "\r\n");
 
@@ -167,7 +167,7 @@ static void js_cli_callback(JsThreadEvent event, const char* msg, void* context)
         js_cli_print(ctx, "\r\n");
         break;
     case JsThreadEventDone:
-        js_cli_print(ctx, "Script done!\r\n");
+        js_cli_print(ctx, "Skript dokoncen!\r\n");
 
         js_cli_exit(ctx);
         break;
@@ -182,19 +182,19 @@ void js_cli_execute(PipeSide* pipe, FuriString* args, void* context) {
 
     do {
         if(furi_string_size(args) == 0) {
-            printf("Usage:\r\njs <path>\r\n");
+            printf("Pouziti:\r\njs <cesta>\r\n");
             break;
         }
 
         if(!storage_file_exists(storage, path)) {
-            printf("Can not open file %s\r\n", path);
+            printf("Nelze otevrit soubor %s\r\n", path);
             break;
         }
 
         JsCliContext ctx = {.pipe = pipe};
         ctx.exit_sem = furi_semaphore_alloc(1, 0);
 
-        printf("Running script %s, press CTRL+C to stop\r\n", path);
+        printf("Spoustim skript %s, CTRL+C pro zastaveni\r\n", path);
         JsThread* js_thread = js_thread_run(path, js_cli_callback, &ctx);
 
         while(furi_semaphore_acquire(ctx.exit_sem, 100) != FuriStatusOk) {

@@ -4,13 +4,13 @@
 #include <locale/locale.h>
 
 const char* const log_level_text[] = {
-    "Default",
-    "None",
-    "Error",
-    "Warning",
+    "Vychozi",
+    "Zadne",
+    "Chyba",
+    "Varovani",
     "Info",
-    "Debug",
-    "Trace",
+    "Ladeni",
+    "Podrobne",
 };
 
 const uint32_t log_level_value[] = {
@@ -32,7 +32,7 @@ static void log_level_changed(VariableItem* item) {
 const char* const log_device_text[] = {
     "USART",
     "LPUART",
-    "None",
+    "Zadne",
 };
 
 const uint32_t log_device_value[] = {
@@ -75,8 +75,8 @@ static void log_baud_rate_changed(VariableItem* item) {
 }
 
 const char* const debug_text[] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 
 static void debug_changed(VariableItem* item) {
@@ -90,11 +90,11 @@ static void debug_changed(VariableItem* item) {
 }
 
 const char* const heap_trace_mode_text[] = {
-    "None",
-    "Main",
+    "Zadne",
+    "Hlavni",
 #ifdef FURI_DEBUG
-    "Tree",
-    "All",
+    "Strom",
+    "Vse",
 #endif
 };
 
@@ -114,8 +114,8 @@ static void heap_trace_mode_changed(VariableItem* item) {
 }
 
 const char* const measurement_units_text[] = {
-    "Metric",
-    "Imperial",
+    "Metricke",
+    "Imperialni",
 };
 
 const uint32_t measurement_units_value[] = {
@@ -164,8 +164,8 @@ static void date_format_changed(VariableItem* item) {
 }
 
 const char* const hand_mode[] = {
-    "Righty",
-    "Lefty",
+    "Pravak",
+    "Levak",
 };
 
 static void hand_orient_changed(VariableItem* item) {
@@ -179,8 +179,8 @@ static void hand_orient_changed(VariableItem* item) {
 }
 
 const char* const sleep_method[] = {
-    "Default",
-    "Legacy",
+    "Vychozi",
+    "Puvodni",
 };
 
 static void sleep_method_changed(VariableItem* item) {
@@ -194,8 +194,8 @@ static void sleep_method_changed(VariableItem* item) {
 }
 
 const char* const filename_scheme[] = {
-    "Default",
-    "Detailed",
+    "Vychozi",
+    "Podrobne",
 };
 
 static void filename_scheme_changed(VariableItem* item) {
@@ -229,14 +229,14 @@ SystemSettings* system_settings_alloc(void) {
     app->var_item_list = variable_item_list_alloc();
 
     item = variable_item_list_add(
-        app->var_item_list, "Hand Orient", COUNT_OF(hand_mode), hand_orient_changed, app);
+        app->var_item_list, "Orientace ruky", COUNT_OF(hand_mode), hand_orient_changed, app);
     value_index = furi_hal_rtc_is_flag_set(FuriHalRtcFlagHandOrient) ? 1 : 0;
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, hand_mode[value_index]);
 
     item = variable_item_list_add(
         app->var_item_list,
-        "Units",
+        "Jednotky",
         COUNT_OF(measurement_units_text),
         measurement_units_changed,
         app);
@@ -246,28 +246,28 @@ SystemSettings* system_settings_alloc(void) {
     variable_item_set_current_value_text(item, measurement_units_text[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "Time Format", COUNT_OF(time_format_text), time_format_changed, app);
+        app->var_item_list, "Format casu", COUNT_OF(time_format_text), time_format_changed, app);
     value_index = value_index_uint32(
         locale_get_time_format(), time_format_value, COUNT_OF(time_format_value));
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, time_format_text[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "Date Format", COUNT_OF(date_format_text), date_format_changed, app);
+        app->var_item_list, "Format data", COUNT_OF(date_format_text), date_format_changed, app);
     value_index = value_index_uint32(
         locale_get_date_format(), date_format_value, COUNT_OF(date_format_value));
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, date_format_text[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "Log Level", COUNT_OF(log_level_text), log_level_changed, app);
+        app->var_item_list, "Uroven logu", COUNT_OF(log_level_text), log_level_changed, app);
     value_index = value_index_uint32(
         furi_hal_rtc_get_log_level(), log_level_value, COUNT_OF(log_level_text));
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, log_level_text[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "Log Device", COUNT_OF(log_device_text), log_device_changed, app);
+        app->var_item_list, "Zarizeni logu", COUNT_OF(log_device_text), log_device_changed, app);
     value_index = value_index_uint32(
         furi_hal_rtc_get_log_device(), log_device_value, COUNT_OF(log_device_text));
     variable_item_set_current_value_index(item, value_index);
@@ -275,7 +275,7 @@ SystemSettings* system_settings_alloc(void) {
 
     item = variable_item_list_add(
         app->var_item_list,
-        "Log Baud Rate",
+        "Rychlost logu",
         COUNT_OF(log_baud_rate_text),
         log_baud_rate_changed,
         app);
@@ -292,7 +292,7 @@ SystemSettings* system_settings_alloc(void) {
 
     item = variable_item_list_add(
         app->var_item_list,
-        "Heap Trace",
+        "Sledovani pameti",
         COUNT_OF(heap_trace_mode_text),
         heap_trace_mode_changed,
         app);
@@ -303,13 +303,13 @@ SystemSettings* system_settings_alloc(void) {
     variable_item_set_current_value_text(item, heap_trace_mode_text[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "Sleep Method", COUNT_OF(sleep_method), sleep_method_changed, app);
+        app->var_item_list, "Rezim uspani", COUNT_OF(sleep_method), sleep_method_changed, app);
     value_index = furi_hal_rtc_is_flag_set(FuriHalRtcFlagLegacySleep) ? 1 : 0;
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, sleep_method[value_index]);
 
     item = variable_item_list_add(
-        app->var_item_list, "File Naming", COUNT_OF(filename_scheme), filename_scheme_changed, app);
+        app->var_item_list, "Pojmenovani souboru", COUNT_OF(filename_scheme), filename_scheme_changed, app);
     value_index = furi_hal_rtc_is_flag_set(FuriHalRtcFlagDetailedFilename) ? 1 : 0;
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, filename_scheme[value_index]);

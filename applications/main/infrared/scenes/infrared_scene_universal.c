@@ -20,42 +20,42 @@ void infrared_scene_universal_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "TVs",
+        "Televizory",
         SubmenuIndexUniversalTV,
         infrared_scene_universal_submenu_callback,
         context);
 
     submenu_add_item(
         submenu,
-        "Audio",
+        "Zvuk",
         SubmenuIndexUniversalAudio,
         infrared_scene_universal_submenu_callback,
         context);
 
     submenu_add_item(
         submenu,
-        "Projectors",
+        "Projektory",
         SubmenuIndexUniversalProjector,
         infrared_scene_universal_submenu_callback,
         context);
 
     submenu_add_item(
         submenu,
-        "LEDs",
+        "LED svetla",
         SubmenuIndexUniversalLEDs,
         infrared_scene_universal_submenu_callback,
         context);
 
     submenu_add_item(
         submenu,
-        "Fans",
+        "Ventilatory",
         SubmenuIndexUniversalFan,
         infrared_scene_universal_submenu_callback,
         context);
 
     submenu_add_item(
         submenu,
-        "ACs",
+        "Klimatizace",
         SubmenuIndexUniversalAirConditioner,
         infrared_scene_universal_submenu_callback,
         context);

@@ -18,9 +18,9 @@ void archive_scene_delete_on_enter(void* context) {
     ArchiveApp* app = (ArchiveApp*)context;
 
     widget_add_button_element(
-        app->widget, GuiButtonTypeLeft, "Cancel", archive_scene_delete_widget_callback, app);
+        app->widget, GuiButtonTypeLeft, "Zrusit", archive_scene_delete_widget_callback, app);
     widget_add_button_element(
-        app->widget, GuiButtonTypeRight, "Delete", archive_scene_delete_widget_callback, app);
+        app->widget, GuiButtonTypeRight, "Smazat", archive_scene_delete_widget_callback, app);
 
     FuriString* filename;
     filename = furi_string_alloc();
@@ -35,7 +35,7 @@ void archive_scene_delete_on_enter(void* context) {
     path_extract_filename(current->path, filename, false);
 
     char delete_str[64];
-    snprintf(delete_str, sizeof(delete_str), "\e#Delete %s?\e#", furi_string_get_cstr(filename));
+    snprintf(delete_str, sizeof(delete_str), "\e#Smazat %s?\e#", furi_string_get_cstr(filename));
     widget_add_text_box_element(
         app->widget, 0, 0, 128, 23, AlignCenter, AlignCenter, delete_str, false);
 

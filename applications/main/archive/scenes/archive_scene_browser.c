@@ -20,13 +20,13 @@ static const char* archive_get_flipper_app_name(ArchiveFileTypeEnum file_type) {
     case ArchiveFileTypeSubGhz:
         return "Sub-GHz";
     case ArchiveFileTypeSubGhzRemote:
-        return "Sub-GHz Remote";
+        return "Sub-GHz ovladac";
     case ArchiveFileTypeLFRFID:
-        return "125 kHz RFID";
+        return "RFID 125 kHz";
     case ArchiveFileTypeInfrared:
-        return "Infrared";
+        return "Infracervene";
     case ArchiveFileTypeBadUsb:
-        return "Bad USB";
+        return "Skodlive USB";
     case ArchiveFileTypeU2f:
         return "U2F";
     case ArchiveFileTypeUpdateManifest:
@@ -34,7 +34,7 @@ static const char* archive_get_flipper_app_name(ArchiveFileTypeEnum file_type) {
     case ArchiveFileTypeJS:
         return EXT_PATH("apps/assets/js_app.fap");
     case ArchiveFileTypeFolder:
-        return "Archive";
+        return "Soubory";
     default:
         return NULL;
     }

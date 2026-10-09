@@ -13,7 +13,7 @@ static const char* parse_nrf_connect(FindMy* app, const char* path) {
     FuriString* line = furi_string_alloc();
     do {
         // XX-XX-XX-XX-XX-XX_YYYY-MM-DD HH_MM_SS.txt
-        error = "Filename must\nhave MAC\naddress";
+        error = "Nazev souboru musi\nobsahovat MAC\nadresu";
         uint8_t mac[EXTRA_BEACON_MAC_ADDR_SIZE];
         path_extract_filename_no_ext(path, line);
         if(furi_string_size(line) < sizeof(mac) * 3 - 1) break;
@@ -23,18 +23,18 @@ static const char* parse_nrf_connect(FindMy* app, const char* path) {
             char b = furi_string_get_char(line, i * 3 + 1);
             if((a < 'A' && a > 'F') || (a < '0' && a > '9') || (b < 'A' && b > 'F') ||
                (b < '0' && b > '9') || !hex_char_to_uint8(a, b, &mac[i])) {
-                error = "Filename must\nhave MAC\naddress";
+                error = "Nazev souboru musi\nobsahovat MAC\nadresu";
                 break;
             }
         }
         if(error) break;
         findmy_reverse_mac_addr(mac);
 
-        error = "Can't open file";
+        error = "Soubor nelze otevrit";
         if(!file_stream_open(stream, path, FSAM_READ, FSOM_OPEN_EXISTING)) break;
 
         // YYYY-MM-DD HH:MM:SS.ms, XX dBm, 0xXXXXX
-        error = "Wrong file format";
+        error = "Nespravny format souboru";
         if(!stream_read_line(stream, line)) break;
         const char* marker = " dBm, 0x";
         size_t pos = furi_string_search(line, marker);
@@ -42,7 +42,7 @@ static const char* parse_nrf_connect(FindMy* app, const char* path) {
         furi_string_right(line, pos + strlen(marker));
         furi_string_trim(line);
 
-        error = "Wrong payload size";
+        error = "Nespravna velikost dat";
         size_t line_size = furi_string_size(line);
         uint8_t data_size = findmy_state_data_size(app->state.tag_type);
         FURI_LOG_I("ImportPayload", "Line Size: %d", line_size);
@@ -56,7 +56,7 @@ static const char* parse_nrf_connect(FindMy* app, const char* path) {
             char b = furi_string_get_char(line, i * 2 + 1);
             if((a < 'A' && a > 'F') || (a < '0' && a > '9') || (b < 'A' && b > 'F') ||
                (b < '0' && b > '9') || !hex_char_to_uint8(a, b, &data[i])) {
-                error = "Invalid payload";
+                error = "Neplatna data";
                 break;
             }
         }
@@ -82,10 +82,10 @@ static const char* parse_open_haystack(FindMy* app, const char* path) {
     Stream* stream = file_stream_alloc(app->storage);
     FuriString* line = furi_string_alloc();
     do {
-        error = "Can't open file";
+        error = "Soubor nelze otevrit";
         if(!file_stream_open(stream, path, FSAM_READ, FSOM_OPEN_EXISTING)) break;
 
-        error = "Wrong file format";
+        error = "Nespravny format souboru";
         while(stream_read_line(stream, line)) {
             if(furi_string_start_with(line, "Public key: ") ||
                furi_string_start_with(line, "Advertisement key: ")) {
@@ -98,7 +98,7 @@ static const char* parse_open_haystack(FindMy* app, const char* path) {
         furi_string_right(line, furi_string_search_char(line, ':') + 2);
         furi_string_trim(line);
 
-        error = "Base64 failed";
+        error = "Chyba Base64";
         size_t decoded_len;
         uint8_t* public_key = base64_decode(
             (uint8_t*)furi_string_get_cstr(line), furi_string_size(line), &decoded_len);
@@ -155,7 +155,7 @@ void findmy_scene_config_import_on_enter(void* context) {
 
     item = variable_item_list_add(var_item_list, "OpenHaystack (.keys)", 0, NULL, NULL);
 
-    item = variable_item_list_add(var_item_list, "Register Tag Manually", 0, NULL, NULL);
+    item = variable_item_list_add(var_item_list, "Rucne registrovat stitek", 0, NULL, NULL);
 
     // This scene acts more like a submenu than a var item list tbh
     UNUSED(item);

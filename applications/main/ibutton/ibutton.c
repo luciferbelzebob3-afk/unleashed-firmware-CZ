@@ -33,7 +33,7 @@ static void ibutton_make_app_folder(iButton* ibutton) {
     Storage* storage = furi_record_open(RECORD_STORAGE);
 
     if(!storage_simply_mkdir(storage, IBUTTON_APP_FOLDER)) {
-        dialog_message_show_storage_error(ibutton->dialogs, "Cannot create\napp folder");
+        dialog_message_show_storage_error(ibutton->dialogs, "Nelze vytvorit\nslozku aplikace");
     }
 
     furi_record_close(RECORD_STORAGE);
@@ -194,7 +194,7 @@ bool ibutton_load_key(iButton* ibutton, bool show_error) {
 
         furi_string_free(tmp);
     } else if(show_error) {
-        dialog_message_show_storage_error(ibutton->dialogs, "Cannot load\nkey file");
+        dialog_message_show_storage_error(ibutton->dialogs, "Nelze nacist\nsoubor klice");
     }
 
     return success;
@@ -231,7 +231,7 @@ bool ibutton_save_key(iButton* ibutton) {
         ibutton_protocols_save(ibutton->protocols, key, furi_string_get_cstr(ibutton->file_path));
 
     if(!success) {
-        dialog_message_show_storage_error(ibutton->dialogs, "Cannot save\nkey file");
+        dialog_message_show_storage_error(ibutton->dialogs, "Nelze ulozit\nsoubor klice");
     }
 
     return success;
