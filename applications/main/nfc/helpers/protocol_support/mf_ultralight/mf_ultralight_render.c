@@ -3,9 +3,9 @@
 #include "../iso14443_3a/iso14443_3a_render.h"
 
 static void nfc_render_mf_ultralight_pages_count(const MfUltralightData* data, FuriString* str) {
-    furi_string_cat_printf(str, "\nPages Read: %u/%u", data->pages_read, data->pages_total);
+    furi_string_cat_printf(str, "\nPrectene stranky: %u/%u", data->pages_read, data->pages_total);
     if(data->pages_read != data->pages_total) {
-        furi_string_cat_printf(str, "\nPassword-protected pages!");
+        furi_string_cat_printf(str, "\nStranky chranene heslem!");
     }
 }
 
@@ -17,7 +17,7 @@ static void nfc_render_mf_ultralight_counters(const MfUltralightData* data, Furi
 static void nfc_render_mf_ultralight_pwd_pack_lines(
     const MfUltralightConfigPages* config,
     FuriString* str) {
-    furi_string_cat_printf(str, "\nPassword: ");
+    furi_string_cat_printf(str, "\nHeslo: ");
     nfc_render_iso14443_3a_format_bytes(
         str, config->password.data, MF_ULTRALIGHT_AUTH_PASSWORD_SIZE);
 
@@ -32,20 +32,20 @@ void nfc_render_mf_ultralight_pwd_pack(const MfUltralightData* data, FuriString*
     bool has_config = mf_ultralight_get_config_page(data, &config);
 
     if(!has_config) {
-        furi_string_cat_printf(str, "\e#Already Unlocked!");
+        furi_string_cat_printf(str, "\e#Jiz odemceno!");
     } else if(all_pages) {
-        furi_string_cat_printf(str, "\e#All Pages Are Unlocked!");
+        furi_string_cat_printf(str, "\e#Vsechny stranky jsou odemceny!");
     } else {
-        furi_string_cat_printf(str, "\e#Some Pages Are Locked!");
+        furi_string_cat_printf(str, "\e#Nektere stranky jsou zamcene!");
     }
 
     if(!has_config) {
-        furi_string_cat_printf(str, "\nThis card does not support\npassword protection!");
+        furi_string_cat_printf(str, "\nTato karta nepodporuje\nochranu heslem!");
     } else if(mf_ultralight_is_pwd_pack_read(data)) {
         nfc_render_mf_ultralight_pwd_pack_lines(config, str);
     } else {
         // Unauthenticated reads mask these pages to zero - don't show 00 00 00 00 as a password.
-        furi_string_cat_printf(str, "\nPassword not captured.");
+        furi_string_cat_printf(str, "\nHeslo nebylo zachyceno.");
     }
 
     nfc_render_mf_ultralight_pages_count(data, str);
@@ -103,7 +103,7 @@ static void nfc_render_mf_ultralight_aes_config(const MfUltralightData* data, Fu
     const bool dp_key_locked = lock & MF_ULTRALIGHT_AES_LOCK_KEY0;
     const bool uid_key_locked = lock & MF_ULTRALIGHT_AES_LOCK_KEY1;
 
-    furi_string_cat_printf(str, "\n\e#UL-AES Config");
+    furi_string_cat_printf(str, "\n\e#Konfigurace UL-AES");
     // A Random-ID card presents a random anticollision UID (shown at the top of the info view); the
     // real static UID is revealed in pages 0-1 only after UIDRetrKey auth (they read as 0 otherwise,
     // so page 0 byte 0 == 0x04 means it was recovered). Surface it at the top of the config section.
@@ -111,19 +111,19 @@ static void nfc_render_mf_ultralight_aes_config(const MfUltralightData* data, Fu
         const uint8_t* p0 = data->page[0].data;
         const uint8_t* p1 = data->page[1].data;
         const uint8_t real_uid[7] = {p0[0], p0[1], p0[2], p1[0], p1[1], p1[2], p1[3]};
-        furi_string_cat_printf(str, "\nReal UID:");
+        furi_string_cat_printf(str, "\nSkutecne UID:");
         nfc_render_iso14443_3a_format_bytes(str, real_uid, sizeof(real_uid));
     }
     if(auth0 <= 0x3B) {
         furi_string_cat_printf(
-            str, "\nAuth from: page 0x%02X (%s)", auth0, prot_rw ? "r+w" : "write");
+            str, "\nOvereni od stranky 0x%02X (%s)", auth0, prot_rw ? "r+w" : "write");
     } else {
-        furi_string_cat_printf(str, "\nAuth from: off (open)");
+        furi_string_cat_printf(str, "\nOvereni: vypnuto (otevreno)");
     }
     if(authlim == 0) {
-        furi_string_cat_printf(str, "\nAuth limit: unlimited");
+        furi_string_cat_printf(str, "\nLimit overeni: neomezeny");
     } else {
-        furi_string_cat_printf(str, "\nAuth limit: %u (locks!)", authlim);
+        furi_string_cat_printf(str, "\nLimit overeni: %u (zamkne!)", authlim);
     }
     furi_string_cat_printf(str, "\nUser cfg: %s", user_cfg_locked ? "zamceno" : "otevreno");
     furi_string_cat_printf(
@@ -134,7 +134,7 @@ static void nfc_render_mf_ultralight_aes_config(const MfUltralightData* data, Fu
     furi_string_cat_printf(str, "\nRandom ID: %s", random_id ? "zapnuto" : "vypnuto");
     furi_string_cat_printf(str, "\nSecure msg: %s", secure_msg ? "zapnuto" : "vypnuto");
     furi_string_cat_printf(
-        str, "\nKey lock: DP %s / UID %s", dp_key_locked ? "A" : "N", uid_key_locked ? "A" : "N");
+        str, "\nZamek klice: DP %s / UID %s", dp_key_locked ? "A" : "N", uid_key_locked ? "A" : "N");
 }
 
 void nfc_render_mf_ultralight_info(
@@ -151,9 +151,9 @@ void nfc_render_mf_ultralight_info(
         nfc_render_iso14443_3a_info(data->iso14443_3a_data, format_type, str);
         // Inline pages line (not the shared helper, whose "Password-protected pages!" note is wrong
         // for an AES-protected card).
-        furi_string_cat_printf(str, "\nPages Read: %u/%u", data->pages_read, data->pages_total);
+        furi_string_cat_printf(str, "\nPrectene stranky: %u/%u", data->pages_read, data->pages_total);
         if(data->pages_read != data->pages_total) {
-            furi_string_cat_printf(str, "\nAES-protected pages!");
+            furi_string_cat_printf(str, "\nStranky chranene AES!");
         }
         nfc_render_mf_ultralight_counters(data, str);
         nfc_render_mf_ultralight_aes_key(data, str);

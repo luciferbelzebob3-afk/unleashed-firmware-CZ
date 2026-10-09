@@ -20,7 +20,7 @@ typedef struct {
 } CliSubcommand;
 
 static void updater_cli_install(FuriString* manifest_path) {
-    printf("Verifying update package at '%s'\r\n", furi_string_get_cstr(manifest_path));
+    printf("Overuji aktualizacni balik v '%s'\r\n", furi_string_get_cstr(manifest_path));
 
     UpdatePrepareResult result = update_operation_prepare(furi_string_get_cstr(manifest_path));
     if(result != UpdatePrepareResultOK) {
@@ -29,30 +29,30 @@ static void updater_cli_install(FuriString* manifest_path) {
             update_operation_describe_preparation_result(result));
         return;
     }
-    printf("OK.\r\nRestarting to apply update. BRB\r\n");
+    printf("OK.\r\nRestartuji pro pouziti aktualizace.\r\n");
     furi_delay_ms(100);
     furi_hal_power_reset();
 }
 
 static void updater_cli_backup(FuriString* args) {
-    printf("Backup /int to '%s'\r\n", furi_string_get_cstr(args));
+    printf("Zalohuji /int do '%s'\r\n", furi_string_get_cstr(args));
     Storage* storage = furi_record_open(RECORD_STORAGE);
     bool success = int_backup_create(storage, furi_string_get_cstr(args));
     furi_record_close(RECORD_STORAGE);
-    printf("Result: %s\r\n", success ? "OK" : "FAIL");
+    printf("Vysledek: %s\r\n", success ? "OK" : "FAIL");
 }
 
 static void updater_cli_restore(FuriString* args) {
-    printf("Restore /int from '%s'\r\n", furi_string_get_cstr(args));
+    printf("Obnovuji /int ze souboru '%s'\r\n", furi_string_get_cstr(args));
     Storage* storage = furi_record_open(RECORD_STORAGE);
     bool success = int_backup_unpack(storage, furi_string_get_cstr(args));
     furi_record_close(RECORD_STORAGE);
-    printf("Result: %s\r\n", success ? "OK" : "FAIL");
+    printf("Vysledek: %s\r\n", success ? "OK" : "FAIL");
 }
 
 static void updater_cli_help(FuriString* args) {
     UNUSED(args);
-    printf("Commands:\r\n"
+    printf("Prikazy:\r\n"
            "\tinstall /ext/path/to/update.fuf - overit a pouzit aktualizacni balicek\r\n"
            "\tbackup /ext/path/to/backup.tar - vytvorit zalohu interniho uloziste\r\n"
            "\trestore /ext/path/to/backup.tar - obnovit zalohu interniho uloziste\r\n");
