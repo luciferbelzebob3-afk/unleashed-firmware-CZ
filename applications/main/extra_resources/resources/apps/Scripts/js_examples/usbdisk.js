@@ -9,31 +9,31 @@ let imageSize = 128 * 1024 * 1024;
 
 let imageExisted = storage.fileExists(imagePath);
 if (imageExisted) {
-    print("Disk image '128MB' already exists");
+    print("Obraz disku '128MB' uz existuje");
 } else {
     // CreateImage isn't necessary to overall function, check when its used not at script start
     if (doesSdkSupport(["usbdisk-createimage"])) {
-        print("Creating disk image '128MB'...");
+        print("Vytvarim obraz disku '128MB'...");
         usbdisk.createImage(imagePath, imageSize);
     } else {
-        die("Disk image '128MB' not present, can't auto-create");
+        die("Obraz disku '128MB' neexistuje a nelze ho automaticky vytvorit");
     }
 }
 
-print("Starting UsbDisk...");
+print("Spoustim UsbDisk...");
 usbdisk.start("/ext/apps_data/mass_storage/128MB.img");
 
-print("Started, waiting until ejected...");
+print("Spusteno, cekam na vysunuti...");
 while (!usbdisk.wasEjected()) {
     delay(1000);
 }
 
-print("Ejected, stopping UsbDisk...");
+print("Vysunuto, zastavuji UsbDisk...");
 usbdisk.stop();
 
 if (!imageExisted) {
-    print("Removing disk image...");
+    print("Odstranuji obraz disku...");
     storage.remove(imagePath);
 }
 
-print("Done");
+print("Hotovo");
