@@ -496,69 +496,69 @@ static void hid_ptt_populate_help(HidPushToTalk* hid_ptt, uint32_t appIndex) {
     case HidPushToTalkAppIndexGoogleMeet:
         app_specific_help =
             "Google Meet:\n"
-            "This feature is off by default in your audio settings "
-            "and may not work for Windows users who use their screen "
-            "reader. In this situation, the spacebar performs a different action.\n\n";
+            "Tato funkce je v nastaveni zvuku ve vychozim stavu vypnuta "
+            "a nemusi fungovat uzivatelum Windows, kteri pouzivaji "
+            "ctecku obrazovky. V takovem pripade mezernik provadi jinou akci.\n\n";
         break;
     case HidPushToTalkAppIndexGoogleMeetGlobal:
         app_specific_help = "Google Meet (Global):\n"
-                            "1. Install \"Google Meet - Global Shortcuts\" extension.\n"
-                            "2. Open chrome://extensions/shortcuts.\n"
-                            "3. Set 'Toggle microphone' to Cmd+Ctrl+7 and enable Global.\n"
-                            "4. Set 'Toggle camera' to Cmd+Ctrl+8 and enable Global.\n"
-                            "5. Set 'Raise hand' to Cmd+Ctrl+9 and enable Global.\n\n";
+                            "1. Nainstaluj rozsireni \"Google Meet - Global Shortcuts\".\n"
+                            "2. Otevri chrome://extensions/shortcuts.\n"
+                            "3. Nastav 'Toggle microphone' na Cmd+Ctrl+7 a zapni Global.\n"
+                            "4. Nastav 'Toggle camera' na Cmd+Ctrl+8 a zapni Global.\n"
+                            "5. Nastav 'Raise hand' na Cmd+Ctrl+9 a zapni Global.\n\n";
         break;
     case HidPushToTalkAppIndexDiscord:
         app_specific_help = "Discord:\n"
-                            "1. Under App Settings, click Voice & Video. Under Input Mode, "
-                            "check the box next to Push to Talk.\n"
-                            "2. Scroll down to SHORTCUT, click Record Keybinder.\n"
-                            "3. Press PTT in the app to bind it."
-                            "4. Go to Keybinds and assign mute button.\n\n";
+                            "1. V App Settings otevri Voice & Video. V Input Mode "
+                            "zaskrtni polozku Push to Talk.\n"
+                            "2. Sjed na SHORTCUT a klikni na Record Keybinder.\n"
+                            "3. Stiskni PTT v aplikaci a prirad ho."
+                            "4. Otevri Keybinds a prirad tlacitko ztlumeni.\n\n";
         break;
     case HidPushToTalkAppIndexTeamSpeak:
         app_specific_help = "TeamSpeak:\n"
-                            "To make keys working bind them in TeamSpeak settings.\n\n";
+                            "Aby tlacitka fungovala, navaz je v nastaveni TeamSpeak.\n\n";
         break;
     case HidPushToTalkAppIndexTeams:
         app_specific_help =
             "Teams:\n"
-            "Go to Settings > Privacy. Make sure Keyboard shortcut to unmute is toggled on.\n\n";
+            "Otevri Settings > Privacy. Zapni moznost Keyboard shortcut to unmute.\n\n";
         break;
     case HidPushToTalkAppIndexZoomGlobal:
         app_specific_help = "Zoom (Global):\n"
-                            "1. Go to Settings > Keyboard Shortcuts.\n"
-                            "2. Find the 'Mute/Unmute' shortcut and click 'Edit'.\n"
-                            "3. Press the Mute button in the app to bind it.\n"
-                            "4. Check global checkbox.\n"
-                            "5. Repeat for video and hand shortcuts.\n"
-                            "6. Long-press < to send Enter key.\n\n";
+                            "1. Otevri Settings > Keyboard Shortcuts.\n"
+                            "2. Najdi zkratku 'Mute/Unmute' a klikni na 'Edit'.\n"
+                            "3. Stiskni tlacitko Mute v aplikaci a prirad ho.\n"
+                            "4. Zaskrtni volbu globalni zkratky.\n"
+                            "5. Opakuj to pro zkratky videa a ruky.\n"
+                            "6. Podrz < pro odeslani klavesy Enter.\n\n";
         break;
     case HidPushToTalkAppIndexZoom:
         app_specific_help = "Zoom:\n"
-                            "1. Go to Settings > Keyboard Shortcuts.\n"
-                            "2. Find the 'Mute/Unmute' shortcut and click 'Edit'.\n"
-                            "3. Press the Mute button in the app to bind it.\n"
+                            "1. Otevri Settings > Keyboard Shortcuts.\n"
+                            "2. Najdi zkratku 'Mute/Unmute' a klikni na 'Edit'.\n"
+                            "3. Stiskni tlacitko Mute v aplikaci a prirad ho.\n"
                             "4. Repeat for video and hand shortcuts.\n"
-                            "5. Long-press < to send Enter key.\n\n";
+                            "5. Podrz < pro odeslani klavesy Enter.\n\n";
         break;
     }
     char* left_button_help = "";
     if(appIndex == HidPushToTalkAppIndexZoom || appIndex == HidPushToTalkAppIndexZoomGlobal) {
-        left_button_help = "Long-press < sends Enter.\n";
+        left_button_help = "Podrzenim < odesles Enter.\n";
     }
     FuriString* msg = furi_string_alloc();
     furi_string_cat_printf(
         msg,
-        "%sGeneral:\n"
-        "To operate properly flipper microphone "
-        "status must be in sync with your computer.\n"
-        "Hold > to change mic status.\n"
+        "%sObecne:\n"
+        "Aby Flipper fungoval spravne, "
+        "stav mikrofonu musi odpovidat stavu v pocitaci.\n"
+        "Podrz > pro zmenu stavu mikrofonu.\n"
         "%s"
-        "Long-press OK in menu to open this help.\n"
-        "Press BACK to switch mic on/off.\n"
-        "Hold 'o' for PTT mode (mic will be off once you release 'o')\n"
-        "Hold BACK to exit.",
+        "Podrz OK v menu pro otevreni teto napovedy.\n"
+        "Stiskem BACK zapnes nebo vypnes mikrofon.\n"
+        "Podrz 'o' pro rezim PTT (po uvolneni 'o' se mikrofon vypne).\n"
+        "Podrz BACK pro ukonceni.",
         app_specific_help,
         left_button_help);
     widget_add_text_scroll_element(hid_ptt->help, 0, 0, 128, 64, furi_string_get_cstr(msg));

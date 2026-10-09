@@ -65,7 +65,7 @@ static void infrared_progress_view_draw_callback(Canvas* canvas, void* _model) {
     uint8_t buttons_y = y + (model->is_paused ? 42 : 50);
 
     canvas_draw_icon(canvas, buttons_x + 0, buttons_y + 0, &I_Pin_back_arrow_10x8);
-    canvas_draw_str(canvas, buttons_x + 14, buttons_y + 8, model->is_paused ? "pokrac." : "stop");
+    canvas_draw_str(canvas, buttons_x + 14, buttons_y + 8, model->is_paused ? "pokrac." : "zastav.");
 
     canvas_draw_icon(canvas, buttons_x + 1, buttons_y + 10, &I_Ok_btn_9x9);
     canvas_draw_str(canvas, buttons_x + 14, buttons_y + 17, model->is_paused ? "odeslat 1" : "pauza");

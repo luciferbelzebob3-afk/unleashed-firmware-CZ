@@ -87,7 +87,7 @@ static void subghz_test_packet_draw(Canvas* canvas, SubGhzTestPacketModel* model
 
     canvas_set_color(canvas, ColorBlack);
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 0, 8, "CC1101 Packet Test");
+    canvas_draw_str(canvas, 0, 8, "Test paketu CC1101");
 
     canvas_set_font(canvas, FontSecondary);
     // Frequency
@@ -100,7 +100,7 @@ static void subghz_test_packet_draw(Canvas* canvas, SubGhzTestPacketModel* model
         model->real_frequency % 1000);
     canvas_draw_str(canvas, 0, 20, buffer);
     // Path
-    char* path_name = "Unknown";
+    char* path_name = "Neznamy";
     if(model->path == FuriHalSubGhzPathIsolate) {
         path_name = "isolate";
     } else if(model->path == FuriHalSubGhzPath433) {

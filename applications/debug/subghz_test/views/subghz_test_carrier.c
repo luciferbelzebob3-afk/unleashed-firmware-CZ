@@ -43,7 +43,7 @@ void subghz_test_carrier_draw(Canvas* canvas, SubGhzTestCarrierModel* model) {
 
     canvas_set_color(canvas, ColorBlack);
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 0, 8, "CC1101 Basic Test");
+    canvas_draw_str(canvas, 0, 8, "Zakladni test CC1101");
 
     canvas_set_font(canvas, FontSecondary);
     // Frequency
@@ -56,7 +56,7 @@ void subghz_test_carrier_draw(Canvas* canvas, SubGhzTestCarrierModel* model) {
         model->real_frequency % 1000);
     canvas_draw_str(canvas, 0, 20, buffer);
     // Path
-    char* path_name = "Unknown";
+    char* path_name = "Neznamy";
     if(model->path == FuriHalSubGhzPathIsolate) {
         path_name = "isolate";
     } else if(model->path == FuriHalSubGhzPath433) {
