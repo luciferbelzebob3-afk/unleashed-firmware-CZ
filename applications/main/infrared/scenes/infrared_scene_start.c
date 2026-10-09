@@ -21,25 +21,25 @@ void infrared_scene_start_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Universal Remotes",
+        "Univerzalni ovladace",
         SubmenuIndexUniversalRemotes,
         infrared_scene_start_submenu_callback,
         infrared);
     submenu_add_item(
         submenu,
-        "Learn New Remote",
+        "Naucit novy ovladac",
         SubmenuIndexLearnNewRemote,
         infrared_scene_start_submenu_callback,
         infrared);
     submenu_add_item(
         submenu,
-        "Saved Remotes",
+        "Ulozene ovladace",
         SubmenuIndexSavedRemotes,
         infrared_scene_start_submenu_callback,
         infrared);
     submenu_add_item(
         submenu,
-        "GPIO Settings",
+        "Nastaveni GPIO",
         SubmenuIndexGpioSettings,
         infrared_scene_start_submenu_callback,
         infrared);
@@ -47,13 +47,13 @@ void infrared_scene_start_on_enter(void* context) {
     if(infrared->app_state.is_debug_enabled) {
         submenu_add_item(
             submenu,
-            "Learn New Remote RAW",
+            "Naucit novy ovladac RAW",
             SubmenuIndexLearnNewRemoteRaw,
             infrared_scene_start_submenu_callback,
             infrared);
         submenu_add_item(
             submenu,
-            "Debug RX",
+            "Ladeni prijmu",
             SubmenuIndexDebug,
             infrared_scene_start_submenu_callback,
             infrared);
