@@ -84,14 +84,14 @@ const bool vibro_value[VIBRO_COUNT] = {false, true};
 
 #define RGB_BACKLIGHT_INSTALLED_COUNT 2
 const char* const rgb_backlight_installed_text[RGB_BACKLIGHT_INSTALLED_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 const bool rgb_backlight_installed_value[RGB_BACKLIGHT_INSTALLED_COUNT] = {false, true};
 
 #define RGB_BACKLIGHT_RAINBOW_MODE_COUNT 3
 const char* const rgb_backlight_rainbow_mode_text[RGB_BACKLIGHT_RAINBOW_MODE_COUNT] = {
-    "OFF",
+    "VYP",
     "Duhovy",
     "Vlna",
 };
@@ -158,7 +158,7 @@ typedef enum {
 // --- NIGHT SHIFT ---
 #define NIGHT_SHIFT_COUNT 7
 const char* const night_shift_text[NIGHT_SHIFT_COUNT] =
-    {"OFF", "-10%", "-20%", "-30%", "-40%", "-50%", "-60%"
+    {"VYP", "-10%", "-20%", "-30%", "-40%", "-50%", "-60%"
 
 };
 const float night_shift_value[NIGHT_SHIFT_COUNT] = {
@@ -245,8 +245,8 @@ const uint32_t night_shift_end_value[NIGHT_SHIFT_END_COUNT] = {
 
 #define LCD_INVERSION_COUNT 2
 const char* const lcd_inversion_text[LCD_INVERSION_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 const bool lcd_inversion_value[LCD_INVERSION_COUNT] = {false, true};
 
@@ -685,10 +685,10 @@ static NotificationAppSettings* alloc_settings(void) {
         item = variable_item_list_add(app->variable_item_list, "Vibrace", 1, NULL, app);
         value_index = 0;
         variable_item_set_current_value_index(item, value_index);
-        variable_item_set_current_value_text(item, "Stealth");
+        variable_item_set_current_value_text(item, "Tichy rezim");
     } else {
         item = variable_item_list_add(
-            app->variable_item_list, "Vibro", VIBRO_COUNT, vibro_changed, app);
+            app->variable_item_list, "Vibrace", VIBRO_COUNT, vibro_changed, app);
         value_index =
             value_index_bool(app->notification->settings.vibro_on, vibro_value, VIBRO_COUNT);
         variable_item_set_current_value_index(item, value_index);
