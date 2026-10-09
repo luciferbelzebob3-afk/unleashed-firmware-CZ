@@ -22,7 +22,7 @@ void archive_scene_new_dir_on_enter(void* context) {
     TextInput* text_input = archive->text_input;
 
     archive->text_store[0] = '\0';
-    text_input_set_header_text(text_input, "New directory:");
+    text_input_set_header_text(text_input, "Nova slozka:");
 
     text_input_set_result_callback(
         text_input,
@@ -62,7 +62,7 @@ bool archive_scene_new_dir_on_event(void* context, SceneManagerEvent event) {
                 FuriString* dialog_msg;
                 dialog_msg = furi_string_alloc();
                 furi_string_cat_printf(
-                    dialog_msg, "Cannot mkdir:\n%s", storage_error_get_desc(error));
+                    dialog_msg, "Nelze vytvorit slozku:\n%s", storage_error_get_desc(error));
                 dialog_message_show_storage_error(
                     archive->dialogs, furi_string_get_cstr(dialog_msg));
                 furi_string_free(dialog_msg);
