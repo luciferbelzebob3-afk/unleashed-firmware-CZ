@@ -5,8 +5,8 @@
 
 #define RADIO_DEVICE_COUNT 2
 const char* const radio_device_text[RADIO_DEVICE_COUNT] = {
-    "Internal",
-    "External",
+    "Interni",
+    "Externi",
 };
 
 const uint32_t radio_device_value[RADIO_DEVICE_COUNT] = {
@@ -16,8 +16,8 @@ const uint32_t radio_device_value[RADIO_DEVICE_COUNT] = {
 
 #define ON_OFF_COUNT 2
 const char* const on_off_text[ON_OFF_COUNT] = {
-    "OFF",
-    "ON",
+    "Vypnuto",
+    "Zapnuto",
 };
 
 #define DEBUG_P_COUNT 2
@@ -161,7 +161,7 @@ void subghz_scene_radio_settings_on_enter(void* context) {
         value_count_device = 1; // Only 1 item if external disconnected
     item = variable_item_list_add(
         subghz->variable_item_list,
-        "Module",
+        "Modul",
         value_count_device,
         subghz_scene_radio_settings_set_device,
         subghz);
@@ -173,7 +173,7 @@ void subghz_scene_radio_settings_on_enter(void* context) {
     //Add TX Power
     item = variable_item_list_add(
         subghz->variable_item_list,
-        "TX Power",
+        "Vykon vysilani",
         TX_POWER_COUNT,
         subghz_scene_radio_settings_set_tx_power,
         subghz);
@@ -184,7 +184,7 @@ void subghz_scene_radio_settings_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Protocol Names",
+        "Nazvy protokolu",
         ON_OFF_COUNT,
         subghz_scene_receiver_config_set_timestamp_file_names,
         subghz);
@@ -194,7 +194,7 @@ void subghz_scene_radio_settings_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Counter Incr.",
+        "Krok citace",
         furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug) ? DEBUG_COUNTER_COUNT : 3,
         subghz_scene_receiver_config_set_debug_counter,
         subghz);
@@ -210,7 +210,7 @@ void subghz_scene_radio_settings_on_enter(void* context) {
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
         item = variable_item_list_add(
             variable_item_list,
-            "Ext Amp & LEDs",
+            "Externi zesilovac a LED",
             ON_OFF_COUNT,
             subghz_scene_reciever_config_set_ext_amp_leds_control,
             subghz);
@@ -220,7 +220,7 @@ void subghz_scene_radio_settings_on_enter(void* context) {
 
         item = variable_item_list_add(
             variable_item_list,
-            "Debug Pin",
+            "Debug pin",
             DEBUG_P_COUNT,
             subghz_scene_receiver_config_set_debug_pin,
             subghz);
