@@ -145,9 +145,9 @@ int32_t chaining_test_app_a(const char* arg) {
             DialogMessage* message = dialog_message_alloc();
             FuriString* text;
 
-            dialog_message_set_header(message, "Hi, I am A", 64, 0, AlignCenter, AlignTop);
-            text = furi_string_alloc_printf("Me from the past says:\n%s", arg);
-            dialog_message_set_buttons(message, NULL, "ok!", NULL);
+            dialog_message_set_header(message, "Ahoj, jsem A", 64, 0, AlignCenter, AlignTop);
+            text = furi_string_alloc_printf("Ja z minulosti rikam:\n%s", arg);
+            dialog_message_set_buttons(message, NULL, "OK", NULL);
 
             dialog_message_set_text(
                 message, furi_string_get_cstr(text), 64, 32, AlignCenter, AlignCenter);

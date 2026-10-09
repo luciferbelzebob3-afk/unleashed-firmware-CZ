@@ -329,7 +329,7 @@ void furi_hal_bt_dump_state(FuriString* buffer) {
             Manufacturer_Name,
             LMP_PAL_Subversion);
     } else {
-        furi_string_cat_printf(buffer, "BLE not ready");
+        furi_string_cat_printf(buffer, "BLE neni pripraveno");
     }
 }
 
