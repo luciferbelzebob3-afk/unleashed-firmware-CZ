@@ -188,7 +188,7 @@ static void ws_test_draw_callback(Canvas* canvas, void* context) {
         canvas_draw_str_aligned(canvas, 0, 55, AlignLeft, AlignBottom, line);
     }
 
-    canvas_draw_str_aligned(canvas, 0, 64, AlignLeft, AlignBottom, "OK: retry  Back: exit");
+    canvas_draw_str_aligned(canvas, 0, 64, AlignLeft, AlignBottom, "OK: zkusit znovu  Zpet: konec");
 
     furi_mutex_release(app->mutex);
 }

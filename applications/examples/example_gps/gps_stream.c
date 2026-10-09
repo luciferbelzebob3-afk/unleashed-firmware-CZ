@@ -88,10 +88,10 @@ static void render_callback(Canvas* canvas, void* context) {
 
     if(!gps_view->connected) {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "No USB/BLE connection");
+        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "Neni pripojeni USB/BLE");
     } else if(gps_view->status == GpsStatusNotSupported) {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "GPS not available");
+        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "GPS neni dostupne");
     } else if(gps_view->status == GpsStatusNoPermission) {
         canvas_set_font(canvas, FontPrimary);
         canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "Permission denied");
@@ -100,10 +100,10 @@ static void render_callback(Canvas* canvas, void* context) {
         canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "Location disabled");
     } else if(gps_view->status == GpsStatusUnknown) {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "Location error");
+        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "Chyba polohy");
     } else if(!gps_view->has_fix) {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "Waiting for data...");
+        canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignBottom, "Cekam na data...");
     } else {
         const GpsLocation* location = &gps_view->location;
 

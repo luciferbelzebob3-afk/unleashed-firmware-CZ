@@ -11,7 +11,7 @@ static void example_number_input_scene_update_view(void* context) {
     ExampleNumberInput* app = context;
     DialogEx* dialog_ex = app->dialog_ex;
 
-    dialog_ex_set_header(dialog_ex, "The number is", 64, 0, AlignCenter, AlignTop);
+    dialog_ex_set_header(dialog_ex, "Zadane cislo je", 64, 0, AlignCenter, AlignTop);
 
     char buffer[12] = {};
     snprintf(buffer, sizeof(buffer), "%ld", app->current_number);

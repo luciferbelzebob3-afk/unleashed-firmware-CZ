@@ -11,7 +11,7 @@ void example_number_input_scene_input_min_on_enter(void* context) {
     ExampleNumberInput* app = context;
     NumberInput* number_input = app->number_input;
 
-    number_input_set_header_text(number_input, "Enter the minimum value");
+    number_input_set_header_text(number_input, "Zadejte minimalni hodnotu");
     number_input_set_result_callback(
         number_input,
         example_number_input_scene_input_min_callback,

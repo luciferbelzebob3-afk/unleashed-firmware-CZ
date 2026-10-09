@@ -688,7 +688,7 @@ static void ping_render_callback(Canvas* canvas, void* context) {
     }
 
     if(app->state == RunStateNoBridge) {
-        canvas_draw_str(canvas, 0, 63, "No USB/BLE connection");
+        canvas_draw_str(canvas, 0, 63, "Neni pripojeni USB/BLE");
     } else if(app->state == RunStateOpening) {
         canvas_draw_str(canvas, 0, 63, "Opening UDP socket...");
     } else if(app->state == RunStateDone || app->state == RunStateError) {
