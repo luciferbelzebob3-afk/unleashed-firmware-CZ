@@ -101,8 +101,8 @@ static void bt_cli_command_packet_tx(PipeSide* pipe, FuriString* args, void* con
             printf("1 - Stridajici se bity '11110000'\r\n");
             printf("2 - Stridajici se bity '10101010'\r\n");
             printf("3 - Pseudonahodna bitova posloupnost 15\r\n");
-            printf("4 - Samé bity '1'\r\n");
-            printf("5 - Samé bity '0'\r\n");
+            printf("4 - Pouze bity '1'\r\n");
+            printf("5 - Pouze bity '0'\r\n");
             break;
         }
         if(!args_read_int_and_trim(args, &datarate) && (datarate < 1 || datarate > 2)) {
