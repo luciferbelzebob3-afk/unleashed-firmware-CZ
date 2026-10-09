@@ -249,7 +249,7 @@ static NfcCommand nfc_scene_write_poller_callback_mf_plus(NfcGenericEvent event,
 static void nfc_scene_write_on_enter_mf_plus(NfcApp* instance) {
     instance->poller = nfc_poller_alloc(instance->nfc, NfcProtocolMfPlus);
     nfc_poller_start(instance->poller, nfc_scene_write_poller_callback_mf_plus, instance);
-    furi_string_set(instance->text_box_store, "Use the source\ncard only");
+    furi_string_set(instance->text_box_store, "Pouzijte jen\nzdrojovou kartu");
 }
 
 // On save-name confirm (the dump file is already written by the generic handler), cache the
