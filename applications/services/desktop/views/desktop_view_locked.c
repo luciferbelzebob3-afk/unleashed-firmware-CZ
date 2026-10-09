@@ -120,11 +120,11 @@ static void desktop_view_locked_draw(Canvas* canvas, void* model) {
     if(view_state == DesktopViewLockedStateDoorsClosing) {
         desktop_view_locked_doors_draw(canvas, m);
         canvas_set_font(canvas, FontPrimary);
-        elements_multiline_text_framed(canvas, 42, 30 + STATUS_BAR_Y_SHIFT, "Locked");
+        elements_multiline_text_framed(canvas, 42, 30 + STATUS_BAR_Y_SHIFT, "Uzamceno");
     } else if(view_state == DesktopViewLockedStateLockedHintShown) {
         canvas_set_font(canvas, FontSecondary);
         elements_bold_rounded_frame(canvas, 14, 2 + STATUS_BAR_Y_SHIFT, 99, 48);
-        elements_multiline_text(canvas, 65, 20 + STATUS_BAR_Y_SHIFT, "To unlock\npress:");
+        elements_multiline_text(canvas, 65, 20 + STATUS_BAR_Y_SHIFT, "Pro odemceni\nstiskni:");
         canvas_draw_icon(canvas, 65, 36 + STATUS_BAR_Y_SHIFT, &I_Pin_back_arrow_10x8);
         canvas_draw_icon(canvas, 80, 36 + STATUS_BAR_Y_SHIFT, &I_Pin_back_arrow_10x8);
         canvas_draw_icon(canvas, 95, 36 + STATUS_BAR_Y_SHIFT, &I_Pin_back_arrow_10x8);
@@ -132,7 +132,7 @@ static void desktop_view_locked_draw(Canvas* canvas, void* model) {
         canvas_draw_dot(canvas, 17, 61);
     } else if(view_state == DesktopViewLockedStateUnlockedHintShown) {
         canvas_set_font(canvas, FontPrimary);
-        elements_multiline_text_framed(canvas, 42, 30 + STATUS_BAR_Y_SHIFT, "Unlocked");
+        elements_multiline_text_framed(canvas, 42, 30 + STATUS_BAR_Y_SHIFT, "Odemceno");
     }
 }
 
