@@ -51,7 +51,7 @@ const float raw_threshold_rssi_value[RAW_THRESHOLD_RSSI_COUNT] = {
 
 #define HOPPING_MODE_COUNT 12
 const char* const hopping_mode_text[HOPPING_MODE_COUNT] = {
-    "OFF",
+    "VYP",
     "-90dBm",
     "-85dBm",
     "-80dBm",
@@ -98,8 +98,8 @@ const uint32_t bin_raw_value[COMBO_BOX_COUNT] = {
 };
 
 const char* const combobox_text[COMBO_BOX_COUNT] = {
-    "OFF",
-    "ON",
+    "VYP",
+    "ZAP",
 };
 
 static void
