@@ -294,9 +294,9 @@ static void clock_render_callback(Canvas* const canvas, void* ctx) {
         }
     }
     if(timer_running) {
-        elements_button_center(canvas, "Stop");
+        elements_button_center(canvas, "Zastavit");
     } else if(timer_start_timestamp != 0 && !timer_running) {
-        elements_button_center(canvas, "Start");
+        elements_button_center(canvas, "Spustit");
     }
 
     // A small bell + alarm time on the left when armed, so the user can see the
