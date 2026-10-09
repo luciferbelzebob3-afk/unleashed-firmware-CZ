@@ -203,7 +203,7 @@ static NfcCommand
 static void nfc_scene_write_on_enter_type_4_tag(NfcApp* instance) {
     instance->poller = nfc_poller_alloc(instance->nfc, NfcProtocolType4Tag);
     nfc_poller_start(instance->poller, nfc_scene_write_poller_callback_type_4_tag, instance);
-    furi_string_set(instance->text_box_store, "Apply card\nto the back");
+    furi_string_set(instance->text_box_store, "Prilozte kartu\nzezadu");
 }
 
 const NfcProtocolSupportBase nfc_protocol_support_type_4_tag = {
