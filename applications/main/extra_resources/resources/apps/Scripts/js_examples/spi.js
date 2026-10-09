@@ -9,7 +9,7 @@ let spi = require("spi");
 let eventLoop = require("event_loop");
 let gui = require("gui");
 let textBoxView = require("gui/text_box");
-let text = "SPI demo\n";
+let text = "Ukazka SPI\n";
 let textBox = textBoxView.makeWith({
     focus: "end",
     font: "text",
@@ -31,20 +31,20 @@ let data_buf = spi.writeRead([0x90, 0x0, 0x0, 0x0, 0x0, 0x0], 100);
 let data = Uint8Array(data_buf);
 if (data.length === 6) {
     if (data[4] === 0xEF) {
-        addText("Found Winbond device\n");
+        addText("Nalezeno zarizeni Winbond\n");
         if (data[5] === 0x15) {
-            addText("Device ID: W25Q32\n");
+            addText("ID zarizeni: W25Q32\n");
         } else {
-            addText("Unknown device ID: " + data[5].toString(16) + "\n");
+            addText("Nezname ID zarizeni: " + data[5].toString(16) + "\n");
         }
     } else if (data[4] === 0x0) {
-        addText("Be sure Winbond W25Q32 is connected to Flipper Zero SPI pins.\n");
+        addText("Pripoj Winbond W25Q32 ke SPI pinum Flipperu Zero.\n");
     } else {
-        addText("Unknown device. Manufacturer ID: " + data[4].toString(16) + "\n");
+        addText("Nezname zarizeni. ID vyrobce: " + data[4].toString(16) + "\n");
     }
 }
 
-addText("\nReading JEDEC ID\n");
+addText("\nCtu JEDEC ID\n");
 
 // Acquire the SPI bus. Multiple calls will happen with Chip Select (CS) held low.
 spi.acquire();
@@ -62,22 +62,22 @@ data_buf = spi.read(3);
 spi.release();
 
 data = Uint8Array(data_buf);
-addText("JEDEC MF ID: " + data[0].toString(16) + "\n");
-addText("JEDEC Memory Type: " + data[1].toString(16) + "\n");
-addText("JEDEC Capacity ID: " + data[2].toString(16) + "\n");
+addText("ID vyrobce JEDEC: " + data[0].toString(16) + "\n");
+addText("Typ pameti JEDEC: " + data[1].toString(16) + "\n");
+addText("ID kapacity JEDEC: " + data[2].toString(16) + "\n");
 
 if (data[0] === 0xEF) {
-    addText("Found Winbond device\n");
+    addText("Nalezeno zarizeni Winbond\n");
 }
 let capacity = data[1] << 8 | data[2];
 if (capacity === 0x4016) {
-    addText("Device: W25Q32\n");
+    addText("Zarizeni: W25Q32\n");
 } else if (capacity === 0x4015) {
-    addText("Device: W25Q16\n");
+    addText("Zarizeni: W25Q16\n");
 } else if (capacity === 0x4014) {
-    addText("Device: W25Q80\n");
+    addText("Zarizeni: W25Q80\n");
 } else {
-    addText("Unknown device\n");
+    addText("Neznama zarizeni\n");
 }
 
 // Wait for user to close the app

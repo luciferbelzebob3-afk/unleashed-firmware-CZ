@@ -17,7 +17,7 @@ void power_settings_scene_reboot_confirm_on_enter(void* context) {
         dialog_ex_set_header(dialog, "Restartovat do rezimu DFU?", 64, 0, AlignCenter, AlignTop);
         dialog_ex_set_text(
             dialog,
-            "Needed for device maintenance\nor firmware upgrades",
+            "Pro udrzbu zarizeni\nnebo aktualizaci firmwaru",
             64,
             14,
             AlignCenter,

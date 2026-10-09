@@ -268,7 +268,7 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
 
     do {
         if(!flipper_format_read_header(fff_file, temp_str, &temp_data32)) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Missing or incorrect header");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Chybejici nebo nespravna hlavicka");
             break;
         }
 
