@@ -906,7 +906,7 @@ static void mf_classic_scene_show_keys_on_enter(NfcApp* instance) {
     furi_string_reset(instance->text_box_store);
     nfc_append_filename_string_when_present(instance, instance->text_box_store);
 
-    furi_string_cat_printf(instance->text_box_store, "\e#Found MFC Keys:");
+    furi_string_cat_printf(instance->text_box_store, "\e#Nalezene klice MFC:");
 
     uint8_t num_sectors = mf_classic_get_total_sectors_num(mfc_data->type);
     uint8_t found_keys_a = 0, found_keys_b = 0;
