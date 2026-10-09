@@ -138,7 +138,7 @@ static void infrared_scene_universal_common_handle_popup_input(
             infrared_scene_universal_common_hide_popup(infrared);
             scene_manager_next_scene(scene_manager, InfraredSceneUniversalSave);
         } else {
-            infrared_show_error_message(infrared, "Failed to read\nthe signal");
+            infrared_show_error_message(infrared, "Signal se nepodarilo\nnacist");
         }
         break;
     }
