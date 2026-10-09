@@ -381,7 +381,7 @@ bool subghz_rename_file(SubGhz* subghz) {
             furi_string_get_cstr(subghz->file_path));
 
         if(fs_result != FSE_OK) {
-            dialog_message_show_storage_error(subghz->dialogs, "Cannot rename\n file/directory");
+            dialog_message_show_storage_error(subghz->dialogs, "Nelze prejmenovat\nsoubor/slozku");
             ret = false;
         }
     }
@@ -399,7 +399,7 @@ bool subghz_file_available(SubGhz* subghz) {
         storage_common_stat(storage, furi_string_get_cstr(subghz->file_path), NULL);
 
     if(fs_result != FSE_OK) {
-        dialog_message_show_storage_error(subghz->dialogs, "File not available\n file/directory");
+        dialog_message_show_storage_error(subghz->dialogs, "Soubor/slozka\nneni dostupna");
         ret = false;
     }
 
