@@ -256,7 +256,7 @@ void subghz_scene_signal_settings_on_enter(void* context) {
     item = variable_item_list_add(variable_item_list, "Upravit citac", 1, NULL, subghz);
     variable_item_set_current_value_index(item, 0);
     variable_item_set_current_value_text(item, furi_string_get_cstr(tmp_text));
-    variable_item_set_locked(item, (counter_not_available), "Not available\nfor this\nprotocol !");
+    variable_item_set_locked(item, (counter_not_available), "Pro tento\nprotokol neni\ndostupne!");
     //
 
     // ### Button edit section ###
@@ -273,7 +273,7 @@ void subghz_scene_signal_settings_on_enter(void* context) {
     item = variable_item_list_add(variable_item_list, "Upravit tlacitko", 1, NULL, subghz);
     variable_item_set_current_value_index(item, 0);
     variable_item_set_current_value_text(item, furi_string_get_cstr(tmp_text));
-    variable_item_set_locked(item, (button_not_available), "Not available\nfor this\nprotocol !");
+    variable_item_set_locked(item, (button_not_available), "Pro tento\nprotokol neni\ndostupne!");
     //
 
     furi_assert(cnt_byte_ptr);

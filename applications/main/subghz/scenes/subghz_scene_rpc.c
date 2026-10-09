@@ -20,7 +20,7 @@ static void subghz_format_file_name_tmp(SubGhz* subghz) {
     file_name = furi_string_alloc();
     path_extract_filename(subghz->file_path, file_name, true);
     snprintf(
-        subghz->file_name_tmp, SUBGHZ_MAX_LEN_NAME, "loaded\n%s", furi_string_get_cstr(file_name));
+        subghz->file_name_tmp, SUBGHZ_MAX_LEN_NAME, "Nacteno\n%s", furi_string_get_cstr(file_name));
     furi_string_free(file_name);
 }
 

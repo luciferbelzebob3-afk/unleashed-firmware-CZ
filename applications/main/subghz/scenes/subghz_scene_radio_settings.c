@@ -22,7 +22,7 @@ const char* const on_off_text[ON_OFF_COUNT] = {
 
 #define DEBUG_P_COUNT 2
 const char* const debug_pin_text[DEBUG_P_COUNT] = {
-    "OFF",
+    "VYP",
     "17(1W)",
 };
 
