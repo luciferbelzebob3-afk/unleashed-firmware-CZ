@@ -647,7 +647,7 @@ static NotificationAppSettings* alloc_settings(void) {
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, night_shift_start_text[value_index]);
     variable_item_set_locked(
-        item, (app->notification->settings.night_shift == 1), "Night Shift \nOFF!");
+        item, (app->notification->settings.night_shift == 1), "Nocni rezim \nVYP!");
 
     item = variable_item_list_add(
         app->variable_item_list, " . End", NIGHT_SHIFT_END_COUNT, night_shift_end_changed, app);
@@ -656,7 +656,7 @@ static NotificationAppSettings* alloc_settings(void) {
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, night_shift_end_text[value_index]);
     variable_item_set_locked(
-        item, (app->notification->settings.night_shift == 1), "Night Shift \nOFF!");
+        item, (app->notification->settings.night_shift == 1), "Nocni rezim \nVYP!");
 
     // --- NIGHT SHIFT END---
 
