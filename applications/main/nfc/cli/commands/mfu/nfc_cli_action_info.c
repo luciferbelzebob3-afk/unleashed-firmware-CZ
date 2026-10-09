@@ -68,9 +68,9 @@ const char*
     nfc_cli_mfu_capability_container_get_access_description(const uint8_t value, bool read) {
     const char* description = "RFU"; //value 0x01 - 0x07, and 0xF when read
     if(value == 0x00)
-        description = "access fully granted";
+        description = "pristup plne povolen";
     else if(value >= 0x08 && value <= 0x0E)
-        description = "proprietary";
+        description = "proprietarni";
     else if(value == 0x0F && !read)
         description = "pristup neni vubec povolen";
 
@@ -82,11 +82,11 @@ static void nfc_cli_mfu_info_print_common(const MfUltralightData* data) {
 
     printf(ANSI_FG_GREEN "\r\n\tTag information\r\n" ANSI_RESET);
     printf(
-        "Type: " ANSI_FG_YELLOW "%s\r\n" ANSI_RESET,
+        "Typ: " ANSI_FG_YELLOW "%s\r\n" ANSI_RESET,
         mf_ultralight_get_device_name(data, NfcDeviceNameTypeFull));
 
     nfc_cli_mfu_info_get_vendor(data->iso14443_3a_data->uid[0], str);
-    printf("Vendor ID: %s\r\n", furi_string_get_cstr(str));
+    printf("ID vyrobce: %s\r\n", furi_string_get_cstr(str));
 
     furi_string_reset(str);
     nfc_render_mf_ultralight_info(data, NfcProtocolFormatTypeFull, str);
@@ -100,21 +100,21 @@ static void nfc_cli_mfu_info_print_ndef(const MfUltralightData* data) {
     const MfUltralightCapabilityContainer* cc =
         (const MfUltralightCapabilityContainer*)data->page[3].data;
     if(cc->magic == 0xE1) {
-        printf(ANSI_FG_GREEN "\r\n\tNDEF Message\r\n" ANSI_RESET);
-        nfc_cli_printf_array(data->page[3].data, 4, "Capability container: ");
+        printf(ANSI_FG_GREEN "\r\n\tZprava NDEF\r\n" ANSI_RESET);
+        nfc_cli_printf_array(data->page[3].data, 4, "Kontejner schopnosti: ");
         printf(
-            "\r\nMagic number: %02X\r\nVersion %d.%d\r\nSize: [%02X] - %d bytes\r\n",
+            "\r\nMagicke cislo: %02X\r\nVerze %d.%d\r\nVelikost: [%02X] - %d bajtu\r\n",
             cc->magic,
             cc->version.major,
             cc->version.minor,
             cc->size,
             cc->size * 8);
         printf(
-            "Access read: [%02X] - %s",
+            "Pristup pro cteni: [%02X] - %s",
             cc->access.read,
             nfc_cli_mfu_capability_container_get_access_description(cc->access.read, true));
         printf(
-            "Access write: [%02X] - %s",
+            "Pristup pro zapis: [%02X] - %s",
             cc->access.write,
             nfc_cli_mfu_capability_container_get_access_description(cc->access.write, false));
     }
@@ -124,14 +124,14 @@ static void nfc_cli_mfu_info_print_counter(const MfUltralightData* data) {
     uint32_t features = mf_ultralight_get_feature_support_set(data->type);
     if(!mf_ultralight_support_feature(features, MfUltralightFeatureSupportReadCounter)) return;
 
-    printf(ANSI_FG_GREEN "\r\n\n\tTag counters\r\n" ANSI_RESET);
+    printf(ANSI_FG_GREEN "\r\n\n\tPocitadla karty\r\n" ANSI_RESET);
     uint8_t i =
         mf_ultralight_support_feature(features, MfUltralightFeatureSupportSingleCounter) ? 2 : 0;
 
     for(; i < MF_ULTRALIGHT_COUNTER_NUM; i++) {
-        printf("Counter [%d]: ", i);
+        printf("Pocitadlo [%d]: ", i);
         nfc_cli_printf_array(data->counter[i].data, MF_ULTRALIGHT_COUNTER_SIZE, "");
-        printf(" Value: %lu\r\n", data->counter[i].counter);
+        printf(" Hodnota: %lu\r\n", data->counter[i].counter);
 
         const uint8_t tf = data->tearing_flag[i].data;
         printf(
@@ -147,8 +147,8 @@ static void nfc_cli_mfu_info_print_signature(const MfUltralightData* data) {
     if(!mf_ultralight_support_feature(features, MfUltralightFeatureSupportReadSignature)) return;
 
     const MfUltralightSignature* signature = &data->signature;
-    printf(ANSI_FG_GREEN "\r\n\n\tTag signature\r\n" ANSI_RESET);
-    nfc_cli_printf_array(signature->data, sizeof(signature->data), "ECC signature: ");
+    printf(ANSI_FG_GREEN "\r\n\n\tPodpis karty\r\n" ANSI_RESET);
+    nfc_cli_printf_array(signature->data, sizeof(signature->data), "Podpis ECC: ");
 }
 
 static void nfc_cli_mfu_info_print_version_storage_size(uint8_t storage_size) {
@@ -168,26 +168,26 @@ static void nfc_cli_mfu_info_print_version(const MfUltralightData* data) {
 
     const MfUltralightVersion* version = &data->version;
     printf(ANSI_FG_GREEN "\r\n\n\tTag Version\r\n" ANSI_RESET);
-    nfc_cli_printf_array((uint8_t*)version, sizeof(MfUltralightVersion), "Raw bytes: ");
+    nfc_cli_printf_array((uint8_t*)version, sizeof(MfUltralightVersion), "Surove bajty: ");
 
     FuriString* str = furi_string_alloc();
     nfc_cli_mfu_info_get_vendor(version->vendor_id, str);
     printf("\r\nVendor ID: %s\r\n", furi_string_get_cstr(str));
     furi_string_free(str);
 
-    printf("Product type: %02X\r\n", version->prod_type);
+    printf("Typ produktu: %02X\r\n", version->prod_type);
 
     printf(
-        "Protocol type: %02X%s\r\n",
+        "Typ protokolu: %02X%s\r\n",
         version->protocol_type,
-        (version->protocol_type == 0x3) ? ", ISO14443-3 Compliant" : "");
+        (version->protocol_type == 0x3) ? ", kompatibilni s ISO14443-3" : "");
 
     printf(
-        "Product subtype: [%02X], %s\r\n",
+        "Podtyp produktu: [%02X], %s\r\n",
         version->prod_subtype,
         (version->prod_subtype == 1) ? "17 pF" : "50pF");
     printf(
-        "Major version: %02X\r\nMinor version: %02X\r\nSize: ",
+        "Hlavni verze: %02X\r\nVedlejsi verze: %02X\r\nVelikost: ",
         version->prod_ver_major,
         version->prod_ver_minor);
     nfc_cli_mfu_info_print_version_storage_size(version->storage_size);
@@ -222,6 +222,6 @@ void nfc_cli_mfu_info_execute(PipeSide* pipe, NfcCliActionContext* ctx) {
         nfc_cli_mfu_info_print_signature(data);
         nfc_cli_mfu_info_print_version(data);
     } else {
-        printf(ANSI_FG_RED "Error: %s" ANSI_RESET, nfc_cli_mf_ultralight_get_error(error));
+        printf(ANSI_FG_RED "Chyba: %s" ANSI_RESET, nfc_cli_mf_ultralight_get_error(error));
     }
 }
