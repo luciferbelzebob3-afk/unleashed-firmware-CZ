@@ -27,7 +27,7 @@ void power_settings_scene_power_off_on_enter(void* context) {
             dialog, "   Budu tu\ncekat na tebe...", 78, 14, AlignLeft, AlignTop);
         dialog_ex_set_icon(dialog, 24, 10, &I_dolph_cry_49x54);
     }
-    dialog_ex_set_left_button_text(dialog, "Baterie");
+    dialog_ex_set_left_button_text(dialog, "Zpet");
     dialog_ex_set_right_button_text(dialog, "Vypnout");
     dialog_ex_set_result_callback(dialog, power_settings_scene_power_off_dialog_callback);
     dialog_ex_set_context(dialog, app);
