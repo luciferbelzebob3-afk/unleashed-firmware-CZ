@@ -66,11 +66,11 @@ void nfc_render_iso14443_3b_info(
 
     const char* nad_support_str =
         iso14443_3b_supports_frame_option(data, Iso14443_3bFrameOptionNad) ? "" : "ne";
-    furi_string_cat_printf(str, "NAD: %ssupported\n", nad_support_str);
+    furi_string_cat_printf(str, "NAD: %spodporovano\n", nad_support_str);
 
     const char* cid_support_str =
         iso14443_3b_supports_frame_option(data, Iso14443_3bFrameOptionCid) ? "" : "ne";
-    furi_string_cat_printf(str, "CID: %ssupported", cid_support_str);
+    furi_string_cat_printf(str, "CID: %spodporovano", cid_support_str);
 
     furi_string_cat_printf(str, "\n::::::::::::[Data aplikace]::::::::::::\nSurova data:");
 

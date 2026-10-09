@@ -95,9 +95,9 @@ void nfc_render_ntag4xx_version(const Ntag4xxVersion* data, FuriString* str) {
         data->sw_proto);
     furi_string_cat_printf(
         str,
-        "batch %02x:%02x:%02x:%02x:%01x\n"
-        "week %d year %d\n"
-        "fab key %02x id %02x\n",
+        "sada %02x:%02x:%02x:%02x:%01x\n"
+        "tyden %d, rok %d\n"
+        "vyrobni klic %02x, id %02x\n",
         data->batch[0],
         data->batch[1],
         data->batch[2],

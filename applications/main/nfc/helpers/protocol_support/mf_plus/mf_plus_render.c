@@ -140,7 +140,7 @@ void nfc_render_mf_plus_version_info(const MfPlusData* data, FuriString* str) {
         const char* device_name = mf_plus_get_device_name(data, NfcDeviceNameTypeFull);
         if(data->type == MfPlusTypeUnknown || data->size == MfPlusSizeUnknown ||
            data->security_level == MfPlusSecurityLevelUnknown) {
-            furi_string_cat_printf(str, "This %s", device_name);
+            furi_string_cat_printf(str, "Zarizeni: %s", device_name);
             furi_string_replace(str, " Unknown", "");
         } else {
             furi_string_cat(str, device_name);
@@ -189,8 +189,8 @@ void nfc_render_mf_plus_version(const MfPlusVersion* data, FuriString* str) {
         data->sw_proto);
     furi_string_cat_printf(
         str,
-        "batch %02x:%02x:%02x:%02x:%02x\n"
-        "week %d year %d\n",
+        "sada %02x:%02x:%02x:%02x:%02x\n"
+        "tyden %d, rok %d\n",
         data->batch[0],
         data->batch[1],
         data->batch[2],

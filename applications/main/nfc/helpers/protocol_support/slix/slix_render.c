@@ -37,21 +37,21 @@ void nfc_render_slix_info(const SlixData* data, NfcProtocolFormatType format_typ
         const SlixProtection protection = data->system_info.protection;
 
         furi_string_cat(str, "::::::::::::[Ochrana stranek]::::::::::::\n");
-        furi_string_cat_printf(str, "Pointer: H >= %02X\n", protection.pointer);
+        furi_string_cat_printf(str, "Ukazatel: H >= %02X\n", protection.pointer);
 
-        const char* rh = (protection.condition & SLIX_PP_CONDITION_RH) ? "" : "un";
-        const char* rl = (protection.condition & SLIX_PP_CONDITION_RL) ? "" : "un";
+        const char* rh = (protection.condition & SLIX_PP_CONDITION_RH) ? "chraneno" : "nechraneno";
+        const char* rl = (protection.condition & SLIX_PP_CONDITION_RL) ? "chraneno" : "nechraneno";
 
-        const char* wh = (protection.condition & SLIX_PP_CONDITION_WH) ? "" : "un";
-        const char* wl = (protection.condition & SLIX_PP_CONDITION_WL) ? "" : "un";
+        const char* wh = (protection.condition & SLIX_PP_CONDITION_WH) ? "chraneno" : "nechraneno";
+        const char* wl = (protection.condition & SLIX_PP_CONDITION_WL) ? "chraneno" : "nechraneno";
 
-        furi_string_cat_printf(str, "R:  H %sprotec. L %sprotec.\n", rh, rl);
-        furi_string_cat_printf(str, "W: H %sprotec. L %sprotec.\n", wh, wl);
+        furi_string_cat_printf(str, "C: H %s, L %s\n", rh, rl);
+        furi_string_cat_printf(str, "Z: H %s, L %s\n", wh, wl);
     }
 
     if(slix_type_has_features(slix_type, SLIX_TYPE_FEATURE_PRIVACY)) {
         furi_string_cat(str, "::::::::::::::::::::[Soukromi]::::::::::::::::::::::\n");
-        furi_string_cat_printf(str, "Privacy mode: %sabled\n", data->privacy ? "en" : "dis");
+        furi_string_cat_printf(str, "Rezim soukromi: %s\n", data->privacy ? "zapnut" : "vypnut");
     }
 
     if(slix_type_has_features(slix_type, SLIX_TYPE_FEATURE_SIGNATURE)) {

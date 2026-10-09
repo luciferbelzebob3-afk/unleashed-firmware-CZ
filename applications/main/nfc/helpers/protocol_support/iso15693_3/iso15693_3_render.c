@@ -81,18 +81,18 @@ void nfc_render_iso15693_3_extra(const Iso15693_3Data* data, FuriString* str) {
     }
 
     if(data->system_info.flags & ISO15693_3_SYSINFO_FLAG_IC_REF) {
-        furi_string_cat_printf(str, "IC Reference: %02X\n", data->system_info.ic_ref);
+        furi_string_cat_printf(str, "Reference IC: %02X\n", data->system_info.ic_ref);
     }
 
     furi_string_cat(str, ":::::::::::::::::::[Lock bits]::::::::::::::::::::\n");
 
     if(data->system_info.flags & ISO15693_3_SYSINFO_FLAG_DSFID) {
         furi_string_cat_printf(
-            str, "DSFID: %s locked\n", data->settings.lock_bits.dsfid ? "" : "not");
+            str, "DSFID: %suzamceno\n", data->settings.lock_bits.dsfid ? "" : "ne");
     }
 
     if(data->system_info.flags & ISO15693_3_SYSINFO_FLAG_AFI) {
         furi_string_cat_printf(
-            str, "AFI: %s locked\n", data->settings.lock_bits.dsfid ? "" : "not");
+            str, "AFI: %suzamceno\n", data->settings.lock_bits.dsfid ? "" : "ne");
     }
 }
