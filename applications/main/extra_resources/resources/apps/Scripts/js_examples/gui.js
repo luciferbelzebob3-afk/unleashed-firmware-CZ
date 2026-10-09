@@ -59,7 +59,7 @@ let views = {
         defaultData: Uint8Array([0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88]),
     }),
     longText: textBoxView.makeWith({
-        text: "Tohle je dlouhy text pro ukazku textoveho pole. Pomoci sipky nahoru a dolu muzes posouvat obsah.\nTato ukazka obsahuje nekolik delších odstavcu, aby slo vyzkouset posouvani textu na obrazovce. Prvni odstavec ukazuje, jak se radky automaticky zalamuji a jak se lze pohybovat po delsim obsahu. Druhy odstavec obsahuje dalsi vety, aby bylo jasne, ze text pokracuje i mimo aktualne viditelnou cast obrazovky. Treti odstavec slouzi jako doplneni ukazky a pomaha overit, ze posouvani funguje spravne v obou smerech. Pri prochazeni muzes pouzit sipky na ovladaci a vratit se zpet stejnym zpusobem.",
+        text: "Tohle je dlouhy text pro ukazku textoveho pole. Pomoci sipky nahoru a dolu muzes posouvat obsah.\nTato ukazka obsahuje nekolik delsich odstavcu, aby slo vyzkouset posouvani textu na obrazovce. Prvni odstavec ukazuje, jak se radky automaticky zalamuji a jak se lze pohybovat po delsim obsahu. Druhy odstavec obsahuje dalsi vety, aby bylo jasne, ze text pokracuje i mimo aktualne viditelnou cast obrazovky. Treti odstavec slouzi jako doplneni ukazky a pomaha overit, ze posouvani funguje spravne v obou smerech. Pri prochazeni muzes pouzit sipky na ovladaci a vratit se zpet stejnym zpusobem.",
     }),
     stopwatchWidget: widget.makeWith({}, stopwatchWidgetElements),
     buttonMenu: buttonMenuView.makeWith({
