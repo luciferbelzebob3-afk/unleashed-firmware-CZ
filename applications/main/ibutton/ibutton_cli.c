@@ -11,15 +11,15 @@
 #include <ibutton/ibutton_protocols.h>
 
 static void ibutton_cli_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("ikey read\r\n");
     printf("ikey emulate <key_type> <key_data>\r\n");
     printf("ikey write Dallas <key_data>\r\n");
-    printf("\t<key_type> choose from:\r\n");
+    printf("\t<key_type> vyber z:\r\n");
     printf("\tDallas (8 bytes key_data)\r\n");
     printf("\tCyfral (2 bytes key_data)\r\n");
-    printf("\tMetakom (4 bytes key_data), must contain correct parity\r\n");
-    printf("\t<key_data> are hex-formatted\r\n");
+    printf("\tMetakom (4 bajty key_data), musi mit spravnou paritu\r\n");
+    printf("\t<key_data> je v hexadecimalnim tvaru\r\n");
 }
 
 static bool ibutton_cli_parse_key(iButtonProtocols* protocols, iButtonKey* key, FuriString* args) {
@@ -90,7 +90,7 @@ static void ibutton_cli_read(PipeSide* pipe) {
     ibutton_worker_start_thread(worker);
     ibutton_worker_read_set_callback(worker, ibutton_cli_worker_read_cb, event);
 
-    printf("Reading iButton...\r\nPress Ctrl+C to abort\r\n");
+    printf("Ctu iButton...\r\nStiskni Ctrl+C pro preruseni\r\n");
     ibutton_worker_read_start(worker, key);
 
     while(true) {
@@ -150,9 +150,9 @@ void ibutton_cli_write(PipeSide* pipe, FuriString* args) {
             break;
         }
 
-        printf("Writing key ");
+        printf("Zapisuji klic ");
         ibutton_cli_print_key(protocols, key);
-        printf("Press Ctrl+C to abort\r\n");
+        printf("Stiskni Ctrl+C pro preruseni\r\n");
 
         ibutton_worker_set_write_targets(worker, ibutton_settings_get_write_targets());
         ibutton_worker_write_id_start(worker, key);
@@ -163,15 +163,15 @@ void ibutton_cli_write(PipeSide* pipe, FuriString* args) {
             if(flags & EVENT_FLAG_IBUTTON_COMPLETE) {
                 if(write_context.result == iButtonWorkerWriteSameKey ||
                    write_context.result == iButtonWorkerWriteOK) {
-                    printf("Write success\r\n");
+                    printf("Zapis uspesny\r\n");
                     break;
                 } else if(write_context.result == iButtonWorkerWriteCannotWrite) {
-                    printf("Write fail\r\n");
+                    printf("Zapis selhal\r\n");
                     break;
                 } else if(write_context.result == iButtonWorkerWriteNoEnabledTarget) {
                     // The setting can only be changed on the device, so name the screen.
-                    printf("Every blank that can write it is disabled in iButton -> Settings "
-                           "-> Write Blanks.\r\n");
+                    printf("Vsechny zapisovatelne klice jsou vypnute v iButton -> Nastaveni "
+                           "-> Zapisovatelne klice.\r\n");
                     break;
                 }
             }
@@ -203,9 +203,9 @@ void ibutton_cli_emulate(PipeSide* pipe, FuriString* args) {
             break;
         }
 
-        printf("Emulating key ");
+        printf("Emuluji klic ");
         ibutton_cli_print_key(protocols, key);
-        printf("Press Ctrl+C to abort\r\n");
+        printf("Stiskni Ctrl+C pro preruseni\r\n");
 
         ibutton_worker_emulate_start(worker, key);
 
