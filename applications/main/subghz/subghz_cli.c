@@ -520,7 +520,7 @@ void subghz_cli_command_decode_raw(PipeSide* pipe, FuriString* args, void* conte
         if(furi_string_size(args)) {
             if(!args_read_probably_quoted_string_and_trim(args, file_name)) {
                 cli_print_usage(
-                    "subghz decode_raw", "<file_name: path_RAW_file>", furi_string_get_cstr(args));
+                    "subghz decode_raw", "<cesta_k_RAW_souboru>", furi_string_get_cstr(args));
                 break;
             }
         }
@@ -1164,7 +1164,7 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
     furi_hal_power_suppress_charge_exit();
     furi_record_close(RECORD_NOTIFICATION);
 
-    printf("\r\nExit chat\r\n");
+    printf("\r\nKonec chatu\r\n");
 }
 
 static void execute(PipeSide* pipe, FuriString* args, void* context) {
