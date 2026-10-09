@@ -11,7 +11,7 @@ static bool rpc_debug_app_scene_input_error_code_validator_callback(
     for(; *text; ++text) {
         const char c = *text;
         if(c < '0' || c > '9') {
-            furi_string_printf(error, "%s", "Please enter\na number!");
+            furi_string_printf(error, "%s", "Zadej\ncislo!");
             return false;
         }
     }
@@ -27,7 +27,7 @@ static void rpc_debug_app_scene_input_error_code_result_callback(void* context) 
 void rpc_debug_app_scene_input_error_code_on_enter(void* context) {
     RpcDebugApp* app = context;
     strlcpy(app->text_store, "666", TEXT_STORE_SIZE);
-    text_input_set_header_text(app->text_input, "Enter error code");
+    text_input_set_header_text(app->text_input, "Zadej kod chyby");
     text_input_set_validator(
         app->text_input, rpc_debug_app_scene_input_error_code_validator_callback, NULL);
     text_input_set_result_callback(
