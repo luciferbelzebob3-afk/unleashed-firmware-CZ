@@ -77,7 +77,7 @@ static bool
 static void storage_settings_scene_benchmark(StorageSettings* app) {
     DialogEx* dialog_ex = app->dialog_ex;
     uint8_t* bench_data;
-    dialog_ex_set_header(dialog_ex, "Preparing Data...", 64, 32, AlignCenter, AlignCenter);
+    dialog_ex_set_header(dialog_ex, "Priprava dat...", 64, 32, AlignCenter, AlignCenter);
 
     bench_data = malloc(BENCH_DATA_SIZE);
     for(size_t i = 0; i < BENCH_DATA_SIZE; i++) {
@@ -88,7 +88,7 @@ static void storage_settings_scene_benchmark(StorageSettings* app) {
     uint32_t bench_w_speed[BENCH_COUNT] = {0, 0, 0, 0, 0, 0};
     uint32_t bench_r_speed[BENCH_COUNT] = {0, 0, 0, 0, 0, 0};
 
-    dialog_ex_set_header(dialog_ex, "Benchmarking...", 74, 32, AlignCenter, AlignCenter);
+    dialog_ex_set_header(dialog_ex, "Testovani rychlosti...", 74, 32, AlignCenter, AlignCenter);
     dialog_ex_set_icon(dialog_ex, 12, 20, &I_LoadingHourglass_24x24);
     for(size_t i = 0; i < BENCH_COUNT; i++) {
         if(!storage_settings_scene_bench_write(
