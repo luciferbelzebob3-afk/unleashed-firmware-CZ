@@ -35,7 +35,7 @@ static void hid_mouse_jiggler_draw_callback(Canvas* canvas, void* context) {
 #endif
 
     canvas_set_font(canvas, FontPrimary);
-    elements_multiline_text_aligned(canvas, 27, 2, AlignLeft, AlignTop, "Mouse Jiggler");
+    elements_multiline_text_aligned(canvas, 27, 2, AlignLeft, AlignTop, "Pohyb mysi");
 
     // Timeout
     elements_multiline_text(canvas, AlignLeft, 26, "Interval (ms):");
@@ -50,12 +50,12 @@ static void hid_mouse_jiggler_draw_callback(Canvas* canvas, void* context) {
     canvas_set_font(canvas, FontPrimary);
 #ifdef HID_TRANSPORT_BLE
     if(model->running && !model->connected) {
-        elements_multiline_text(canvas, AlignLeft, 40, "Waiting for\nConnection...");
+        elements_multiline_text(canvas, AlignLeft, 40, "Cekam na\npripojeni...");
     } else {
-        elements_multiline_text(canvas, AlignLeft, 40, "Press Start\nto jiggle");
+        elements_multiline_text(canvas, AlignLeft, 40, "Stiskni Spustit\npro pohyb mysi");
     }
 #else
-    elements_multiline_text(canvas, AlignLeft, 40, "Press Start\nto jiggle");
+    elements_multiline_text(canvas, AlignLeft, 40, "Stiskni Spustit\npro pohyb mysi");
 #endif
     canvas_set_font(canvas, FontSecondary);
 
@@ -75,7 +75,7 @@ static void hid_mouse_jiggler_draw_callback(Canvas* canvas, void* context) {
 
     // Back
     canvas_draw_icon(canvas, 74, 54, &I_Pin_back_arrow_10x8);
-    elements_multiline_text_aligned(canvas, 91, 62, AlignLeft, AlignBottom, "Quit");
+    elements_multiline_text_aligned(canvas, 91, 62, AlignLeft, AlignBottom, "Konec");
 }
 
 static void hid_mouse_jiggler_timer_callback(void* context) {

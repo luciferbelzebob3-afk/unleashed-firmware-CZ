@@ -51,14 +51,14 @@ static void hid_mouse_jiggler_stealth_draw_callback(Canvas* canvas, void* contex
 
     canvas_set_font(canvas, FontPrimary);
 #ifdef HID_TRANSPORT_BLE
-    elements_multiline_text_aligned(canvas, 17, 4, AlignLeft, AlignTop, "Mouse Jiggler Stealth");
+    elements_multiline_text_aligned(canvas, 17, 4, AlignLeft, AlignTop, "Skryty pohyb mysi");
 #else
-    elements_multiline_text_aligned(canvas, 10, 2, AlignLeft, AlignTop, "Mouse Jiggler Stealth");
+    elements_multiline_text_aligned(canvas, 10, 2, AlignLeft, AlignTop, "Skryty pohyb mysi");
 #endif
 
     // Both rows hint only presses that do something - keep bounds in sync with the input handler
     canvas_set_font(canvas, FontSecondary);
-    FuriString* min_interval_str = furi_string_alloc_printf("Min:%dm", model->min_interval);
+    FuriString* min_interval_str = furi_string_alloc_printf("Min:%d m", model->min_interval);
     elements_multiline_text_aligned(
         canvas, 0, 16, AlignLeft, AlignTop, furi_string_get_cstr(min_interval_str));
     furi_string_free(min_interval_str);
@@ -69,7 +69,7 @@ static void hid_mouse_jiggler_stealth_draw_callback(Canvas* canvas, void* contex
             canvas_draw_icon(canvas, 57, 18, &I_ButtonDown_7x4);
     }
 
-    FuriString* max_interval_str = furi_string_alloc_printf("Max:%dm", model->max_interval);
+    FuriString* max_interval_str = furi_string_alloc_printf("Max:%d m", model->max_interval);
     elements_multiline_text_aligned(
         canvas, 0, 28, AlignLeft, AlignTop, furi_string_get_cstr(max_interval_str));
     furi_string_free(max_interval_str);
@@ -84,12 +84,12 @@ static void hid_mouse_jiggler_stealth_draw_callback(Canvas* canvas, void* contex
     canvas_set_font(canvas, FontPrimary);
 #ifdef HID_TRANSPORT_BLE
     if(model->running && !model->connected) {
-        elements_multiline_text(canvas, AlignLeft, 50, "Waiting for\nConnection...");
+        elements_multiline_text(canvas, AlignLeft, 50, "Cekam na\npripojeni...");
     } else {
-        elements_multiline_text(canvas, AlignLeft, 50, "Press Start\nto jiggle");
+        elements_multiline_text(canvas, AlignLeft, 50, "Stiskni Spustit\npro pohyb mysi");
     }
 #else
-    elements_multiline_text(canvas, AlignLeft, 50, "Press Start\nto jiggle");
+    elements_multiline_text(canvas, AlignLeft, 50, "Stiskni Spustit\npro pohyb mysi");
 #endif
 
     // Ok
@@ -108,7 +108,7 @@ static void hid_mouse_jiggler_stealth_draw_callback(Canvas* canvas, void* contex
 
     // Back
     canvas_draw_icon(canvas, 74, 54, &I_Pin_back_arrow_10x8);
-    elements_multiline_text_aligned(canvas, 91, 62, AlignLeft, AlignBottom, "Quit");
+    elements_multiline_text_aligned(canvas, 91, 62, AlignLeft, AlignBottom, "Konec");
 }
 
 static void hid_mouse_jiggler_stealth_timer_callback(void* context) {

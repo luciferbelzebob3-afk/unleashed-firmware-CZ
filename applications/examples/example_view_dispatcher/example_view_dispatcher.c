@@ -60,7 +60,7 @@ static bool example_view_dispatcher_app_custom_event_callback(void* context, uin
     return true;
 }
 
-// This function is called when the user presses the "Switch View" button on the Widget view.
+// This function is called when the user presses the "Prepnout zobrazeni" button on the Widget view.
 static void example_view_dispatcher_app_button_callback(
     GuiButtonType button_type,
     InputType input_type,
@@ -74,11 +74,11 @@ static void example_view_dispatcher_app_button_callback(
     }
 }
 
-// This function is called when the user activates the "Switch View" submenu item.
+// This function is called when the user activates the "Prepnout zobrazeni" submenu item.
 static void example_view_dispatcher_app_submenu_callback(void* context, uint32_t index) {
     furi_assert(context);
     ExampleViewDispatcherApp* app = context;
-    // Only request the view switch if the user activates the "Switch View" item.
+    // Only request the view switch if the user activates the "Prepnout zobrazeni" item.
     if(index == SubmenuIndexSwitchView) {
         // Request switch to the Widget view via the custom event queue.
         view_dispatcher_send_custom_event(app->view_dispatcher, ViewIndexWidget);
@@ -93,19 +93,19 @@ static ExampleViewDispatcherApp* example_view_dispatcher_app_alloc() {
     // Create and initialize the Widget view.
     app->widget = widget_alloc();
     widget_add_string_multiline_element(
-        app->widget, 64, 32, AlignCenter, AlignCenter, FontSecondary, "Press the Button below");
+        app->widget, 64, 32, AlignCenter, AlignCenter, FontSecondary, "Stiskni tlacitko nize");
     widget_add_button_element(
         app->widget,
         GuiButtonTypeCenter,
-        "Switch View",
+        "Prepnout zobrazeni",
         example_view_dispatcher_app_button_callback,
         app);
     // Create and initialize the Submenu view.
     app->submenu = submenu_alloc();
-    submenu_add_item(app->submenu, "Do Nothing", SubmenuIndexNothing, NULL, NULL);
+    submenu_add_item(app->submenu, "Nedelat nic", SubmenuIndexNothing, NULL, NULL);
     submenu_add_item(
         app->submenu,
-        "Switch View",
+        "Prepnout zobrazeni",
         SubmenuIndexSwitchView,
         example_view_dispatcher_app_submenu_callback,
         app);

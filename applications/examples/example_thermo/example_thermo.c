@@ -255,7 +255,7 @@ static void example_thermo_draw_callback(Canvas* canvas, void* ctx) {
             furi_crash("Neplatne jednotky mereni");
         }
         /* If a reading is available, display it */
-        snprintf(text_store, TEXT_STORE_SIZE, "Temperature: %+.1f%c", (double)temp, temp_units);
+        snprintf(text_store, TEXT_STORE_SIZE, "Teplota: %+.1f%c", (double)temp, temp_units);
     } else {
         /* Or show a message that no data is available */
         strlcpy(text_store, "-- Zadna data --", TEXT_STORE_SIZE);
