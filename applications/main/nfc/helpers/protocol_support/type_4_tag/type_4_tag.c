@@ -41,7 +41,7 @@ static void nfc_scene_more_info_on_enter_type_4_tag(NfcApp* instance) {
 
     if(scene_state == NfcSceneMoreInfoStateASCII) {
         if(simple_array_get_count(data->ndef_data) == 0) {
-            furi_string_cat_str(instance->text_box_store, "No NDEF data to show");
+            furi_string_cat_str(instance->text_box_store, "Zadna data NDEF k zobrazeni");
         } else {
             pretty_format_bytes_hex_canonical(
                 instance->text_box_store,
