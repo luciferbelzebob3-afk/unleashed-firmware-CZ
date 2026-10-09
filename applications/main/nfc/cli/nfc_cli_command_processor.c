@@ -109,7 +109,7 @@ static NfcCliProcessorError
             } else if(action->alloc && (action->free == NULL)) {
                 FURI_LOG_W(
                     TAG,
-                    "Free callback not defined for action \"%s\". Skip allocation to avoid memory leak.",
+                    "Pro akci \"%s\" neni definovano uvolneni. Alokace se kvuli uniku pameti preskoci.",
                     action->name);
                 instance->action_context = NULL;
             } else {
@@ -188,7 +188,7 @@ static NfcCliProcessorError nfc_cli_parse_single_key(
             else {
                 furi_string_printf(
                     instance->error_message,
-                    "Key \'%s\' is not supported",
+                    "Klic \'%s\' neni podporovan",
                     furi_string_get_cstr(argument));
                 result = NfcCliProcessorErrorKeyNotSupported;
             }
@@ -198,7 +198,7 @@ static NfcCliProcessorError nfc_cli_parse_single_key(
         if(key->features.parameter && from_group) {
             furi_string_printf(
                 instance->error_message,
-                "Parameter key \'%s\' can\'t be grouped",
+                "Parametr \'%s\' nelze seskupit",
                 furi_string_get_cstr(argument));
             result = NfcCliProcessorErrorKeyParameterInGroup;
             break;
@@ -206,7 +206,7 @@ static NfcCliProcessorError nfc_cli_parse_single_key(
 
         if(nfc_cli_check_duplicate_keys(instance, key)) {
             furi_string_printf(
-                instance->error_message, "Duplicated key \'%s\'", furi_string_get_cstr(argument));
+                instance->error_message, "Duplicitni klic \'%s\'", furi_string_get_cstr(argument));
             result = NfcCliProcessorErrorKeyDuplication;
             break;
         }
@@ -219,7 +219,7 @@ static NfcCliProcessorError nfc_cli_parse_single_key(
             result = NfcCliProcessorErrorKeyParameterValueMissing;
             furi_string_printf(
                 instance->error_message,
-                "Missing value for \'%s\'",
+                "Chybi hodnota pro \'%s\'",
                 furi_string_get_cstr(argument));
             break;
         }
@@ -227,7 +227,7 @@ static NfcCliProcessorError nfc_cli_parse_single_key(
         if(key->parse == NULL) {
             furi_string_printf(
                 instance->error_message,
-                "Parse callback for key \'%s\' not defined",
+                "Neni definovan parser pro klic \'%s\'",
                 furi_string_get_cstr(argument));
             result = NfcCliProcessorErrorKeyParseError;
             break;
@@ -237,7 +237,7 @@ static NfcCliProcessorError nfc_cli_parse_single_key(
         if(!key->parse(value_str, instance->action_context)) {
             furi_string_printf(
                 instance->error_message,
-                "Unable to parse value \'%s\' for key \'%s\'",
+                "Hodnotu \'%s\' pro klic \'%s\' nelze zpracovat",
                 furi_string_get_cstr(value_str),
                 furi_string_get_cstr(argument));
             result = NfcCliProcessorErrorKeyParseError;
@@ -287,7 +287,7 @@ static NfcCliProcessorError nfc_cli_parse_argument(
         result = NfcCliProcessorErrorKeyNotSupported;
         furi_string_printf(
             instance->error_message,
-            "Key \'%s\' is not supported",
+            "Klic \'%s\' neni podporovan",
             furi_string_get_cstr(argument));
     }
 
@@ -307,7 +307,7 @@ static NfcCliProcessorError
 
     if((result == NfcCliProcessorErrorNone) &&
        (instance->required_keys_expected != instance->required_keys_found)) {
-        furi_string_printf(instance->error_message, "Some required keys missing");
+        furi_string_printf(instance->error_message, "Chybi nektere povinne klice");
         result = NfcCliProcessorErrorKeyRequiredMissing;
     }
 
@@ -322,7 +322,7 @@ static inline void nfc_cli_command_process_error(
 
         if(error != NfcCliProcessorErrorNoneButHelp)
             printf(
-                ANSI_FG_RED "Error: %s\r\n" ANSI_RESET,
+                ANSI_FG_RED "Chyba: %s\r\n" ANSI_RESET,
                 furi_string_get_cstr(instance->error_message));
 
         if(error == NfcCliProcessorErrorActionNotFound)
