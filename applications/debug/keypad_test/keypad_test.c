@@ -35,7 +35,7 @@ static void keypad_test_render_callback(Canvas* canvas, void* ctx) {
     snprintf(strings[4], 20, "D: %d", state->down);
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 0, 10, "Keypad test");
+    canvas_draw_str(canvas, 0, 10, "Test klavesnice");
 
     canvas_set_font(canvas, FontSecondary);
     canvas_draw_str(canvas, 0, 24, strings[1]);
@@ -51,7 +51,7 @@ static void keypad_test_render_callback(Canvas* canvas, void* ctx) {
     if(state->press[3]) canvas_draw_disc(canvas, 100, 44, 5);
     if(state->press[4]) canvas_draw_disc(canvas, 100, 26, 5);
 
-    canvas_draw_str(canvas, 10, 63, "[back] - reset, hold to exit");
+    canvas_draw_str(canvas, 10, 63, "[Zpet] - reset, podrzenim odejdes");
 
     furi_mutex_release(state->mutex);
 }
