@@ -1,10 +1,10 @@
 checkSdkFeatures(["infrared-send"]);
 let infrared = require("infrared");
 
-print("Sending Samsung32 signal (lowers volume)...");
+print("Odesilam signal Samsung32 (snizeni hlasitosti)...");
 infrared.sendSignal("Samsung32", 0x00000007, 0x0000000b);
 delay(1000);
-print("Sending raw signal... (Fujitsu AC)");
+print("Odesilam surovy signal... (klimatizace Fujitsu)");
 infrared.sendRawSignal(
   [
     3298, 1571, 442, 368, 442, 367, 443, 1180, 442, 370, 440, 1181, 442, 368,
@@ -31,7 +31,7 @@ infrared.sendRawSignal(
 );
 delay(1000);
 print(
-  "Sending raw signal... (Fujitsu AC) with default frequency and duty cycle",
+  "Odesilam surovy signal... (klimatizace Fujitsu) s vychozi frekvenci a stridou",
 );
 infrared.sendRawSignal([
   3300, 1596, 416, 362, 448, 363, 446, 1177, 445, 363, 446, 1177, 445, 362, 448,
@@ -44,4 +44,4 @@ infrared.sendRawSignal([
   1178, 444, 1174, 449, 1177, 445, 1180, 443, 1179, 443,
 ]);
 
-print("Success");
+print("Hotovo");
