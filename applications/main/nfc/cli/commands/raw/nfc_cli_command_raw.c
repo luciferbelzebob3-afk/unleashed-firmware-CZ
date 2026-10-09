@@ -44,11 +44,11 @@ typedef struct {
 } NfcCliRawCmdContext;
 
 static const char* raw_error_names[] = {
-    [NfcCliRawErrorNone] = "None",
-    [NfcCliRawErrorTimeout] = "Timeout",
-    [NfcCliRawErrorProtocol] = "Internal protocol",
-    [NfcCliRawErrorWrongCrc] = "Wrong CRC",
-    [NfcCliRawErrorNotPresent] = "No card",
+    [NfcCliRawErrorNone] = "Bez chyby",
+    [NfcCliRawErrorTimeout] = "Casovy limit",
+    [NfcCliRawErrorProtocol] = "Interni protokol",
+    [NfcCliRawErrorWrongCrc] = "Nespravne CRC",
+    [NfcCliRawErrorNotPresent] = "Zadna karta",
 };
 
 static NfcCliActionContext* nfc_cli_raw_alloc_ctx(Nfc* nfc) {
@@ -162,7 +162,7 @@ static inline void nfc_cli_raw_print_result(const NfcCliRawCmdContext* instance)
         "Tx: ");
 
     if(instance->response.result != NfcCliRawErrorNone)
-        printf("\r\nError: \"%s\"\r\n", raw_error_names[instance->response.result]);
+        printf("\r\nChyba: \"%s\"\r\n", raw_error_names[instance->response.result]);
 
     size_t rx_size = bit_buffer_get_size_bytes(instance->response.rx_buffer);
     if(rx_size > 0) {
@@ -220,7 +220,7 @@ static bool nfc_cli_raw_parse_protocol(FuriString* value, void* output) {
     if(result && ctx->request.protocol != NfcProtocolInvalid &&
        ctx->request.protocol != new_protocol) {
         printf(
-            ANSI_FG_RED "Error: previous %s != new %s. Unable to continue." ANSI_RESET,
+            ANSI_FG_RED "Chyba: predchozi %s != nove %s. Nelze pokracovat." ANSI_RESET,
             nfc_cli_get_protocol_name(ctx->request.protocol),
             nfc_cli_get_protocol_name(new_protocol));
         result = false;
@@ -296,38 +296,38 @@ const NfcCliKeyDescriptor raw_action_keys[] = {
         .long_name = NULL,
         .short_name = "t",
         .features = {.parameter = true, .required = false},
-        .description = "timeout in fc",
+        .description = "casovy limit v FC",
         .parse = nfc_cli_raw_parse_timeout,
     },
     {
         .long_name = NULL,
         .short_name = "k",
-        .description = "keep signal field ON after receive",
+        .description = "ponechat pole signalu zapnute po prijmu",
         .parse = nfc_cli_raw_parse_keep,
     },
     {
         .long_name = NULL,
         .short_name = "c",
-        .description = "calculate and append CRC",
+        .description = "spocitat a pridat CRC",
         .parse = nfc_cli_raw_parse_crc,
     },
     {
         .long_name = NULL,
         .short_name = "s",
-        .description = "Select on FieldOn",
+        .description = "Vybrat pri zapnutem poli",
         .parse = nfc_cli_raw_parse_select,
     },
     {
         .long_name = "protocol",
         .short_name = "p",
-        .description = "desired protocol. Possible values: 14a, iso14a, 14b, iso14b, 15, felica",
+        .description = "pozadovany protokol. Moznosti: 14a, iso14a, 14b, iso14b, 15, felica",
         .features = {.parameter = true, .required = true},
         .parse = nfc_cli_raw_parse_protocol,
     },
     {
         .long_name = "data",
         .short_name = "d",
-        .description = "Raw bytes to send in HEX format",
+        .description = "Surove bajty k odeslani v sestnactkovem formatu",
         .features = {.parameter = true, .required = true},
         .parse = nfc_cli_raw_parse_data,
     },
@@ -335,7 +335,7 @@ const NfcCliKeyDescriptor raw_action_keys[] = {
 
 const NfcCliActionDescriptor raw_action = {
     .name = "raw",
-    .description = "Sends raw bytes using different protocols",
+    .description = "Odesle surove bajty pomoci ruznych protokolu",
     .key_count = COUNT_OF(raw_action_keys),
     .keys = raw_action_keys,
     .execute = nfc_cli_raw_execute,
