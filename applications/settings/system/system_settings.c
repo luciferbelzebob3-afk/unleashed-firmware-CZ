@@ -32,7 +32,7 @@ static void log_level_changed(VariableItem* item) {
 const char* const log_device_text[] = {
     "USART",
     "LPUART",
-    "None",
+    "Zadne",
 };
 
 const uint32_t log_device_value[] = {
@@ -90,10 +90,10 @@ static void debug_changed(VariableItem* item) {
 }
 
 const char* const heap_trace_mode_text[] = {
-    "None",
-    "Main",
+    "Zadne",
+    "Hlavni",
 #ifdef FURI_DEBUG
-    "Tree",
+    "Strom",
     "Vse",
 #endif
 };
@@ -179,7 +179,7 @@ static void hand_orient_changed(VariableItem* item) {
 }
 
 const char* const sleep_method[] = {
-    "Default",
+    "Vychozi",
     "Puvodni",
 };
 
@@ -194,7 +194,7 @@ static void sleep_method_changed(VariableItem* item) {
 }
 
 const char* const filename_scheme[] = {
-    "Default",
+    "Vychozi",
     "Podrobne",
 };
 
