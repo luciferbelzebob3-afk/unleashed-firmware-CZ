@@ -21,21 +21,21 @@ static void findmy_main_draw_callback(Canvas* canvas, void* _model) {
     canvas_set_bitmap_mode(canvas, true);
     canvas_set_font(canvas, FontPrimary);
 
-    canvas_draw_str(canvas, 4, 11, "FindMy Flipper");
+    canvas_draw_str(canvas, 4, 11, "Najit Flipper");
 
     const char* network_text = "";
     switch(model->type) {
     case FindMyTypeApple:
-        network_text = "Apple Network";
+        network_text = "Sit Apple";
         break;
     case FindMyTypeSamsung:
-        network_text = "Samsung Network";
+        network_text = "Sit Samsung";
         break;
     case FindMyTypeTile:
-        network_text = "Tile Network";
+        network_text = "Sit Tile";
         break;
     case FindMyTypeGoogle:
-        network_text = "Google Network";
+        network_text = "Sit Google";
         break;
     default:
         break;
@@ -64,20 +64,20 @@ static void findmy_main_draw_callback(Canvas* canvas, void* _model) {
     }
     canvas_set_font(canvas, FontSecondary);
     if(model->active) {
-        canvas_draw_str(canvas, 4, 49, "Broadcast Active");
+        canvas_draw_str(canvas, 4, 49, "Vysilani aktivni");
         canvas_draw_icon(canvas, 78, 41, &I_Ok_btn_9x9);
     } else {
-        canvas_draw_str(canvas, 4, 49, "Broadcast Inactive");
+        canvas_draw_str(canvas, 4, 49, "Vysilani vypnuto");
     }
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 4, 21, "Press <- to run in background");
+    canvas_draw_str(canvas, 4, 21, " <-: spustit na pozadi");
     canvas_set_font(canvas, FontSecondary);
     char interval_str[20];
-    snprintf(interval_str, sizeof(interval_str), "Ping Interval: %ds", model->interval);
+    snprintf(interval_str, sizeof(interval_str), "Interval pingu: %ds", model->interval);
     canvas_draw_str(canvas, 4, 62, interval_str);
 
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 100, 61, "Config");
+    canvas_draw_str(canvas, 100, 61, "Nastav.");
     canvas_draw_line(canvas, 100, 51, 127, 51);
     canvas_draw_line(canvas, 97, 53, 97, 63);
     canvas_draw_line(canvas, 97, 53, 99, 51);
