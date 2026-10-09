@@ -446,7 +446,7 @@ static void archive_view_render(Canvas* canvas, void* mdl) {
         draw_list(canvas, model);
     } else {
         canvas_draw_str_aligned(
-            canvas, GUI_DISPLAY_WIDTH / 2, 40, AlignCenter, AlignCenter, "Empty");
+            canvas, GUI_DISPLAY_WIDTH / 2, 40, AlignCenter, AlignCenter, "Prazdne");
         if(model->menu) {
             render_item_menu(canvas, model);
         }
