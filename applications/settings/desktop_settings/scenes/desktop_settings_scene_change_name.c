@@ -22,7 +22,7 @@ static bool desktop_settings_scene_change_name_validator(
     for(; *text; ++text) {
         const char c = *text;
         if((c < '0' || c > '9') && (c < 'A' || c > 'Z') && (c < 'a' || c > 'z')) {
-            furi_string_printf(error, "Please only\nenter letters\nand numbers!");
+            furi_string_printf(error, "Zadej pouze\npismena a\ncislice!");
             return false;
         }
     }
