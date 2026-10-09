@@ -202,7 +202,7 @@ static NfcCommand nfc_scene_write_poller_callback_mf_plus(NfcGenericEvent event,
         if(tag_uid_len == dump_uid_len && memcmp(tag_uid, dump_uid, tag_uid_len) == 0) {
             mfp_event->data->mode_request.mode = MfPlusPollerModeWrite;
         } else {
-            furi_string_set(instance->text_box_store, "Use the source\ncard only");
+            furi_string_set(instance->text_box_store, "Pouzijte jen\nzdrojovou kartu");
             view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventWrongCard);
             command = NfcCommandStop;
         }
