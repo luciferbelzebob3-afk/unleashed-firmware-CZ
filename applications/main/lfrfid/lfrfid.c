@@ -337,7 +337,7 @@ bool lfrfid_load_key_data(LfRfid* app, FuriString* path, bool show_dialog) {
     } while(0);
 
     if((!result) && (show_dialog)) {
-        dialog_message_show_storage_error(app->dialogs, "Cannot load\nkey file");
+        dialog_message_show_storage_error(app->dialogs, "Nelze nacist\nsoubor klice");
     }
 
     return result;
@@ -347,7 +347,7 @@ bool lfrfid_save_key_data(LfRfid* app, FuriString* path) {
     bool result = lfrfid_dict_file_save(app->dict, app->protocol_id, furi_string_get_cstr(path));
 
     if(!result) {
-        dialog_message_show_storage_error(app->dialogs, "Cannot save\nkey file");
+        dialog_message_show_storage_error(app->dialogs, "Nelze ulozit\nsoubor klice");
     }
 
     return result;
@@ -357,7 +357,7 @@ void lfrfid_make_app_folder(LfRfid* app) {
     furi_assert(app);
 
     if(!storage_simply_mkdir(app->storage, LFRFID_APP_FOLDER)) {
-        dialog_message_show_storage_error(app->dialogs, "Cannot create\napp folder");
+        dialog_message_show_storage_error(app->dialogs, "Nelze vytvorit\nslozku aplikace");
     }
 }
 
