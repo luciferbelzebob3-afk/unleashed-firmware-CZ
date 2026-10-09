@@ -192,7 +192,7 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
                (count == 0)) {
                 furi_string_printf(
                     app->status,
-                    "Unsupported preset %s",
+                    "Nepodporovany preset %s",
                     furi_string_get_cstr(app->preset.preset_name));
                 break;
             }
