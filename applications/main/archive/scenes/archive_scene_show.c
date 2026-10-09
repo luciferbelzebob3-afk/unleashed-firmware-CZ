@@ -73,7 +73,7 @@ void archive_scene_show_on_enter(void* context) {
                     64,
                     AlignLeft,
                     AlignCenter,
-                    "\e#Error:\nStorage file open error\e#",
+                    "\e#Chyba:\nSoubor nelze otevrit\e#",
                     false);
             }
             storage_file_close(file);
@@ -86,7 +86,7 @@ void archive_scene_show_on_enter(void* context) {
                 64,
                 AlignLeft,
                 AlignCenter,
-                "\e#Error:\nFile is too small\e#",
+                "\e#Chyba:\nSoubor je prilis maly\e#",
                 false);
         } else {
             widget_add_text_box_element(
@@ -97,7 +97,7 @@ void archive_scene_show_on_enter(void* context) {
                 64,
                 AlignLeft,
                 AlignCenter,
-                "\e#Error:\nFile is too large to show\e#",
+                "\e#Chyba:\nSoubor je prilis velky\e#",
                 false);
         }
     } else {
@@ -109,7 +109,7 @@ void archive_scene_show_on_enter(void* context) {
             64,
             AlignLeft,
             AlignCenter,
-            "\e#Error:\nFile system error\e#",
+            "\e#Chyba:\nChyba souboroveho systemu\e#",
             false);
     }
     path_extract_filename(current->path, filename, false);
