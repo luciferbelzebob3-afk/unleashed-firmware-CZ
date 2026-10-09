@@ -1059,7 +1059,7 @@ static bool
                 widget_add_button_element(
                     instance->widget,
                     GuiButtonTypeCenter,
-                    "Log",
+                    "Zaznam",
                     nfc_protocol_support_common_widget_callback,
                     instance);
                 scene_manager_set_scene_state(

@@ -191,7 +191,7 @@ static void slix_scene_unlock_success_on_enter(NfcApp* instance) {
     for(size_t i = 0; i < uid_len; i++) {
         furi_string_cat_printf(temp_str, " %02X", uid[i]);
     }
-    furi_string_cat_printf(temp_str, "\nPrivacy Mode: Disabled");
+    furi_string_cat_printf(temp_str, "\nRezim soukromi: vypnut");
     widget_add_string_multiline_element(
         widget, 0, 12, AlignLeft, AlignTop, FontSecondary, furi_string_get_cstr(temp_str));
     furi_string_free(temp_str);

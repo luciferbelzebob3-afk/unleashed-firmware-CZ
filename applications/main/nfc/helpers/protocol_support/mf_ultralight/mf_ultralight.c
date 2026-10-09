@@ -73,7 +73,7 @@ static void nfc_scene_more_info_on_enter_mf_ultralight(NfcApp* instance) {
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeLeft,
-            "Info",
+            "Informace",
             nfc_protocol_support_common_widget_callback,
             instance);
     } else if(scene_state == NfcSceneMoreInfoStateRawData) {
@@ -301,12 +301,12 @@ static void nfc_scene_read_and_saved_menu_on_enter_mf_ultralight(NfcApp* instanc
     }
 
     if(is_locked) {
-        // "Unlock" enters a key/password manually (AES key for UL-AES, 3DES for UL-C, password
+        // "Odemknout" enters a key/password manually (AES key for UL-AES, 3DES for UL-C, password
         // otherwise — the SubmenuIndexUnlock handler routes by type). UL-C/UL-AES also get the
         // dictionary attack.
         submenu_add_item(
             submenu,
-            "Unlock",
+            "Odemknout",
             SubmenuIndexUnlock,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -340,11 +340,11 @@ static void
         // Whether it cost anything depends on AUTHLIM, which is often 0 (unlimited), so this
         // states the condition rather than asserting the card counted it.
         furi_string_cat_printf(
-            str, "\e#Auth Failed\nCards with an auth limit\ncounted this attempt.\n\n");
+            str, "\e#Autentizace selhala\nKarty s limitem pokusu\nse zapocitaly do tohoto\npokusu.\n\n");
     } else if(outcome == MfUltralightAuthOutcomeSkippedUid) {
         furi_string_cat_printf(
             str,
-            "\e#Auth Skipped\nThis password needs a\n7-byte UID. Nothing was\nsent to the card.\n\n");
+            "\e#Autentizace preskocena\nToto heslo vyzaduje\n7bajtove UID. Na kartu\nse nic neodeslalo.\n\n");
     }
 }
 

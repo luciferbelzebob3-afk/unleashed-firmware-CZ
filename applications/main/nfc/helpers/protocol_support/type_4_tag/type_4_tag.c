@@ -63,7 +63,7 @@ static void nfc_scene_more_info_on_enter_type_4_tag(NfcApp* instance) {
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeLeft,
-            "Info",
+            "Informace",
             nfc_protocol_support_common_widget_callback,
             instance);
     } else if(scene_state == NfcSceneMoreInfoStateRawData) {

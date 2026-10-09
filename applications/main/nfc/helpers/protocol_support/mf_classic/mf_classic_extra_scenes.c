@@ -940,7 +940,7 @@ static void mf_classic_scene_show_keys_on_enter(NfcApp* instance) {
 
     furi_string_cat_printf(
         instance->text_box_store,
-        "\nTotal keys found:\n -> %d/%d A keys\n -> %d/%d B keys",
+        "\nNalezeno klicu:\n -> %d/%d klicu A\n -> %d/%d klicu B",
         found_keys_a,
         num_sectors,
         found_keys_b,
