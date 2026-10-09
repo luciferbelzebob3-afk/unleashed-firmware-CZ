@@ -525,7 +525,7 @@ static void storage_cli_extract(PipeSide* pipe, FuriString* old_path, FuriString
         bool success = tar_archive_unpack_to(archive, furi_string_get_cstr(new_path), NULL);
         uint32_t end_tick = furi_get_tick();
         printf(
-            "Decompression %s in %lu ticks \r\n",
+            "Rozbaleni %s za %lu tiků \r\n",
             success ? "uspesne" : "selhalo",
             end_tick - start_tick);
     } while(false);
@@ -546,7 +546,7 @@ typedef struct {
 static const StorageCliCommand storage_cli_commands[] = {
     {
         "write_chunk",
-        "read data from cli and append it to file, <args> should contain how many bytes you want to write",
+        "cti data z CLI a pridej je do souboru, <args> urcuje pocet bajtu k zapisu",
         &storage_cli_write_chunk,
     },
     {
