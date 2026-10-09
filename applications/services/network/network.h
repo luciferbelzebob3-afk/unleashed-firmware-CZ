@@ -126,37 +126,37 @@ static inline const char* network_error_to_string(NetworkError error) {
     case NetworkErrorNone:
         return "OK";
     case NetworkErrorDnsFailed:
-        return "DNS failed";
+        return "DNS selhalo";
     case NetworkErrorTimeout:
-        return "Timeout";
+        return "Casovy limit";
     case NetworkErrorConnectionRefused:
         return "Connection refused";
     case NetworkErrorNetworkUnreachable:
-        return "Network unreachable";
+        return "Sit neni dostupna";
     case NetworkErrorHostUnreachable:
         return "Host unreachable";
     case NetworkErrorInvalidConnection:
-        return "Invalid connection";
+        return "Neplatne spojeni";
     case NetworkErrorNotConnected:
-        return "Not connected";
+        return "Nepripojeno";
     case NetworkErrorSendFailed:
-        return "Send failed";
+        return "Odeslani selhalo";
     case NetworkErrorReceiveFailed:
-        return "Receive failed";
+        return "Prijem selhal";
     case NetworkErrorMaxConnections:
         return "Too many connections";
     case NetworkErrorInvalidProtocol:
-        return "Invalid protocol";
+        return "Neplatny protokol";
     case NetworkErrorInternal:
-        return "Internal error";
+        return "Interni chyba";
     case NetworkErrorTlsFailed:
-        return "TLS failed";
+        return "TLS selhalo";
     case NetworkErrorInvalidUrl:
-        return "Invalid URL";
+        return "Neplatna URL adresa";
     case NetworkErrorFileError:
-        return "File error";
+        return "Chyba souboru";
     default:
-        return "Unknown error";
+        return "Neznama chyba";
     }
 }
 
@@ -169,15 +169,15 @@ static inline const char* network_error_to_string(NetworkError error) {
 static inline const char* network_state_to_string(NetworkState state) {
     switch(state) {
     case NetworkStateDisconnected:
-        return "Disconnected";
+        return "Odpojeno";
     case NetworkStateConnecting:
         return "Connecting";
     case NetworkStateConnected:
-        return "Connected";
+        return "Pripojeno";
     case NetworkStateError:
-        return "Error";
+        return "Chyba";
     default:
-        return "Unknown";
+        return "Neznamy";
     }
 }
 
