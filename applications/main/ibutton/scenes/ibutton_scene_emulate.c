@@ -31,7 +31,7 @@ void ibutton_scene_emulate_on_enter(void* context) {
         widget, 52, 24, 75, 40, AlignCenter, AlignTop, furi_string_get_cstr(tmp), true);
 
     widget_add_string_multiline_element(
-        widget, 88, 10, AlignCenter, AlignTop, FontPrimary, "Emulating");
+        widget, 88, 10, AlignCenter, AlignTop, FontPrimary, "Emuluji");
 
     ibutton_worker_emulate_set_callback(ibutton->worker, ibutton_scene_emulate_callback, ibutton);
     ibutton_worker_emulate_start(ibutton->worker, key);
