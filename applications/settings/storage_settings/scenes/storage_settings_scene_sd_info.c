@@ -32,18 +32,18 @@ void storage_settings_scene_sd_info_on_enter(void* context) {
             sd_api_get_fs_type_text(sd_info.fs_type));
 
         if(sd_info.kb_total < 1024) {
-            furi_string_cat_printf(app->text_string, "Total: %lu KiB\n", sd_info.kb_total);
+            furi_string_cat_printf(app->text_string, "Celkem: %lu KiB\n", sd_info.kb_total);
         } else if(sd_info.kb_total < 1024 * 1024) {
-            furi_string_cat_printf(app->text_string, "Total: %lu MiB\n", sd_info.kb_total / 1024);
+            furi_string_cat_printf(app->text_string, "Celkem: %lu MiB\n", sd_info.kb_total / 1024);
         } else {
             furi_string_cat_printf(
                 app->text_string, "Celkem: %lu GiB\n", sd_info.kb_total / (1024 * 1024));
         }
 
         if(sd_info.kb_free < 1024) {
-            furi_string_cat_printf(app->text_string, "Free: %lu KiB\n", sd_info.kb_free);
+            furi_string_cat_printf(app->text_string, "Volne: %lu KiB\n", sd_info.kb_free);
         } else if(sd_info.kb_free < 1024 * 1024) {
-            furi_string_cat_printf(app->text_string, "Free: %lu MiB\n", sd_info.kb_free / 1024);
+            furi_string_cat_printf(app->text_string, "Volne: %lu MiB\n", sd_info.kb_free / 1024);
         } else {
             furi_string_cat_printf(
                 app->text_string, "Volne: %lu GiB\n", sd_info.kb_free / (1024 * 1024));

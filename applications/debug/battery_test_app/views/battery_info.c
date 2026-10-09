@@ -58,7 +58,7 @@ static void draw_battery(Canvas* canvas, BatteryInfoModel* data, int x, int y) {
             emote,
             sizeof(emote),
             "%s",
-            drain_current > HIGH_DRAIN_CURRENT_THRESHOLD ? "Oh no!" : "Chroup-chroup!");
+            drain_current > HIGH_DRAIN_CURRENT_THRESHOLD ? "Jejda!" : "Chroup, chroup!");
         snprintf(header, sizeof(header), "%s", "Spotreba je");
         snprintf(
             value,
