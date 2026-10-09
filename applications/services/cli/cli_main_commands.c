@@ -281,7 +281,7 @@ void cli_command_vibro(PipeSide* pipe, FuriString* args, void* context) {
         furi_record_close(RECORD_NOTIFICATION);
     } else if(!furi_string_cmp(args, "1")) {
         if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode)) {
-            printf("Flipper je v tichém rezimu. Zapni zvuk zarizeni pro ovladani vibraci.");
+            printf("Flipper je v tichem rezimu. Zapni zvuk zarizeni pro ovladani vibraci.");
             return;
         }
 
