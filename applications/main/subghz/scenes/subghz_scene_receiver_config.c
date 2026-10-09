@@ -261,13 +261,13 @@ static void subghz_scene_receiver_config_set_hopping(VariableItem* item) {
             preset.data_size);
         variable_item_set_current_value_index(
             frequency_item, subghz_setting_get_frequency_default_index(setting));
-        variable_item_set_item_label(item, "Hopping");
+        variable_item_set_item_label(item, "Preladovani");
     } else {
         variable_item_set_current_value_text(frequency_item, " -----");
         variable_item_set_current_value_index(
             frequency_item, subghz_setting_get_frequency_default_index(setting));
 
-        variable_item_set_item_label(item, "Hopping RSSI");
+        variable_item_set_item_label(item, "Preladovani RSSI");
     }
     subghz->last_settings->enable_hopping = index != 0;
     subghz->last_settings->hopping_threshold = hopping_mode_value[index];
@@ -395,7 +395,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
 
     item = variable_item_list_add(
         subghz->variable_item_list,
-        "Frequency",
+        "Frekvence",
         subghz_setting_get_frequency_count(setting),
         subghz_scene_receiver_config_set_frequency,
         subghz);
@@ -415,7 +415,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
 
     item = variable_item_list_add(
         subghz->variable_item_list,
-        "Modulation",
+        "Modulace",
         subghz_setting_get_preset_count(setting),
         subghz_scene_receiver_config_set_preset,
         subghz);
@@ -458,7 +458,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
        SubGhzCustomEventManagerSet) {
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "Ignore ReversRB2",
+            "Ignorovat ReversRB2",
             COMBO_BOX_COUNT,
             subghz_scene_receiver_config_set_reversrb2,
             subghz);
@@ -470,7 +470,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
 
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "Ignore Alarms",
+            "Ignorovat alarmy",
             COMBO_BOX_COUNT,
             subghz_scene_receiver_config_set_alarms,
             subghz);
@@ -482,7 +482,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
 
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "Ignore Sensors",
+            "Ignorovat senzory",
             COMBO_BOX_COUNT,
             subghz_scene_receiver_config_set_sensors,
             subghz);
@@ -494,7 +494,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
 
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "Ignore Princeton",
+            "Ignorovat Princeton",
             COMBO_BOX_COUNT,
             subghz_scene_receiver_config_set_princeton,
             subghz);
@@ -506,7 +506,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
 
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "Ignore Nice Flor-S / Nice One",
+            "Ignorovat Nice Flor-S / Nice One",
             COMBO_BOX_COUNT,
             subghz_scene_receiver_config_set_niceflors,
             subghz);
@@ -518,7 +518,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
 
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "Delete old signals when memory is full",
+            "Pri plne pameti mazat stare signaly",
             COMBO_BOX_COUNT,
             subghz_scene_receiver_config_set_delete_old_signals,
             subghz);
@@ -531,7 +531,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
     // Enable speaker, will send all incoming noises and signals to speaker so you can listen how your remote sounds like :)
     item = variable_item_list_add(
         subghz->variable_item_list,
-        "Sound",
+        "Zvuk",
         COMBO_BOX_COUNT,
         subghz_scene_receiver_config_set_speaker,
         subghz);
@@ -543,7 +543,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
     if(scene_manager_get_scene_state(subghz->scene_manager, SubGhzSceneReadRAW) !=
        SubGhzCustomEventManagerSet) {
         // Reset to default
-        variable_item_list_add(subghz->variable_item_list, "Reset to default", 1, NULL, NULL);
+        variable_item_list_add(subghz->variable_item_list, "Obnovit vychozi", 1, NULL, NULL);
 
         variable_item_list_set_enter_callback(
             subghz->variable_item_list,
@@ -553,7 +553,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
     if(scene_manager_get_scene_state(subghz->scene_manager, SubGhzSceneReadRAW) !=
        SubGhzCustomEventManagerSet) {
         // Lock keyboard
-        variable_item_list_add(subghz->variable_item_list, "Lock Keyboard", 1, NULL, NULL);
+        variable_item_list_add(subghz->variable_item_list, "Zamknout klavesnici", 1, NULL, NULL);
         variable_item_list_set_enter_callback(
             subghz->variable_item_list,
             subghz_scene_receiver_config_var_list_enter_callback,
@@ -564,7 +564,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
        SubGhzCustomEventManagerSet) {
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "RSSI Threshold:",
+            "Pr ag RSSI:",
             RAW_THRESHOLD_RSSI_COUNT,
             subghz_scene_receiver_config_set_raw_threshold_rssi,
             subghz);
