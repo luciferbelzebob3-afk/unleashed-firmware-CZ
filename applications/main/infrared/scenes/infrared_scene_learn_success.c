@@ -15,8 +15,8 @@ void infrared_scene_learn_success_on_enter(void* context) {
 
     if(infrared_signal_is_raw(signal)) {
         const InfraredRawSignal* raw = infrared_signal_get_raw_signal(signal);
-        dialog_ex_set_header(dialog_ex, "Unknown", 95, 10, AlignCenter, AlignCenter);
-        infrared_text_store_set(infrared, 0, "%zu samples", raw->timings_size);
+        dialog_ex_set_header(dialog_ex, "Neznamy", 95, 10, AlignCenter, AlignCenter);
+        infrared_text_store_set(infrared, 0, "%zu vzorku", raw->timings_size);
         dialog_ex_set_text(dialog_ex, infrared->text_store[0], 75, 23, AlignLeft, AlignTop);
 
     } else {
@@ -44,9 +44,9 @@ void infrared_scene_learn_success_on_enter(void* context) {
             dialog_ex, infrared->text_store[1], label_x_offset, 34, AlignLeft, AlignCenter);
     }
 
-    dialog_ex_set_left_button_text(dialog_ex, "Retry");
-    dialog_ex_set_right_button_text(dialog_ex, "Save");
-    dialog_ex_set_center_button_text(dialog_ex, "Send");
+    dialog_ex_set_left_button_text(dialog_ex, "Opakovat");
+    dialog_ex_set_right_button_text(dialog_ex, "Ulozit");
+    dialog_ex_set_center_button_text(dialog_ex, "Odeslat");
     dialog_ex_set_icon(dialog_ex, 0, 1, &I_DolphinReadingSuccess_59x63);
     dialog_ex_set_result_callback(dialog_ex, infrared_scene_learn_success_dialog_result_callback);
     dialog_ex_set_context(dialog_ex, context);
