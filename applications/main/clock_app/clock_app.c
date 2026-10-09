@@ -201,7 +201,7 @@ static void clock_render_callback(Canvas* const canvas, void* ctx) {
         canvas_set_font(canvas, FontPrimary);
         canvas_draw_str_aligned(canvas, 64, 26, AlignCenter, AlignCenter, "! ALARM !");
         canvas_set_font(canvas, FontSecondary);
-        canvas_draw_str_aligned(canvas, 64, 44, AlignCenter, AlignCenter, "Press any key to stop");
+        canvas_draw_str_aligned(canvas, 64, 44, AlignCenter, AlignCenter, "Stiskni klavesu pro konec");
         return;
     }
 
@@ -484,7 +484,7 @@ static void alarm_time_draw(Canvas* canvas, void* ctx) {
     canvas_draw_line(canvas, ux - uw / 2, 46, ux + uw / 2, 46);
 
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str_aligned(canvas, 64, 60, AlignCenter, AlignBottom, "Up/Down set  OK save");
+    canvas_draw_str_aligned(canvas, 64, 60, AlignCenter, AlignBottom, "Nahoru/dolu nastavit  OK ulozit");
 }
 
 static bool alarm_time_input(InputEvent* event, void* context) {
