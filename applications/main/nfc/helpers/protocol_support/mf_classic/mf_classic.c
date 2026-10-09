@@ -326,7 +326,7 @@ static NfcCommand
         furi_string_reset(instance->text_box_store);
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventCardDetected);
     } else if(mfc_event->type == MfClassicPollerEventTypeCardLost) {
-        furi_string_set(instance->text_box_store, "Use the source\ncard only");
+        furi_string_set(instance->text_box_store, "Pouzijte jen\nzdrojovou kartu");
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventCardLost);
     } else if(mfc_event->type == MfClassicPollerEventTypeRequestMode) {
         const MfClassicData* tag_data = nfc_poller_get_data(instance->poller);
@@ -360,7 +360,7 @@ static NfcCommand
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventPollerSuccess);
         command = NfcCommandStop;
     } else if(mfc_event->type == MfClassicPollerEventTypeFail) {
-        furi_string_set(instance->text_box_store, "Not all sectors\nwere written\ncorrectly");
+        furi_string_set(instance->text_box_store, "Ne vsechny sektory\nse zapsaly\nspravne");
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventPollerFailure);
         command = NfcCommandStop;
     }
