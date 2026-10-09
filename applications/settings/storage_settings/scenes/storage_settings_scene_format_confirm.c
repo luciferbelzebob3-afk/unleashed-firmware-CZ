@@ -22,8 +22,8 @@ void storage_settings_scene_format_confirm_on_enter(void* context) {
     } else {
         dialog_ex_set_header(dialog_ex, "Format SD Card?", 64, 0, AlignCenter, AlignTop);
         dialog_ex_set_text(dialog_ex, "All data will be lost!", 64, 12, AlignCenter, AlignTop);
-        dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-        dialog_ex_set_right_button_text(dialog_ex, "Format");
+        dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+        dialog_ex_set_right_button_text(dialog_ex, "Formatovat");
     }
 
     dialog_ex_set_context(dialog_ex, app);

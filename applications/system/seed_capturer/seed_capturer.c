@@ -190,8 +190,8 @@ static void seed_draw_callback(Canvas* canvas, void* ctx) {
         elements_frame(canvas, 0, 37, 128, 14);
         canvas_draw_str(canvas, 4, 47, furi_string_get_cstr(app->status));
 
-        if(app->hop_count >= SEED_MIN_HOP) elements_button_center(canvas, "Save");
-        elements_button_left(canvas, "Reset");
+        if(app->hop_count >= SEED_MIN_HOP) elements_button_center(canvas, "Ulozit");
+        elements_button_left(canvas, "Resetovat");
         break;
 
     case SeedSceneWipeConfirm:
@@ -202,15 +202,15 @@ static void seed_draw_callback(Canvas* canvas, void* ctx) {
             AlignCenter,
             AlignCenter,
             "Delete every capture file\nin subghz_seed_captures?");
-        elements_button_center(canvas, "Delete");
-        elements_button_left(canvas, "Cancel");
+        elements_button_center(canvas, "Smazat");
+        elements_button_left(canvas, "Zrusit");
         break;
 
     default:
         /* a saved file name is wider than the screen, so let the text box wrap it */
         elements_text_box(
             canvas, 2, 16, 124, 34, AlignCenter, AlignTop, furi_string_get_cstr(app->status), false);
-        elements_button_left(canvas, "Back");
+        elements_button_left(canvas, "Zpet");
         break;
     }
 

@@ -1,7 +1,7 @@
 #include "storage_settings.h"
 
 const SubmenuSettingsHelperDescriptor descriptor_template = {
-    .app_name = "Storage",
+    .app_name = "Uloziste",
     .options_cnt = 6,
     .options =
         {

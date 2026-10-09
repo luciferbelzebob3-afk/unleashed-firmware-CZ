@@ -24,7 +24,7 @@ const uint32_t vibro_touch_level_value[VIBRO_TOUCH_LEVEL_COUNT] =
     {0, 13, 16, 19, 21, 24, 27, 30, 33, 36};
 // vibro touch trigger mask human readable values
 const char* const vibro_touch_trigger_mask_text[VIBRO_TOUCH_TRIGGER_MASK_COUNT] = {
-    "Press",
+    "Stiskni",
     "Release",
     "Both",
 };

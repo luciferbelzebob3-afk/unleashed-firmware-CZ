@@ -51,7 +51,7 @@ void power_settings_scene_start_on_enter(void* context) {
     VariableItemList* variable_item_list = app->variable_item_list;
 
     variable_item_list_add(variable_item_list, "Battery Info", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Reboot", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Restartovat", 1, NULL, NULL);
     variable_item_list_add(variable_item_list, "Power OFF", 1, NULL, NULL);
 
     VariableItem* item;

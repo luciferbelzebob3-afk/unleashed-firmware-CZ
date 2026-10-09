@@ -35,7 +35,7 @@ void hid_scene_rename_on_enter(void* context) {
 
     // Rename success popup view
     popup_set_icon(app->popup, 48, 6, &I_DolphinDone_80x58);
-    popup_set_header(app->popup, "Done", 14, 15, AlignLeft, AlignTop);
+    popup_set_header(app->popup, "Hotovo", 14, 15, AlignLeft, AlignTop);
     popup_set_timeout(app->popup, 1500);
     popup_set_context(app->popup, app);
     popup_set_callback(app->popup, hid_scene_rename_popup_callback);

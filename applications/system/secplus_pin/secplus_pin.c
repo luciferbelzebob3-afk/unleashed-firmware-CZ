@@ -108,7 +108,7 @@ static void secplus_pin_draw_edit(Canvas* canvas, SecPlusPin* app) {
         snprintf(buf, sizeof(buf), "%04u  of  %04u", done, PIN_MAX);
         canvas_set_font(canvas, FontSecondary);
         elements_progress_bar_with_text(canvas, 2, 37, 124, (float)done / (float)PIN_MAX, buf);
-        elements_button_center(canvas, "Stop");
+        elements_button_center(canvas, "Zastavit");
         return;
     }
 

@@ -596,7 +596,7 @@ static void render_callback(Canvas* const canvas, void* ctx) {
         }
     } else if(program_state->mfkey_state == Ready) {
         canvas_draw_str_aligned(canvas, 50, 30, AlignLeft, AlignTop, "Ready");
-        elements_button_center(canvas, "Start");
+        elements_button_center(canvas, "Spustit");
         elements_button_right(canvas, "Help");
     } else if(program_state->mfkey_state == Help) {
         canvas_draw_str_aligned(canvas, 7, 20, AlignLeft, AlignTop, "Collect nonces by reading");
@@ -604,7 +604,7 @@ static void render_callback(Canvas* const canvas, void* ctx) {
         canvas_draw_str_aligned(canvas, 7, 40, AlignLeft, AlignTop, "https://docs.flipper.net/");
         canvas_draw_str_aligned(canvas, 7, 50, AlignLeft, AlignTop, "nfc/mfkey32");
     } else if(program_state->mfkey_state == Error) {
-        canvas_draw_str_aligned(canvas, 50, 25, AlignLeft, AlignTop, "Error");
+        canvas_draw_str_aligned(canvas, 50, 25, AlignLeft, AlignTop, "Chyba");
         if(program_state->err == MissingNonces) {
             canvas_draw_str_aligned(canvas, 25, 36, AlignLeft, AlignTop, "No nonces found");
         } else if(program_state->err == ZeroNonces) {

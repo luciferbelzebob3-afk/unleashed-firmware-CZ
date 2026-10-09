@@ -100,9 +100,9 @@ static void hid_mouse_jiggler_stealth_draw_callback(Canvas* canvas, void* contex
     }
     canvas_draw_icon(canvas, 74, 34, &I_Ok_btn_9x9);
     if(model->running) {
-        elements_multiline_text_aligned(canvas, 91, 41, AlignLeft, AlignBottom, "Stop");
+        elements_multiline_text_aligned(canvas, 91, 41, AlignLeft, AlignBottom, "Zastavit");
     } else {
-        elements_multiline_text_aligned(canvas, 91, 41, AlignLeft, AlignBottom, "Start");
+        elements_multiline_text_aligned(canvas, 91, 41, AlignLeft, AlignBottom, "Spustit");
     }
     canvas_set_color(canvas, ColorBlack);
 

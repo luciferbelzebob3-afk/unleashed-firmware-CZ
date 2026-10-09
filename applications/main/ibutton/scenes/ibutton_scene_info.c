@@ -23,7 +23,7 @@ void ibutton_scene_info_on_enter(void* context) {
     } else {
         furi_string_printf(
             tmp,
-            "Name:%s\n\e#%s\e#\n",
+            "Nazev:%s\n\e#%s\e#\n",
             ibutton->key_name,
             ibutton_protocols_get_name(ibutton->protocols, protocol_id));
     }

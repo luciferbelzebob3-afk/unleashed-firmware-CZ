@@ -201,7 +201,7 @@ void desktop_settings_app_free(DesktopSettingsApp* app) {
                 if(!flipper_format_file_open_always(file, NAMECHANGER_PATH)) break;
                 if(!flipper_format_write_header_cstr(file, NAMECHANGER_HEADER, NAMECHANGER_VERSION))
                     break;
-                if(!flipper_format_write_string_cstr(file, "Name", app->device_name)) break;
+                if(!flipper_format_write_string_cstr(file, "Nazev", app->device_name)) break;
             } while(0);
 
             flipper_format_free(file);

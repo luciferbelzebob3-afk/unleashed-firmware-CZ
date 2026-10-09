@@ -19,7 +19,7 @@ void desktop_settings_scene_pin_menu_on_enter(void* context) {
     if(!desktop_pin_code_is_set()) {
         submenu_add_item(
             submenu,
-            "Set PIN",
+            "Nastavit PIN",
             DesktopSettingsCustomEventSetPin,
             desktop_settings_scene_pin_menu_submenu_callback,
             app);

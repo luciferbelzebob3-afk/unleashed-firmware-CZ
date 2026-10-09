@@ -37,7 +37,7 @@ static void hid_mouse_draw_callback(Canvas* canvas, void* context) {
 #endif
 
     canvas_set_font(canvas, FontPrimary);
-    elements_multiline_text_aligned(canvas, 17, 3, AlignLeft, AlignTop, "Mouse");
+    elements_multiline_text_aligned(canvas, 17, 3, AlignLeft, AlignTop, "Mys");
     canvas_set_font(canvas, FontSecondary);
 
     if(model->left_mouse_held == true) {

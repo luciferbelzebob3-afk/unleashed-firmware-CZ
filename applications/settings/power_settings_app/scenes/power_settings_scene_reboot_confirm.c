@@ -30,8 +30,8 @@ void power_settings_scene_reboot_confirm_on_enter(void* context) {
         furi_crash("Invalid reboot type");
     }
 
-    dialog_ex_set_left_button_text(dialog, "Cancel");
-    dialog_ex_set_right_button_text(dialog, "Reboot");
+    dialog_ex_set_left_button_text(dialog, "Zrusit");
+    dialog_ex_set_right_button_text(dialog, "Restartovat");
 
     dialog_ex_set_result_callback(dialog, power_settings_scene_reboot_confirm_dialog_callback);
     dialog_ex_set_context(dialog, app);

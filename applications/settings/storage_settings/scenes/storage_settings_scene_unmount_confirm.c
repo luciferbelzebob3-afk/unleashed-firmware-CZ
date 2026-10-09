@@ -21,14 +21,14 @@ void storage_settings_scene_unmount_confirm_on_enter(void* context) {
             32,
             AlignCenter,
             AlignCenter);
-        dialog_ex_set_left_button_text(dialog_ex, "Cancel");
+        dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
         dialog_ex_set_right_button_text(dialog_ex, "Mount");
     } else {
         dialog_ex_set_header(dialog_ex, "Unmount SD Card?", 64, 10, AlignCenter, AlignCenter);
         dialog_ex_set_text(
             dialog_ex, "SD card will be\nunavailable", 64, 32, AlignCenter, AlignCenter);
-        dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-        dialog_ex_set_right_button_text(dialog_ex, "Unmount");
+        dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+        dialog_ex_set_right_button_text(dialog_ex, "Odpojit");
     }
 
     dialog_ex_set_context(dialog_ex, app);

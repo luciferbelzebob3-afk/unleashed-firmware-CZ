@@ -6,7 +6,7 @@
 const char* const log_level_text[] = {
     "Default",
     "None",
-    "Error",
+    "Chyba",
     "Warning",
     "Info",
     "Debug",

@@ -18,7 +18,7 @@ void storage_settings_scene_factory_reset_on_enter(void* context) {
     dialog_ex_set_context(dialog_ex, app);
     dialog_ex_set_result_callback(dialog_ex, storage_settings_scene_factory_reset_dialog_callback);
 
-    dialog_ex_set_left_button_text(dialog_ex, "Cancel");
+    dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
     dialog_ex_set_right_button_text(dialog_ex, "Erase");
 
     dialog_ex_set_header(dialog_ex, "Confirm Factory Reset?", 64, 0, AlignCenter, AlignTop);

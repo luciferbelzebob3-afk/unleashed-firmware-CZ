@@ -143,7 +143,7 @@ static void nice_o_draw_callback(Canvas* canvas, void* ctx) {
         if(app->key_count >= NICE_O_MIN_KEYS) {
             elements_button_center(canvas, "Solve");
         }
-        elements_button_left(canvas, "Back");
+        elements_button_left(canvas, "Zpet");
         break;
     }
 
@@ -152,7 +152,7 @@ static void nice_o_draw_callback(Canvas* canvas, void* ctx) {
         snprintf(buf, sizeof(buf), "%lu / %u", app->sweep_ic, NICE_O_SWEEP_TOTAL);
         elements_progress_bar_with_text(
             canvas, 2, 32, 124, (float)app->sweep_ic / (float)NICE_O_SWEEP_TOTAL, buf);
-        elements_button_left(canvas, "Cancel");
+        elements_button_left(canvas, "Zrusit");
         break;
     }
 
@@ -165,12 +165,12 @@ static void nice_o_draw_callback(Canvas* canvas, void* ctx) {
             canvas_set_font(canvas, FontSecondary);
             snprintf(buf, sizeof(buf), "Serial  %07lX", app->serial);
             canvas_draw_str(canvas, 6, 42, buf);
-            elements_button_center(canvas, "Save");
+            elements_button_center(canvas, "Ulozit");
         } else {
             elements_multiline_text_aligned(
                 canvas, 64, 32, AlignCenter, AlignCenter, furi_string_get_cstr(app->status));
         }
-        elements_button_left(canvas, "Back");
+        elements_button_left(canvas, "Zpet");
         break;
     }
 

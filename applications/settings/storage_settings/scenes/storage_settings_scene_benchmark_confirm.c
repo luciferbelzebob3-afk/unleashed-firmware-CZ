@@ -29,8 +29,8 @@ void storage_settings_scene_benchmark_confirm_on_enter(void* context) {
             AlignLeft,
             AlignTop);
         dialog_ex_set_icon(dialog_ex, 103, 12, &I_qr_benchmark_25x25);
-        dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-        dialog_ex_set_right_button_text(dialog_ex, "Benchmark");
+        dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+        dialog_ex_set_right_button_text(dialog_ex, "Test vykonu");
     }
 
     dialog_ex_set_context(dialog_ex, app);
