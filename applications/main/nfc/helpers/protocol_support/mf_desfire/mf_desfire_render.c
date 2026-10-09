@@ -30,7 +30,7 @@ void nfc_render_mf_desfire_info(
         // Light has one fixed application that GetApplicationIDs never lists, so no key reveals more
         furi_string_cat(str, "\nJedna pevna aplikace");
     } else {
-        furi_string_cat_printf(str, "\nAuth required to read apps!");
+        furi_string_cat_printf(str, "\nPro cteni aplikaci je nutne overeni!");
     }
 
     furi_string_cat_printf(str, "\n%lu", bytes_total);
@@ -38,7 +38,7 @@ void nfc_render_mf_desfire_info(
     if(data->version.sw_storage & 1) {
         furi_string_push_back(str, '+');
     }
-    furi_string_cat_printf(str, " bytes, %lu bytes free", bytes_free);
+    furi_string_cat_printf(str, " bajtu, volno: %lu bajtu", bytes_free);
 
     if(format_type != NfcProtocolFormatTypeFull) return;
 

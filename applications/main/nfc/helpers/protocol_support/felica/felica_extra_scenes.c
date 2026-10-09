@@ -181,7 +181,7 @@ static bool felica_scene_system_on_event(NfcApp* nfc, SceneManagerEvent event) {
                 furi_string_reset(nfc->text_box_store);
 
                 const FelicaService* service = simple_array_cget(system->services, service_ind);
-                furi_string_cat_printf(nfc->text_box_store, "Service 0x%04X\n", service->code);
+                furi_string_cat_printf(nfc->text_box_store, "Sluzba 0x%04X\n", service->code);
                 nfc_more_info_render_felica_blocks(
                     data, system, nfc->text_box_store, service->code);
 

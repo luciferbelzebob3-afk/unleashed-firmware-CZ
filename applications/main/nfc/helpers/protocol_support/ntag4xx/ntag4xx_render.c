@@ -40,12 +40,12 @@ void nfc_render_ntag4xx_info(
         }
         furi_string_cat_printf(
             str, "\nVelikost pameti: %zu bajtu\n", size_cc + size_ndef + size_proprietary);
-        furi_string_cat_printf(str, "Usable NDEF Size: %zu bytes\n", size_ndef - sizeof(uint16_t));
-        furi_string_cat_printf(str, "Capability Cont.: %zu bytes\n", size_cc);
+        furi_string_cat_printf(str, "Pouzitelna velikost NDEF: %zu bajtu\n", size_ndef - sizeof(uint16_t));
+        furi_string_cat_printf(str, "Kontejner schopnosti: %zu bajtu\n", size_cc);
         if(size_proprietary) {
             furi_string_cat_printf(str, "Proprietary File: %zu bytes\n", size_proprietary);
         }
-        furi_string_cat_printf(str, "TagTamper: %ssupported", has_tagtamper ? "" : "not ");
+        furi_string_cat_printf(str, "TagTamper: %spodporovano", has_tagtamper ? "" : "ne");
     }
 
     if(format_type != NfcProtocolFormatTypeFull) return;
