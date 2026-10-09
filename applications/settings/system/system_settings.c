@@ -76,7 +76,7 @@ static void log_baud_rate_changed(VariableItem* item) {
 
 const char* const debug_text[] = {
     "VYPNUTO",
-    "ON",
+    "ZAPNUTO",
 };
 
 static void debug_changed(VariableItem* item) {
