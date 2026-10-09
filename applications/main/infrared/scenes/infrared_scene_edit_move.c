@@ -54,13 +54,13 @@ bool infrared_scene_edit_move_on_event(void* context, SceneManagerEvent event) {
             const InfraredErrorCode task_error = infrared_blocking_task_finalize(infrared);
 
             if(INFRARED_ERROR_PRESENT(task_error)) {
-                const char* format = "Failed to move\n\"%s\"";
+                const char* format = "Nelze presunout\n\"%s\"";
                 uint8_t signal_index = infrared->app_state.prev_button_index;
 
                 if(INFRARED_ERROR_CHECK(
                        task_error, InfraredErrorCodeSignalRawUnableToReadTooLongData)) {
                     signal_index = INFRARED_ERROR_GET_INDEX(task_error);
-                    format = "Failed to move\n\"%s\" is too long.\nTry to edit file from pc";
+                    format = "Nelze presunout\n\"%s\" je prilis dlouhy.\nUprav soubor v pocitaci";
                 }
                 furi_assert(format);
 
