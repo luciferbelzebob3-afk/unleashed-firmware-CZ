@@ -15,10 +15,10 @@ void ibutton_scene_start_on_enter(void* context) {
 
     ibutton_reset_key(ibutton);
 
-    submenu_add_item(submenu, "Read", SubmenuIndexRead, ibutton_submenu_callback, ibutton);
-    submenu_add_item(submenu, "Saved", SubmenuIndexSaved, ibutton_submenu_callback, ibutton);
-    submenu_add_item(submenu, "Add Manually", SubmenuIndexAdd, ibutton_submenu_callback, ibutton);
-    submenu_add_item(submenu, "Settings", SubmenuIndexSettings, ibutton_submenu_callback, ibutton);
+    submenu_add_item(submenu, "Cist", SubmenuIndexRead, ibutton_submenu_callback, ibutton);
+    submenu_add_item(submenu, "Ulozene", SubmenuIndexSaved, ibutton_submenu_callback, ibutton);
+    submenu_add_item(submenu, "Pridat rucne", SubmenuIndexAdd, ibutton_submenu_callback, ibutton);
+    submenu_add_item(submenu, "Nastaveni", SubmenuIndexSettings, ibutton_submenu_callback, ibutton);
 
     submenu_set_selected_item(
         submenu, scene_manager_get_scene_state(ibutton->scene_manager, iButtonSceneStart));
