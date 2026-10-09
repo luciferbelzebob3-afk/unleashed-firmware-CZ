@@ -66,7 +66,7 @@ static SubGhzEnvironment* subghz_cli_environment_init(void) {
     if(subghz_environment_load_keystore(environment, SUBGHZ_KEYSTORE_DIR_USER_NAME)) {
         printf("Load_keystore keeloq_mfcodes_user \033[0;32mOK\033[0m\r\n");
     } else {
-        printf("Load_keystore keeloq_mfcodes_user \033[0;33mAbsent\033[0m\r\n");
+        printf("Load_keystore keeloq_mfcodes_user \033[0;33mCHYBI\033[0m\r\n");
     }
     subghz_environment_set_alutech_at_4n_rainbow_table_file_name(
         environment, SUBGHZ_ALUTECH_AT_4N_DIR_NAME);
@@ -126,7 +126,7 @@ void subghz_cli_command_rx_carrier(PipeSide* pipe, FuriString* args, void* conte
     if(furi_string_size(args)) {
         if(strint_to_uint32(furi_string_get_cstr(args), NULL, &frequency, 10) !=
            StrintParseNoError) {
-            cli_print_usage("subghz rx_carrier", "<Frequency: in Hz>", furi_string_get_cstr(args));
+            cli_print_usage("subghz rx_carrier", "<frekvence v Hz>", furi_string_get_cstr(args));
             return;
         }
         if(!furi_hal_subghz_is_frequency_valid(frequency)) {
@@ -438,7 +438,7 @@ void subghz_cli_command_rx_raw(PipeSide* pipe, FuriString* args, void* context) 
     if(furi_string_size(args)) {
         if(strint_to_uint32(furi_string_get_cstr(args), NULL, &frequency, 10) !=
            StrintParseNoError) {
-            cli_print_usage("subghz rx", "<Frequency: in Hz>", furi_string_get_cstr(args));
+            cli_print_usage("subghz rx", "<frekvence v Hz>", furi_string_get_cstr(args));
             return;
         }
         if(!furi_hal_subghz_is_frequency_valid(frequency)) {
@@ -874,7 +874,7 @@ static void subghz_cli_command_print_usage(void) {
     printf(
         "\tchat <frekvence v Hz> <zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Chat s dalsimi Flippery\r\n");
     printf(
-        "\ttx <3 byte Key: in hex> <frequency: in Hz> <te: us> <repeat: count> <device: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Transmitting key\r\n");
+        "\ttx <3bajtovy klic v hex> <frekvence v Hz> <TE v us> <pocet opakovani> <zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Vysilat klic\r\n");
     printf("\trx <frekvence v Hz> <zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>\t - Prijimat\r\n");
     printf("\trx_raw <frekvence v Hz>\t - Prijimat RAW\r\n");
     printf("\tdecode_raw <cesta_k_RAW_souboru>\t - Test dekodovani\r\n");
@@ -883,7 +883,7 @@ static void subghz_cli_command_print_usage(void) {
 
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
         printf("\r\n");
-        printf("  debug cmd:\r\n");
+        printf("  ladici prikazy:\r\n");
         printf("\ttx_carrier <frekvence v Hz>\t - Vysilat nosnou\r\n");
         printf("\trx_carrier <frekvence v Hz>\t - Prijimat nosnou\r\n");
         printf(
