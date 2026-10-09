@@ -89,23 +89,23 @@ static void render_callback(Canvas* canvas, void* context) {
     char buffer[64];
 
     if(app->state == GpsClickStateIdle) {
-        render_message(canvas, "GPS one-shot request", "Press OK to get location");
+        render_message(canvas, "Jednorazovy pozadavek GPS", "Stiskni OK pro ziskani polohy");
     } else if(app->state == GpsClickStateWaiting) {
         render_message(canvas, "Requesting...", NULL);
     } else if(app->state == GpsClickStateSendFailed) {
-        render_message(canvas, "No USB/BLE connection", "Press OK to retry");
+        render_message(canvas, "Chybi pripojeni USB/BLE", "Stiskni OK pro opakovani");
     } else if(app->state == GpsClickStateTimeout) {
-        render_message(canvas, "No response", "Press OK to retry");
+        render_message(canvas, "Bez odezvy", "Stiskni OK pro opakovani");
     } else if(app->status == GpsStatusNotSupported) {
-        render_message(canvas, "GPS not available", "Press OK to retry");
+        render_message(canvas, "GPS neni dostupne", "Stiskni OK pro opakovani");
     } else if(app->status == GpsStatusNoPermission) {
-        render_message(canvas, "Permission denied", "Press OK to retry");
+        render_message(canvas, "Pristup zamitnut", "Stiskni OK pro opakovani");
     } else if(app->status == GpsStatusDisabled) {
-        render_message(canvas, "Location disabled", "Press OK to retry");
+        render_message(canvas, "Poloha je vypnuta", "Stiskni OK pro opakovani");
     } else if(app->status == GpsStatusUnknown) {
-        render_message(canvas, "Location error", "Press OK to retry");
+        render_message(canvas, "Chyba polohy", "Stiskni OK pro opakovani");
     } else if(!app->has_fix) {
-        render_message(canvas, "No location data", "Press OK to retry");
+        render_message(canvas, "Zadna data o poloze", "Stiskni OK pro opakovani");
     } else {
         const GpsLocation* location = &app->location;
 
