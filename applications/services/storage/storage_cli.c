@@ -525,7 +525,7 @@ static void storage_cli_extract(PipeSide* pipe, FuriString* old_path, FuriString
         bool success = tar_archive_unpack_to(archive, furi_string_get_cstr(new_path), NULL);
         uint32_t end_tick = furi_get_tick();
         printf(
-            "Rozbaleni %s za %lu tiků \r\n",
+            "Rozbaleni %s za %lu tiku \r\n",
             success ? "uspesne" : "selhalo",
             end_tick - start_tick);
     } while(false);
