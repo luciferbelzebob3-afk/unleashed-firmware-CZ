@@ -656,7 +656,7 @@ static void mf_plus_scene_update_initial_on_enter(NfcApp* instance) {
 
     Popup* popup = instance->popup;
     popup_reset(popup);
-    popup_set_text(popup, "Use the source\ncard only", 128, 32, AlignRight, AlignCenter);
+    popup_set_text(popup, "Pouzijte jen\nzdrojovou kartu", 128, 32, AlignRight, AlignCenter);
     popup_set_icon(popup, 0, 8, &I_NFC_manual_60x50);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewPopup);
 
