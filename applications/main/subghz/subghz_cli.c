@@ -981,7 +981,7 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
         if(parse_err) {
             cli_print_usage(
                 "subghz chat",
-                "<Frequency: in Hz> <Device: 0 - CC1101_INT, 1 - CC1101_EXT>",
+                "<Frekvence: v Hz> <Zarizeni: 0 - CC1101_INT, 1 - CC1101_EXT>",
                 furi_string_get_cstr(args));
             return;
         }

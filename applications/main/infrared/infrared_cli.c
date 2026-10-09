@@ -492,7 +492,7 @@ static void infrared_cli_brute_force_signals(
 
             if(cli_is_pipe_broken_or_is_etx_next_char(pipe)) break;
 
-            printf("\r%d%% complete.", (int)((float)current_signal++ / (float)signal_count * 100));
+            printf("\r%d%% dokonceno.", (int)((float)current_signal++ / (float)signal_count * 100));
             fflush(stdout);
         }
 

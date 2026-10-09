@@ -16,8 +16,8 @@ static void ibutton_cli_print_usage(void) {
     printf("ikey emulate <key_type> <key_data>\r\n");
     printf("ikey write Dallas <key_data>\r\n");
     printf("\t<key_type> vyber z:\r\n");
-    printf("\tDallas (8 bytes key_data)\r\n");
-    printf("\tCyfral (2 bytes key_data)\r\n");
+    printf("\tDallas (8 bajtu key_data)\r\n");
+    printf("\tCyfral (2 bajty key_data)\r\n");
     printf("\tMetakom (4 bajty key_data), musi mit spravnou paritu\r\n");
     printf("\t<key_data> je v hexadecimalnim tvaru\r\n");
 }

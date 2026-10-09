@@ -9,7 +9,7 @@
 #include <one_wire/one_wire_host.h>
 
 static void onewire_cli_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("onewire search\r\n");
 }
 
