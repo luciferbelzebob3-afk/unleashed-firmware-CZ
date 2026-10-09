@@ -29,7 +29,7 @@ void subghz_scene_delete_raw_on_enter(void* context) {
         subghz->widget, 0, 0, 128, 23, AlignCenter, AlignCenter, delete_str, false);
 
     widget_add_string_element(
-        subghz->widget, 38, 25, AlignLeft, AlignTop, FontSecondary, "Signal RAW");
+        subghz->widget, 38, 25, AlignLeft, AlignTop, FontSecondary, "Surovy signal");
     subghz_txrx_get_frequency_and_modulation(subghz->txrx, frequency_str, modulation_str, false);
     widget_add_string_element(
         subghz->widget,
