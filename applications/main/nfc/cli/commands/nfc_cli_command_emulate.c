@@ -57,7 +57,7 @@ static void nfc_cli_emulate_execute(PipeSide* pipe, NfcCliActionContext* context
     do {
         const char* path = furi_string_get_cstr(instance->file_path);
         if(!storage_common_exists(instance->storage, path)) {
-            printf(ANSI_FG_RED "Wrong path \'%s\'.\r\n" ANSI_RESET, path);
+            printf(ANSI_FG_RED "Nespravna cesta \'%s\'.\r\n" ANSI_RESET, path);
             break;
         }
 
@@ -70,7 +70,7 @@ static void nfc_cli_emulate_execute(PipeSide* pipe, NfcCliActionContext* context
 
         if(!nfc_cli_emulate_protocol_supports_emulation(protocol)) {
             printf(
-                ANSI_FG_RED "Error. Emulation for %s is not supported\r\n" ANSI_RESET,
+                ANSI_FG_RED "Chyba. Emulace protokolu %s neni podporovana\r\n" ANSI_RESET,
                 nfc_cli_get_protocol_name(protocol));
             break;
         }
@@ -79,7 +79,7 @@ static void nfc_cli_emulate_execute(PipeSide* pipe, NfcCliActionContext* context
         NfcListener* listener = nfc_listener_alloc(instance->nfc, protocol, data);
 
         nfc_listener_start(listener, NULL, NULL);
-        printf("\r\nEmulating. Press Ctrl+C to abort\r\n");
+        printf("\r\nEmuluji. Stiskni Ctrl+C pro preruseni\r\n");
         while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
             furi_delay_ms(100);
         }
@@ -101,14 +101,14 @@ const NfcCliKeyDescriptor emulate_keys[] = {
         .features = {.required = true, .parameter = true},
         .long_name = "file",
         .short_name = "f",
-        .description = "path to new file",
+        .description = "cesta k novemu souboru",
         .parse = nfc_cli_emulate_parse_filename_key,
     },
 };
 
 const NfcCliActionDescriptor emulate_action = {
     .name = "emulate",
-    .description = "Emulate .nfc file content",
+    .description = "Emulovat obsah souboru .nfc",
     .alloc = nfc_cli_emulate_alloc_ctx,
     .free = nfc_cli_emulate_free_ctx,
     .execute = nfc_cli_emulate_execute,

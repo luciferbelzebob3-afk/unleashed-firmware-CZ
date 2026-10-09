@@ -636,7 +636,7 @@ static NotificationAppSettings* alloc_settings(void) {
 
     item = variable_item_list_add(
         app->variable_item_list,
-        " . Start",
+        " . Zacatek",
         NIGHT_SHIFT_START_COUNT,
         night_shift_start_changed,
         app);

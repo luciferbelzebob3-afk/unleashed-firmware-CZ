@@ -41,8 +41,8 @@ static void nfc_cli_shell_motd(void* context) {
                            "                             000      0000     \r\n"
                            "                                     0000      \r\n"
                            "                                     0005      \r\n"
-                           "\r\n" ANSI_FG_BR_WHITE "Welcome to NFC Command Line Interface!\r\n"
-                           "Run `help` or `?` to list available commands\r\n" ANSI_RESET);
+                           "\r\n" ANSI_FG_BR_WHITE "Vitej v prikazovem rozhrani NFC!\r\n"
+                           "Pro vypis dostupnych prikazu spust `help` nebo `?`\r\n" ANSI_RESET);
 }
 
 static void nfc_cli_subscribe_commands(NfcCliContext* instance) {
@@ -109,7 +109,7 @@ void nfc_cli_execute(PipeSide* pipe, FuriString* args, void* context) {
 
     if(nfc_cli_desktop_app_is_running()) {
         printf(ANSI_FG_YELLOW
-               "NFC app is running, unable to run NFC CLI at the same time!\r\n" ANSI_RESET);
+               "Aplikace NFC je spustena, nelze soucasne spustit NFC CLI!\r\n" ANSI_RESET);
         return;
     }
 

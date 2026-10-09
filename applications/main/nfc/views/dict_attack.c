@@ -134,7 +134,7 @@ static void dict_attack_draw_mf_classic(Canvas* canvas, DictAttackViewModel* m) 
     snprintf(
         draw_str,
         sizeof(draw_str),
-        "Keys found: %d/%d",
+        "Nalezene klice: %d/%d",
         m->keys_found,
         m->sectors_total * NFC_CLASSIC_KEYS_PER_SECTOR);
     canvas_draw_str_aligned(canvas, 0, 33, AlignLeft, AlignTop, draw_str);

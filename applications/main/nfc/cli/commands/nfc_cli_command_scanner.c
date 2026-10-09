@@ -78,13 +78,13 @@ const NfcCliKeyDescriptor tree_key = {
     .short_name = "t",
     .long_name = "tree",
     .features = {.parameter = false, .required = false, .multivalue = false},
-    .description = "displays protocol hierarchy for each detected protocol",
+    .description = "zobrazi hierarchii protokolu pro kazdy detekovany protokol",
     .parse = nfc_cli_command_scanner_parse_tree,
 };
 
 const NfcCliActionDescriptor scanner_action = {
     .name = "scanner",
-    .description = "Detect tag type",
+    .description = "Detekovat typ tagu",
     .key_count = 1,
     .keys = &tree_key,
     .execute = nfc_cli_command_scanner_execute,

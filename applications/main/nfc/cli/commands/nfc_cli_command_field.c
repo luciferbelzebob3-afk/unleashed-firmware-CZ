@@ -21,7 +21,7 @@ static void nfc_cli_field(PipeSide* pipe, FuriString* args, void* context) {
 
 const NfcCliCommandDescriptor field_cmd = {
     .name = "field",
-    .description = "Turns NFC field on",
+    .description = "Zapne NFC pole",
     .callback = nfc_cli_field,
     .action_count = 0,
     .actions = NULL,

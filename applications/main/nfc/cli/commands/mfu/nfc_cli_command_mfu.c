@@ -8,7 +8,7 @@
 //mfu info
 const NfcCliActionDescriptor info_action = {
     .name = "info",
-    .description = "Get basic information about the card",
+    .description = "Ziskat zakladni informace o karte",
     .alloc = nfc_cli_mfu_info_alloc_ctx,
     .free = nfc_cli_mfu_info_free_ctx,
     .execute = nfc_cli_mfu_info_execute,
@@ -21,7 +21,7 @@ const NfcCliKeyDescriptor rdbl_action_keys[] = {
         .short_name = "b",
         .long_name = "block",
         .features = {.required = true, .parameter = true},
-        .description = "desired block number",
+        .description = "pozadovane cislo bloku",
         .parse = nfc_cli_mfu_rdbl_parse_block,
     },
 };
@@ -30,7 +30,7 @@ const NfcCliKeyDescriptor rdbl_action_keys[] = {
 //mfu rdbl --block 0
 const NfcCliActionDescriptor rdbl_action = {
     .name = "rdbl",
-    .description = "Read block from ultralight card",
+    .description = "Precist blok z karty Ultralight",
     .alloc = nfc_cli_mfu_rdbl_alloc_ctx,
     .free = nfc_cli_mfu_rdbl_free_ctx,
     .execute = nfc_cli_mfu_rdbl_execute,
@@ -43,14 +43,14 @@ const NfcCliKeyDescriptor wrbl_action_keys[] = {
         .short_name = "b",
         .long_name = "block",
         .features = {.required = true, .parameter = true},
-        .description = "desired block number",
+        .description = "pozadovane cislo bloku",
         .parse = nfc_cli_mfu_wrbl_parse_block,
     },
     {
         .short_name = "d",
         .long_name = "data",
         .features = {.required = true, .parameter = true},
-        .description = "new data for block",
+        .description = "nova data bloku",
         .parse = nfc_cli_mfu_wrbl_parse_data,
     },
 };
@@ -59,7 +59,7 @@ const NfcCliKeyDescriptor wrbl_action_keys[] = {
 //mfu rdbl --block 0 -- data DEADBEEF
 const NfcCliActionDescriptor wrbl_action = {
     .name = "wrbl",
-    .description = "Write block to ultralight card",
+    .description = "Zapsat blok na kartu Ultralight",
     .alloc = nfc_cli_mfu_wrbl_alloc_ctx,
     .free = nfc_cli_mfu_wrbl_free_ctx,
     .execute = nfc_cli_mfu_wrbl_execute,
@@ -74,4 +74,4 @@ const NfcCliActionDescriptor* mfu_actions[] = {
 };
 
 //Command descriptor
-ADD_NFC_CLI_COMMAND(mfu, "Mifare Ultralight specific commands", mfu_actions);
+ADD_NFC_CLI_COMMAND(mfu, "Prikazy specificke pro Mifare Ultralight", mfu_actions);
