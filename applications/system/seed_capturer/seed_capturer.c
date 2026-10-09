@@ -110,7 +110,7 @@ typedef struct {
 
 /* ------------------------------------------------------------------ drawing */
 
-static const char* const seed_menu[] = {"Novy zaznam", "Delete all captures", "Exit"};
+static const char* const seed_menu[] = {"Novy zaznam", "Smazat vsechny zaznamy", "Exit"};
 
 static void seed_draw_menu(Canvas* canvas, const char* const* items, uint8_t count, uint8_t sel) {
     for(uint8_t i = 0; i < count; i++) {
@@ -132,7 +132,7 @@ static void seed_draw_callback(Canvas* canvas, void* ctx) {
     canvas_set_font(canvas, FontPrimary);
     switch(app->scene) {
     case SeedSceneMfr:
-        canvas_draw_str(canvas, 2, 10, "Remote type");
+        canvas_draw_str(canvas, 2, 10, "Typ ovladace");
         break;
     case SeedSceneFreq:
         canvas_draw_str(canvas, 2, 10, "Frekvence");
@@ -147,7 +147,7 @@ static void seed_draw_callback(Canvas* canvas, void* ctx) {
         canvas_draw_str(canvas, 2, 10, buf);
         break;
     default:
-        canvas_draw_str(canvas, 2, 10, "Seed Capturer");
+        canvas_draw_str(canvas, 2, 10, "Zachytavac seedu");
         break;
     }
     canvas_draw_line(canvas, 0, 13, 128, 13);
@@ -201,7 +201,7 @@ static void seed_draw_callback(Canvas* canvas, void* ctx) {
             28,
             AlignCenter,
             AlignCenter,
-            "Delete every capture file\nin subghz_seed_captures?");
+            "Smazat vsechny soubory zaznamu\nze slozky subghz_seed_captures?");
         elements_button_center(canvas, "Smazat");
         elements_button_left(canvas, "Zrusit");
         break;
@@ -293,16 +293,16 @@ static void
     if(fix != app->fix) {
         /* Another remote in range. Locking onto the first Fix seen is what keeps one
          * file to one remote; Reset re-arms if it locked onto the wrong one. */
-        furi_string_printf(app->status, "Other remote %08lX", fix);
+        furi_string_printf(app->status, "Jiny ovladac %08lX", fix);
     } else if(app->hop_count >= SEED_MAX_HOP) {
-        furi_string_printf(app->status, "Have %u, enough", SEED_MAX_HOP);
+        furi_string_printf(app->status, "Pocet %u je dostacujici", SEED_MAX_HOP);
     } else {
         bool known = false;
         for(uint8_t i = 0; i < app->hop_count; i++) {
             if(app->hops[i] == hop) known = true;
         }
         if(known) {
-            furi_string_set(app->status, "Same hop, ignored");
+            furi_string_set(app->status, "Stejny hop, ignorovano");
         } else {
             app->hops[app->hop_count++] = hop;
             furi_string_printf(app->status, "Hop %u: %08lX", app->hop_count, hop);
@@ -393,7 +393,7 @@ static bool seed_save(SeedCapturer* app) {
 
     storage_simply_mkdir(app->storage, SEED_PARENT);
     if(!storage_simply_mkdir(app->storage, SEED_FOLDER)) {
-        seed_set_status(app, "Cannot create folder");
+        seed_set_status(app, "Nelze vytvorit slozku");
         return false;
     }
 
@@ -464,7 +464,7 @@ static bool seed_save(SeedCapturer* app) {
 
     char msg[96];
     if(ok) {
-        snprintf(msg, sizeof(msg), "Saved %u hops\n%s", app->hop_count, name);
+        snprintf(msg, sizeof(msg), "Ulozeno %u hopu\n%s", app->hop_count, name);
     } else {
         snprintf(msg, sizeof(msg), "Ulozeni selhalo\n%s", name);
     }
@@ -497,7 +497,7 @@ static bool seed_wipe(SeedCapturer* app) {
 
     char msg[64];
     if(ok) {
-        snprintf(msg, sizeof(msg), "Deleted %lu capture%s", count, (count == 1) ? "" : "s");
+        snprintf(msg, sizeof(msg), "Pocet smazanych zaznamu: %lu", count);
     } else {
         snprintf(msg, sizeof(msg), "Mazani selhalo");
     }
@@ -524,7 +524,7 @@ int32_t seed_capturer_app(void* p) {
     app->queue = furi_message_queue_alloc(16, sizeof(InputEvent));
     app->storage = furi_record_open(RECORD_STORAGE);
     app->notifications = furi_record_open(RECORD_NOTIFICATION);
-    app->status = furi_string_alloc_set("Idle");
+    app->status = furi_string_alloc_set("Neaktivni");
     app->scene = SeedSceneMenu;
 
     app->view_port = view_port_alloc();
@@ -576,14 +576,14 @@ int32_t seed_capturer_app(void* p) {
                     app->scene = SeedSceneMfr;
                 if(event.key == InputKeyOk) {
                     seed_capture_reset(app);
-                    furi_string_printf(app->status, "Press remote %u+ times", SEED_MIN_HOP);
+                    furi_string_printf(app->status, "Stisknete ovladac alespon %u krat", SEED_MIN_HOP);
                     app->scene = SeedSceneCapture;
                     furi_mutex_release(app->mutex);
                     const bool started = seed_rx_start(app);
                     if(!started) seed_rx_stop(app);
                     furi_mutex_acquire(app->mutex, FuriWaitForever);
                     if(!started) {
-                        furi_string_set(app->status, "Radio unavailable");
+                        furi_string_set(app->status, "Radio neni dostupne");
                         app->scene = SeedSceneResult;
                         notification_message(app->notifications, &sequence_error);
                     }

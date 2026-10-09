@@ -15,8 +15,8 @@ void flipper_boot_dfu_show_splash(void) {
     canvas_set_font(canvas, FontPrimary);
 
     canvas_draw_icon(canvas, 0, 64 - 50, &I_DFU_128x50);
-    canvas_draw_str(canvas, 2, 8, "Update & Recovery Mode");
-    canvas_draw_str(canvas, 2, 21, "DFU Started");
+    canvas_draw_str(canvas, 2, 8, "Rezim aktualizace a obnovy");
+    canvas_draw_str(canvas, 2, 21, "DFU spusteno");
     canvas_commit(canvas);
 
     canvas_free(canvas);

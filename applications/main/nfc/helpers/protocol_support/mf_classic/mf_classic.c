@@ -27,7 +27,7 @@ static void nfc_scene_menu_add_save_keys_mf_classic(NfcApp* instance, const MfCl
 
     submenu_add_item(
         instance->submenu,
-        "Save Keys to Dictionary",
+        "Ulozit klice do slovniku",
         SubmenuIndexSaveKeys,
         nfc_protocol_support_common_submenu_callback,
         instance);
@@ -139,27 +139,27 @@ static void nfc_scene_read_menu_on_enter_mf_classic(NfcApp* instance) {
     Submenu* submenu = instance->submenu;
     const MfClassicData* data = nfc_device_get_data(instance->nfc_device, NfcProtocolMfClassic);
 
-    // Doesn't make sense to show "Write to Initial Card" right after reading
+    // Doesn't make sense to show "Zapsat na zdrojovou kartu" right after reading
     submenu_remove_item(submenu, SubmenuIndexCommonWrite);
 
     if(!mf_classic_is_card_read(data)) {
         submenu_add_item(
             submenu,
-            "Extract MFC Keys",
+            "Ziskat klice MFC",
             SubmenuIndexDetectReader,
             nfc_protocol_support_common_submenu_callback,
             instance);
 
         submenu_add_item(
             submenu,
-            "Unlock with Dictionary",
+            "Odemknout slovnikem",
             SubmenuIndexDictAttack,
             nfc_protocol_support_common_submenu_callback,
             instance);
 
         submenu_add_item(
             submenu,
-            "Crack nonces in MFKey32",
+            "Lamat nonce pomoci MFKey32",
             SubmenuIndexCrackNonces,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -167,7 +167,7 @@ static void nfc_scene_read_menu_on_enter_mf_classic(NfcApp* instance) {
 
     submenu_add_item(
         submenu,
-        "Show Keys",
+        "Zobrazit klice",
         SubmenuIndexShowKeys,
         nfc_protocol_support_common_submenu_callback,
         instance);
@@ -196,19 +196,19 @@ static void nfc_scene_saved_menu_on_enter_mf_classic(NfcApp* instance) {
     Submenu* submenu = instance->submenu;
     const MfClassicData* data = nfc_device_get_data(instance->nfc_device, NfcProtocolMfClassic);
 
-    submenu_change_item_label(submenu, SubmenuIndexCommonWrite, "Write to Initial Card");
+    submenu_change_item_label(submenu, SubmenuIndexCommonWrite, "Zapsat na zdrojovou kartu");
 
     if(!mf_classic_is_card_read(data)) {
         submenu_add_item(
             submenu,
-            "Extract MFC Keys",
+            "Ziskat klice MFC",
             SubmenuIndexDetectReader,
             nfc_protocol_support_common_submenu_callback,
             instance);
 
         submenu_add_item(
             submenu,
-            "Unlock with Dictionary",
+            "Odemknout slovnikem",
             SubmenuIndexDictAttack,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -216,14 +216,14 @@ static void nfc_scene_saved_menu_on_enter_mf_classic(NfcApp* instance) {
 
     submenu_add_item(
         submenu,
-        "Update from Initial Card",
+        "Nacist ze zdrojove karty",
         SubmenuIndexUpdate,
         nfc_protocol_support_common_submenu_callback,
         instance);
 
     submenu_add_item(
         submenu,
-        "Show Keys",
+        "Zobrazit klice",
         SubmenuIndexShowKeys,
         nfc_protocol_support_common_submenu_callback,
         instance);

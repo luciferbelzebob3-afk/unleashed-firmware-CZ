@@ -41,12 +41,12 @@ bool subghz_tx_start(SubGhz* subghz, FlipperFormat* flipper_format) {
 void subghz_dialog_message_freq_error(SubGhz* subghz, bool only_rx) {
     DialogsApp* dialogs = subghz->dialogs;
     DialogMessage* message = dialog_message_alloc();
-    const char* header_text = "Frequency not supported";
-    const char* message_text = "Frequency\nis outside of\nsupported range.";
+    const char* header_text = "Nepodporovana frekvence";
+    const char* message_text = "Frekvence je mimo\npodporovany rozsah.";
 
     if(only_rx) {
-        header_text = "Transmission is blocked";
-        message_text = "Frequency\nis outside of\ndefault range.\nCheck docs.";
+        header_text = "Vysilani je blokovano";
+        message_text = "Frekvence je mimo\nvychozi rozsah.\nZkontrolujte dokumentaci.";
     }
 
     dialog_message_set_header(message, header_text, 63, 3, AlignCenter, AlignTop);

@@ -565,11 +565,11 @@ static void mf_ultralight_scene_unlock_warn_on_enter(NfcApp* nfc) {
     if((type == MfUltralightAuthTypeReader) || (type == MfUltralightAuthTypeManual)) {
         // Build dialog text
         FuriString* password_str =
-            furi_string_alloc_set_str("Try to unlock the card with\npassword: ");
+            furi_string_alloc_set_str("Pokus o odemknuti karty\nheslem: ");
         for(size_t i = 0; i < sizeof(nfc->mf_ul_auth->password.data); i++) {
             furi_string_cat_printf(password_str, "%02X ", nfc->mf_ul_auth->password.data[i]);
         }
-        furi_string_cat_str(password_str, "\nWarning: incorrect password\nwill block the card!");
+        furi_string_cat_str(password_str, "\nPozor: chybne heslo\nkartu zablokuje!");
         nfc_text_store_set(nfc, furi_string_get_cstr(password_str));
         furi_string_free(password_str);
 
@@ -706,7 +706,7 @@ static void mf_ultralight_scene_capture_pass_on_enter(NfcApp* instance) {
         AlignLeft,
         AlignCenter,
         FontPrimary,
-        "Touch the\nreader to get\npassword...");
+        "Prilozte kartu\nke ctecce pro ziskani\nhesla...");
     widget_add_icon_element(instance->widget, 0, 15, &I_Modern_reader_18x34);
     widget_add_icon_element(instance->widget, 20, 12, &I_Move_flipper_26x39);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewWidget);

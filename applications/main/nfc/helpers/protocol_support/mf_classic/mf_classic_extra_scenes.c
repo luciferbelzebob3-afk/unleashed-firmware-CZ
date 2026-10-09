@@ -387,7 +387,7 @@ static void mf_classic_scene_dict_attack_on_enter(NfcApp* instance) {
     bool show_loading = keys_dict_check_presence(furi_string_get_cstr(cuid_dict_path));
     furi_string_free(cuid_dict_path);
 
-    if(show_loading) nfc_show_loading_label_popup(instance, "CUID dictionary\nis loading", true);
+    if(show_loading) nfc_show_loading_label_popup(instance, "Nacitam slovnik CUID", true);
     mf_classic_scene_dict_attack_prepare_view(instance);
     if(show_loading) nfc_show_loading_label_popup(instance, NULL, false);
 
@@ -764,7 +764,7 @@ static void mf_classic_scene_mfkey_complete_on_enter(NfcApp* instance) {
             AlignCenter,
             AlignTop,
             FontSecondary,
-            "Now use Mfkey32 to extract \nkeys: r.flipper.net/nfc-tools");
+            "Nyni pouzijte Mfkey32 pro ziskani\nklicu: r.flipper.net/nfc-tools");
         widget_add_icon_element(instance->widget, 50, 39, &I_MFKey_qr_25x25);
         widget_add_button_element(
             instance->widget,
@@ -780,7 +780,7 @@ static void mf_classic_scene_mfkey_complete_on_enter(NfcApp* instance) {
             AlignLeft,
             AlignTop,
             FontSecondary,
-            "Now run Mfkey32\n to extract \nkeys");
+            "Spustte Mfkey32\n pro ziskani\nklicu");
         widget_add_icon_element(instance->widget, 5, 18, &I_WarningDolphin_45x42);
         widget_add_button_element(
             instance->widget,
@@ -835,7 +835,7 @@ static void mf_classic_scene_mfkey_nonces_info_on_enter(NfcApp* instance) {
     FuriString* temp_str = furi_string_alloc();
 
     size_t mfkey_params_saved = mfkey32_logger_get_params_num(instance->mfkey32_logger);
-    furi_string_printf(temp_str, "Nonce pairs saved: %zu\n", mfkey_params_saved);
+    furi_string_printf(temp_str, "Paru nonce ulozeno: %zu\n", mfkey_params_saved);
     widget_add_string_element(
         instance->widget, 0, 0, AlignLeft, AlignTop, FontPrimary, furi_string_get_cstr(temp_str));
     widget_add_string_element(

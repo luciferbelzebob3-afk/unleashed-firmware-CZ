@@ -71,7 +71,7 @@ static void nfc_protocol_support_on_enter_load_failed(NfcApp* instance) {
         AlignLeft,
         AlignTop,
         FontSecondary,
-        "Plugin file missing\nor outdated. Update\nthe firmware\nresources.");
+        "Soubor pluginu chybi\nnebo je zastaraly.\nAktualizujte zdroje\nfirmwaru.");
     notification_message(instance->notifications, &sequence_error);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewWidget);
 }
@@ -1011,7 +1011,7 @@ static void nfc_protocol_support_scene_emulate_on_enter(NfcApp* instance) {
 
     } else {
         widget_add_string_element(
-            widget, 90, 26, AlignCenter, AlignCenter, FontPrimary, "Emulating");
+            widget, 90, 26, AlignCenter, AlignCenter, FontPrimary, "Emuluji");
         if(!furi_string_empty(instance->file_name)) {
             furi_string_printf(
                 temp_str,
@@ -1021,7 +1021,7 @@ static void nfc_protocol_support_scene_emulate_on_enter(NfcApp* instance) {
         } else {
             furi_string_printf(
                 temp_str,
-                "Unsaved\n%s",
+                "Neulozeno\n%s",
                 nfc_device_get_name(instance->nfc_device, NfcDeviceNameTypeFull));
             furi_string_replace_str(temp_str, "Mifare", "MIFARE");
         }
@@ -1172,10 +1172,10 @@ static void nfc_protocol_support_scene_write_setup_view(NfcApp* instance) {
             AlignCenter);
         popup_set_icon(popup, 0, 8, &I_NFC_manual_60x50);
     } else if(state == NfcSceneWriteStateWriting) {
-        popup_set_header(popup, "Writing\nDon't move...", 52, 32, AlignLeft, AlignCenter);
+        popup_set_header(popup, "Zapisuji\nNehybejte kartou...", 52, 32, AlignLeft, AlignCenter);
         popup_set_icon(popup, 12, 23, &A_Loading_24);
     } else if(state == NfcSceneWriteStateSuccess) {
-        popup_set_header(popup, "Successfully\nwritten!", 126, 2, AlignRight, AlignTop);
+        popup_set_header(popup, "Zapsano\nuspesne!", 126, 2, AlignRight, AlignTop);
         popup_set_icon(popup, 0, 9, &I_DolphinSuccess_91x55);
         popup_set_timeout(popup, 1500);
         popup_set_context(popup, instance);

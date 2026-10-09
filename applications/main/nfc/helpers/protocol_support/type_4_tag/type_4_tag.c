@@ -56,7 +56,7 @@ static void nfc_scene_more_info_on_enter_type_4_tag(NfcApp* instance) {
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeRight,
-            "Raw Data",
+            "Surova data",
             nfc_protocol_support_common_widget_callback,
             instance);
 
@@ -186,8 +186,8 @@ static NfcCommand
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventCardDetected);
     } else if(type_4_tag_event->type == Type4TagPollerEventTypeWriteFailed) {
         const char* error_str = type_4_tag_event->data->error == Type4TagErrorCardLocked ?
-                                    "Card does not\nallow writing\nnew data" :
-                                    "Failed to\nwrite new data";
+                                    "Karta neumoznuje\nzapis novych dat" :
+                                    "Zapis novych dat\nse nezdaril";
         furi_string_set(instance->text_box_store, error_str);
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventPollerFailure);
         command = NfcCommandStop;

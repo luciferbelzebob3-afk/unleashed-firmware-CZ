@@ -25,14 +25,14 @@ static bool nfc_scene_mf_plus_is_sl3(NfcApp* instance) {
     return data->security_level == MfPlusSecurityLevel3;
 }
 
-// "Show Keys" lists the recovered SL3 sector and admin keys. Offered on both the read and saved
+// "Zobrazit klice" lists the recovered SL3 sector and admin keys. Offered on both the read and saved
 // menus for SL3 cards; always present (even with no keys yet) so the view is always reachable. The
 // ISO14443-4/version details live behind the Info screen's "More" hub, not on these menus.
 static void nfc_scene_mf_plus_add_show_keys(NfcApp* instance) {
     if(!nfc_scene_mf_plus_is_sl3(instance)) return;
     submenu_add_item(
         instance->submenu,
-        "Show Keys",
+        "Zobrazit klice",
         SubmenuIndexShowKeys,
         nfc_protocol_support_common_submenu_callback,
         instance);
@@ -46,15 +46,15 @@ static void nfc_scene_mf_plus_read_menu_on_enter(NfcApp* instance) {
 }
 
 // Saved menu: the generic "Write" item (advertised only for SL3) writes the dump back to the source
-// card, so relabel it to say exactly that, and offer "Update from Initial Card" (re-read the source
+// card, so relabel it to say exactly that, and offer "Nacist ze zdrojove karty" (re-read the source
 // card with the saved keys to refresh the dump).
 static void nfc_scene_mf_plus_saved_menu_on_enter(NfcApp* instance) {
     if(nfc_scene_mf_plus_is_sl3(instance)) {
         submenu_change_item_label(
-            instance->submenu, SubmenuIndexCommonWrite, "Write to Initial Card");
+            instance->submenu, SubmenuIndexCommonWrite, "Zapsat na zdrojovou kartu");
         submenu_add_item(
             instance->submenu,
-            "Update from Initial Card",
+            "Nacist ze zdrojove karty",
             SubmenuIndexUpdate,
             nfc_protocol_support_common_submenu_callback,
             instance);

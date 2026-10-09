@@ -74,7 +74,7 @@ static void
     desktop_scene_pin_input_update_wrong_count(DesktopScenePinInputState* state, Desktop* desktop) {
     uint32_t attempts = furi_hal_rtc_get_pin_fails();
     if(attempts > 0) {
-        furi_string_printf(state->enter_pin_string, "Wrong Attempts: %lu", attempts);
+        furi_string_printf(state->enter_pin_string, "Chybne pokusy: %lu", attempts);
         desktop_view_pin_input_set_label_tertiary(
             desktop->pin_input_view, 64, 60, furi_string_get_cstr(state->enter_pin_string));
     } else {
@@ -101,7 +101,7 @@ void desktop_scene_pin_input_on_enter(void* context) {
 
     desktop_view_pin_input_hide_pin(desktop->pin_input_view, true);
     desktop_view_pin_input_set_label_button(desktop->pin_input_view, "OK");
-    desktop_view_pin_input_set_label_secondary(desktop->pin_input_view, 44, 25, "Enter PIN:");
+    desktop_view_pin_input_set_label_secondary(desktop->pin_input_view, 44, 25, "Zadejte PIN:");
     desktop_scene_pin_input_update_wrong_count(state, desktop);
     desktop_view_pin_input_set_pin_position(desktop->pin_input_view, 64, 37);
     desktop_view_pin_input_reset_pin(desktop->pin_input_view);
@@ -128,7 +128,7 @@ bool desktop_scene_pin_input_on_event(void* context, SceneManagerEvent event) {
                 desktop_scene_locked_light_red(true);
                 desktop_view_pin_input_set_label_primary(desktop->pin_input_view, 0, 0, NULL);
                 desktop_view_pin_input_set_label_secondary(
-                    desktop->pin_input_view, 25, 25, "Wrong PIN try again:");
+                    desktop->pin_input_view, 25, 25, "Spatny PIN, zkuste to znovu:");
                 desktop_scene_pin_input_set_timer(desktop, true, WRONG_PIN_HEADER_TIMEOUT);
                 desktop_scene_pin_input_update_wrong_count(state, desktop);
                 desktop_view_pin_input_reset_pin(desktop->pin_input_view);
@@ -139,7 +139,7 @@ bool desktop_scene_pin_input_on_event(void* context, SceneManagerEvent event) {
             desktop_scene_locked_light_red(false);
             desktop_view_pin_input_set_label_primary(desktop->pin_input_view, 0, 0, NULL);
             desktop_view_pin_input_set_label_secondary(
-                desktop->pin_input_view, 44, 25, "Enter PIN:");
+                desktop->pin_input_view, 44, 25, "Zadejte PIN:");
             desktop_scene_pin_input_update_wrong_count(state, desktop);
             consumed = true;
             break;

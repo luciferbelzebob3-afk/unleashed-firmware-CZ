@@ -66,7 +66,7 @@ static void nfc_scene_more_info_on_enter_mf_ultralight(NfcApp* instance) {
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeRight,
-            "Raw Data",
+            "Surova data",
             nfc_protocol_support_common_widget_callback,
             instance);
 
@@ -136,7 +136,7 @@ static NfcCommand
             // can permanently lock the card. So NEVER authenticate automatically on a plain read;
             // only when the user explicitly asked for it:
             //   - Manual key entry -> try their DataProtKey.
-            //   - "Reveal Real UID" (Random ID cards) -> try the default all-zero UIDRetrKey to
+            //   - "Odhalit skutecne UID" (Random ID cards) -> try the default all-zero UIDRetrKey to
             //     reveal the hidden static UID (kept in pages 0-1, shown as "Real UID" in config).
             //     A non-default UIDRetrKey fails and keeps showing the random UID.
             if(instance->mf_ul_auth->type == MfUltralightAuthTypeManual) {
@@ -288,13 +288,13 @@ static void nfc_scene_read_and_saved_menu_on_enter_mf_ultralight(NfcApp* instanc
         submenu_remove_item(submenu, SubmenuIndexCommonWrite);
         submenu_add_item(
             submenu,
-            "Write (Keep Key)",
+            "Zapsat (ponechat klic)",
             SubmenuIndexWriteKeepKey,
             nfc_protocol_support_common_submenu_callback,
             instance);
         submenu_add_item(
             submenu,
-            "Write (Copy Key)",
+            "Zapsat (zkopirovat klic)",
             SubmenuIndexWriteCopyKey,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -313,7 +313,7 @@ static void nfc_scene_read_and_saved_menu_on_enter_mf_ultralight(NfcApp* instanc
         if(data->type == MfUltralightTypeMfulC || data->type == MfUltralightTypeUltralightAES) {
             submenu_add_item(
                 submenu,
-                "Unlock with Dictionary",
+                "Odemknout slovnikem",
                 SubmenuIndexDictAttack,
                 nfc_protocol_support_common_submenu_callback,
                 instance);
@@ -326,7 +326,7 @@ static void nfc_scene_read_and_saved_menu_on_enter_mf_ultralight(NfcApp* instanc
        data->iso14443_3a_data->uid[0] == 0x08) {
         submenu_add_item(
             submenu,
-            "Reveal Real UID",
+            "Odhalit skutecne UID",
             SubmenuIndexRevealUid,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -564,7 +564,7 @@ static NfcCommand
         command = NfcCommandStop;
     } else if(mf_ultralight_event->type == MfUltralightPollerEventTypeCardLocked) {
         furi_string_set(
-            instance->text_box_store, "Card protected by\npassword, AUTH0\nor lock bits");
+            instance->text_box_store, "Karta je chranena\nheslem, AUTH0 nebo\nzamykacimi bity");
         view_dispatcher_send_custom_event(instance->view_dispatcher, NfcCustomEventPollerFailure);
         command = NfcCommandStop;
     } else if(mf_ultralight_event->type == MfUltralightPollerEventTypeWriteFail) {

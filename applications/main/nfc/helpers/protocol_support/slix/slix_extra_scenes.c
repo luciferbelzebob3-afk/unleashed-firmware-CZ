@@ -23,13 +23,13 @@ static void slix_scene_unlock_menu_on_enter(NfcApp* instance) {
         scene_manager_get_scene_state(instance->scene_manager, NfcSceneSlixUnlockMenu);
     submenu_add_item(
         submenu,
-        "Enter Password Manually",
+        "Zadat heslo rucne",
         SubmenuIndexSlixUnlockMenuManual,
         slix_scene_unlock_menu_submenu_callback,
         instance);
     submenu_add_item(
         submenu,
-        "Auth As TommyBox",
+        "Autentizovat jako TommyBox",
         SubmenuIndexSlixUnlockMenuTonieBox,
         slix_scene_unlock_menu_submenu_callback,
         instance);
@@ -129,9 +129,9 @@ static NfcCommand slix_scene_unlock_worker_callback(NfcGenericEvent event, void*
 
 static void slix_scene_unlock_on_enter(NfcApp* instance) {
     popup_set_icon(instance->popup, 0, 8, &I_NFC_manual_60x50);
-    popup_set_header(instance->popup, "Unlocking", 97, 15, AlignCenter, AlignTop);
+    popup_set_header(instance->popup, "Odemykani", 97, 15, AlignCenter, AlignTop);
     popup_set_text(
-        instance->popup, "Hold card next\nto Flipper's back", 94, 27, AlignCenter, AlignTop);
+        instance->popup, "Prilozte kartu\nk zadni strane Flipperu", 94, 27, AlignCenter, AlignTop);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewPopup);
 
     notification_message(instance->notifications, &sequence_blink_start_yellow);
@@ -183,7 +183,7 @@ static void
 
 static void slix_scene_unlock_success_on_enter(NfcApp* instance) {
     Widget* widget = instance->widget;
-    widget_add_string_element(widget, 0, 0, AlignLeft, AlignTop, FontPrimary, "SLIX Unlocked!");
+    widget_add_string_element(widget, 0, 0, AlignLeft, AlignTop, FontPrimary, "SLIX odemceno!");
 
     FuriString* temp_str = furi_string_alloc_set_str("UID:");
     size_t uid_len = 0;
@@ -197,9 +197,9 @@ static void slix_scene_unlock_success_on_enter(NfcApp* instance) {
     furi_string_free(temp_str);
 
     widget_add_button_element(
-        widget, GuiButtonTypeLeft, "Retry", slix_scene_unlock_success_widget_callback, instance);
+        widget, GuiButtonTypeLeft, "Znovu", slix_scene_unlock_success_widget_callback, instance);
     widget_add_button_element(
-        widget, GuiButtonTypeRight, "More", slix_scene_unlock_success_widget_callback, instance);
+        widget, GuiButtonTypeRight, "Dalsi", slix_scene_unlock_success_widget_callback, instance);
 
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewWidget);
 }
