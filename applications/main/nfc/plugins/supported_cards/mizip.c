@@ -249,7 +249,7 @@ static bool mizip_parse(const NfcDevice* device, FuriString* parsed_data) {
             furi_string_cat_printf(
                 parsed_data, "\nCurrent Credit: %d.%02d E \n", balance / 100, balance % 100);
         } else {
-            furi_string_cat(parsed_data, "\nCurrent Credit: Unknown\n");
+            furi_string_cat(parsed_data, "\nAktualni kredit: neznamy\n");
         }
         if(previous_credit_read) {
             furi_string_cat_printf(
@@ -258,7 +258,7 @@ static bool mizip_parse(const NfcDevice* device, FuriString* parsed_data) {
                 previous_balance / 100,
                 previous_balance % 100);
         } else {
-            furi_string_cat(parsed_data, "Previous Credit: Unknown\n");
+            furi_string_cat(parsed_data, "Predchozi kredit: neznamy\n");
         }
 
         parsed = true;

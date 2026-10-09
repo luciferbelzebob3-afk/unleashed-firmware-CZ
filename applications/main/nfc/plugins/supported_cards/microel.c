@@ -211,7 +211,7 @@ static bool microel_parse(const NfcDevice* device, FuriString* parsed_data) {
                 parsed_data, "\nCurrent Credit: %d.%02d E \n", balance / 100, balance % 100);
         } else {
             FURI_LOG_D(TAG, "Block 4 holds no data");
-            furi_string_cat(parsed_data, "\nCurrent Credit: Unknown\n");
+            furi_string_cat(parsed_data, "\nAktualni kredit: neznamy\n");
         }
         if(mf_classic_parser_block_has_data(data, 5)) {
             furi_string_cat_printf(
@@ -221,7 +221,7 @@ static bool microel_parse(const NfcDevice* device, FuriString* parsed_data) {
                 previous_balance % 100);
         } else {
             FURI_LOG_D(TAG, "Block 5 holds no data");
-            furi_string_cat(parsed_data, "Previous Credit: Unknown\n");
+            furi_string_cat(parsed_data, "Predchozi kredit: neznamy\n");
         }
 
         parsed = true;

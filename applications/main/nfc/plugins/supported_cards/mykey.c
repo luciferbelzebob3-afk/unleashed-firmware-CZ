@@ -88,7 +88,7 @@ static bool mykey_parse(const NfcDevice* device, FuriString* parsed_data) {
     furi_string_cat_printf(parsed_data, "Serial#: %08lX\n", (uint32_t)__bswap32(data->blocks[7]));
     furi_string_cat_printf(
         parsed_data, "Prod. date: %02X/%02X/%04X\n", mfg_day, mfg_month, mfg_year);
-    furi_string_cat_printf(parsed_data, "Blank: %s\n", is_blank ? "yes" : "no");
+    furi_string_cat_printf(parsed_data, "Prazdna: %s\n", is_blank ? "ano" : "ne");
     furi_string_cat_printf(parsed_data, "LockID: %s", mykey_has_lockid(data) ? "maybe" : "no");
 
     if(!is_blank) {
@@ -97,7 +97,7 @@ static bool mykey_parse(const NfcDevice* device, FuriString* parsed_data) {
 
         uint32_t block3C = data->blocks[0x3C];
         if(block3C == 0xFFFFFFFF) {
-            furi_string_cat(parsed_data, "No history available!");
+            furi_string_cat(parsed_data, "Historie neni k dispozici!");
         } else {
             block3C ^= data->blocks[0x07];
             uint32_t startingOffset = ((block3C & 0x30000000) >> 28) |
@@ -118,7 +118,7 @@ static bool mykey_parse(const NfcDevice* device, FuriString* parsed_data) {
 
                 if(txnOffset == 8) {
                     furi_string_cat_printf(
-                        parsed_data, "Current credit: %d.%02d euros\n", credit / 100, credit % 100);
+                        parsed_data, "Aktualni kredit: %d.%02d EUR\n", credit / 100, credit % 100);
                     furi_string_cat(parsed_data, "Op. history (newest first):");
                 }
 

@@ -45,7 +45,7 @@
 #define NDEF_TITLE(device, parsed_data)    \
     furi_string_printf(                    \
         parsed_data,                       \
-        "\e#NDEF Format Data\nCard: %s\n", \
+        "\e#Data formatovani NDEF\nKarta: %s\n", \
         nfc_device_get_name(device, NfcDeviceNameTypeFull))
 
 // ---=== structures ===---
@@ -553,7 +553,7 @@ static bool ndef_parse_wifi(Ndef* ndef, size_t pos, size_t len) {
                     const char* auth;
                     switch(auth_type) {
                     case AUTH_TYPE_OPEN:
-                        auth = "Open";
+                        auth = "Otevrene";
                         break;
                     case AUTH_TYPE_WPA_PSK:
                         auth = "WPA Personal";
@@ -571,7 +571,7 @@ static bool ndef_parse_wifi(Ndef* ndef, size_t pos, size_t len) {
                         auth = "WPA/WPA2 Personal";
                         break;
                     default:
-                        auth = "Unknown";
+                        auth = "Neznamy";
                         break;
                     }
                     ndef_print(ndef, "AUTH", auth, strlen(auth), false);
@@ -586,7 +586,7 @@ static bool ndef_parse_wifi(Ndef* ndef, size_t pos, size_t len) {
         pos += field_len;
     }
 
-    furi_string_cat(ndef->output, "No data parsed\n");
+    furi_string_cat(ndef->output, "Nebyla dekodovana zadna data\n");
     return true;
 }
 
@@ -611,7 +611,7 @@ bool ndef_parse_record(
     uint8_t type_len) {
     FURI_LOG_D(TAG, "payload type: %.*s len: %hu pos: %zu", type_len, type, len, pos);
     if(!len) {
-        furi_string_cat(ndef->output, "Empty\n");
+        furi_string_cat(ndef->output, "Prazdne\n");
         return true;
     }
 
@@ -619,10 +619,10 @@ bool ndef_parse_record(
     case NdefTnfWellKnownType:
         if(strncmp("Sp", type, type_len) == 0) {
             if(ndef->smart_poster_depth >= NDEF_SMART_POSTER_MAX_DEPTH) {
-                furi_string_cat(ndef->output, "SmartPoster\nNesting too deep\n\n");
+                furi_string_cat(ndef->output, "SmartPoster\nPrilis hluboke zanoreni\n\n");
                 return false;
             }
-            furi_string_cat(ndef->output, "SmartPoster\nContained records below\n\n");
+            furi_string_cat(ndef->output, "SmartPoster\nNize jsou vlozene zaznamy\n\n");
             ndef->smart_poster_depth++;
             bool parsed = ndef_parse_message(ndef, pos, len, 0, true);
             ndef->smart_poster_depth--;
@@ -633,8 +633,8 @@ bool ndef_parse_record(
             return ndef_parse_text(ndef, pos, len);
         }
         // Dump data without parsing
-        furi_string_cat(ndef->output, "Unknown\n");
-        ndef_print(ndef, "Well-known Type", type, type_len, false);
+        furi_string_cat(ndef->output, "Neznamy\n");
+        ndef_print(ndef, "Znamy typ", type, type_len, false);
         if(!ndef_dump(ndef, "Payload", pos, len, false)) return false;
         return true;
 
@@ -647,7 +647,7 @@ bool ndef_parse_record(
             return ndef_parse_wifi(ndef, pos, len);
         }
         // Dump data without parsing
-        furi_string_cat(ndef->output, "Unknown\n");
+        furi_string_cat(ndef->output, "Neznamy\n");
         ndef_print(ndef, "Media Type", type, type_len, false);
         if(!ndef_dump(ndef, "Payload", pos, len, false)) return false;
         return true;
