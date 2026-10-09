@@ -67,7 +67,7 @@ const uint32_t clock_enable_value[CLOCK_ENABLE_COUNT] = {0, 1};
 #define BATTERY_VIEW_COUNT 6
 
 const char* const battery_view_count_text[BATTERY_VIEW_COUNT] =
-    {"Bar", "%", "Inv. %", "Retro 3", "Retro 5", "Bar %"};
+    {"Sloupec", "%", "Obr. %", "Retro 3", "Retro 5", "Sloupec %"};
 
 const uint32_t displayBatteryPercentage_value[BATTERY_VIEW_COUNT] = {
     DISPLAY_BATTERY_BAR,
