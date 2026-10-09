@@ -48,7 +48,7 @@ static void js_subghz_set_rx(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -67,7 +67,7 @@ static void js_subghz_set_idle(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -86,7 +86,7 @@ static void js_subghz_get_rssi(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -106,7 +106,7 @@ static void js_subghz_get_state(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -136,7 +136,7 @@ static void js_subghz_is_external(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -150,27 +150,27 @@ static void js_subghz_set_frequency(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
 
     if(js_subghz->state != JsSubghzRadioStateIDLE) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not in IDLE state");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni ve stavu IDLE");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
 
     mjs_val_t frequency_arg = mjs_arg(mjs, 0);
     if(!mjs_is_number(frequency_arg)) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Frequency must be a number");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Frekvence musi byt cislo");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
     int32_t frequency = mjs_get_int32(mjs, frequency_arg);
 
     if(!subghz_devices_is_frequency_valid(js_subghz->radio_device, frequency)) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Invalid frequency");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Neplatna frekvence");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -186,7 +186,7 @@ static void js_subghz_get_frequency(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -200,21 +200,21 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
 
     mjs_val_t file = mjs_arg(mjs, 0);
     if(!mjs_is_string(file)) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "File must be a string");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nazev souboru musi byt textovy retezec");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
 
     const char* file_path = mjs_get_string(mjs, &file, NULL);
     if(!file_path) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Failed to get file path");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nepodarilo se ziskat cestu k souboru");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -242,7 +242,7 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
     if(!flipper_format_file_open_existing(fff_file, file_path)) {
         flipper_format_free(fff_file);
         furi_record_close(RECORD_STORAGE);
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Failed to open file");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nepodarilo se otevrit soubor");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -276,16 +276,16 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
             (!strcmp(furi_string_get_cstr(temp_str), SUBGHZ_RAW_FILE_TYPE))) &&
            temp_data32 == SUBGHZ_KEY_FILE_VERSION) {
         } else {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Type or version mismatch");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nesouhlasi typ nebo verze");
             break;
         }
         if(!flipper_format_read_uint32(fff_file, "Frequency", &frequency, 1)) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Missing Frequency");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Chybi frekvence");
             break;
         }
 
         if(!subghz_devices_is_frequency_valid(js_subghz->radio_device, frequency)) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Unsupported frequency");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nepodporovana frekvence");
             break;
         }
 
@@ -296,7 +296,7 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
 
         FuriHalSubGhzPreset preset = js_subghz_get_preset_name(furi_string_get_cstr(temp_str));
         if(preset == FuriHalSubGhzPresetIDLE) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Unknown preset");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Neznamy preset");
             break;
         }
 
@@ -307,13 +307,13 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
             uint8_t* custom_preset_data;
             if(!flipper_format_get_value_count(fff_file, "Custom_preset_data", &temp_data32) ||
                !temp_data32 || (temp_data32 % 2)) {
-                mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Custom_preset_data size error");
+                mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Custom_preset_data: chyba velikosti");
                 break;
             }
             custom_preset_data = malloc(temp_data32);
             if(!flipper_format_read_hex(
                    fff_file, "Custom_preset_data", custom_preset_data, temp_data32)) {
-                mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Custom_preset_data read error");
+                mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Custom_preset_data: chyba cteni");
                 break;
             }
             subghz_devices_load_preset(js_subghz->radio_device, preset, custom_preset_data);
@@ -325,7 +325,7 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
         js_subghz->frequency = subghz_devices_set_frequency(js_subghz->radio_device, frequency);
 
         if(!flipper_format_read_string(fff_file, "Protocol", temp_str)) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Missing protocol");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Chybi protokol");
             break;
         }
 
@@ -361,14 +361,14 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
 
         transmitter = subghz_transmitter_alloc_init(environment, furi_string_get_cstr(temp_str));
         if(!transmitter) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Failed to init transmitter");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nepodarilo se inicializovat vysilac");
             break;
         }
 
         SubGhzProtocolStatus status =
             subghz_transmitter_deserialize(transmitter, is_raw ? fff_raw : fff_file);
         if(status != SubGhzProtocolStatusOk) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Failed to deserialize protocol");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nepodarilo se dekodovat protokol");
             break;
         }
         // Must close file here, otherwise RAW protocol cannot open
@@ -384,7 +384,7 @@ static void js_subghz_transmit_file(struct mjs* mjs) {
             if(!subghz_devices_start_async_tx(
                    js_subghz->radio_device, subghz_transmitter_yield, transmitter)) {
                 is_sent = false;
-                mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Failed to start async tx");
+                mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Nepodarilo se spustit asynchronni vysilani");
                 break;
             }
             while(!subghz_devices_is_async_complete_tx(js_subghz->radio_device)) {
@@ -470,7 +470,7 @@ static void js_subghz_end(struct mjs* mjs) {
     furi_assert(js_subghz);
 
     if(!js_subghz->radio_device) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio is not setup");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Radio neni nastaveno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
