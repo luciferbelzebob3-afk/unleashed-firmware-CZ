@@ -7,6 +7,16 @@ on:
     paths:
       - ".translation-audit/**"
       - ".github/workflows/czech-translation-audit.yml"
+      - "applications/**"
+      - "applications_user/**"
+      - "assets/**"
+      - "documentation/**"
+      - "furi/**"
+      - "lib/**"
+      - "targets/**"
+      - "scripts/**"
+      - "firmware/**"
+      - "site_scons/**"
 
 permissions:
   contents: read
