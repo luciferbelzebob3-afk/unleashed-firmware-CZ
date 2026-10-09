@@ -147,15 +147,15 @@ static void loader_show_gui_error(
             break;*/
         case LoaderStatusErrorOutOfMemory:
             dialog_message_set_header(
-                message, "Error: Out of Memory", 64, 0, AlignCenter, AlignTop);
+                message, "Chyba: nedostatek pameti", 64, 0, AlignCenter, AlignTop);
             dialog_message_set_text(
                 message,
-                "Not enough RAM to run the\napp. Please reboot the device",
+                "Nedostatek RAM pro spusteni\naplikace. Restartuj zarizeni",
                 64,
                 13,
                 AlignCenter,
                 AlignTop);
-            dialog_message_set_buttons(message, NULL, NULL, "Reboot");
+            dialog_message_set_buttons(message, NULL, NULL, "Restartovat");
             if(dialog_message_show(dialogs, message) == DialogMessageButtonRight) {
                 furi_hal_power_reset();
             }
