@@ -28,7 +28,7 @@ void storage_settings_scene_internal_info_on_enter(void* context) {
     } else {
         furi_string_printf(
             app->text_string,
-            "Name: %s\nType: Virtual (/.int on SD)\nTotal: %lu KiB\nFree: %lu KiB\n",
+            "Nazev: %s\nTyp: virtualni (/.int na SD)\nCelkem: %lu KiB\nVolne: %lu KiB\n",
             furi_hal_version_get_name_ptr() ? furi_hal_version_get_name_ptr() : "Neznamy",
             (uint32_t)(total_space / 1024),
             (uint32_t)(free_space / 1024));

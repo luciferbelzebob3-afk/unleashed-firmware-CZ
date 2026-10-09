@@ -22,12 +22,12 @@ void storage_settings_scene_sd_info_on_enter(void* context) {
         dialog_ex_set_icon(dialog_ex, 83, 22, &I_WarningDolphinFlip_45x42);
         dialog_ex_set_header(dialog_ex, "SD karta neni pripojena", 64, 3, AlignCenter, AlignTop);
         dialog_ex_set_text(
-            dialog_ex, "Try to reinsert\nor format SD\ncard.", 3, 19, AlignLeft, AlignTop);
+            dialog_ex, "Zkus SD kartu znovu\nvlozit nebo ji\nnaformatovat.", 3, 19, AlignLeft, AlignTop);
         dialog_ex_set_center_button_text(dialog_ex, "OK");
     } else {
         furi_string_printf(
             app->text_string,
-            "Label: %s\nType: %s\n",
+            "Nazev: %s\nTyp: %s\n",
             sd_info.label,
             sd_api_get_fs_type_text(sd_info.fs_type));
 
@@ -37,7 +37,7 @@ void storage_settings_scene_sd_info_on_enter(void* context) {
             furi_string_cat_printf(app->text_string, "Total: %lu MiB\n", sd_info.kb_total / 1024);
         } else {
             furi_string_cat_printf(
-                app->text_string, "Total: %lu GiB\n", sd_info.kb_total / (1024 * 1024));
+                app->text_string, "Celkem: %lu GiB\n", sd_info.kb_total / (1024 * 1024));
         }
 
         if(sd_info.kb_free < 1024) {
@@ -46,7 +46,7 @@ void storage_settings_scene_sd_info_on_enter(void* context) {
             furi_string_cat_printf(app->text_string, "Free: %lu MiB\n", sd_info.kb_free / 1024);
         } else {
             furi_string_cat_printf(
-                app->text_string, "Free: %lu GiB\n", sd_info.kb_free / (1024 * 1024));
+                app->text_string, "Volne: %lu GiB\n", sd_info.kb_free / (1024 * 1024));
         }
 
         furi_string_cat_printf(
