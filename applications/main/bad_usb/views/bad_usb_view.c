@@ -32,7 +32,7 @@ static void bad_usb_draw_callback(Canvas* canvas, void* _model) {
     canvas_draw_str(canvas, 2, 8, furi_string_get_cstr(disp_str));
 
     if(strlen(model->layout) == 0) {
-        furi_string_set(disp_str, "(default)");
+        furi_string_set(disp_str, "(vychozi)");
     } else {
         furi_string_printf(disp_str, "(%s)", model->layout);
     }
@@ -58,41 +58,41 @@ static void bad_usb_draw_callback(Canvas* canvas, void* _model) {
 
     if((state == BadUsbStateIdle) || (state == BadUsbStateDone) ||
        (state == BadUsbStateNotConnected)) {
-        elements_button_center(canvas, "Run");
-        elements_button_left(canvas, "Config");
+        elements_button_center(canvas, "Spustit");
+        elements_button_left(canvas, "Nastav.");
         elements_button_right(canvas, model->interface == BadUsbHidInterfaceBle ? "USB" : "BLE");
     } else if((state == BadUsbStateRunning) || (state == BadUsbStateDelay)) {
-        elements_button_center(canvas, "Stop");
+        elements_button_center(canvas, "Zastavit");
         if(!model->pause_wait) {
-            elements_button_right(canvas, "Pause");
+            elements_button_right(canvas, "Pozastavit");
         }
     } else if(state == BadUsbStatePaused) {
-        elements_button_center(canvas, "End");
-        elements_button_right(canvas, "Resume");
+        elements_button_center(canvas, "Ukoncit");
+        elements_button_right(canvas, "Pokracovat");
     } else if(state == BadUsbStateWaitForBtn) {
-        elements_button_center(canvas, "Press to continue");
+        elements_button_center(canvas, "Stiskni pro pokracovani");
     } else if(state == BadUsbStateWillRun) {
-        elements_button_center(canvas, "Cancel");
+        elements_button_center(canvas, "Zrusit");
     }
 
     if(state == BadUsbStateNotConnected) {
         canvas_draw_icon(canvas, 4, 26, &I_Clock_18x18);
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 127, 31, AlignRight, AlignBottom, "Connect");
-        canvas_draw_str_aligned(canvas, 127, 43, AlignRight, AlignBottom, "to device");
+        canvas_draw_str_aligned(canvas, 127, 31, AlignRight, AlignBottom, "Pripojit");
+        canvas_draw_str_aligned(canvas, 127, 43, AlignRight, AlignBottom, "k zarizeni");
     } else if(state == BadUsbStateWillRun) {
         canvas_draw_icon(canvas, 4, 26, &I_Clock_18x18);
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 127, 31, AlignRight, AlignBottom, "Will run");
-        canvas_draw_str_aligned(canvas, 127, 43, AlignRight, AlignBottom, "on connect");
+        canvas_draw_str_aligned(canvas, 127, 31, AlignRight, AlignBottom, "Spusti se");
+        canvas_draw_str_aligned(canvas, 127, 43, AlignRight, AlignBottom, "po pripojeni");
     } else if(state == BadUsbStateFileError) {
         canvas_draw_icon(canvas, 4, 26, &I_Error_18x18);
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 127, 31, AlignRight, AlignBottom, "File");
-        canvas_draw_str_aligned(canvas, 127, 43, AlignRight, AlignBottom, "ERROR");
+        canvas_draw_str_aligned(canvas, 127, 31, AlignRight, AlignBottom, "Soubor");
+        canvas_draw_str_aligned(canvas, 127, 43, AlignRight, AlignBottom, "CHYBA");
     } else if(state == BadUsbStateScriptError) {
         canvas_draw_icon(canvas, 4, 26, &I_Error_18x18);
-        furi_string_printf(disp_str, "line %zu", model->state.error_line);
+        furi_string_printf(disp_str, "radek %zu", model->state.error_line);
         canvas_draw_str_aligned(
             canvas, 127, 46, AlignRight, AlignBottom, furi_string_get_cstr(disp_str));
         furi_string_set_str(disp_str, model->state.error);
@@ -100,7 +100,7 @@ static void bad_usb_draw_callback(Canvas* canvas, void* _model) {
         canvas_draw_str_aligned(
             canvas, 127, 56, AlignRight, AlignBottom, furi_string_get_cstr(disp_str));
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 127, 33, AlignRight, AlignBottom, "ERROR:");
+        canvas_draw_str_aligned(canvas, 127, 33, AlignRight, AlignBottom, "CHYBA:");
     } else if(state == BadUsbStateIdle) {
         canvas_draw_icon(canvas, 4, 26, &I_Smile_18x18);
         furi_string_printf(disp_str, "0/%zu", model->state.line_nb);

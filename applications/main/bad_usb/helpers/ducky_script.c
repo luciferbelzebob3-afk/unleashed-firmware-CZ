@@ -222,7 +222,7 @@ static int32_t ducky_parse_line(BadUsbScript* bad_usb, FuriString* line) {
     char next_char = *line_cstr;
     key = modifiers | ducky_get_keycode(bad_usb, line_cstr, false);
 
-    if(key == 0 && next_char) ducky_error(bad_usb, "No keycode defined for %s", line_cstr);
+    if(key == 0 && next_char) ducky_error(bad_usb, "Neni definovan kod klavesy pro %s", line_cstr);
 
     bad_usb->hid->kb_press(bad_usb->hid_inst, key);
     bad_usb->hid->kb_release(bad_usb->hid_inst, key);
@@ -362,7 +362,7 @@ static int32_t ducky_script_execute_next(BadUsbScript* bad_usb, File* script_fil
             return delay_val;
         } else if(delay_val < 0) { // Script error
             bad_usb->st.error_line = bad_usb->st.line_cur - 1;
-            FURI_LOG_E(WORKER_TAG, "Unknown command at line %zu", bad_usb->st.line_cur - 1U);
+            FURI_LOG_E(WORKER_TAG, "Neznamy prikaz na radku %zu", bad_usb->st.line_cur - 1U);
             return SCRIPT_STATE_ERROR;
         } else {
             return delay_val + bad_usb->defdelay;
@@ -401,7 +401,7 @@ static int32_t ducky_script_execute_next(BadUsbScript* bad_usb, File* script_fil
                     return delay_val;
                 } else if(delay_val < 0) {
                     bad_usb->st.error_line = bad_usb->st.line_cur;
-                    FURI_LOG_E(WORKER_TAG, "Unknown command at line %zu", bad_usb->st.line_cur);
+                    FURI_LOG_E(WORKER_TAG, "Neznamy prikaz na radku %zu", bad_usb->st.line_cur);
                     return SCRIPT_STATE_ERROR;
                 } else {
                     return delay_val + bad_usb->defdelay;
@@ -463,7 +463,7 @@ static int32_t bad_usb_worker(void* context) {
                     worker_state = BadUsbStateScriptError; // Script preload error
                 }
             } else {
-                FURI_LOG_E(WORKER_TAG, "File open error");
+                FURI_LOG_E(WORKER_TAG, "Chyba pri otevreni souboru");
                 worker_state = BadUsbStateFileError; // File open error
             }
             bad_usb->st.state = worker_state;

@@ -21,7 +21,7 @@ static int32_t ducky_fnc_delay(BadUsbScript* bad_usb, const char* line, int32_t 
         return (int32_t)delay_val;
     }
 
-    return ducky_error(bad_usb, "Invalid number %s", line);
+    return ducky_error(bad_usb, "Neplatne cislo %s", line);
 }
 
 static int32_t ducky_fnc_defdelay(BadUsbScript* bad_usb, const char* line, int32_t param) {
@@ -30,7 +30,7 @@ static int32_t ducky_fnc_defdelay(BadUsbScript* bad_usb, const char* line, int32
     line = &line[ducky_get_command_len(line) + 1];
     bool state = ducky_get_number(line, &bad_usb->defdelay);
     if(!state) {
-        return ducky_error(bad_usb, "Invalid number %s", line);
+        return ducky_error(bad_usb, "Neplatne cislo %s", line);
     }
     return 0;
 }
@@ -41,7 +41,7 @@ static int32_t ducky_fnc_strdelay(BadUsbScript* bad_usb, const char* line, int32
     line = &line[ducky_get_command_len(line) + 1];
     bool state = ducky_get_number(line, &bad_usb->stringdelay);
     if(!state) {
-        return ducky_error(bad_usb, "Invalid number %s", line);
+        return ducky_error(bad_usb, "Neplatne cislo %s", line);
     }
     return 0;
 }
@@ -52,7 +52,7 @@ static int32_t ducky_fnc_defstrdelay(BadUsbScript* bad_usb, const char* line, in
     line = &line[ducky_get_command_len(line) + 1];
     bool state = ducky_get_number(line, &bad_usb->defstringdelay);
     if(!state) {
-        return ducky_error(bad_usb, "Invalid number %s", line);
+        return ducky_error(bad_usb, "Neplatne cislo %s", line);
     }
     return 0;
 }
@@ -68,7 +68,7 @@ static int32_t ducky_fnc_string(BadUsbScript* bad_usb, const char* line, int32_t
        bad_usb->defstringdelay == 0) { // stringdelay not set - run command immediately
         bool state = ducky_string(bad_usb, furi_string_get_cstr(bad_usb->string_print));
         if(!state) {
-            return ducky_error(bad_usb, "Invalid string %s", line);
+            return ducky_error(bad_usb, "Neplatny retezec %s", line);
         }
     } else { // stringdelay is set - run command in thread to keep handling external events
         return SCRIPT_STATE_STRING_START;
@@ -83,7 +83,7 @@ static int32_t ducky_fnc_repeat(BadUsbScript* bad_usb, const char* line, int32_t
     line = &line[ducky_get_command_len(line) + 1];
     bool state = ducky_get_number(line, &bad_usb->repeat_cnt);
     if((!state) || (bad_usb->repeat_cnt == 0)) {
-        return ducky_error(bad_usb, "Invalid number %s", line);
+        return ducky_error(bad_usb, "Neplatne cislo %s", line);
     }
     return 0;
 }
@@ -106,7 +106,7 @@ static int32_t ducky_fnc_altchar(BadUsbScript* bad_usb, const char* line, int32_
     ducky_numlock_on(bad_usb);
     bool state = ducky_altchar(bad_usb, line);
     if(!state) {
-        return ducky_error(bad_usb, "Invalid altchar %s", line);
+        return ducky_error(bad_usb, "Neplatny znak Alt %s", line);
     }
     return 0;
 }
@@ -118,7 +118,7 @@ static int32_t ducky_fnc_altstring(BadUsbScript* bad_usb, const char* line, int3
     ducky_numlock_on(bad_usb);
     bool state = ducky_altstring(bad_usb, line);
     if(!state) {
-        return ducky_error(bad_usb, "Invalid altstring %s", line);
+        return ducky_error(bad_usb, "Neplatny retezec Alt %s", line);
     }
     return 0;
 }
@@ -128,7 +128,7 @@ static int32_t ducky_fnc_hold(BadUsbScript* bad_usb, const char* line, int32_t p
     line = &line[ducky_get_command_len(line) + 1];
 
     if(bad_usb->key_hold_nb > (HID_KB_MAX_KEYS - 1)) {
-        return ducky_error(bad_usb, "Too many keys are held");
+        return ducky_error(bad_usb, "Je stisknuto prilis mnoho klaves");
     }
 
     // Handle Mouse Keys here
@@ -148,7 +148,7 @@ static int32_t ducky_fnc_hold(BadUsbScript* bad_usb, const char* line, int32_t p
     }
 
     // keyboard and mouse were none
-    return ducky_error(bad_usb, "Unknown keycode for %s", line);
+    return ducky_error(bad_usb, "Neznamy kod klavesy pro %s", line);
 }
 
 static int32_t ducky_fnc_release(BadUsbScript* bad_usb, const char* line, int32_t param) {
@@ -156,7 +156,7 @@ static int32_t ducky_fnc_release(BadUsbScript* bad_usb, const char* line, int32_
     line = &line[ducky_get_command_len(line) + 1];
 
     if(bad_usb->key_hold_nb == 0) {
-        return ducky_error(bad_usb, "No keys are held");
+        return ducky_error(bad_usb, "Neni stisknuta zadna klavesa");
     }
 
     // Handle Mouse Keys here
@@ -176,7 +176,7 @@ static int32_t ducky_fnc_release(BadUsbScript* bad_usb, const char* line, int32_
     }
 
     // keyboard and mouse were none
-    return ducky_error(bad_usb, "No keycode defined for %s", line);
+    return ducky_error(bad_usb, "Neni definovan kod klavesy pro %s", line);
 }
 
 static int32_t ducky_fnc_media(BadUsbScript* bad_usb, const char* line, int32_t param) {
@@ -185,7 +185,7 @@ static int32_t ducky_fnc_media(BadUsbScript* bad_usb, const char* line, int32_t 
     line = &line[ducky_get_command_len(line) + 1];
     uint16_t key = ducky_get_media_keycode_by_name(line);
     if(key == HID_CONSUMER_UNASSIGNED) {
-        return ducky_error(bad_usb, "No keycode defined for %s", line);
+        return ducky_error(bad_usb, "Neni definovan kod klavesy pro %s", line);
     }
     bad_usb->hid->consumer_press(bad_usb->hid_inst, key);
     bad_usb->hid->consumer_release(bad_usb->hid_inst, key);
@@ -198,7 +198,7 @@ static int32_t ducky_fnc_globe(BadUsbScript* bad_usb, const char* line, int32_t 
     line = &line[ducky_get_command_len(line) + 1];
     uint16_t key = ducky_get_keycode(bad_usb, line, false);
     if(key == HID_KEYBOARD_NONE) {
-        return ducky_error(bad_usb, "No keycode defined for %s", line);
+        return ducky_error(bad_usb, "Neni definovan kod klavesy pro %s", line);
     }
 
     bad_usb->hid->consumer_press(bad_usb->hid_inst, HID_CONSUMER_FN_GLOBE);
@@ -223,7 +223,7 @@ static int32_t ducky_fnc_mouse_scroll(BadUsbScript* bad_usb, const char* line, i
     int32_t mouse_scroll_dist = 0;
 
     if(strint_to_int32(line, NULL, &mouse_scroll_dist, 10) != StrintParseNoError) {
-        return ducky_error(bad_usb, "Invalid Number %s", line);
+        return ducky_error(bad_usb, "Neplatne cislo %s", line);
     }
 
     bad_usb->hid->mouse_scroll(bad_usb->hid_inst, mouse_scroll_dist);
@@ -239,13 +239,13 @@ static int32_t ducky_fnc_mouse_move(BadUsbScript* bad_usb, const char* line, int
     int32_t mouse_move_y = 0;
 
     if(strint_to_int32(line, NULL, &mouse_move_x, 10) != StrintParseNoError) {
-        return ducky_error(bad_usb, "Invalid Number %s", line);
+        return ducky_error(bad_usb, "Neplatne cislo %s", line);
     }
 
     line = &line[strcspn(line, " ") + 1];
 
     if(strint_to_int32(line, NULL, &mouse_move_y, 10) != StrintParseNoError) {
-        return ducky_error(bad_usb, "Invalid Number %s", line);
+        return ducky_error(bad_usb, "Neplatne cislo %s", line);
     }
 
     bad_usb->hid->mouse_move(bad_usb->hid_inst, mouse_move_x, mouse_move_y);
