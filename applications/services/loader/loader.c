@@ -591,11 +591,11 @@ static LoaderMessageLoaderStatusResult loader_start_external_app(
                     dialog_message_set_text(message, text, 64, 32, AlignCenter, AlignCenter);
                     if(dialog_message_show(dialogs, message) == DialogMessageButtonRight) {
                         result.value = loader_make_status_error(
-                            LoaderStatusErrorApiMismatch, error_message, "API Mismatch");
+                            LoaderStatusErrorApiMismatch, error_message, "Nesoulad API");
                         result.error = loader_status_error_from_preload_status(preload_res);
                     } else {
                         result.value = loader_make_status_error(
-                            LoaderStatusErrorApiMismatchExit, error_message, "API Mismatch");
+                            LoaderStatusErrorApiMismatchExit, error_message, "Nesoulad API");
                         result.error = loader_status_error_from_preload_status(preload_res);
                     }
                     dialog_message_free(message);
@@ -607,7 +607,7 @@ static LoaderMessageLoaderStatusResult loader_start_external_app(
                 result.value = loader_make_status_error(
                     LoaderStatusErrorInternal,
                     error_message,
-                    "Preload failed, %s: %s",
+                    "Priprava aplikace selhala: %s: %s",
                     path,
                     err_msg);
                 result.error = loader_status_error_from_preload_status(preload_res);
@@ -620,7 +620,7 @@ static LoaderMessageLoaderStatusResult loader_start_external_app(
         if(load_status != FlipperApplicationLoadStatusSuccess) {
             const char* err_msg = flipper_application_load_status_to_string(load_status);
             result.value = loader_make_status_error(
-                LoaderStatusErrorInternal, error_message, "Load failed, %s: %s", path, err_msg);
+                LoaderStatusErrorInternal, error_message, "Nacteni aplikace selhalo: %s: %s", path, err_msg);
             result.error = loader_status_error_from_load_status(load_status);
             break;
         }
@@ -629,7 +629,7 @@ static LoaderMessageLoaderStatusResult loader_start_external_app(
 
         if(flipper_application_is_plugin(loader->app.fap)) {
             result.value = loader_make_status_error(
-                LoaderStatusErrorInternal, error_message, "Plugin %s is not runnable", path);
+                LoaderStatusErrorInternal, error_message, "Plugin %s nelze spustit", path);
             break;
         }
 
@@ -864,7 +864,7 @@ static LoaderMessageLoaderStatusResult loader_do_start_by_name(
                 status.value = loader_make_status_error(
                     LoaderStatusErrorAppStarted,
                     error_message,
-                    "Loader is locked, please close the \"%s\" first",
+                    "Spoustec je zamceny, nejdriv zavri \"%s\"",
                     current_thread_name);
             }
             break;
