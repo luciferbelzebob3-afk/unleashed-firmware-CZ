@@ -9,18 +9,18 @@
 #define SCROLL_DELAY    (2)
 
 static const char* ArchiveTabNames[] = {
-    [ArchiveTabFavorites] = "Favorites",
+    [ArchiveTabFavorites] = "Oblibene",
     [ArchiveTabIButton] = "iButton",
     [ArchiveTabNFC] = "NFC",
     [ArchiveTabSubGhz] = "Sub-GHz",
     [ArchiveTabSubGhzRemote] = "SubRem",
     [ArchiveTabLFRFID] = "RFID LF",
-    [ArchiveTabInfrared] = "Infrared",
+    [ArchiveTabInfrared] = "Infracervene",
     [ArchiveTabBadUsb] = "Bad USB",
     [ArchiveTabU2f] = "U2F",
-    [ArchiveTabApplications] = "Apps",
-    [ArchiveTabInternal] = "Internal",
-    [ArchiveTabBrowser] = "Browser",
+    [ArchiveTabApplications] = "Aplikace",
+    [ArchiveTabInternal] = "Interni",
+    [ArchiveTabBrowser] = "Prohlizec",
 };
 
 static const Icon* ArchiveItemIcons[] = {
@@ -56,55 +56,55 @@ static void contex_menu_filemanager_init(ArchiveBrowserViewModel* model) {
     if(model->item_cnt > 0) {
         if(model->clipboard_mode == CLIPBOARD_MODE_OFF) {
             archive_menu_add_item(
-                menu_array_push_raw(model->context_menu), "Cut", ArchiveBrowserEventFileMenuCut);
+                menu_array_push_raw(model->context_menu), "Vyjmout", ArchiveBrowserEventFileMenuCut);
             archive_menu_add_item(
-                menu_array_push_raw(model->context_menu), "Copy", ArchiveBrowserEventFileMenuCopy);
+                menu_array_push_raw(model->context_menu), "Kopirovat", ArchiveBrowserEventFileMenuCopy);
         } else if(model->clipboard_mode == CLIPBOARD_MODE_CUT) {
             archive_menu_add_item(
                 menu_array_push_raw(model->context_menu),
-                "Paste",
+                "Vlozit",
                 ArchiveBrowserEventFileMenuPaste_Cut);
         } else if(model->clipboard_mode == CLIPBOARD_MODE_COPY) {
             archive_menu_add_item(
                 menu_array_push_raw(model->context_menu),
-                "Paste",
+                "Vlozit",
                 ArchiveBrowserEventFileMenuPaste_Copy);
         }
 
         archive_menu_add_item(
-            menu_array_push_raw(model->context_menu), "NewDir", ArchiveBrowserEventFileMenuNewDir);
+            menu_array_push_raw(model->context_menu), "Nova slozka", ArchiveBrowserEventFileMenuNewDir);
         archive_menu_add_item(
-            menu_array_push_raw(model->context_menu), "Rename", ArchiveBrowserEventFileMenuRename);
+            menu_array_push_raw(model->context_menu), "Prejmenovat", ArchiveBrowserEventFileMenuRename);
         archive_menu_add_item(
-            menu_array_push_raw(model->context_menu), "Delete", ArchiveBrowserEventFileMenuDelete);
+            menu_array_push_raw(model->context_menu), "Smazat", ArchiveBrowserEventFileMenuDelete);
     } else {
         if(model->clipboard_mode == CLIPBOARD_MODE_CUT) {
             archive_menu_add_item(
                 menu_array_push_raw(model->context_menu),
-                "Paste",
+                "Vlozit",
                 ArchiveBrowserEventFileMenuPaste_Cut);
         } else if(model->clipboard_mode == CLIPBOARD_MODE_COPY) {
             archive_menu_add_item(
                 menu_array_push_raw(model->context_menu),
-                "Paste",
+                "Vlozit",
                 ArchiveBrowserEventFileMenuPaste_Copy);
         }
         archive_menu_add_item(
-            menu_array_push_raw(model->context_menu), "NewDir", ArchiveBrowserEventFileMenuNewDir);
+            menu_array_push_raw(model->context_menu), "Nova slozka", ArchiveBrowserEventFileMenuNewDir);
     }
 }
 
 static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
     if(menu_array_size(model->context_menu) == 0) {
         // Context menu is empty, init array
-        const char* item_pin = "Pin";
+        const char* item_pin = "Pripnout";
 
         // Need init context menu
         ArchiveFile_t* selected =
             files_array_get(model->files, model->item_idx - model->array_offset);
 
         if((selected->fav) || (model->tab_idx == ArchiveTabFavorites)) {
-            item_pin = "Unpin";
+            item_pin = "Odepnout";
         }
 
         if(selected->type == ArchiveFileTypeFolder) {
@@ -125,7 +125,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
                 if(model->tab_idx == ArchiveTabFavorites) {
                     archive_menu_add_item(
                         menu_array_push_raw(model->context_menu),
-                        "Move",
+                        "Presunout",
                         ArchiveBrowserEventEnterFavMove);
                 }
             }
@@ -140,12 +140,12 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
                 // Info, [Show],
                 archive_menu_add_item(
                     menu_array_push_raw(model->context_menu),
-                    "Info",
+                    "Informace",
                     ArchiveBrowserEventFileMenuInfo);
                 if(selected->is_text_file) {
                     archive_menu_add_item(
                         menu_array_push_raw(model->context_menu),
-                        "Show",
+                        "Zobrazit",
                         ArchiveBrowserEventFileMenuShow);
                 }
             }
@@ -158,7 +158,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
 
             model->menu_can_switch = false;
             archive_menu_add_item(
-                menu_array_push_raw(model->context_menu), "Run", ArchiveBrowserEventFileMenuRun);
+                menu_array_push_raw(model->context_menu), "Spustit", ArchiveBrowserEventFileMenuRun);
             archive_menu_add_item(
                 menu_array_push_raw(model->context_menu),
                 item_pin,
@@ -166,11 +166,11 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
             if(selected->type <= ArchiveFileTypeBadUsb) {
                 archive_menu_add_item(
                     menu_array_push_raw(model->context_menu),
-                    "Show",
+                    "Zobrazit",
                     ArchiveBrowserEventFileMenuShow);
             }
             archive_menu_add_item(
-                menu_array_push_raw(model->context_menu), "Move", ArchiveBrowserEventEnterFavMove);
+                menu_array_push_raw(model->context_menu), "Presunout", ArchiveBrowserEventEnterFavMove);
         } else if(selected->is_app) {
             // Only U2F?
             // Run, Info, [Show], Pin, Delete
@@ -178,13 +178,13 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
 
             //FURI_LOG_D(TAG, "3 types");
             archive_menu_add_item(
-                menu_array_push_raw(model->context_menu), "Run", ArchiveBrowserEventFileMenuRun);
+                menu_array_push_raw(model->context_menu), "Spustit", ArchiveBrowserEventFileMenuRun);
             archive_menu_add_item(
-                menu_array_push_raw(model->context_menu), "Info", ArchiveBrowserEventFileMenuInfo);
+                menu_array_push_raw(model->context_menu), "Informace", ArchiveBrowserEventFileMenuInfo);
             if(selected->type <= ArchiveFileTypeBadUsb) {
                 archive_menu_add_item(
                     menu_array_push_raw(model->context_menu),
-                    "Show",
+                    "Zobrazit",
                     ArchiveBrowserEventFileMenuShow);
             }
             archive_menu_add_item(
@@ -194,7 +194,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
 
             archive_menu_add_item(
                 menu_array_push_raw(model->context_menu),
-                "Delete",
+                "Smazat",
                 ArchiveBrowserEventFileMenuDelete);
         } else {
             // Other
@@ -209,7 +209,7 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
 
                 archive_menu_add_item(
                     menu_array_push_raw(model->context_menu),
-                    "Run",
+                    "Spustit",
                     ArchiveBrowserEventFileMenuRun);
                 archive_menu_add_item(
                     menu_array_push_raw(model->context_menu),
@@ -217,12 +217,12 @@ static void render_item_menu(Canvas* canvas, ArchiveBrowserViewModel* model) {
                     ArchiveBrowserEventFileMenuPin);
                 archive_menu_add_item(
                     menu_array_push_raw(model->context_menu),
-                    "Info",
+                    "Informace",
                     ArchiveBrowserEventFileMenuInfo);
                 if(selected->type <= ArchiveFileTypeBadUsb) {
                     archive_menu_add_item(
                         menu_array_push_raw(model->context_menu),
-                        "Show",
+                        "Zobrazit",
                         ArchiveBrowserEventFileMenuShow);
                 }
             }
@@ -426,7 +426,7 @@ static void archive_render_status_bar(Canvas* canvas, ArchiveBrowserViewModel* m
             9,
             AlignCenter,
             AlignBottom,
-            (model->clipboard_mode == CLIPBOARD_MODE_COPY) ? "Copy" : "Cut");
+            (model->clipboard_mode == CLIPBOARD_MODE_COPY) ? "Kopirovat" : "Vyjmout");
 
         canvas_set_color(canvas, ColorWhite);
         canvas_draw_dot(canvas, 93, 0);
