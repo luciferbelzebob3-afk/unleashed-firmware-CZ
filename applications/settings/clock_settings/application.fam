@@ -1,6 +1,6 @@
 App(
     appid="clock_settings",
-    name="Clock & Alarm",
+    name="Hodiny a budik",
     apptype=FlipperAppType.EXTSETTINGS,
     entry_point="clock_settings",
     requires=["gui"],
