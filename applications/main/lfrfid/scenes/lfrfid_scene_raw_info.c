@@ -16,7 +16,7 @@ void lfrfid_scene_raw_info_on_enter(void* context) {
             AlignTop,
             FontSecondary,
             "Vloz SD kartu\n"
-            "to use this function");
+            "pro pouziti teto funkce");
 
     } else {
         widget_add_text_box_element(
