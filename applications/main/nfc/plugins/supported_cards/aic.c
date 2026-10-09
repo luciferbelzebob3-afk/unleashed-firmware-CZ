@@ -643,7 +643,7 @@ bool aic_parse(const NfcDevice* device, FuriString* parsed_data) {
 
     furi_string_cat_str(
         parsed_data, "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-    furi_string_cat_str(parsed_data, "\nDeifrovane S-PAD 0:\n");
+    furi_string_cat_str(parsed_data, "\nDesifrovane S-PAD 0:\n");
     for(int i = 0; i < 16; i++) {
         furi_string_cat_printf(parsed_data, "%02X ", decrypted[i]);
         if(i == 7) {

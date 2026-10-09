@@ -36,9 +36,9 @@ static const struct {
     const char* type;
 } clipper_types[] = {
     // Application advertised on classic, plastic cards.
-    {.app = {.data = {0x90, 0x11, 0xf2}}, .type = "Card"},
+    {.app = {.data = {0x90, 0x11, 0xf2}}, .type = "Karta"},
     // Application advertised on a mobile device.
-    {.app = {.data = {0x91, 0x11, 0xf2}}, .type = "Mobile Device"},
+    {.app = {.data = {0x91, 0x11, 0xf2}}, .type = "Mobilni zarizeni"},
 };
 static const size_t kNumCardTypes = sizeof(clipper_types) / sizeof(clipper_types[0]);
 

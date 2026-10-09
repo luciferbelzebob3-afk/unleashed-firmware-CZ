@@ -235,7 +235,7 @@ static bool banapass_parse(const NfcDevice* device, FuriString* parsed_data) {
                     if((access_code[i] & 0x0F) > 9) access_code_is_bcd = false;
                 }
                 furi_string_cat_printf(
-                    parsed_data, "\nBCD valid: %s\n", access_code_is_bcd ? "Yes" : "No");
+                    parsed_data, "\nBCD platne: %s\n", access_code_is_bcd ? "Ano" : "Ne");
                 if((access_code[0] >> 4) != 3) {
                     furi_string_cat_printf(
                         parsed_data,
