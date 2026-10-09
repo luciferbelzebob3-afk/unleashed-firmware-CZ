@@ -119,7 +119,7 @@ static bool bt_pin_code_verify_event_handler(Bt* bt, uint32_t pin) {
     pin_str = furi_string_alloc_printf("Verify code\n%06lu", pin);
     dialog_message_set_text(
         bt->dialog_message, furi_string_get_cstr(pin_str), 64, 4, AlignCenter, AlignTop);
-    dialog_message_set_buttons(bt->dialog_message, "Cancel", "OK", NULL);
+    dialog_message_set_buttons(bt->dialog_message, "Zrusit", "OK", NULL);
     DialogMessageButton button = dialog_message_show(bt->dialogs, bt->dialog_message);
     furi_string_free(pin_str);
     return button == DialogMessageButtonCenter;
@@ -463,7 +463,7 @@ static void bt_apply_settings(Bt* bt) {
 
 static void bt_load_keys(Bt* bt) {
     if(!furi_hal_bt_is_gatt_gap_supported()) {
-        bt_show_warning(bt, "Unsupported radio stack");
+        bt_show_warning(bt, "Nepodporovany radiovy stack");
         bt->status = BtStatusUnavailable;
         return;
 

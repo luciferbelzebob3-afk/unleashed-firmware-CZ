@@ -40,7 +40,7 @@ static void bt_cli_command_carrier_tx(PipeSide* pipe, FuriString* args, void* co
         bt_disconnect(bt);
         furi_hal_bt_reinit();
         printf("Transmitting carrier at %d channel at %d dB power\r\n", channel, power);
-        printf("Press CTRL+C to stop\r\n");
+        printf("Stiskni CTRL+C pro zastaveni\r\n");
         furi_hal_bt_start_tone_tx(channel, 0x19 + power);
 
         while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
@@ -66,8 +66,8 @@ static void bt_cli_command_carrier_rx(PipeSide* pipe, FuriString* args, void* co
         Bt* bt = furi_record_open(RECORD_BT);
         bt_disconnect(bt);
         furi_hal_bt_reinit();
-        printf("Receiving carrier at %d channel\r\n", channel);
-        printf("Press CTRL+C to stop\r\n");
+        printf("Prijem nosne na kanalu %d\r\n", channel);
+        printf("Stiskni CTRL+C pro zastaveni\r\n");
 
         furi_hal_bt_start_packet_rx(channel, 1);
 
@@ -118,7 +118,7 @@ static void bt_cli_command_packet_tx(PipeSide* pipe, FuriString* args, void* con
             pattern,
             channel,
             datarate);
-        printf("Press CTRL+C to stop\r\n");
+        printf("Stiskni CTRL+C pro zastaveni\r\n");
         furi_hal_bt_start_packet_tx(channel, pattern, datarate);
 
         while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
@@ -150,8 +150,8 @@ static void bt_cli_command_packet_rx(PipeSide* pipe, FuriString* args, void* con
         Bt* bt = furi_record_open(RECORD_BT);
         bt_disconnect(bt);
         furi_hal_bt_reinit();
-        printf("Receiving packets at %d channel at %d M datarate\r\n", channel, datarate);
-        printf("Press CTRL+C to stop\r\n");
+        printf("Prijem paketu na kanalu %d, rychlost %d M\r\n", channel, datarate);
+        printf("Stiskni CTRL+C pro zastaveni\r\n");
         furi_hal_bt_start_packet_rx(channel, datarate);
 
         while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
