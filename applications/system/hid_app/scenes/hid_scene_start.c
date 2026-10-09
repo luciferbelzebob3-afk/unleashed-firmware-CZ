@@ -36,11 +36,11 @@ void hid_scene_start_on_enter(void* context) {
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
-        app->submenu, "Keyboard", HidSubmenuIndexKeyboard, hid_scene_start_submenu_callback, app);
+        app->submenu, "Klavesnice", HidSubmenuIndexKeyboard, hid_scene_start_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Numpad", HidSubmenuIndexNumpad, hid_scene_start_submenu_callback, app);
+        app->submenu, "Ciselna klavesnice", HidSubmenuIndexNumpad, hid_scene_start_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Media", HidSubmenuIndexMedia, hid_scene_start_submenu_callback, app);
+        app->submenu, "Multimedia", HidSubmenuIndexMedia, hid_scene_start_submenu_callback, app);
     submenu_add_item(
         app->submenu,
         "Apple Music macOS",
@@ -48,9 +48,9 @@ void hid_scene_start_on_enter(void* context) {
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
-        app->submenu, "Movie", HidSubmenuIndexMovie, hid_scene_start_submenu_callback, app);
+        app->submenu, "Film", HidSubmenuIndexMovie, hid_scene_start_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Mouse", HidSubmenuIndexMouse, hid_scene_start_submenu_callback, app);
+        app->submenu, "Mys", HidSubmenuIndexMouse, hid_scene_start_submenu_callback, app);
     submenu_add_item(
         app->submenu,
         "TikTok / YT Shorts",
@@ -59,19 +59,19 @@ void hid_scene_start_on_enter(void* context) {
         app);
     submenu_add_item(
         app->submenu,
-        "Mouse Clicker",
+        "Klikac mysi",
         HidSubmenuIndexMouseClicker,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "Mouse Jiggler",
+        "Pohyb mysi",
         HidSubmenuIndexMouseJiggler,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "Mouse Jiggler Stealth",
+        "Skryty pohyb mysi",
         HidSubmenuIndexMouseJigglerStealth,
         hid_scene_start_submenu_callback,
         app);
@@ -84,13 +84,13 @@ void hid_scene_start_on_enter(void* context) {
 #ifdef HID_TRANSPORT_BLE
     submenu_add_item(
         app->submenu,
-        "Bluetooth Remote Name",
+        "Nazev Bluetooth ovladace",
         HidSubmenuIndexRename,
         hid_scene_start_submenu_callback,
         app);
     submenu_add_item(
         app->submenu,
-        "Bluetooth Unpairing",
+        "Zruseni parovani Bluetooth",
         HidSubmenuIndexRemovePairing,
         hid_scene_start_submenu_callback,
         app);

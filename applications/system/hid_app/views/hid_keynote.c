@@ -52,7 +52,7 @@ static void hid_keynote_draw_callback(Canvas* canvas, void* context) {
 
     canvas_draw_icon(canvas, 68, 2, &I_Pin_back_arrow_10x8);
     canvas_set_font(canvas, FontSecondary);
-    elements_multiline_text_aligned(canvas, 127, 3, AlignRight, AlignTop, "Hold to exit");
+    elements_multiline_text_aligned(canvas, 127, 3, AlignRight, AlignTop, "Podrz pro ukonceni");
 
     // Up
     canvas_draw_icon(canvas, 21, 24, &I_Button_18x18);
@@ -97,7 +97,7 @@ static void hid_keynote_draw_callback(Canvas* canvas, void* context) {
         canvas_set_color(canvas, ColorWhite);
     }
     canvas_draw_icon(canvas, 74, 28, &I_Ok_btn_9x9);
-    elements_multiline_text_aligned(canvas, 91, 36, AlignLeft, AlignBottom, "Space");
+    elements_multiline_text_aligned(canvas, 91, 36, AlignLeft, AlignBottom, "Mezernik");
     canvas_set_color(canvas, ColorBlack);
 
     // Back
@@ -130,7 +130,7 @@ static void hid_keynote_draw_vertical_callback(Canvas* canvas, void* context) {
 
     canvas_draw_icon(canvas, 2, 18, &I_Pin_back_arrow_10x8);
     canvas_set_font(canvas, FontSecondary);
-    elements_multiline_text_aligned(canvas, 15, 19, AlignLeft, AlignTop, "Hold to exit");
+    elements_multiline_text_aligned(canvas, 15, 19, AlignLeft, AlignTop, "Podrz pro ukonceni");
 
     const uint8_t x_2 = 23;
     const uint8_t x_1 = 2;
@@ -182,7 +182,7 @@ static void hid_keynote_draw_vertical_callback(Canvas* canvas, void* context) {
         canvas_set_color(canvas, ColorWhite);
     }
     canvas_draw_icon(canvas, 11, 90, &I_Ok_btn_9x9);
-    elements_multiline_text_aligned(canvas, 26, 98, AlignLeft, AlignBottom, "Space");
+    elements_multiline_text_aligned(canvas, 26, 98, AlignLeft, AlignBottom, "Mezernik");
     canvas_set_color(canvas, ColorBlack);
 
     // Back

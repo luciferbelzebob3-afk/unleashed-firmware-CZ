@@ -31,7 +31,7 @@ void hid_scene_rename_on_enter(void* context) {
         app->ble_hid_cfg.name,
         sizeof(app->ble_hid_cfg.name),
         true);
-    text_input_set_header_text(app->text_input, "Bluetooth Name");
+    text_input_set_header_text(app->text_input, "Nazev Bluetooth");
 
     // Rename success popup view
     popup_set_icon(app->popup, 48, 6, &I_DolphinDone_80x58);
