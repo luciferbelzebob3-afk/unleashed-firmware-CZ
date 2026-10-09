@@ -17,14 +17,14 @@
 #include <toolbox/pulse_protocols/pulse_glue.h>
 
 static void lfrfid_cli_print_usage(void) {
-    printf("Usage:\r\n");
-    printf("rfid read <optional: normal | indala>         - read in ASK/PSK mode\r\n");
-    printf("rfid <write | emulate> <key_type> <key_data>  - write or emulate a card\r\n");
-    printf("rfid raw_read <ask | psk> <filename>          - read and save raw data to a file\r\n");
+    printf("Pouziti:\r\n");
+    printf("rfid read <optional: normal | indala>         - cti v rezimu ASK/PSK\r\n");
+    printf("rfid <write | emulate> <key_type> <key_data>  - zapis nebo emuluj kartu\r\n");
+    printf("rfid raw_read <ask | psk> <filename>          - cti a uloz surova data do souboru\r\n");
     printf(
-        "rfid raw_emulate <filename>                   - emulate raw data (not very useful, but helps debug protocols)\r\n");
+        "rfid raw_emulate <filename>                   - emuluj surova data (uzitecne pro ladeni protokolu)\r\n");
     printf(
-        "rfid raw_analyze <filename>                   - outputs raw data to the cli and tries to decode it (useful for protocol development)\r\n");
+        "rfid raw_analyze <filename>                   - vypise surova data do CLI a pokusi se je dekodovat (uzitecne pro vyvoj protokolu)\r\n");
 }
 
 typedef struct {
@@ -73,7 +73,7 @@ static void lfrfid_cli_read(PipeSide* pipe, FuriString* args) {
 
     lfrfid_worker_start_thread(worker);
 
-    printf("Reading RFID...\r\nPress Ctrl+C to abort\r\n");
+    printf("Ctu RFID...\r\nStiskni Ctrl+C pro preruseni\r\n");
 
     const uint32_t available_flags = (1 << LFRFIDWorkerReadDone);
 
@@ -117,7 +117,7 @@ static void lfrfid_cli_read(PipeSide* pipe, FuriString* args) {
         furi_string_free(info);
     }
 
-    printf("Reading stopped\r\n");
+    printf("Cteni zastaveno\r\n");
     protocol_dict_free(dict);
 
     furi_event_flag_free(context.event);
@@ -143,13 +143,13 @@ static bool lfrfid_cli_parse_args(FuriString* args, ProtocolDict* dict, Protocol
         *protocol = protocol_dict_get_protocol_by_name(dict, furi_string_get_cstr(protocol_name));
         if(*protocol == PROTOCOL_NO) {
             printf(
-                "Unknown protocol: %s\r\n"
-                "Available protocols:\r\n",
+                "Neznamy protokol: %s\r\n"
+                "Dostupne protokoly:\r\n",
                 furi_string_get_cstr(protocol_name));
 
             for(ProtocolId i = 0; i < LFRFIDProtocolMax; i++) {
                 printf(
-                    "\t%s, %zu bytes long\r\n",
+                    "\t%s, delka %zu bajtu\r\n",
                     protocol_dict_get_name(dict, i),
                     protocol_dict_get_data_size(dict, i));
             }
@@ -161,7 +161,7 @@ static bool lfrfid_cli_parse_args(FuriString* args, ProtocolDict* dict, Protocol
         // check data arg
         if(!args_read_hex_bytes(data_text, data, data_size)) {
             printf(
-                "%s data needs to be %zu bytes long\r\n",
+                "Data %s musi mit delku %zu bajtu\r\n",
                 protocol_dict_get_name(dict, *protocol),
                 data_size);
             break;
@@ -203,7 +203,7 @@ static void lfrfid_cli_write(PipeSide* pipe, FuriString* args) {
     lfrfid_worker_start_thread(worker);
     lfrfid_worker_write_start(worker, protocol, lfrfid_cli_write_callback, event);
 
-    printf("Writing RFID...\r\nPress Ctrl+C to abort\r\n");
+    printf("Zapisuji RFID...\r\nStiskni Ctrl+C pro preruseni\r\n");
     const uint32_t available_flags =
         (1 << LFRFIDWorkerWriteOK) | (1 << LFRFIDWorkerWriteProtocolCannotBeWritten) |
         (1 << LFRFIDWorkerWriteNoEnabledTarget) | (1 << LFRFIDWorkerWriteFobCannotBeWritten) |
@@ -213,33 +213,33 @@ static void lfrfid_cli_write(PipeSide* pipe, FuriString* args) {
         uint32_t flags = furi_event_flag_wait(event, available_flags, FuriFlagWaitAny, 100);
         if(flags != (unsigned)FuriFlagErrorTimeout) {
             if(FURI_BIT(flags, LFRFIDWorkerWriteOK)) {
-                printf("Written!\r\n");
+                printf("Zapsano!\r\n");
                 break;
             }
 
             if(FURI_BIT(flags, LFRFIDWorkerWriteProtocolCannotBeWritten)) {
-                printf("This protocol cannot be written.\r\n");
+                printf("Tento protokol nelze zapsat.\r\n");
                 break;
             }
 
             if(FURI_BIT(flags, LFRFIDWorkerWriteNoEnabledTarget)) {
                 // The setting can only be changed on the device, so name the screen.
-                printf("Every chip that can write it is disabled in RFID -> Settings -> Write "
-                       "Chips.\r\n");
+                printf("Vsechny cipy schopne zapisu jsou vypnute v RFID -> Nastaveni -> Zapis "
+                       "Cipy.\r\n");
                 break;
             }
 
             if(FURI_BIT(flags, LFRFIDWorkerWriteFobCannotBeWritten)) {
-                printf("Seems this fob cannot be written.\r\n");
+                printf("Tento privesek zrejme nelze zapsat.\r\n");
             }
 
             // The app says the same on screen; without this the CLI just sat there silently.
             if(FURI_BIT(flags, LFRFIDWorkerWriteTooLongToWrite)) {
-                printf("Still trying. Make sure the card is writable and not protected.\r\n");
+                printf("Stale zkousim. Over, ze karta podporuje zapis a neni chranena.\r\n");
             }
         }
     }
-    printf("Writing stopped\r\n");
+    printf("Zapis zastaven\r\n");
 
     lfrfid_worker_stop(worker);
     lfrfid_worker_stop_thread(worker);
@@ -262,11 +262,11 @@ static void lfrfid_cli_emulate(PipeSide* pipe, FuriString* args) {
     lfrfid_worker_start_thread(worker);
     lfrfid_worker_emulate_start(worker, protocol);
 
-    printf("Emulating RFID...\r\nPress Ctrl+C to abort\r\n");
+    printf("Emuluji RFID...\r\nStiskni Ctrl+C pro preruseni\r\n");
     while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
         furi_delay_ms(100);
     }
-    printf("Emulation stopped\r\n");
+    printf("Emulace zastavena\r\n");
 
     lfrfid_worker_stop(worker);
     lfrfid_worker_stop_thread(worker);
@@ -292,12 +292,12 @@ static void lfrfid_cli_raw_analyze(PipeSide* pipe, FuriString* args) {
         }
 
         if(!lfrfid_raw_file_open_read(file, furi_string_get_cstr(filepath))) {
-            printf("Failed to open file\r\n");
+            printf("Soubor se nepodarilo otevrit\r\n");
             break;
         }
 
         if(!lfrfid_raw_file_read_header(file, &frequency, &duty_cycle)) {
-            printf("Invalid header\r\n");
+            printf("Neplatna hlavicka\r\n");
             break;
         }
 
@@ -338,7 +338,7 @@ static void lfrfid_cli_raw_analyze(PipeSide* pipe, FuriString* args) {
                     }
 
                     if(total_protocol != PROTOCOL_NO) {
-                        printf(" <FOUND %s>", protocol_dict_get_name(dict, total_protocol));
+                        printf(" <NALEZENO %s>", protocol_dict_get_name(dict, total_protocol));
                     }
                 }
 
@@ -351,18 +351,18 @@ static void lfrfid_cli_raw_analyze(PipeSide* pipe, FuriString* args) {
                     break;
                 }
             } else {
-                printf("Failed to read pair\r\n");
+                printf("Nepodarilo se precist dvojici\r\n");
                 break;
             }
         }
 
-        printf("   Frequency: %f\r\n", (double)frequency);
-        printf("  Duty Cycle: %f\r\n", (double)duty_cycle);
-        printf("       Warns: %lu\r\n", total_warns);
-        printf("   Pulse sum: %lu\r\n", total_pulse);
-        printf("Duration sum: %lu\r\n", total_duration);
-        printf("     Average: %f\r\n", (double)((float)total_pulse / (float)total_duration));
-        printf("    Protocol: ");
+        printf("   Frekvence: %f\r\n", (double)frequency);
+        printf("Strida: %f\r\n", (double)duty_cycle);
+        printf("Varovani: %lu\r\n", total_warns);
+        printf("Soucet pulzu: %lu\r\n", total_pulse);
+        printf("Soucet trvani: %lu\r\n", total_duration);
+        printf("Prumer: %f\r\n", (double)((float)total_pulse / (float)total_duration));
+        printf("    Protokol: ");
 
         if(total_protocol != PROTOCOL_NO) {
             size_t data_size = protocol_dict_get_data_size(dict, total_protocol);
@@ -383,7 +383,7 @@ static void lfrfid_cli_raw_analyze(PipeSide* pipe, FuriString* args) {
 
             free(data);
         } else {
-            printf("not found\r\n");
+            printf("nenalezeno\r\n");
         }
 
         protocol_dict_free(dict);
@@ -447,13 +447,13 @@ static void lfrfid_cli_raw_read(PipeSide* pipe, FuriString* args) {
 
             if(flags != (unsigned)FuriFlagErrorTimeout) {
                 if(FURI_BIT(flags, LFRFIDWorkerReadRawFileError)) {
-                    printf("File is not RFID raw file\r\n");
+                    printf("Soubor neni raw RFID soubor\r\n");
                     break;
                 }
 
                 if(FURI_BIT(flags, LFRFIDWorkerReadRawOverrun)) {
                     if(!overrun) {
-                        printf("Overrun\r\n");
+                        printf("Preteceni\r\n");
                         overrun = true;
                     }
                 }
@@ -463,7 +463,7 @@ static void lfrfid_cli_raw_read(PipeSide* pipe, FuriString* args) {
         }
 
         if(overrun) {
-            printf("An overrun occurred during read\r\n");
+            printf("Behem cteni doslo k preteceni\r\n");
         }
 
         lfrfid_worker_stop(worker);
@@ -498,7 +498,7 @@ static void lfrfid_cli_raw_emulate(PipeSide* pipe, FuriString* args) {
         }
 
         if(!storage_file_exists(storage, furi_string_get_cstr(filepath))) {
-            printf("File not found: \"%s\"\r\n", furi_string_get_cstr(filepath));
+            printf("Soubor nenalezen: \"%s\"\r\n", furi_string_get_cstr(filepath));
             break;
         }
 
@@ -536,7 +536,7 @@ static void lfrfid_cli_raw_emulate(PipeSide* pipe, FuriString* args) {
         }
 
         if(overrun) {
-            printf("An overrun occurred during emulation\r\n");
+            printf("Behem emulace doslo k preteceni\r\n");
         }
 
         lfrfid_worker_stop(worker);
