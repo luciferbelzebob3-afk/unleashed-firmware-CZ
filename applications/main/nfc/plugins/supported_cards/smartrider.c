@@ -58,7 +58,7 @@ static const char* const CONCESSION_TYPES[] = {
     "Free Travel"};
 
 static inline const char* get_concession_type(uint8_t token) {
-    return (token <= 0x10) ? CONCESSION_TYPES[token] : "Unknown";
+    return (token <= 0x10) ? CONCESSION_TYPES[token] : "Neznamy";
 }
 
 static bool authenticate_and_read(
@@ -275,8 +275,8 @@ static bool smartrider_parse(const NfcDevice* device, FuriString* parsed_data) {
 
     furi_string_printf(
         parsed_data,
-        "\e#SmartRider\nBalance: $%lu.%02lu\nConcession: %s\nSerial: %s%s\n"
-        "Total Cost: $%u.%02u\nAuto-Load: $%u.%02u/$%u.%02u\n\e#Tag On/Off History\n",
+        "\e#SmartRider\nZustatek: $%lu.%02lu\nSleva: %s\nSeriove cislo: %s%s\n"
+        "Celkem utraceno: $%u.%02u\nAutomaticke dobijeni: $%u.%02u/$%u.%02u\n\e#Historie nastupu a vystupu\n",
         sr_data.balance / 100,
         sr_data.balance % 100,
         get_concession_type(sr_data.token),

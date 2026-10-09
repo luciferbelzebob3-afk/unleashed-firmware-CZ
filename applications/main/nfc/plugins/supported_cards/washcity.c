@@ -174,8 +174,8 @@ static bool washcity_parse(const NfcDevice* device, FuriString* parsed_data) {
         uint64_t card_number = bit_lib_bytes_to_num_be(uid, uid_len);
 
         furi_string_printf(
-            parsed_data, "\e#WashCity\nCard number: %0*llX", uid_len * 2, card_number);
-        furi_string_cat_printf(parsed_data, "\nBalance: %lu.%02u EUR", balance_usd, balance_cents);
+            parsed_data, "\e#WashCity\nCislo karty: %0*llX", uid_len * 2, card_number);
+        furi_string_cat_printf(parsed_data, "\nZustatek: %lu.%02u EUR", balance_usd, balance_cents);
         parsed = true;
     } while(false);
 

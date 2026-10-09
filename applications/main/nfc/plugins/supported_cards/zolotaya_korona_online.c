@@ -34,36 +34,36 @@ bool parse_online_card_tariff(uint16_t tariff_num, FuriString* tariff_name) {
 
     switch(tariff_num) {
     case 0x0100:
-        furi_string_set_str(tariff_name, "Standart (online)");
+        furi_string_set_str(tariff_name, "Standardni (online)");
         tariff_parsed = true;
         break;
     case 0x0101:
     case 0x0121:
-        furi_string_set_str(tariff_name, "Standart (airtag)");
+        furi_string_set_str(tariff_name, "Standardni (airtag)");
         tariff_parsed = true;
         break;
     case 0x0401:
-        furi_string_set_str(tariff_name, "Student (50%% discount)");
+        furi_string_set_str(tariff_name, "Studentsky (sleva 50%%)");
         tariff_parsed = true;
         break;
     case 0x0402:
-        furi_string_set_str(tariff_name, "Student (travel)");
+        furi_string_set_str(tariff_name, "Studentsky (cestovni)");
         tariff_parsed = true;
         break;
     case 0x0002:
-        furi_string_set_str(tariff_name, "School (50%% discount)");
+        furi_string_set_str(tariff_name, "Skolni (sleva 50%%)");
         tariff_parsed = true;
         break;
     case 0x0505:
-        furi_string_set_str(tariff_name, "Social (large families)");
+        furi_string_set_str(tariff_name, "Socialni (vicecetne rodiny)");
         tariff_parsed = true;
         break;
     case 0x0528:
-        furi_string_set_str(tariff_name, "Social (handicapped)");
+        furi_string_set_str(tariff_name, "Socialni (osoby se zdravotnim postizenim)");
         tariff_parsed = true;
         break;
     default:
-        furi_string_set_str(tariff_name, "Unknown");
+        furi_string_set_str(tariff_name, "Neznamy");
         tariff_parsed = false;
         break;
     }
@@ -107,7 +107,7 @@ static bool zolotaya_korona_online_parse(const NfcDevice* device, FuriString* pa
 
         furi_string_cat_printf(
             parsed_data,
-            "\e#Zolotaya korona\nCard number: %u%015llu\nTariff: %02X.%02X: %s\nRegion: %u\n",
+            "\e#Zolotaya korona\nCislo karty: %u%015llu\nTarif: %02X.%02X: %s\nRegion: %u\n",
             card_number_prefix,
             card_number_postfix,
             tariff / 256,

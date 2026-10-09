@@ -81,7 +81,7 @@ static FuriString* ventra_parse_xact(const MfUltralightData* data, uint8_t blk, 
     // Not necessarily in that order on the card.  We need the latest data to compute validity and pretty-print them
     // in reverse chrono.  So this mess sets some globals as to which block is current, computes the validity times, etc.
     if(seq == 0) {
-        furi_string_printf(ventra_xact_str, "-- EMPTY --");
+        furi_string_printf(ventra_xact_str, "-- PRAZDNE --");
         return (ventra_xact_str);
     }
     if(seq > ventra_high_seq) {
@@ -151,16 +151,16 @@ static bool ventra_parse(const NfcDevice* device, FuriString* parsed_data) {
         switch(prod_code) {
         case 2:
         case 0x1F: // Only ever seen one of these, it parses like a Single
-            furi_string_cat_printf(ventra_prod_str, "Single");
+            furi_string_cat_printf(ventra_prod_str, "Jednorazova");
             break;
         case 3:
         case 0x3F:
             is_pass = true;
-            furi_string_cat_printf(ventra_prod_str, "1-Day");
+            furi_string_cat_printf(ventra_prod_str, "1 den");
             break;
         case 4: // Last I checked, 3 day passes only available at airport TVMs & social service agencies
             is_pass = true;
-            furi_string_cat_printf(ventra_prod_str, "3-Day");
+            furi_string_cat_printf(ventra_prod_str, "3 dny");
             break;
         default:
             is_pass =
@@ -230,7 +230,7 @@ static bool ventra_parse(const NfcDevice* device, FuriString* parsed_data) {
 
         furi_string_cat_printf(
             parsed_data,
-            "Exp: %04d-%02d-%02d %02d:%02d\n",
+            "Platnost do: %04d-%02d-%02d %02d:%02d\n",
             ventra_validity_date.year,
             ventra_validity_date.month,
             ventra_validity_date.day,
@@ -238,7 +238,7 @@ static bool ventra_parse(const NfcDevice* device, FuriString* parsed_data) {
             ventra_validity_date.minute);
 
         if(rides_left) {
-            furi_string_cat_printf(parsed_data, "Rides left: %d\n", rides_left);
+            furi_string_cat_printf(parsed_data, "Zbyvajici jizdy: %d\n", rides_left);
         }
 
         furi_string_cat_printf(
@@ -253,10 +253,10 @@ static bool ventra_parse(const NfcDevice* device, FuriString* parsed_data) {
 
         furi_string_cat_printf(
             parsed_data, "TVM ID: %02X%02X\n", data->page[7].data[1], data->page[7].data[0]);
-        furi_string_cat_printf(parsed_data, "Tx count: %d\n", ventra_high_seq);
+        furi_string_cat_printf(parsed_data, "Pocet transakci: %d\n", ventra_high_seq);
         furi_string_cat_printf(
             parsed_data,
-            "Hard Expiry: %04d-%02d-%02d",
+            "Konec platnosti: %04d-%02d-%02d",
             ventra_exp_date.year,
             ventra_exp_date.month,
             ventra_exp_date.day);

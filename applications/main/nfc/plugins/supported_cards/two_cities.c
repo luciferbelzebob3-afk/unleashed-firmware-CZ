@@ -155,25 +155,25 @@ static bool two_cities_parse(const NfcDevice* device, FuriString* parsed_data) {
         if(uid_is_card_number) {
             furi_string_cat_printf(parsed_data, "PN: %lluX\n", card_number);
         } else {
-            furi_string_cat(parsed_data, "PN: Unknown\n");
+            furi_string_cat(parsed_data, "PN: Neznamy\n");
         }
         // block 16 is in the sector verified above, but a known key does not mean it was read
         if(mf_classic_parser_block_has_data(data, 16)) {
             furi_string_cat_printf(parsed_data, "PB: %lu rur.\n", balance);
         } else {
-            furi_string_cat(parsed_data, "PB: Unknown\n");
+            furi_string_cat(parsed_data, "PB: Neznamy\n");
         }
         // the Troika half is in sector 8, which is never verified here, and its number and
         // balance sit in different blocks that can go missing on their own
         if(mf_classic_parser_block_has_data(data, 32)) {
             furi_string_cat_printf(parsed_data, "TN: %lu\n", troika_number);
         } else {
-            furi_string_cat(parsed_data, "TN: Unknown\n");
+            furi_string_cat(parsed_data, "TN: Neznamy\n");
         }
         if(mf_classic_parser_block_has_data(data, 33)) {
             furi_string_cat_printf(parsed_data, "TB: %u rur.\n", troika_balance);
         } else {
-            furi_string_cat(parsed_data, "TB: Unknown\n");
+            furi_string_cat(parsed_data, "TB: Neznamy\n");
         }
 
         parsed = true;

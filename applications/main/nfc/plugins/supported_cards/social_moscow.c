@@ -268,7 +268,7 @@ static bool social_moscow_parse(const NfcDevice* device, FuriString* parsed_data
         if(mf_classic_is_block_read(data, 21) || omc_number != 0) {
             furi_string_cat_printf(parsed_data, "OMC: %llx\n", omc_number);
         } else {
-            furi_string_cat(parsed_data, "OMC: Unknown\n");
+            furi_string_cat(parsed_data, "OMC: neznamy\n");
         }
         furi_string_cat_printf(
             parsed_data,
@@ -282,7 +282,7 @@ static bool social_moscow_parse(const NfcDevice* device, FuriString* parsed_data
             furi_string_cat_printf(parsed_data, "%s\n", furi_string_get_cstr(metro_result));
         }
         if(is_ground_data_present && !furi_string_empty(ground_result)) {
-            render_section_header(parsed_data, "Ground", 21, 20);
+            render_section_header(parsed_data, "Pozemni doprava", 21, 20);
             furi_string_cat_printf(parsed_data, "%s\n", furi_string_get_cstr(ground_result));
         }
         furi_string_free(ground_result);

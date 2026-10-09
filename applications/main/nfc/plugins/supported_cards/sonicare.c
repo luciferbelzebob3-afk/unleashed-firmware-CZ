@@ -63,20 +63,20 @@ static bool sonicare_parse(const NfcDevice* device, FuriString* parsed_data) {
 
         switch(head_type) {
         case SonicareHeadWhite:
-            furi_string_printf(head_type_str, "White");
+            furi_string_printf(head_type_str, "Bila");
             break;
         case SonicareHeadBlack:
-            furi_string_printf(head_type_str, "Black");
+            furi_string_printf(head_type_str, "Cerna");
             break;
         case SonicareHeadUnkown:
         default:
-            furi_string_printf(head_type_str, "Unknown");
+            furi_string_printf(head_type_str, "Neznamy");
             break;
         }
 
         furi_string_printf(
             parsed_data,
-            "\e#Philips Sonicare head\nColor: %s\nTime brushed: %02.0f:%02.0f:%02ld\n",
+            "\e#Hlavice Philips Sonicare\nBarva: %s\nDoba cisteni: %02.0f:%02.0f:%02ld\n",
             furi_string_get_cstr(head_type_str),
             floor(seconds_brushed / 3600),
             floor((seconds_brushed / 60) % 60),

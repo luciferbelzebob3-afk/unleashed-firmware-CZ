@@ -628,7 +628,7 @@ bool aic_parse(const NfcDevice* device, FuriString* parsed_data) {
     }
     furi_string_cat_str(parsed_data, "\n");
 
-    furi_string_cat_printf(parsed_data, "BCD platne: %s\n", access_code_is_bcd ? "Yes" : "No");
+    furi_string_cat_printf(parsed_data, "BCD platne: %s\n", access_code_is_bcd ? "Ano" : "Ne");
     furi_string_cat_str(
         parsed_data, "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
 
