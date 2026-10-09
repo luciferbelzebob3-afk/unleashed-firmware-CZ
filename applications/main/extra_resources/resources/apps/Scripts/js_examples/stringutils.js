@@ -1,6 +1,6 @@
 let sampleText = "Hello, World!";
 
-let lengthOfText = "Length of text: " + sampleText.length.toString();
+let lengthOfText = "Delka textu: " + sampleText.length.toString();
 print(lengthOfText);
 
 let start = 7;
