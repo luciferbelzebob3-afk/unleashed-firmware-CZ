@@ -18,13 +18,13 @@ void storage_settings_scene_factory_reset_on_enter(void* context) {
     dialog_ex_set_context(dialog_ex, app);
     dialog_ex_set_result_callback(dialog_ex, storage_settings_scene_factory_reset_dialog_callback);
 
-    dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-    dialog_ex_set_right_button_text(dialog_ex, "Erase");
+    dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+    dialog_ex_set_right_button_text(dialog_ex, "Smazat");
 
-    dialog_ex_set_header(dialog_ex, "Confirm Factory Reset?", 64, 0, AlignCenter, AlignTop);
+    dialog_ex_set_header(dialog_ex, "Potvrdit tovarni reset?", 64, 0, AlignCenter, AlignTop);
     dialog_ex_set_text(
         dialog_ex,
-        "Internal storage will be erased\ndata and settings will be lost!",
+        "Data v interni pameti a\nnastaveni budou smazana!",
         64,
         14,
         AlignCenter,
@@ -57,7 +57,7 @@ bool storage_settings_scene_factory_reset_on_event(void* context, SceneManagerEv
             if(counter < STORAGE_SETTINGS_SCENE_FACTORY_RESET_CONFIRM_COUNT) {
                 furi_string_printf(
                     app->text_string,
-                    "%ld presses left",
+                    "Zbyva stisku: %ld",
                     STORAGE_SETTINGS_SCENE_FACTORY_RESET_CONFIRM_COUNT - counter);
                 dialog_ex_set_text(
                     app->dialog_ex,
