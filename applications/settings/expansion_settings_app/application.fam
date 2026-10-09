@@ -1,6 +1,6 @@
 App(
     appid="expansion_settings",
-    name="Expansion Modules",
+    name="Rozsirujici moduly",
     apptype=FlipperAppType.EXTSETTINGS,
     entry_point="expansion_settings_app",
     requires=["gui"],
