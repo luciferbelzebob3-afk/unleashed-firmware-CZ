@@ -194,7 +194,7 @@ static void js_badusb_quit(struct mjs* mjs) {
     furi_assert(badusb);
 
     if(badusb->usb_if_prev == NULL) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID neni spustene");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -210,7 +210,7 @@ static void js_badusb_is_connected(struct mjs* mjs) {
     furi_assert(badusb);
 
     if(badusb->usb_if_prev == NULL) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID neni spustene");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -278,7 +278,7 @@ static void js_badusb_press(struct mjs* mjs) {
     JsBadusbInst* badusb = mjs_get_ptr(mjs, obj_inst);
     furi_assert(badusb);
     if(badusb->usb_if_prev == NULL) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID neni spustene");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -304,7 +304,7 @@ static void js_badusb_hold(struct mjs* mjs) {
     JsBadusbInst* badusb = mjs_get_ptr(mjs, obj_inst);
     furi_assert(badusb);
     if(badusb->usb_if_prev == NULL) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID neni spustene");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -323,7 +323,7 @@ static void js_badusb_hold(struct mjs* mjs) {
     if(keycode & 0xFF) {
         badusb->key_hold_cnt++;
         if(badusb->key_hold_cnt > (HID_KB_MAX_KEYS - 1)) {
-            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Too many keys are hold");
+            mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "Je stisknuto prilis mnoho klaves");
             furi_hal_hid_kb_release_all();
             mjs_return(mjs, MJS_UNDEFINED);
             return;
@@ -338,7 +338,7 @@ static void js_badusb_release(struct mjs* mjs) {
     JsBadusbInst* badusb = mjs_get_ptr(mjs, obj_inst);
     furi_assert(badusb);
     if(badusb->usb_if_prev == NULL) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID neni spustene");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -399,7 +399,7 @@ static void badusb_print(struct mjs* mjs, bool ln, bool alt) {
     JsBadusbInst* badusb = mjs_get_ptr(mjs, obj_inst);
     furi_assert(badusb);
     if(badusb->usb_if_prev == NULL) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "HID neni spustene");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
