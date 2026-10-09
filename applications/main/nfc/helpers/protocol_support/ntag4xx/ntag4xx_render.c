@@ -10,7 +10,7 @@ void nfc_render_ntag4xx_info(
 
     const Ntag4xxType type = ntag4xx_get_type_from_version(&data->version);
     if(type >= Ntag4xxTypeUnknown) {
-        furi_string_cat(str, "Memory Size: unknown");
+        furi_string_cat(str, "Velikost pameti: nezname");
     } else {
         size_t size_cc = 32;
         size_t size_ndef = 0;
@@ -39,7 +39,7 @@ void nfc_render_ntag4xx_info(
             break;
         }
         furi_string_cat_printf(
-            str, "\nMemory Size: %zu bytes\n", size_cc + size_ndef + size_proprietary);
+            str, "\nVelikost pameti: %zu bajtu\n", size_cc + size_ndef + size_proprietary);
         furi_string_cat_printf(str, "Usable NDEF Size: %zu bytes\n", size_ndef - sizeof(uint16_t));
         furi_string_cat_printf(str, "Capability Cont.: %zu bytes\n", size_cc);
         if(size_proprietary) {
@@ -50,7 +50,7 @@ void nfc_render_ntag4xx_info(
 
     if(format_type != NfcProtocolFormatTypeFull) return;
 
-    furi_string_cat(str, "\n\e#ISO14443-4 data");
+    furi_string_cat(str, "\n\e#Udaje ISO14443-4");
     nfc_render_iso14443_4a_extra(ntag4xx_get_base_data(data), str);
 }
 
