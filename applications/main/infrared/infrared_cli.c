@@ -113,7 +113,7 @@ static void infrared_cli_print_usage(void) {
     printf("\tRaw format:\r\n");
     printf("\tir tx RAW F:<frequency> DC:<duty_cycle> <sample0> <sample1>...\r\n");
     printf(
-        "\tFrequency (%d - %d), Duty cycle (0 - 100), max 512 samples\r\n",
+        "\tFrekvence (%d - %d), strida (0 - 100), max. 512 vzorku\r\n",
         INFRARED_MIN_FREQUENCY,
         INFRARED_MAX_FREQUENCY);
     printf("\tir decode <input_file> [<output_file>]\r\n");
@@ -234,7 +234,7 @@ static bool
     InfraredErrorCode error = infrared_signal_save(signal, file, name);
     if(INFRARED_ERROR_PRESENT(error)) {
         printf(
-            "Failed to save signal: \"%s\" code: 0x%X index: 0x%02X\r\n",
+            "Nelze ulozit signal: \"%s\" kod: 0x%X index: 0x%02X\r\n",
             name,
             INFRARED_ERROR_GET_CODE(error),
             INFRARED_ERROR_GET_INDEX(error));
@@ -258,7 +258,7 @@ static bool infrared_cli_decode_raw_signal(
         if(message) {
             is_decoded = true;
             printf(
-                "Protocol: %s address: 0x%lX command: 0x%lX %s\r\n",
+                "Protokol: %s adresa: 0x%lX prikaz: 0x%lX %s\r\n",
                 infrared_get_protocol_name(message->protocol),
                 message->address,
                 message->command,
@@ -317,7 +317,7 @@ static bool infrared_cli_decode_file(FlipperFormat* input_file, FlipperFormat* o
         }
         const InfraredRawSignal* raw_signal = infrared_signal_get_raw_signal(signal);
         printf(
-            "Raw signal: %s, %zu samples\r\n",
+            "Surovy signal: %s, %zu vzorku\r\n",
             furi_string_get_cstr(tmp),
             raw_signal->timings_size);
         if(!infrared_cli_decode_raw_signal(
@@ -356,13 +356,13 @@ static void infrared_cli_process_decode(PipeSide* pipe, FuriString* args) {
         if(!flipper_format_buffered_file_open_existing(
                input_file, furi_string_get_cstr(input_path))) {
             printf(
-                "Failed to open file for reading: \"%s\"\r\n", furi_string_get_cstr(input_path));
+                "Nelze otevrit soubor pro cteni: \"%s\"\r\n", furi_string_get_cstr(input_path));
             break;
         }
         if(!flipper_format_read_header(input_file, header, &version) ||
            (!furi_string_start_with_str(header, "IR")) || version != 1) {
             printf(
-                "Invalid or corrupted input file: \"%s\"\r\n", furi_string_get_cstr(input_path));
+                "Neplatny nebo poskozeny vstupni soubor: \"%s\"\r\n", furi_string_get_cstr(input_path));
             break;
         }
         if(!furi_string_empty(output_path)) {
@@ -372,12 +372,12 @@ static void infrared_cli_process_decode(PipeSide* pipe, FuriString* args) {
         if(output_file &&
            !flipper_format_file_open_always(output_file, furi_string_get_cstr(output_path))) {
             printf(
-                "Failed to open file for writing: \"%s\"\r\n", furi_string_get_cstr(output_path));
+                "Nelze otevrit soubor pro zapis: \"%s\"\r\n", furi_string_get_cstr(output_path));
             break;
         }
         if(output_file && !flipper_format_write_header(output_file, header, version)) {
             printf(
-                "Failed to write to the output file: \"%s\"\r\n",
+                "Nelze zapisovat do vystupniho souboru: \"%s\"\r\n",
                 furi_string_get_cstr(output_path));
             break;
         }
