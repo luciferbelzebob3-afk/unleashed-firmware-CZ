@@ -22,15 +22,15 @@ void cli_main_motd(void* context) {
            "| __|| |   |_ _|| _ \\| _ \\| __|| _ \\   / __|| |   |_ _|\r\n"
            "| _| | |__  | | |  _/|  _/| _| |   /  | (__ | |__  | |\r\n"
            "|_|  |____||___||_|  |_|  |___||_|_\\   \\___||____||___|\r\n"
-           "\r\n" ANSI_FG_BR_WHITE "Welcome to Flipper Zero Command Line Interface!\r\n"
-           "Read the manual: https://docs.flipper.net/zero/development/cli\r\n"
-           "Run `help` or `?` to list available commands\r\n"
+           "\r\n" ANSI_FG_BR_WHITE "Vitej v prikazove radce Flipper Zero!\r\n"
+           "Navod najdes zde: https://docs.flipper.net/zero/development/cli\r\n"
+           "Zadej `help` nebo `?` pro seznam dostupnych prikazu\r\n"
            "\r\n" ANSI_RESET);
 
     const Version* firmware_version = furi_hal_version_get_firmware_version();
     if(firmware_version) {
         printf(
-            "Firmware version: %s %s (%s%s built on %s)\r\n",
+            "Verze firmwaru: %s %s (%s%s sestaveno %s)\r\n",
             version_get_gitbranch(firmware_version),
             version_get_version(firmware_version),
             version_get_githash(firmware_version),

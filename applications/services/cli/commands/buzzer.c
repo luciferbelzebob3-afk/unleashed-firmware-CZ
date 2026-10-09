@@ -112,11 +112,11 @@ void execute(PipeSide* pipe, FuriString* args, void* context) {
 
         // Check volume
         if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode)) {
-            printf("Flipper is in stealth mode. Unmute the device to control buzzer.");
+            printf("Flipper je v tichém rezimu. Zapni zvuk zarizeni pro ovladani bzucaku.");
             break;
         }
         if(fabsf(notification->settings.speaker_volume) < BUZZER_VOLUME_EPSILON) {
-            printf("Sound is disabled in settings. Increase volume to control buzzer.");
+            printf("Zvuk je vypnuty v nastaveni. Zvys hlasitost pro ovladani bzucaku.");
             break;
         }
 

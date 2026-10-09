@@ -7,12 +7,12 @@
 #include <toolbox/cli/cli_command.h>
 
 void cli_command_gpio_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("gpio <cmd> <args>\r\n");
-    printf("Cmd list:\r\n");
-    printf("\tmode <pin_name> <0|1>\t - Set gpio mode: 0 - input, 1 - output\r\n");
-    printf("\tset <pin_name> <0|1>\t - Set gpio value\r\n");
-    printf("\tread <pin_name>\t - Read gpio value\r\n");
+    printf("Seznam prikazu:\r\n");
+    printf("\tmode <pin_name> <0|1>\t - Nastavi rezim GPIO: 0 - vstup, 1 - vystup\r\n");
+    printf("\tset <pin_name> <0|1>\t - Nastavi hodnotu GPIO\r\n");
+    printf("\tread <pin_name>\t - Cte hodnotu GPIO\r\n");
 }
 
 static bool pin_name_to_int(FuriString* pin_name, size_t* result) {
@@ -30,7 +30,7 @@ static bool pin_name_to_int(FuriString* pin_name, size_t* result) {
 }
 
 static void gpio_print_pins(void) {
-    printf("Wrong pin name. Available pins: ");
+    printf("Spatny nazev pinu. Dostupne piny: ");
     bool is_debug_mode = furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug);
     for(size_t i = 0; i < gpio_pins_count; i++) {
         if(!gpio_pins[i].debug || is_debug_mode) {
@@ -88,16 +88,16 @@ void cli_command_gpio_mode(PipeSide* pipe, FuriString* args, void* context) {
         gpio_print_pins();
         return;
     } else if(err == GpioParseReturnValueError) {
-        printf("Value is invalid. Enter 1 for input or 0 for output");
+        printf("Neplatna hodnota. Zadej 1 pro vstup nebo 0 pro vystup");
         return;
     }
 
     if(gpio_pins[num].debug) { //-V779
         printf(
-            "Changing this pin mode may damage hardware. Are you sure you want to continue? (y/n)?\r\n");
+            "Zmena rezimu pinu muze poskodit hardware. Opravdu pokracovat? (y/n)?\r\n");
         char c = getchar();
         if(c != 'y' && c != 'Y') {
-            printf("Cancelled.\r\n");
+            printf("Zruseno.\r\n");
             return;
         }
     }
@@ -105,10 +105,10 @@ void cli_command_gpio_mode(PipeSide* pipe, FuriString* args, void* context) {
     if(value == 1) { // output
         furi_hal_gpio_write(gpio_pins[num].pin, false);
         furi_hal_gpio_init_simple(gpio_pins[num].pin, GpioModeOutputPushPull);
-        printf("Pin %s is now an output (low)", gpio_pins[num].name);
+        printf("Pin %s je ted vystup (nizka uroven)", gpio_pins[num].name);
     } else { // input
         furi_hal_gpio_init_simple(gpio_pins[num].pin, GpioModeInput);
-        printf("Pin %s is now an input", gpio_pins[num].name);
+        printf("Pin %s je ted vstup", gpio_pins[num].name);
     }
 }
 
@@ -124,7 +124,7 @@ void cli_command_gpio_read(PipeSide* pipe, FuriString* args, void* context) {
 
     if(LL_GPIO_MODE_INPUT != //-V779
        LL_GPIO_GetPinMode(gpio_pins[num].pin->port, gpio_pins[num].pin->pin)) {
-        printf("Err: pin %s is not set as an input.", gpio_pins[num].name);
+        printf("Chyba: pin %s neni nastaven jako vstup.", gpio_pins[num].name);
         return;
     }
 
@@ -148,23 +148,23 @@ void cli_command_gpio_set(PipeSide* pipe, FuriString* args, void* context) {
         gpio_print_pins();
         return;
     } else if(err == GpioParseReturnValueError) {
-        printf("Value is invalid. Enter 1 for high or 0 for low");
+        printf("Neplatna hodnota. Zadej 1 pro vysokou nebo 0 pro nizkou uroven");
         return;
     }
 
     if(LL_GPIO_MODE_OUTPUT != //-V779
        LL_GPIO_GetPinMode(gpio_pins[num].pin->port, gpio_pins[num].pin->pin)) {
-        printf("Err: pin %s is not set as an output.", gpio_pins[num].name);
+        printf("Chyba: pin %s neni nastaven jako vystup.", gpio_pins[num].name);
         return;
     }
 
     // Extra check if debug pins used
     if(gpio_pins[num].debug) {
         printf(
-            "Setting this pin may damage hardware. Are you sure you want to continue? (y/n)?\r\n");
+            "Nastaveni tohoto pinu muze poskodit hardware. Opravdu pokracovat? (y/n)?\r\n");
         char c = getchar();
         if(c != 'y' && c != 'Y') {
-            printf("Cancelled.\r\n");
+            printf("Zruseno.\r\n");
             return;
         }
     }

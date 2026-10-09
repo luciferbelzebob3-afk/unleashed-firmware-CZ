@@ -60,7 +60,7 @@ void cli_command_uptime(PipeSide* pipe, FuriString* args, void* context) {
     UNUSED(args);
     UNUSED(context);
     uint32_t uptime = furi_get_tick() / furi_kernel_get_tick_frequency();
-    printf("Uptime: %luh%lum%lus", uptime / 60 / 60, uptime / 60 % 60, uptime % 60);
+    printf("Doba behu: %luh%lum%lus", uptime / 60 / 60, uptime / 60 % 60, uptime % 60);
 }
 
 void cli_command_date(PipeSide* pipe, FuriString* args, void* context) {
@@ -94,7 +94,7 @@ void cli_command_date(PipeSide* pipe, FuriString* args, void* context) {
 
         if(ret != 7) {
             printf(
-                "Invalid datetime format, use `%s`. sscanf %d %s",
+                "Neplatny format data a casu, pouzij `%s`. sscanf %d %s",
                 "%Y-%m-%d %H:%M:%S %u",
                 ret,
                 furi_string_get_cstr(args));
@@ -102,7 +102,7 @@ void cli_command_date(PipeSide* pipe, FuriString* args, void* context) {
         }
 
         if(!datetime_validate_datetime(&datetime)) {
-            printf("Invalid datetime data");
+            printf("Neplatne datum a cas");
             return;
         }
 
@@ -110,7 +110,7 @@ void cli_command_date(PipeSide* pipe, FuriString* args, void* context) {
         // Verification
         furi_hal_rtc_get_datetime(&datetime);
         printf(
-            "New datetime is: " CLI_DATE_FORMAT,
+            "Nove datum a cas: " CLI_DATE_FORMAT,
             datetime.year,
             datetime.month,
             datetime.day,
@@ -146,15 +146,15 @@ bool cli_command_log_level_set_from_string(FuriString* level) {
         furi_log_set_level(log_level);
         return true;
     } else {
-        printf("<log> — start logging using the current level from the system settings\r\n");
-        printf("<log error> — only critical errors and other important messages\r\n");
-        printf("<log warn> — non-critical errors and warnings including <log error>\r\n");
-        printf("<log info> — non-critical information including <log warn>\r\n");
-        printf("<log default> — the default system log level (equivalent to <log info>)\r\n");
+        printf("<log> — spusti zaznam s aktualni urovni z nastaveni systemu\r\n");
+        printf("<log error> — pouze kriticke chyby a dalsi dulezite zpravy\r\n");
+        printf("<log warn> — nekriticke chyby a varovani vcetne <log error>\r\n");
+        printf("<log info> — nekriticke informace vcetne <log warn>\r\n");
+        printf("<log default> — vychozi uroven zaznamu systemu (odpovida <log info>)\r\n");
         printf(
-            "<log debug> — debug information including <log info> (may impact system performance)\r\n");
+            "<log debug> — ladici informace vcetne <log info> (muze ovlivnit vykon systemu)\r\n");
         printf(
-            "<log trace> — system traces including <log debug> (may impact system performance)\r\n");
+            "<log trace> — podrobne zaznamy systemu vcetne <log debug> (muze ovlivnit vykon systemu)\r\n");
     }
     return false;
 }
@@ -173,7 +173,7 @@ void cli_command_log(PipeSide* pipe, FuriString* args, void* context) {
 
     const char* current_level;
     furi_log_level_to_string(furi_log_get_level(), &current_level);
-    printf("Current log level: %s\r\n", current_level);
+    printf("Aktualni uroven zaznamu: %s\r\n", current_level);
 
     FuriLogHandler log_handler = {
         .callback = cli_command_log_tx_callback,
@@ -182,8 +182,8 @@ void cli_command_log(PipeSide* pipe, FuriString* args, void* context) {
 
     furi_log_add_handler(log_handler);
 
-    printf("Use <log ?> to list available log levels\r\n");
-    printf("Press CTRL+C to stop...\r\n");
+    printf("Pouzij <log ?> pro seznam dostupnych urovni zaznamu\r\n");
+    printf("Stiskni CTRL+C pro zastaveni...\r\n");
     while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
         furi_delay_ms(100);
     }

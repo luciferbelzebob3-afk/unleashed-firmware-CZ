@@ -57,12 +57,12 @@ static void execute(PipeSide* pipe, FuriString* args, void* context) {
     const char* charge_state;
     if(furi_hal_power_is_charging()) {
         if((charge_percent < 100) && (!furi_hal_power_is_charging_done())) {
-            charge_state = "charging";
+            charge_state = "nabiji se";
         } else {
-            charge_state = "charged";
+            charge_state = "nabito";
         }
     } else {
-        charge_state = "discharging";
+        charge_state = "vybiji se";
     }
 
     // Get misc info
@@ -84,7 +84,7 @@ static void execute(PipeSide* pipe, FuriString* args, void* context) {
             break;
         case 2: // OS: FURI <edition> <branch> <version> <commit> (SDK <maj>.<min>)
             printf(
-                "OS" ANSI_RESET ": FURI %s %s %s %s (SDK %hu.%hu)",
+                "System" ANSI_RESET ": FURI %s %s %s %s (SDK %hu.%hu)",
                 version_get_version(version),
                 version_get_gitbranch(version),
                 version_get_version(version),
@@ -94,26 +94,26 @@ static void execute(PipeSide* pipe, FuriString* args, void* context) {
             break;
         case 3: // Host: <model> <hostname>
             printf(
-                "Host" ANSI_RESET ": %s %s",
+                "Hostitel" ANSI_RESET ": %s %s",
                 furi_hal_version_get_model_code(),
                 furi_hal_version_get_device_name_ptr());
             break;
         case 4: // Kernel: FreeRTOS <maj>.<min>.<build>
             printf(
-                "Kernel" ANSI_RESET ": FreeRTOS %d.%d.%d",
+                "Jadro" ANSI_RESET ": FreeRTOS %d.%d.%d",
                 tskKERNEL_VERSION_MAJOR,
                 tskKERNEL_VERSION_MINOR,
                 tskKERNEL_VERSION_BUILD);
             break;
         case 5: // Uptime: ?h?m?s
             printf(
-                "Uptime" ANSI_RESET ": %luh%lum%lus",
+                "Doba behu" ANSI_RESET ": %luh%lum%lus",
                 uptime / 60 / 60,
                 uptime / 60 % 60,
                 uptime % 60);
             break;
         case 6: // ST7567 128x64 @ 1 bpp in 1.4"
-            printf("Display" ANSI_RESET ": ST7567 128x64 @ 1 bpp in 1.4\"");
+            printf("Displej" ANSI_RESET ": ST7567 128x64 @ 1 bpp in 1.4\"");
             break;
         case 7: // DE: GuiSrv
             printf("DE" ANSI_RESET ": GuiSrv");
@@ -122,11 +122,11 @@ static void execute(PipeSide* pipe, FuriString* args, void* context) {
             printf("Shell" ANSI_RESET ": CliShell");
             break;
         case 9: // CPU: STM32WB55RG @ 64 MHz
-            printf("CPU" ANSI_RESET ": STM32WB55RG @ 64 MHz");
+            printf("Procesor" ANSI_RESET ": STM32WB55RG @ 64 MHz");
             break;
         case 10: // Memory: <used> / <total> B (??%)
             printf(
-                "Memory" ANSI_RESET ": %zu / %zu B (%hu%%)", heap_used, heap_total, heap_percent);
+                "Pamet" ANSI_RESET ": %zu / %zu B (%hu%%)", heap_used, heap_total, heap_percent);
             break;
         case 11: // Disk (/ext): <used> / <total> MiB (??%)
             printf(
@@ -136,7 +136,7 @@ static void execute(PipeSide* pipe, FuriString* args, void* context) {
                 ext_percent);
             break;
         case 12: // Battery: ??% (<state>)
-            printf("Battery" ANSI_RESET ": %hu%% (%s)" ANSI_RESET, charge_percent, charge_state);
+            printf("Baterie" ANSI_RESET ": %hu%% (%s)" ANSI_RESET, charge_percent, charge_state);
             break;
         case 13: // empty space
             break;
