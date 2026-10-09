@@ -34,7 +34,7 @@ void infrared_scene_edit_delete_on_enter(void* context) {
     const InfraredEditTarget edit_target = infrared->app_state.edit_target;
 
     if(edit_target == InfraredEditTargetButton) {
-        dialog_ex_set_header(dialog_ex, "Delete Button?", 64, 0, AlignCenter, AlignTop);
+        dialog_ex_set_header(dialog_ex, "Smazat tlacitko?", 64, 0, AlignCenter, AlignTop);
 
         const int32_t current_button_index = infrared->app_state.current_button_index;
         furi_check(current_button_index != InfraredButtonIndexNone);
@@ -77,7 +77,7 @@ void infrared_scene_edit_delete_on_enter(void* context) {
         }
 
     } else if(edit_target == InfraredEditTargetRemote) {
-        dialog_ex_set_header(dialog_ex, "Delete Remote?", 64, 0, AlignCenter, AlignTop);
+        dialog_ex_set_header(dialog_ex, "Smazat ovladac?", 64, 0, AlignCenter, AlignTop);
         infrared_text_store_set(
             infrared,
             0,
@@ -90,8 +90,8 @@ void infrared_scene_edit_delete_on_enter(void* context) {
 
     dialog_ex_set_text(dialog_ex, infrared->text_store[0], 64, 31, AlignCenter, AlignCenter);
     dialog_ex_set_icon(dialog_ex, 0, 0, NULL);
-    dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-    dialog_ex_set_right_button_text(dialog_ex, "Delete");
+    dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+    dialog_ex_set_right_button_text(dialog_ex, "Smazat");
     dialog_ex_set_result_callback(dialog_ex, infrared_scene_edit_delete_dialog_result_callback);
     dialog_ex_set_context(dialog_ex, context);
 
