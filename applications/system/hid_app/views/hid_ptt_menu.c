@@ -168,7 +168,7 @@ static void
             const size_t row_width = row_right_x - row_left_x;
 
             if((position == model->position) && model->hint_visible) {
-                const char* hint_prefix = " | Long press";
+                const char* hint_prefix = " | Podrz";
                 const char* hint_suffix = "pro napovedu";
                 const int32_t icon_y = text_y - 8;
 
