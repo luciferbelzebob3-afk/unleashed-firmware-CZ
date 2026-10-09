@@ -50,16 +50,16 @@ void power_settings_scene_start_on_enter(void* context) {
     PowerSettingsApp* app = context;
     VariableItemList* variable_item_list = app->variable_item_list;
 
-    variable_item_list_add(variable_item_list, "Battery Info", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Reboot", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Power OFF", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Info o baterii", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Restartovat", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Vypnout", 1, NULL, NULL);
 
     VariableItem* item;
     uint8_t value_index;
 
     item = variable_item_list_add(
         variable_item_list,
-        "Auto PowerOff",
+        "Automaticke vypnuti",
         AUTO_POWEROFF_DELAY_COUNT,
         power_settings_scene_start_auto_poweroff_delay_changed,
         app);
@@ -73,7 +73,7 @@ void power_settings_scene_start_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Limit Charge",
+        "Omezit nabijeni",
         CHARGE_SUPRESS_PERCENT_COUNT,
         power_settings_scene_start_charge_supress_percent_changed,
         app);
