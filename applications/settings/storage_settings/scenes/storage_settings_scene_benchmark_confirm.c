@@ -17,13 +17,13 @@ void storage_settings_scene_benchmark_confirm_on_enter(void* context) {
         dialog_ex_set_icon(dialog_ex, 83, 22, &I_WarningDolphinFlip_45x42);
         dialog_ex_set_header(dialog_ex, "SD karta neni pripojena", 64, 3, AlignCenter, AlignTop);
         dialog_ex_set_text(
-            dialog_ex, "Try to reinsert\nor format SD\ncard.", 3, 19, AlignLeft, AlignTop);
+            dialog_ex, "Zkus SD kartu znovu\nvlozit nebo ji\nnaformatovat.", 3, 19, AlignLeft, AlignTop);
         dialog_ex_set_center_button_text(dialog_ex, "OK");
     } else {
         dialog_ex_set_header(dialog_ex, "Otestovat vykon SD karty?", 64, 0, AlignCenter, AlignTop);
         dialog_ex_set_text(
             dialog_ex,
-            "SD will be tested in SPI\nmode. Learn more:\nr.flipper.net/sd_test",
+            "SD karta bude testovana\n v rezimu SPI. Vice informaci:\nr.flipper.net/sd_test",
             0,
             12,
             AlignLeft,

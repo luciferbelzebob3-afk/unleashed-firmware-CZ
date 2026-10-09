@@ -24,7 +24,7 @@ void storage_settings_scene_factory_reset_on_enter(void* context) {
     dialog_ex_set_header(dialog_ex, "Potvrdit tovarni nastaveni?", 64, 0, AlignCenter, AlignTop);
     dialog_ex_set_text(
         dialog_ex,
-        "Internal storage will be erased\ndata and settings will be lost!",
+        "Interni uloziste bude smazano,\ndata a nastaveni budou ztracena!",
         64,
         14,
         AlignCenter,
