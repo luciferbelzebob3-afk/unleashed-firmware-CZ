@@ -316,14 +316,14 @@ void subghz_read_raw_draw(Canvas* canvas, SubGhzReadRAWModel* model) {
 
     switch(model->status) {
     case SubGhzReadRAWStatusIDLE:
-        elements_button_left(canvas, "Erase");
-        elements_button_center(canvas, "Send");
-        elements_button_right(canvas, "Save");
+        elements_button_left(canvas, "Smazat");
+        elements_button_center(canvas, "Odeslat");
+        elements_button_right(canvas, "Ulozit");
         break;
     case SubGhzReadRAWStatusLoadKeyIDLE:
         if(!model->raw_send_only) {
-            elements_button_left(canvas, "New");
-            elements_button_right(canvas, "More");
+            elements_button_left(canvas, "Novy");
+            elements_button_right(canvas, "Dalsi");
         }
         elements_button_center(canvas, "Send");
         elements_text_box(
@@ -343,12 +343,12 @@ void subghz_read_raw_draw(Canvas* canvas, SubGhzReadRAWModel* model) {
     case SubGhzReadRAWStatusLoadKeyTX:
     case SubGhzReadRAWStatusLoadKeyTXRepeat:
         graphics_mode = 0;
-        elements_button_center(canvas, "Hold to repeat");
+        elements_button_center(canvas, "Drz pro opakovani");
         break;
 
     case SubGhzReadRAWStatusStart:
-        elements_button_left(canvas, "Config");
-        elements_button_center(canvas, "REC");
+        elements_button_left(canvas, "Nastav.");
+        elements_button_center(canvas, "NAHR");
         break;
 
     default:
