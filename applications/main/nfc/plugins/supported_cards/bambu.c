@@ -441,7 +441,7 @@ static bool bambu_parse(const NfcDevice* device, FuriString* parsed_data) {
 
     // Build formatted output
     furi_string_cat_printf(parsed_data, "\e#Bambu Lab Filament\n");
-    furi_string_cat_printf(parsed_data, "Type: %s\n", detailed_type);
+    furi_string_cat_printf(parsed_data, "Typ: %s\n", detailed_type);
 
     // Display color: show name with hex if available, otherwise just hex
     // For hex code: show 6-digit if fully opaque, otherwise show "#RRGGBB @ XX%"
@@ -449,7 +449,7 @@ static bool bambu_parse(const NfcDevice* device, FuriString* parsed_data) {
         if(color_a == 0xFF) {
             furi_string_cat_printf(
                 parsed_data,
-                "Color: %s (#%02X%02X%02X)\n",
+                "Barva: %s (#%02X%02X%02X)\n",
                 filament_info->color_name,
                 color_r,
                 color_g,
@@ -458,7 +458,7 @@ static bool bambu_parse(const NfcDevice* device, FuriString* parsed_data) {
             uint8_t alpha_percent = (color_a * 100) / 255;
             furi_string_cat_printf(
                 parsed_data,
-                "Color: %s (#%02X%02X%02X @ %u%%)\n",
+                "Barva: %s (#%02X%02X%02X @ %u%%)\n",
                 filament_info->color_name,
                 color_r,
                 color_g,
@@ -468,12 +468,12 @@ static bool bambu_parse(const NfcDevice* device, FuriString* parsed_data) {
     } else {
         if(color_a == 0xFF) {
             furi_string_cat_printf(
-                parsed_data, "Color: #%02X%02X%02X\n", color_r, color_g, color_b);
+                parsed_data, "Barva: #%02X%02X%02X\n", color_r, color_g, color_b);
         } else {
             uint8_t alpha_percent = (color_a * 100) / 255;
             furi_string_cat_printf(
                 parsed_data,
-                "Color: #%02X%02X%02X @ %u%%\n",
+                "Barva: #%02X%02X%02X @ %u%%\n",
                 color_r,
                 color_g,
                 color_b,
@@ -482,26 +482,26 @@ static bool bambu_parse(const NfcDevice* device, FuriString* parsed_data) {
     }
 
     if(filament_info != NULL) {
-        furi_string_cat_printf(parsed_data, "Filament Code: %s\n", filament_info->filament_code);
+        furi_string_cat_printf(parsed_data, "Kod filamentu: %s\n", filament_info->filament_code);
     } else {
-        furi_string_cat_printf(parsed_data, "Filament Code: Unknown (update lookup table)\n");
-        furi_string_cat_printf(parsed_data, "Material ID: %s\n", material_id);
-        furi_string_cat_printf(parsed_data, "Variant: %s\n", variant_id);
+        furi_string_cat_printf(parsed_data, "Kod filamentu: neznamy (aktualizujte vyhledavaci tabulku)\n");
+        furi_string_cat_printf(parsed_data, "ID materialu: %s\n", material_id);
+        furi_string_cat_printf(parsed_data, "Varianta: %s\n", variant_id);
     }
 
-    furi_string_cat_printf(parsed_data, "Prod: %s\n", production_date);
+    furi_string_cat_printf(parsed_data, "Vyroba: %s\n", production_date);
 
-    furi_string_cat_printf(parsed_data, "\n\e#Configurations\n");
+    furi_string_cat_printf(parsed_data, "\n\e#Konfigurace\n");
     furi_string_cat_printf(parsed_data, "Hotend: %u-%u C\n", hotend_min, hotend_max);
-    furi_string_cat_printf(parsed_data, "Drying: %u C for %uh\n", drying_temp, drying_hours);
-    furi_string_cat_printf(parsed_data, "Nozzle: >= %.2fmm\n", (double)nozzle_diameter);
+    furi_string_cat_printf(parsed_data, "Suseni: %u C po dobu %u h\n", drying_temp, drying_hours);
+    furi_string_cat_printf(parsed_data, "Tryska: >= %.2f mm\n", (double)nozzle_diameter);
 
-    furi_string_cat_printf(parsed_data, "\n\e#Specifications\n");
-    furi_string_cat_printf(parsed_data, "Weight: %ug\n", weight_grams);
-    furi_string_cat_printf(parsed_data, "Diameter: %.2fmm\n", (double)diameter_mm);
-    furi_string_cat_printf(parsed_data, "Spool Width: %.2fmm\n", (double)spool_width_mm);
+    furi_string_cat_printf(parsed_data, "\n\e#Specifikace\n");
+    furi_string_cat_printf(parsed_data, "Hmotnost: %u g\n", weight_grams);
+    furi_string_cat_printf(parsed_data, "Prumer: %.2f mm\n", (double)diameter_mm);
+    furi_string_cat_printf(parsed_data, "Sirka civky: %.2f mm\n", (double)spool_width_mm);
     if(filament_length > 0) {
-        furi_string_cat_printf(parsed_data, "Length: %um\n", filament_length);
+        furi_string_cat_printf(parsed_data, "Delka: %u m\n", filament_length);
     }
 
     return true;

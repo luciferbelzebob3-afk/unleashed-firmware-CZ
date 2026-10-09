@@ -577,10 +577,10 @@ bool aic_parse(const NfcDevice* device, FuriString* parsed_data) {
     }
 
     parsed = true;
-    furi_string_printf(parsed_data, "\e#Amusement IC Card\n");
+    furi_string_printf(parsed_data, "\e#Karta Amusement IC\n");
     furi_string_cat_str(
         parsed_data, "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-    furi_string_cat_str(parsed_data, "\nType:\n");
+    furi_string_cat_str(parsed_data, "\nTyp:\n");
 
     // Determine card brand and type
     const uint8_t data_format_code_2 = data->data.fs.id.data[9];
@@ -617,7 +617,7 @@ bool aic_parse(const NfcDevice* device, FuriString* parsed_data) {
         access_code[i * 2] = (decrypted[i + 6] & 0xF0) >> 4; // Get upper nibble
         access_code[i * 2 + 1] = decrypted[i + 6] & 0x0F; // Get lower nibble
     }
-    furi_string_cat_str(parsed_data, "\nAccess Code:\n");
+    furi_string_cat_str(parsed_data, "\nPristupovy kod:\n");
     bool access_code_is_bcd = true;
     for(int i = 0; i < 20; i++) {
         furi_string_cat_printf(parsed_data, "%d", access_code[i]);
@@ -628,7 +628,7 @@ bool aic_parse(const NfcDevice* device, FuriString* parsed_data) {
     }
     furi_string_cat_str(parsed_data, "\n");
 
-    furi_string_cat_printf(parsed_data, "BCD valid: %s\n", access_code_is_bcd ? "Yes" : "No");
+    furi_string_cat_printf(parsed_data, "BCD platne: %s\n", access_code_is_bcd ? "Yes" : "No");
     furi_string_cat_str(
         parsed_data, "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
 
@@ -638,12 +638,12 @@ bool aic_parse(const NfcDevice* device, FuriString* parsed_data) {
         parse_access_code(access_code, parsed_data);
     } else {
         furi_string_cat_printf(
-            parsed_data, "\nAccess code preamble wrong: expected 5, got %d\n", access_code[0]);
+            parsed_data, "\nChybna predpona pristupoveho kodu: ocekavano 5, nacteno %d\n", access_code[0]);
     }
 
     furi_string_cat_str(
         parsed_data, "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-    furi_string_cat_str(parsed_data, "\nDecrypted S-PAD 0:\n");
+    furi_string_cat_str(parsed_data, "\nDeifrovane S-PAD 0:\n");
     for(int i = 0; i < 16; i++) {
         furi_string_cat_printf(parsed_data, "%02X ", decrypted[i]);
         if(i == 7) {

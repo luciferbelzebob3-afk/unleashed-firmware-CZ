@@ -309,7 +309,7 @@ static bool bip_parse(const NfcDevice* device, FuriString* parsed_data) {
         // All data is now parsed and stored in bip_data, now print it
 
         // Print basic info
-        furi_string_printf(parsed_data, "\e#Tarjeta Bip!\nCard Number: %lu\n", bip_data.card_id);
+        furi_string_printf(parsed_data, "\e#Tarjeta Bip!\nCislo karty: %lu\n", bip_data.card_id);
         if(balance_read) {
             furi_string_cat_printf(
                 parsed_data, "Zustatek: $%hu (priznaky %hu)\n", bip_data.balance, bip_data.flags);
@@ -335,7 +335,7 @@ static bool bip_parse(const NfcDevice* device, FuriString* parsed_data) {
 
         // Print top-ups, newest first
         if(top_ups_read) {
-            furi_string_cat_printf(parsed_data, "\n\e#Last Top-ups");
+            furi_string_cat_printf(parsed_data, "\n\e#Posledni dobijeni");
             for(size_t i = 0; i < 3; i++) {
                 const BipTransaction* top_up = &bip_data.top_ups[(3u + newest_top_up - i) % 3];
                 furi_string_cat_printf(parsed_data, "\n+$%d\n  @", top_up->amount);
@@ -357,7 +357,7 @@ static bool bip_parse(const NfcDevice* device, FuriString* parsed_data) {
 
         // Print charges
         if(charges_read) {
-            furi_string_cat_printf(parsed_data, "\n\e#Last Charges (Trips)");
+            furi_string_cat_printf(parsed_data, "\n\e#Posledni jizdy");
             for(size_t i = 0; i < 3; i++) {
                 const BipTransaction* charge = &bip_data.charges[(3u + newest_charge - i) % 3];
                 furi_string_cat_printf(parsed_data, "\n-$%d\n  @", charge->amount);
