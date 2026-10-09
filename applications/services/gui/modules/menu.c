@@ -35,7 +35,7 @@ static void menu_draw_callback(Canvas* canvas, void* _model) {
     canvas_clear(canvas);
 
     if(model->position >= model->count) {
-        canvas_draw_str(canvas, 2, 32, "Empty");
+        canvas_draw_str(canvas, 2, 32, "Prazdne");
         elements_scrollbar(canvas, 0, 0);
     } else if(model->style) {
         model->style->draw(canvas, model);
