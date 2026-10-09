@@ -51,7 +51,7 @@ static void keypad_test_render_callback(Canvas* canvas, void* ctx) {
     if(state->press[3]) canvas_draw_disc(canvas, 100, 44, 5);
     if(state->press[4]) canvas_draw_disc(canvas, 100, 26, 5);
 
-    canvas_draw_str(canvas, 10, 63, "[Zpet] - reset, podrzenim odejdes");
+    canvas_draw_str(canvas, 10, 63, "[Zpet] - resetuj, podrzenim odejdes");
 
     furi_mutex_release(state->mutex);
 }

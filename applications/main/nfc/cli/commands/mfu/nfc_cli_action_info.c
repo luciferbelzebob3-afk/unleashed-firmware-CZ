@@ -56,7 +56,7 @@ static void nfc_cli_mfu_info_get_vendor(const uint8_t vendor_key, FuriString* ou
         if(flipper_format_read_string(ff, uid_str, buf))
             furi_string_printf(output, "%s, %s", uid_str, furi_string_get_cstr(buf));
         else
-            furi_string_printf(output, "unknown");
+            furi_string_printf(output, "neznamy");
     } while(false);
 
     flipper_format_free(ff);
@@ -72,7 +72,7 @@ const char*
     else if(value >= 0x08 && value <= 0x0E)
         description = "proprietary";
     else if(value == 0x0F && !read)
-        description = "no access granted at all";
+        description = "pristup neni vubec povolen";
 
     return description;
 }

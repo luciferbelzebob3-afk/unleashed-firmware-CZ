@@ -95,7 +95,7 @@ static NfcCliProcessorError
         const NfcCliActionDescriptor* action = nfc_cli_get_action_from_args(cmd, args);
         if(action == NULL) {
             result = NfcCliProcessorErrorActionNotFound;
-            furi_string_printf(instance->error_message, "Action not found");
+            furi_string_printf(instance->error_message, "Akce nenalezena");
             break;
         }
 

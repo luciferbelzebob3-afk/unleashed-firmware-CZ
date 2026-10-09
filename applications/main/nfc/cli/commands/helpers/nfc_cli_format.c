@@ -24,10 +24,10 @@ const char* nfc_cli_get_protocol_name(NfcProtocol protocol) {
 
 static const char* mf_ultralight_error_names[] = {
     [MfUltralightErrorNone] = "OK",
-    [MfUltralightErrorNotPresent] = "Card not present",
-    [MfUltralightErrorProtocol] = "Protocol failure",
-    [MfUltralightErrorAuth] = "Auth failed",
-    [MfUltralightErrorTimeout] = "Timeout",
+    [MfUltralightErrorNotPresent] = "Karta neni pritomna",
+    [MfUltralightErrorProtocol] = "Chyba protokolu",
+    [MfUltralightErrorAuth] = "Autentizace selhala",
+    [MfUltralightErrorTimeout] = "Casovy limit",
 };
 
 const char* nfc_cli_mf_ultralight_get_error(MfUltralightError error) {

@@ -71,7 +71,7 @@ eventLoop.subscribe(views.textInput.input, function (_sub, text, gui, views, ctx
     } else if (typeof result === "function") {
         result = "function";
     } else {
-        result = "unknown type: " + typeof result;
+        result = "neznamy typ: " + typeof result;
     }
 
     gui.viewDispatcher.sendTo("front");
