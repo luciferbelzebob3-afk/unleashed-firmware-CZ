@@ -456,18 +456,18 @@ void parse_transport_type(BlockData* data_block, FuriString* transport) {
             furi_string_cat(transport, "Metro");
             break;
         case 2:
-            furi_string_cat(transport, "Monorail");
+            furi_string_cat(transport, "Jednokolejka");
             break;
         case 3:
             furi_string_cat(transport, "MCC");
             break;
         default:
-            furi_string_cat(transport, "Unknown");
+            furi_string_cat(transport, "Neznamy");
             break;
         }
         break;
     case 2:
-        furi_string_cat(transport, "Ground");
+        furi_string_cat(transport, "Pozemni doprava");
         break;
     default:
         furi_string_cat(transport, "");
@@ -507,13 +507,13 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x02: {
         parse_layout_2(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
@@ -523,13 +523,13 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             return false;
         }
         //remaining_trips
-        furi_string_cat_printf(result, "Trips: %d\n", data_block.total_trips);
+        furi_string_cat_printf(result, "Pocet jizd: %d\n", data_block.total_trips);
         //valid_from_date
         DateTime card_valid_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_valid_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_valid_from_date_s.day,
             card_valid_from_date_s.month,
             card_valid_from_date_s.year);
@@ -538,12 +538,12 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
         from_days_to_datetime(data_block.valid_to_date, &card_valid_to_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d\n",
+            "Platnost do: %02d.%02d.%04d\n",
             card_valid_to_date_s.day,
             card_valid_to_date_s.month,
             card_valid_to_date_s.year);
         //trip_number
-        furi_string_cat_printf(result, "Trips: %d\n", data_block.total_trips);
+        furi_string_cat_printf(result, "Pocet jizd: %d\n", data_block.total_trips);
         //trip_from
         DateTime card_start_trip_minutes_s = {0};
         from_seconds_to_datetime(
@@ -564,24 +564,24 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x06: {
         parse_layout_6(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d\n", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d\n", data_block.remaining_trips);
         //valid_from_date
         DateTime card_valid_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_valid_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_valid_from_date_s.day,
             card_valid_from_date_s.month,
             card_valid_from_date_s.year);
@@ -590,12 +590,12 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
         from_days_to_datetime(data_block.valid_to_date, &card_valid_to_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d\n",
+            "Platnost do: %02d.%02d.%04d\n",
             card_valid_to_date_s.day,
             card_valid_to_date_s.month,
             card_valid_to_date_s.year);
         //trip_number
-        furi_string_cat_printf(result, "Trips: %d\n", data_block.total_trips);
+        furi_string_cat_printf(result, "Pocet jizd: %d\n", data_block.total_trips);
         //trip_from
         DateTime card_start_trip_minutes_s = {0};
         from_minutes_to_datetime(
@@ -618,18 +618,18 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x08: {
         parse_layout_8(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d\n", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d\n", data_block.remaining_trips);
         //valid_from_date
         DateTime card_valid_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_valid_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_valid_from_date_s.day,
             card_valid_from_date_s.month,
             card_valid_from_date_s.year);
@@ -639,7 +639,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             data_block.valid_from_date + data_block.valid_for_days, &card_valid_to_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d",
+            "Platnost do: %02d.%02d.%04d",
             card_valid_to_date_s.day,
             card_valid_to_date_s.month,
             card_valid_to_date_s.year);
@@ -648,24 +648,24 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x0A: {
         parse_layout_A(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 2016);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d\n", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d\n", data_block.remaining_trips);
         //valid_from_date
         DateTime card_valid_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_valid_from_date_s, 2016);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_valid_from_date_s.day,
             card_valid_from_date_s.month,
             card_valid_from_date_s.year);
@@ -677,7 +677,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             2016);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d",
+            "Platnost do: %02d.%02d.%04d",
             card_valid_to_date_s.day,
             card_valid_to_date_s.month,
             card_valid_to_date_s.year);
@@ -728,18 +728,18 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x0C: {
         parse_layout_C(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d\n", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d\n", data_block.remaining_trips);
         //valid_from_date
         DateTime card_valid_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_valid_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_valid_from_date_s.day,
             card_valid_from_date_s.month,
             card_valid_from_date_s.year);
@@ -749,12 +749,12 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             data_block.valid_from_date + data_block.valid_for_days, &card_valid_to_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d\n",
+            "Platnost do: %02d.%02d.%04d\n",
             card_valid_to_date_s.day,
             card_valid_to_date_s.month,
             card_valid_to_date_s.year);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d", data_block.remaining_trips);
         //trip_from
         if(data_block.start_trip_date) { // TODO: (-nofl) unused
             DateTime card_start_trip_minutes_s = {0};
@@ -772,24 +772,24 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x0D: {
         parse_layout_D(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d\n", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d\n", data_block.remaining_trips);
         //valid_from_date
         DateTime card_valid_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_valid_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_valid_from_date_s.day,
             card_valid_from_date_s.month,
             card_valid_from_date_s.year);
@@ -799,7 +799,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             data_block.valid_from_date + data_block.valid_for_days, &card_valid_to_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d",
+            "Platnost do: %02d.%02d.%04d",
             card_valid_to_date_s.day,
             card_valid_to_date_s.month,
             card_valid_to_date_s.year);
@@ -830,18 +830,18 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x1C1: {
         parse_layout_E1(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         //remaining_funds
-        furi_string_cat_printf(result, "Balance: %ld rub\n", data_block.remaining_funds / 100);
+        furi_string_cat_printf(result, "Zustatek: %ld RUB\n", data_block.remaining_funds / 100);
         //trip_from
         if(data_block.start_trip_date) {
             DateTime card_start_trip_minutes_s = {0};
@@ -867,15 +867,15 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
                 furi_string_cat(transport, "Metro");
                 break;
             case 2:
-                furi_string_cat(transport, "Monorail");
+                furi_string_cat(transport, "Jednokolejka");
                 break;
             default:
-                furi_string_cat(transport, "Unknown");
+                furi_string_cat(transport, "Neznamy");
                 break;
             }
             break;
         case 2:
-            furi_string_cat(transport, "Ground");
+            furi_string_cat(transport, "Pozemni doprava");
             break;
         case 3:
             furi_string_cat(transport, "MCC");
@@ -884,7 +884,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             furi_string_cat(transport, "");
             break;
         }
-        furi_string_cat_printf(result, "Transport: %s", furi_string_get_cstr(transport));
+        furi_string_cat_printf(result, "Doprava: %s", furi_string_get_cstr(transport));
         //validator
         if(data_block.validator) {
             furi_string_cat_printf(result, "\nValidator: %05d", data_block.validator);
@@ -896,24 +896,24 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x1C2: {
         parse_layout_E2(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d\n", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d\n", data_block.remaining_trips);
         //valid_from_date
         DateTime card_valid_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_valid_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d",
+            "Platnost od: %02d.%02d.%04d",
             card_valid_from_date_s.day,
             card_valid_from_date_s.month,
             card_valid_from_date_s.year);
@@ -984,13 +984,13 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             furi_string_cat(transport, "Metro");
             break;
         case 2:
-            furi_string_cat(transport, "Monorail");
+            furi_string_cat(transport, "Jednokolejka");
             break;
         case 3:
-            furi_string_cat(transport, "Ground");
+            furi_string_cat(transport, "Pozemni doprava");
             break;
         default:
-            furi_string_cat(transport, "Unknown");
+            furi_string_cat(transport, "Neznamy");
             break;
         }
         //validator
@@ -1004,18 +1004,18 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x1C3: {
         parse_layout_E3(&data_block, block);
         // number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         // use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         // remaining_funds
-        furi_string_cat_printf(result, "Balance: %lu rub\n", data_block.remaining_funds);
+        furi_string_cat_printf(result, "Zustatek: %lu RUB\n", data_block.remaining_funds);
         // start_trip_minutes
         DateTime card_start_trip_minutes_s = {0};
         from_minutes_to_datetime(data_block.start_trip_minutes, &card_start_trip_minutes_s, 2016);
@@ -1030,7 +1030,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
         // transport
         FuriString* transport = furi_string_alloc();
         parse_transport_type(&data_block, transport);
-        furi_string_cat_printf(result, "Transport: %s\n", furi_string_get_cstr(transport));
+        furi_string_cat_printf(result, "Doprava: %s\n", furi_string_get_cstr(transport));
         // validator
         furi_string_cat_printf(result, "Validator: %05d\n", data_block.validator);
         // fare
@@ -1040,16 +1040,16 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             furi_string_cat(fare, "");
             break;
         case 1:
-            furi_string_cat(fare, "Single");
+            furi_string_cat(fare, "Jednotliva");
             break;
         case 2:
-            furi_string_cat(fare, "90 minutes");
+            furi_string_cat(fare, "90 minut");
             break;
         default:
-            furi_string_cat(fare, "Unknown");
+            furi_string_cat(fare, "Neznamy");
             break;
         }
-        furi_string_cat_printf(result, "Fare: %s", furi_string_get_cstr(fare));
+        furi_string_cat_printf(result, "Jizdenka: %s", furi_string_get_cstr(fare));
         furi_string_free(fare);
         furi_string_free(transport);
         break;
@@ -1059,24 +1059,24 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
         parse_layout_E4(&data_block, block);
 
         // number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         // use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 2016);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         // remaining_funds
-        furi_string_cat_printf(result, "Balance: %lu rub\n", data_block.remaining_funds);
+        furi_string_cat_printf(result, "Zustatek: %lu RUB\n", data_block.remaining_funds);
         // valid_from_date
         DateTime card_use_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_use_from_date_s, 2016);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_use_from_date_s.day,
             card_use_from_date_s.month,
             card_use_from_date_s.year);
@@ -1096,12 +1096,12 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
 
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d\n",
+            "Platnost do: %02d.%02d.%04d\n",
             card_use_to_date_s.day,
             card_use_to_date_s.month,
             card_use_to_date_s.year);
         // trip_number
-        // furi_string_cat_printf(result, "Trips left: %d", data_block.remaining_trips);
+        // furi_string_cat_printf(result, "Zbyva jizd: %d", data_block.remaining_trips);
         // trip_from
         DateTime card_start_trip_minutes_s = {0};
         from_minutes_to_datetime(
@@ -1112,7 +1112,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
         //transport
         FuriString* transport = furi_string_alloc();
         parse_transport_type(&data_block, transport);
-        furi_string_cat_printf(result, "Transport: %s", furi_string_get_cstr(transport));
+        furi_string_cat_printf(result, "Doprava: %s", furi_string_get_cstr(transport));
         // validator
         if(data_block.validator) {
             furi_string_cat_printf(result, "\nValidator: %05d", data_block.validator);
@@ -1124,13 +1124,13 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x1C5: {
         parse_layout_E5(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 2019);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
@@ -1192,24 +1192,24 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x1C6: {
         parse_layout_E6(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //use_before_date
         DateTime card_use_before_date_s = {0};
         from_days_to_datetime(data_block.use_before_date, &card_use_before_date_s, 2019);
         furi_string_cat_printf(
             result,
-            "Use before: %02d.%02d.%04d\n",
+            "Pouzit do: %02d.%02d.%04d\n",
             card_use_before_date_s.day,
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         //remaining_trips
-        furi_string_cat_printf(result, "Trips left: %d\n", data_block.remaining_trips);
+        furi_string_cat_printf(result, "Zbyva jizd: %d\n", data_block.remaining_trips);
         //valid_from_date
         DateTime card_use_from_date_s = {0};
         from_minutes_to_datetime(data_block.valid_from_date, &card_use_from_date_s, 2019);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_use_from_date_s.day,
             card_use_from_date_s.month,
             card_use_from_date_s.year);
@@ -1221,7 +1221,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             2019);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d",
+            "Platnost do: %02d.%02d.%04d",
             card_use_to_date_s.day,
             card_use_to_date_s.month,
             card_use_to_date_s.year);
@@ -1269,13 +1269,13 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     case 0x3CCB: {
         parse_layout_FCB(&data_block, block);
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //valid_from_date
         DateTime card_use_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_use_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_use_from_date_s.day,
             card_use_from_date_s.month,
             card_use_from_date_s.year);
@@ -1284,7 +1284,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
         from_days_to_datetime(data_block.valid_to_date, &card_use_to_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d",
+            "Platnost do: %02d.%02d.%04d",
             card_use_to_date_s.day,
             card_use_to_date_s.month,
             card_use_to_date_s.year);
@@ -1292,13 +1292,13 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
     }
     case 0x3C0B: {
         //number
-        furi_string_cat_printf(result, "Number: %010lu\n", data_block.number);
+        furi_string_cat_printf(result, "Cislo: %010lu\n", data_block.number);
         //valid_from_date
         DateTime card_use_from_date_s = {0};
         from_days_to_datetime(data_block.valid_from_date, &card_use_from_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid from: %02d.%02d.%04d\n",
+            "Platnost od: %02d.%02d.%04d\n",
             card_use_from_date_s.day,
             card_use_from_date_s.month,
             card_use_from_date_s.year);
@@ -1307,7 +1307,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
         from_days_to_datetime(data_block.valid_to_date, &card_use_to_date_s, 1992);
         furi_string_cat_printf(
             result,
-            "Valid to: %02d.%02d.%04d",
+            "Platnost do: %02d.%02d.%04d",
             card_use_to_date_s.day,
             card_use_to_date_s.month,
             card_use_to_date_s.year);
