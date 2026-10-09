@@ -23,7 +23,7 @@ void subghz_scene_delete_on_enter(void* context) {
     text = furi_string_alloc();
 
     path_extract_filename(subghz->file_path, text, true);
-    furi_string_cat_printf(text_out, "\e#Delete %s?\e#\n", furi_string_get_cstr(text));
+    furi_string_cat_printf(text_out, "\e#Smazat %s?\e#\n", furi_string_get_cstr(text));
 
     furi_string_reset(text);
     subghz_protocol_decoder_base_get_string(subghz_txrx_get_decoder(subghz->txrx), text);
