@@ -16,7 +16,7 @@ void storage_settings_scene_unmount_confirm_on_enter(void* context) {
         dialog_ex_set_header(dialog_ex, "Pripojit SD kartu?", 64, 10, AlignCenter, AlignCenter);
         dialog_ex_set_text(
             dialog_ex,
-            "This may turn off power\nfor external modules",
+            "Odpojeni muze vypnout\nnapajeni externich modulu",
             64,
             32,
             AlignCenter,
@@ -26,7 +26,7 @@ void storage_settings_scene_unmount_confirm_on_enter(void* context) {
     } else {
         dialog_ex_set_header(dialog_ex, "Odpojit SD kartu?", 64, 10, AlignCenter, AlignCenter);
         dialog_ex_set_text(
-            dialog_ex, "SD card will be\nunavailable", 64, 32, AlignCenter, AlignCenter);
+            dialog_ex, "SD karta nebude\nk dispozici", 64, 32, AlignCenter, AlignCenter);
         dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
         dialog_ex_set_right_button_text(dialog_ex, "Odpojit");
     }
