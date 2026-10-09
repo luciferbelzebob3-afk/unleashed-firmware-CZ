@@ -199,9 +199,9 @@ static void clock_render_callback(Canvas* const canvas, void* ctx) {
         }
         // FontBigNumbers has no letters, so ALARM has to use a text font.
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 26, AlignCenter, AlignCenter, "! ALARM !");
+        canvas_draw_str_aligned(canvas, 64, 26, AlignCenter, AlignCenter, "! BUDIK !");
         canvas_set_font(canvas, FontSecondary);
-        canvas_draw_str_aligned(canvas, 64, 44, AlignCenter, AlignCenter, "Press any key to stop");
+        canvas_draw_str_aligned(canvas, 64, 44, AlignCenter, AlignCenter, "Stiskni tlacitko pro stop");
         return;
     }
 
@@ -273,7 +273,7 @@ static void clock_render_callback(Canvas* const canvas, void* ctx) {
             date_pct_string, sizeof(date_pct_string), "%s   %u%%", date_string, state->battery_pct);
         canvas_draw_str_aligned(
             canvas, 64, 20, AlignCenter, AlignTop, date_pct_string); // DRAW DATE + BATTERY
-        elements_button_left(canvas, "Reset");
+        elements_button_left(canvas, "Vynulovat");
     } else {
         canvas_draw_str_aligned(canvas, 64, 32, AlignCenter, AlignCenter, time_string);
         canvas_set_font(canvas, FontSecondary);
@@ -409,12 +409,12 @@ static bool clock_input_callback(InputEvent* event, void* context) {
 static void alarm_toggle_changed(VariableItem* item) {
     AppState* app = variable_item_get_context(item);
     app->settings.alarm_enabled = variable_item_get_current_value_index(item) == 1;
-    variable_item_set_current_value_text(item, app->settings.alarm_enabled ? "ON" : "OFF");
+    variable_item_set_current_value_text(item, app->settings.alarm_enabled ? "ZAP" : "VYP");
     ns_settings_save(app);
 }
 
 static void refresh_time_menu_item(AppState* app) {
-    // Keep the "Set time" row's value text in step with the chosen alarm time.
+    // Keep the "Nastavit cas" row's value text in step with the chosen alarm time.
     char buf[12];
     format_alarm_time(
         buf, sizeof(buf), app->settings.alarm_hour, app->settings.alarm_minute, app->time_format);
@@ -423,7 +423,7 @@ static void refresh_time_menu_item(AppState* app) {
 
 static void alarm_menu_enter(void* context, uint32_t index) {
     AppState* app = context;
-    if(index != 1) return; // only the "Set time" row opens the picker
+    if(index != 1) return; // only the "Nastavit cas" row opens the picker
 
     app->edit_hour = app->settings.alarm_hour;
     app->edit_minute = app->settings.alarm_minute;
@@ -442,7 +442,7 @@ static void alarm_time_draw(Canvas* canvas, void* ctx) {
     canvas_clear(canvas);
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, 64, 4, AlignCenter, AlignTop, "Alarm time");
+    canvas_draw_str_aligned(canvas, 64, 4, AlignCenter, AlignTop, "Cas budiku");
 
     char hh[4], mm[4];
     bool pm = false;
@@ -484,7 +484,7 @@ static void alarm_time_draw(Canvas* canvas, void* ctx) {
     canvas_draw_line(canvas, ux - uw / 2, 46, ux + uw / 2, 46);
 
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str_aligned(canvas, 64, 60, AlignCenter, AlignBottom, "Up/Down set  OK save");
+    canvas_draw_str_aligned(canvas, 64, 60, AlignCenter, AlignBottom, "Nahoru/dolu nastavit OK ulozit");
 }
 
 static bool alarm_time_input(InputEvent* event, void* context) {
@@ -683,11 +683,11 @@ int32_t clock_app(void* p) {
     // Alarm menu
     app->alarm_menu = variable_item_list_alloc();
     app->alarm_toggle_item =
-        variable_item_list_add(app->alarm_menu, "Alarm", 2, alarm_toggle_changed, app);
+        variable_item_list_add(app->alarm_menu, "Budik", 2, alarm_toggle_changed, app);
     variable_item_set_current_value_index(app->alarm_toggle_item, app->settings.alarm_enabled);
     variable_item_set_current_value_text(
-        app->alarm_toggle_item, app->settings.alarm_enabled ? "ON" : "OFF");
-    app->alarm_time_item = variable_item_list_add(app->alarm_menu, "Set time", 1, NULL, app);
+        app->alarm_toggle_item, app->settings.alarm_enabled ? "ZAP" : "VYP");
+    app->alarm_time_item = variable_item_list_add(app->alarm_menu, "Nastavit cas", 1, NULL, app);
     refresh_time_menu_item(app);
     variable_item_list_set_enter_callback(app->alarm_menu, alarm_menu_enter, app);
     view_dispatcher_add_view(
