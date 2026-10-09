@@ -1,6 +1,6 @@
 App(
     appid="findmy",
-    name="FindMy Flipper",
+    name="Najit Flipper",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="findmy_main",
     requires=["gui"],
@@ -11,7 +11,7 @@ App(
     fap_author="@MatthewKuKanich",
     fap_weburl="https://github.com/MatthewKuKanich/FindMyFlipper",
     fap_version="3.5",
-    fap_description="BLE FindMy Location Beacon",
+    fap_description="Lokalizacni BLE majak FindMy",
 )
 
 App(
