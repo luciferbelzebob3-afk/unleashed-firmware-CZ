@@ -358,14 +358,14 @@ void subghz_protocol_decoder_gangqi_feed(void* context, bool level, volatile uin
  */
 static const char* subghz_protocol_gangqi_get_button_name(uint8_t btn) {
     const char* name_btn[16] = {
-        "Unknown",
-        "Exit settings",
-        "Volume setting",
+        "Neznamy",
+        "Konec nastaveni",
+        "Nastaveni hlasitosti",
         "0x3",
-        "Vibro sens. setting",
-        "Settings mode",
-        "Ringtone setting",
-        "Ring", // D
+        "Citlivost vibraci",
+        "Rezim nastaveni",
+        "Nastaveni vyzvaneni",
+        "Zvonek", // D
         "0x8",
         "0x9",
         "0xA",

@@ -371,7 +371,7 @@ void subghz_protocol_decoder_honeywell_get_string(void* context, FuriString* out
         channel,
         battery_low,
         heartbeat,
-        contact ? "open" : "closed",
+        contact ? "otevreno" : "zavreno",
         code_found_hi,
         code_found_lo,
         contact,

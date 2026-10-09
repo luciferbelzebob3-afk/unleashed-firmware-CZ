@@ -297,34 +297,34 @@ static const char* subghz_protocol_dooya_get_name_button(uint8_t btn) {
     const char* btn_name;
     switch(btn) {
     case 0b00010001:
-        btn_name = "Up_Long";
+        btn_name = "Nahoru_Dlouze";
         break;
     case 0b00011110:
-        btn_name = "Up_Short";
+        btn_name = "Nahoru_Kratce";
         break;
     case 0b00110011:
-        btn_name = "Down_Long";
+        btn_name = "Dolu_Dlouze";
         break;
     case 0b00111100:
-        btn_name = "Down_Short";
+        btn_name = "Dolu_Kratce";
         break;
     case 0b01010101:
-        btn_name = "Stop";
+        btn_name = "Zastavit";
         break;
     case 0b01111001:
-        btn_name = "Up+Down";
+        btn_name = "Nahoru+Dolu";
         break;
     case 0b10000000:
-        btn_name = "Up+Stop";
+        btn_name = "Nahoru+Zastavit";
         break;
     case 0b10000001:
-        btn_name = "Down+Stop";
+        btn_name = "Dolu+Zastavit";
         break;
     case 0b11001100:
         btn_name = "P2";
         break;
     default:
-        btn_name = "Unknown";
+        btn_name = "Neznamy";
         break;
     }
     return btn_name;

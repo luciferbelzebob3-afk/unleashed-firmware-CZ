@@ -296,7 +296,7 @@ void subghz_protocol_decoder_power_smart_feed(
 
 static const char* subghz_protocol_power_smart_get_name_button(uint8_t btn) {
     btn &= 0x3;
-    const char* name_btn[0x4] = {"Unknown", "Down", "Up", "Stop"};
+    const char* name_btn[0x4] = {"Neznamy", "Dolu", "Nahoru", "Zastavit"};
     return name_btn[btn];
 }
 
@@ -327,7 +327,7 @@ void subghz_protocol_decoder_power_smart_get_string(void* context, FuriString* o
         "Key:0x%lX%08lX\r\n"
         "Sn:0x%07lX \r\n"
         "Btn:%s\r\n"
-        "Channel:" CHANNEL_PATTERN "\r\n",
+        "Kanal:" CHANNEL_PATTERN "\r\n",
         instance->generic.protocol_name,
         instance->generic.data_count_bit,
         (uint32_t)(instance->generic.data >> 32),

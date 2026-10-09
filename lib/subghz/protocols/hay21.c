@@ -373,16 +373,16 @@ static const char* subghz_protocol_hay21_get_button_name(uint8_t btn) {
     const char* btn_name;
     switch(btn) {
     case 0x5A:
-        btn_name = "On/Off";
+        btn_name = "Zap/Vyp";
         break;
     case 0xC3:
-        btn_name = "Mode";
+        btn_name = "Rezim";
         break;
     case 0x88:
-        btn_name = "Hold";
+        btn_name = "Podrzit";
         break;
     default:
-        btn_name = "Unknown";
+        btn_name = "Neznamy";
         break;
     }
     return btn_name;

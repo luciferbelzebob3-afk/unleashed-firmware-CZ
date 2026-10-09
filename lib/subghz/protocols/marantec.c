@@ -358,6 +358,6 @@ void subghz_protocol_decoder_marantec_get_string(void* context, FuriString* outp
         (uint32_t)(instance->generic.data & 0xFFFFFFFF),
         instance->generic.serial,
         crc,
-        crc_ok ? "Valid" : "Invalid",
+        crc_ok ? "Platny" : "Neplatny",
         instance->generic.btn);
 }

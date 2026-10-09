@@ -370,20 +370,20 @@ void subghz_protocol_decoder_hollarm_feed(void* context, bool level, volatile ui
  */
 static const char* subghz_protocol_hollarm_get_button_name(uint8_t btn) {
     const char* name_btn[16] = {
-        "Unknown",
-        "Disarm", // B (2)
-        "Arm", // A (1)
+        "Neznamy",
+        "Deaktivovat", // B (2)
+        "Aktivovat", // A (1)
         "0x3",
-        "Ringtone/Alarm", // C (3)
+        "Vyzvaneni/Alarm", // C (3)
         "0x5",
         "0x6",
         "0x7",
-        "Ring", // D (4)
-        "Settings mode",
-        "Exit settings",
-        "Vibro sens. setting",
-        "Not used\n(in settings)",
-        "Volume setting",
+        "Zvonek", // D (4)
+        "Rezim nastaveni",
+        "Konec nastaveni",
+        "Citlivost vibraci",
+        "Nepouzito\n(v nastaveni)",
+        "Nastaveni hlasitosti",
         "0xE",
         "0xF"};
     return btn <= 0xf ? name_btn[btn] : name_btn[0];
