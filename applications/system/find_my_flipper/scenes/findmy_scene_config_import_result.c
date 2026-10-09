@@ -18,7 +18,7 @@ void findmy_scene_config_import_result_on_enter(void* context) {
         app->scene_manager, FindMySceneConfigImportResult);
     if(error) {
         popup_set_icon(popup, 83, 22, &I_WarningDolphinFlip_45x42);
-        popup_set_header(popup, "Error!", 13, 22, AlignLeft, AlignBottom);
+        popup_set_header(popup, "Chyba!", 13, 22, AlignLeft, AlignBottom);
         popup_set_text(popup, error, 6, 26, AlignLeft, AlignTop);
         popup_disable_timeout(popup);
     } else {
