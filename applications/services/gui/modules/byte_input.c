@@ -636,7 +636,7 @@ static void byte_input_view_draw_callback(Canvas* canvas, void* _model) {
     if(model->selected_row == -2) {
         canvas_set_font(canvas, FontSecondary);
         canvas_draw_icon(canvas, 3, 1, &I_Pin_back_arrow_10x8);
-        canvas_draw_str_aligned(canvas, 16, 9, AlignLeft, AlignBottom, "back to keyboard");
+        canvas_draw_str_aligned(canvas, 16, 9, AlignLeft, AlignBottom, "zpet na klavesnici");
         elements_button_center(canvas, "Save");
     } else {
         // Draw the header
