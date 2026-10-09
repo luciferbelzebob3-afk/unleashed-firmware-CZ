@@ -43,11 +43,11 @@ void bad_usb_scene_config_ble_persist_pairing_callback(VariableItem* item) {
     hid->adjust_config(&bad_usb->script_hid_cfg);
     // Set in user config to save in settings file
     bad_usb->user_hid_cfg.ble.bonding = value;
-    variable_item_set_current_value_text(item, value ? "ON" : "OFF");
+    variable_item_set_current_value_text(item, value ? "Zapnuto" : "Vypnuto");
 }
 
 const char* const ble_pairing_mode_names[GapPairingCount] = {
-    "YesNo",
+    "AnoNe",
     "Typ PINu",
     "PIN ano/ne",
 };
@@ -78,7 +78,7 @@ static void draw_menu(BadUsbApp* bad_usb) {
     variable_item_list_add(var_item_list, "Rozlozeni klavesnice (globalni)", 0, NULL, NULL);
 
     item = variable_item_list_add(
-        var_item_list, "Connection", 2, bad_usb_scene_config_connection_callback, bad_usb);
+        var_item_list, "Pripojeni", 2, bad_usb_scene_config_connection_callback, bad_usb);
     variable_item_set_current_value_index(item, bad_usb->interface == BadUsbHidInterfaceBle);
     variable_item_set_current_value_text(
         item, bad_usb->interface == BadUsbHidInterfaceBle ? "BLE" : "USB");
@@ -93,7 +93,7 @@ static void draw_menu(BadUsbApp* bad_usb) {
             bad_usb_scene_config_ble_persist_pairing_callback,
             bad_usb);
         variable_item_set_current_value_index(item, ble_hid_cfg->bonding);
-        variable_item_set_current_value_text(item, ble_hid_cfg->bonding ? "ON" : "OFF");
+        variable_item_set_current_value_text(item, ble_hid_cfg->bonding ? "Zapnuto" : "Vypnuto");
 
         item = variable_item_list_add(
             var_item_list,

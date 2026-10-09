@@ -352,7 +352,7 @@ void subghz_read_raw_draw(Canvas* canvas, SubGhzReadRAWModel* model) {
         break;
 
     default:
-        elements_button_center(canvas, "Stop");
+        elements_button_center(canvas, "Zastavit");
         break;
     }
 

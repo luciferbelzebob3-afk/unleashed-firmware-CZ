@@ -22,7 +22,7 @@ void subghz_scene_delete_raw_on_enter(void* context) {
     FuriString* file_name;
     file_name = furi_string_alloc();
     path_extract_filename(subghz->file_path, file_name, true);
-    snprintf(delete_str, sizeof(delete_str), "\e#Delete %s?\e#", furi_string_get_cstr(file_name));
+    snprintf(delete_str, sizeof(delete_str), "\e#Smazat %s?\e#", furi_string_get_cstr(file_name));
     furi_string_free(file_name);
 
     widget_add_text_box_element(

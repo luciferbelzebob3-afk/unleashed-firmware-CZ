@@ -24,7 +24,7 @@ static uint8_t submenu_called = 0;
 
 #define COUNTER_MODE_COUNT 8
 static const char* const counter_mode_text[COUNTER_MODE_COUNT] = {
-    "System",
+    "Systemovy",
     "Rezim 1",
     "Rezim 2",
     "Rezim 3",

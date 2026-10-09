@@ -69,7 +69,7 @@ const int32_t debug_counter_val[DEBUG_COUNTER_COUNT] = {
 //TX Power
 #define TX_POWER_COUNT 9
 const char* const tx_power_text[TX_POWER_COUNT] = {
-    "Preset",
+    "Predvolba",
     "10dBm +",
     "7dBm",
     "5dBm",
