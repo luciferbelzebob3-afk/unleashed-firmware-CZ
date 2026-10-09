@@ -156,11 +156,11 @@ static void cube_draw_callback(Canvas* canvas, void* context) {
     CubeState* state = context;
     cube_animate(state);
 
-    canvas_draw_str(canvas, 2, 9, "Angry pixels");
+    canvas_draw_str(canvas, 2, 9, "Rozzlobene pixely");
     canvas_draw_str(canvas, 92, 9, "run!");
     canvas_draw_str(canvas, 4, 38, "bonk!");
     canvas_draw_str(canvas, 99, 38, "ouch!");
-    canvas_draw_str(canvas, 20, 62, "the floor is lava");
+    canvas_draw_str(canvas, 20, 62, "Podlaha je lava");
 
     int32_t sin_x = lut_sin(state->phase[0]), cos_x = lut_cos(state->phase[0]);
     int32_t sin_y = lut_sin(state->phase[1]), cos_y = lut_cos(state->phase[1]);

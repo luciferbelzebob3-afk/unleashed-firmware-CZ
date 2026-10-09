@@ -22,7 +22,7 @@ void ble_beacon_app_scene_menu_on_enter(void* context) {
         ble_beacon);
     submenu_add_item(
         submenu,
-        "Set Data",
+        "Nastavit data",
         SubmenuIndexSetData,
         ble_beacon_app_scene_menu_submenu_callback,
         ble_beacon);

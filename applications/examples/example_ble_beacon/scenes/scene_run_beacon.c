@@ -11,17 +11,17 @@ static void
 static void update_status_text(BleBeaconApp* ble_beacon) {
     DialogEx* dialog_ex = ble_beacon->dialog_ex;
 
-    dialog_ex_set_header(dialog_ex, "BLE Beacon Demo", 64, 0, AlignCenter, AlignTop);
+    dialog_ex_set_header(dialog_ex, "Ukazka BLE majaku", 64, 0, AlignCenter, AlignTop);
 
     FuriString* status = ble_beacon->status_string;
 
     furi_string_reset(status);
 
-    furi_string_cat_str(status, "Status: ");
+    furi_string_cat_str(status, "Stav: ");
     if(ble_beacon->is_beacon_active) {
-        furi_string_cat_str(status, "Running\n");
+        furi_string_cat_str(status, "Bezi\n");
     } else {
-        furi_string_cat_str(status, "Stopped\n");
+        furi_string_cat_str(status, "Zastaveno\n");
     }
 
     // Output MAC in reverse order

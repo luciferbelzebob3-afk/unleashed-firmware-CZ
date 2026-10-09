@@ -27,10 +27,10 @@ int32_t example_apps_data_main(void* p) {
 
     // Open file, write data and close it
     if(!storage_file_open(file, APP_DATA_PATH("test.txt"), FSAM_WRITE, FSOM_CREATE_ALWAYS)) {
-        FURI_LOG_E(TAG, "Failed to open file");
+        FURI_LOG_E(TAG, "Nepodarilo se otevrit soubor");
     }
-    if(!storage_file_write(file, "Hello World!", strlen("Hello World!"))) {
-        FURI_LOG_E(TAG, "Failed to write to file");
+    if(!storage_file_write(file, "Ahoj svete!", strlen("Ahoj svete!"))) {
+        FURI_LOG_E(TAG, "Nepodarilo se zapsat do souboru");
     }
     storage_file_close(file);
 
