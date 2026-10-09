@@ -21,7 +21,7 @@
 #define TAG "DesktopSettings"
 
 // variable_item_list_add() takes a uint8_t values count, and the start scene passes
-// menu_styles_count plus one for "Default" - this is what stops that from wrapping
+// menu_styles_count plus one for "Vychozi" - this is what stops that from wrapping
 #define MENU_STYLES_MAX (UINT8_MAX - 1)
 
 static void desktop_settings_menu_styles_free(DesktopSettingsApp* app);
