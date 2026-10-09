@@ -8,7 +8,7 @@
 
 // vibro touch human readable levels
 const char* const vibro_touch_level_text[VIBRO_TOUCH_LEVEL_COUNT] = {
-    "OFF",
+    "VYP",
     "1",
     "2",
     "3",
