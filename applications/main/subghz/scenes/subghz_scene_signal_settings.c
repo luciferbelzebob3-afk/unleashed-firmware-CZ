@@ -25,13 +25,13 @@ static uint8_t submenu_called = 0;
 #define COUNTER_MODE_COUNT 8
 static const char* const counter_mode_text[COUNTER_MODE_COUNT] = {
     "System",
-    "Mode 1",
-    "Mode 2",
-    "Mode 3",
-    "Mode 4",
-    "Mode 5",
-    "Mode 6",
-    "Mode 7",
+    "Rezim 1",
+    "Rezim 2",
+    "Rezim 3",
+    "Rezim 4",
+    "Rezim 5",
+    "Rezim 6",
+    "Rezim 7",
 };
 
 static const int32_t counter_mode_value[COUNTER_MODE_COUNT] = {
@@ -111,7 +111,7 @@ void subghz_scene_signal_settings_variable_item_list_enter_callback(void* contex
     if(index == 1) {
         submenu_called = 1;
         furi_string_cat_printf(byte_input_text, "%i", subghz_block_generic_global.cnt_length_bit);
-        furi_string_cat_str(byte_input_text, "-bits counter in HEX");
+        furi_string_cat_str(byte_input_text, "-bitovy citac v HEX");
 
         // Setup byte_input view
         ByteInput* byte_input = subghz->byte_input;
@@ -130,7 +130,7 @@ void subghz_scene_signal_settings_variable_item_list_enter_callback(void* contex
     if(index == 2) {
         submenu_called = 2;
         furi_string_cat_printf(byte_input_text, "%i", subghz_block_generic_global.btn_length_bit);
-        furi_string_cat_str(byte_input_text, "-bits button in HEX");
+        furi_string_cat_str(byte_input_text, "-bitove tlacitko v HEX");
 
         // Setup byte_input view
         ByteInput* byte_input = subghz->byte_input;
@@ -192,7 +192,7 @@ void subghz_scene_signal_settings_on_enter(void* context) {
     flipper_format_free(fff_data_file);
     furi_record_close(RECORD_STORAGE);
 
-    byte_input_text = furi_string_alloc_set_str("Enter ");
+    byte_input_text = furi_string_alloc_set_str("Zadejte ");
     bool counter_not_available = true;
     bool button_not_available = true;
 
@@ -208,14 +208,14 @@ void subghz_scene_signal_settings_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Counter Mode",
+        "Rezim citace",
         mode_count,
         subghz_scene_signal_settings_counter_mode_changed,
         subghz);
     value_index = value_index_int32(counter_mode, counter_mode_value, mode_count);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, counter_mode_text[value_index]);
-    variable_item_set_locked(item, (counter_mode == 0xff), "Not available\nfor this\nprotocol !");
+    variable_item_set_locked(item, (counter_mode == 0xff), "Pro tento\nprotokol neni\ndostupne!");
     //
 
     SubGhzProtocolDecoderBase* decoder = subghz_txrx_get_decoder(subghz->txrx);
@@ -253,7 +253,7 @@ void subghz_scene_signal_settings_on_enter(void* context) {
         }
     }
 
-    item = variable_item_list_add(variable_item_list, "Edit Counter", 1, NULL, subghz);
+    item = variable_item_list_add(variable_item_list, "Upravit citac", 1, NULL, subghz);
     variable_item_set_current_value_index(item, 0);
     variable_item_set_current_value_text(item, furi_string_get_cstr(tmp_text));
     variable_item_set_locked(item, (counter_not_available), "Not available\nfor this\nprotocol !");
@@ -270,7 +270,7 @@ void subghz_scene_signal_settings_on_enter(void* context) {
         btn_byte_ptr = (uint8_t*)&button;
     }
 
-    item = variable_item_list_add(variable_item_list, "Edit Button", 1, NULL, subghz);
+    item = variable_item_list_add(variable_item_list, "Upravit tlacitko", 1, NULL, subghz);
     variable_item_set_current_value_index(item, 0);
     variable_item_set_current_value_text(item, furi_string_get_cstr(tmp_text));
     variable_item_set_locked(item, (button_not_available), "Not available\nfor this\nprotocol !");
