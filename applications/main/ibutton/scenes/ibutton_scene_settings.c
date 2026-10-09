@@ -15,7 +15,7 @@ void ibutton_scene_settings_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Write Blanks",
+        "Prazdne klice",
         SubmenuIndexWriteTargets,
         ibutton_scene_settings_submenu_callback,
         ibutton);
