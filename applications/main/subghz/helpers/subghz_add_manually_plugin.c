@@ -12,7 +12,7 @@ void subghz_add_manually_scene_on_enter(SubGhz* subghz, SubGhzAddManuallyScene s
             &subghz->add_manually_plugin_manager,
             SUBGHZ_ADD_MANUALLY_PLUGIN_APP_ID,
             SUBGHZ_ADD_MANUALLY_PLUGIN_PATH,
-            "Add Manually is\nmissing or\noutdated. Update\nresources.");
+            "Funkce Pridat rucne\nchybi nebo je\nzastarala.\nAktualizuj zdroje.");
         if(!subghz->add_manually_plugin) {
             return;
         }
