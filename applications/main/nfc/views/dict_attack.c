@@ -44,26 +44,26 @@ static void dict_attack_draw_mf_classic(Canvas* canvas, DictAttackViewModel* m) 
 
     switch(m->nested_phase) {
     case MfClassicNestedPhaseAnalyzePRNG:
-        furi_string_set(m->header, "PRNG Analysis");
+        furi_string_set(m->header, "Analyza PRNG");
         break;
     case MfClassicNestedPhaseDictAttack:
     case MfClassicNestedPhaseDictAttackVerify:
     case MfClassicNestedPhaseDictAttackResume:
-        furi_string_set(m->header, "Nested Dictionary");
+        furi_string_set(m->header, "Vnoreny slovnik");
         break;
     case MfClassicNestedPhaseCalibrate:
     case MfClassicNestedPhaseRecalibrate:
-        furi_string_set(m->header, "Calibration");
+        furi_string_set(m->header, "Kalibrace");
         break;
     case MfClassicNestedPhaseCollectNtEnc:
-        furi_string_set(m->header, "Nonce Collection");
+        furi_string_set(m->header, "Sber nonce");
         break;
     default:
         break;
     }
 
     if(m->prng_type == MfClassicPrngTypeHard) {
-        furi_string_cat(m->header, " (Hard)");
+        furi_string_cat(m->header, " (tezky)");
     }
 
     if(m->backdoor != MfClassicBackdoorNone && m->backdoor != MfClassicBackdoorUnknown) {
@@ -78,7 +78,7 @@ static void dict_attack_draw_mf_classic(Canvas* canvas, DictAttackViewModel* m) 
     if(m->nested_phase == MfClassicNestedPhaseCollectNtEnc) {
         uint8_t nonce_sector =
             m->nested_target_key / (m->prng_type == MfClassicPrngTypeWeak ? 4 : 2);
-        snprintf(draw_str, sizeof(draw_str), "Collecting from sector: %d", nonce_sector);
+        snprintf(draw_str, sizeof(draw_str), "Sber nonce: sektor %d", nonce_sector);
         canvas_draw_str_aligned(canvas, 0, 10, AlignLeft, AlignTop, draw_str);
     } else if(m->is_key_attack) {
         snprintf(
@@ -87,7 +87,7 @@ static void dict_attack_draw_mf_classic(Canvas* canvas, DictAttackViewModel* m) 
             "Reuse key check for sector: %d",
             m->key_attack_current_sector);
     } else {
-        snprintf(draw_str, sizeof(draw_str), "Unlocking sector: %d", m->current_sector);
+        snprintf(draw_str, sizeof(draw_str), "Odemykam sektor: %d", m->current_sector);
     }
     canvas_draw_str_aligned(canvas, 0, 10, AlignLeft, AlignTop, draw_str);
     float dict_progress = 0;
@@ -148,7 +148,7 @@ static void dict_attack_draw_mf_ultralight_c(Canvas* canvas, DictAttackViewModel
 
     canvas_draw_str_aligned(canvas, 0, 0, AlignLeft, AlignTop, furi_string_get_cstr(m->header));
 
-    snprintf(draw_str, sizeof(draw_str), "Trying keys");
+    snprintf(draw_str, sizeof(draw_str), "Zkousim klice");
     canvas_draw_str_aligned(canvas, 0, 10, AlignLeft, AlignTop, draw_str);
 
     float dict_progress =
@@ -164,7 +164,7 @@ static void dict_attack_draw_mf_ultralight_c(Canvas* canvas, DictAttackViewModel
     elements_progress_bar_with_text(canvas, 0, 20, 128, dict_progress, draw_str);
 
     canvas_set_font(canvas, FontSecondary);
-    snprintf(draw_str, sizeof(draw_str), "Klic nalezen: %s", m->key_found ? "Ano" : "No");
+    snprintf(draw_str, sizeof(draw_str), "Klic nalezen: %s", m->key_found ? "Ano" : "Ne");
     canvas_draw_str_aligned(canvas, 0, 33, AlignLeft, AlignTop, draw_str);
 
     snprintf(draw_str, sizeof(draw_str), "Stranky: %d/%d", m->pages_read, m->pages_total);
@@ -178,7 +178,7 @@ static void dict_attack_draw_callback(Canvas* canvas, void* model) {
         canvas_draw_str_aligned(canvas, 64, 4, AlignCenter, AlignTop, "Karta se ztratila!");
         canvas_set_font(canvas, FontSecondary);
         elements_multiline_text_aligned(
-            canvas, 64, 23, AlignCenter, AlignTop, "Make sure the tag is\npositioned correctly.");
+            canvas, 64, 23, AlignCenter, AlignTop, "Zkontroluj polohu\nkarty.");
     } else {
         if(m->attack_type == DictAttackTypeMfClassic) {
             dict_attack_draw_mf_classic(canvas, m);
@@ -188,7 +188,7 @@ static void dict_attack_draw_callback(Canvas* canvas, void* model) {
             dict_attack_draw_mf_ultralight_c(canvas, m);
         }
     }
-    elements_button_center(canvas, "Skip");
+    elements_button_center(canvas, "Preskocit");
 }
 
 static bool dict_attack_input_callback(InputEvent* event, void* context) {
