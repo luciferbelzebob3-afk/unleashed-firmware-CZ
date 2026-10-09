@@ -9,7 +9,7 @@ void nfc_render_type_4_tag_info(
     nfc_render_iso14443_4a_brief(type_4_tag_get_base_data(data), str);
 
     furi_string_cat(str, "\n:::::::::::::::[Ulozena data NDEF]:::::::::::::::\n");
-    furi_string_cat_printf(str, "Current NDEF Size: %lu", simple_array_get_count(data->ndef_data));
+    furi_string_cat_printf(str, "Aktualni velikost NDEF: %lu", simple_array_get_count(data->ndef_data));
 
     if(data->is_tag_specific) {
         furi_string_cat(str, "\n::::::::::::::::::[Parametry tagu]::::::::::::::::::\n");
@@ -20,7 +20,7 @@ void nfc_render_type_4_tag_info(
                                                      furi_string_get_cstr(data->platform_name));
         furi_string_cat_printf(
             str, "Verze mapovani T4T: %u.%u\n", data->t4t_version.major, data->t4t_version.minor);
-        furi_string_cat_printf(str, "NDEF File ID: %04X\n", data->ndef_file_id);
+        furi_string_cat_printf(str, "ID souboru NDEF: %04X\n", data->ndef_file_id);
         furi_string_cat_printf(str, "Max NDEF Size: %u\n", data->ndef_max_len);
         furi_string_cat_printf(
             str, "Velikost APDU: cteni %u, zapis %u\n", data->chunk_max_read, data->chunk_max_write);

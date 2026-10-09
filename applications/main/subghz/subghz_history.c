@@ -160,7 +160,7 @@ bool subghz_history_get_text_space_left(SubGhzHistory* instance, FuriString* out
         return true;
     }
     if(instance->last_index_write == SUBGHZ_HISTORY_MAX) {
-        if(output != NULL) furi_string_printf(output, "   Memory is FULL");
+        if(output != NULL) furi_string_printf(output, "   PAMET JE PLNA");
         return true;
     }
     if(output != NULL)

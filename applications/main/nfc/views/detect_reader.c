@@ -61,7 +61,7 @@ static void detect_reader_draw_callback(Canvas* canvas, void* model) {
     }
     // Draw button
     if(m->nonces > 0) {
-        elements_button_center(canvas, "Done");
+        elements_button_center(canvas, "Hotovo");
     }
 }
 
