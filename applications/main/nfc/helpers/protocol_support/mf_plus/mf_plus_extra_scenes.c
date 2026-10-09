@@ -346,7 +346,7 @@ static void mf_plus_scene_show_keys_on_enter(NfcApp* instance) {
         const bool key_b = mf_plus_is_key_found(data, sector, MfPlusKeyTypeB);
         if(!key_a && !key_b) continue;
 
-        furi_string_cat_printf(str, "\n  -> Sector %u", sector);
+        furi_string_cat_printf(str, "\n  -> Sektor %u", sector);
         if(key_a) {
             found_a++;
             furi_string_cat_printf(str, "\n\e*A: ");
@@ -364,19 +364,19 @@ static void mf_plus_scene_show_keys_on_enter(NfcApp* instance) {
     uint8_t found_admin = 0;
     for(uint8_t type = 0; type < MfPlusAdminKeyNum; type++) {
         if(!mf_plus_is_admin_key_found(data, type)) continue;
-        if(found_admin == 0) furi_string_cat_printf(str, "\n\e*Admin Keys:");
+        if(found_admin == 0) furi_string_cat_printf(str, "\n\e*Spravcovske klice:");
         found_admin++;
         furi_string_cat_printf(str, "\n\e*%s: ", mf_plus_get_admin_key_name(type));
         mf_plus_scene_show_keys_cat_key(str, &data->admin_key[type]);
     }
 
     if(found_a == 0 && found_b == 0 && found_admin == 0) {
-        furi_string_cat_printf(str, "\n\nNo keys recovered yet.");
+        furi_string_cat_printf(str, "\n\nZatim nebyly obnoveny zadne klice.");
     }
 
     furi_string_cat_printf(
         str,
-        "\nTotal keys found:\n -> %u/%u A keys\n -> %u/%u B keys\n -> %u/%u admin keys",
+        "\nCelkem nalezenych klicu:\n -> %u/%u klice A\n -> %u/%u klice B\n -> %u/%u spravcovske klice",
         found_a,
         num_sectors,
         found_b,
