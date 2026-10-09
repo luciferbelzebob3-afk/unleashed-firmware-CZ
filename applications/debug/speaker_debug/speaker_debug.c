@@ -48,7 +48,7 @@ static void speaker_app_cli(PipeSide* pipe, FuriString* args, void* context) {
 
     if(!args_read_string_and_trim(args, cmd)) {
         furi_string_free(cmd);
-        printf("Usage:\r\n");
+        printf("Pouziti:\r\n");
         printf("\t" CLI_COMMAND " stop\r\n");
         return;
     }
@@ -62,7 +62,7 @@ static void speaker_app_cli(PipeSide* pipe, FuriString* args, void* context) {
             printf("Zastavuji\r\n");
         }
     } else {
-        printf("Usage:\r\n");
+        printf("Pouziti:\r\n");
         printf("\t" CLI_COMMAND " stop\r\n");
     }
 

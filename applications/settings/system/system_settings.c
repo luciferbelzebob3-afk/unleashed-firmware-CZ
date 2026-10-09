@@ -7,8 +7,8 @@ const char* const log_level_text[] = {
     "Vychozi",
     "Zadne",
     "Chyba",
-    "Warning",
-    "Info",
+    "Varovani",
+    "Informace",
     "Ladeni",
     "Podrobny zaznam",
 };

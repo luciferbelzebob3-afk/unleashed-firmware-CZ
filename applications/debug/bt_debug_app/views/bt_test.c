@@ -38,8 +38,8 @@ typedef struct {
     uint32_t packets_num_tx;
 } BtTestModel;
 
-#define BT_TEST_START_MESSAGE "Ok - Start"
-#define BT_TEST_STOP_MESSAGE  "Ok - Stop"
+#define BT_TEST_START_MESSAGE "OK - Spustit"
+#define BT_TEST_STOP_MESSAGE  "OK - Zastavit"
 
 static void bt_test_process_up(BtTest* bt_test);
 static void bt_test_process_down(BtTest* bt_test);
@@ -318,7 +318,7 @@ BtTest* bt_test_alloc(void) {
         BtTestModel * model,
         {
             model->state = BtTestStateStopped;
-            model->message = "Ok - Start";
+            model->message = "OK - Spustit";
             BtTestParamArray_init(model->params);
             model->position = 0;
             model->window_position = 0;

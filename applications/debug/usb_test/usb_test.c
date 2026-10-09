@@ -14,9 +14,9 @@ typedef struct {
 } UsbTestApp;
 
 typedef enum {
-    UsbTestSubmenuIndexEnable,
-    UsbTestSubmenuIndexDisable,
-    UsbTestSubmenuIndexRestart,
+    UsbTestSubmenuIndexZapnout,
+    UsbTestSubmenuIndexVypnout,
+    UsbTestSubmenuIndexRestartovat,
     UsbTestSubmenuIndexVcpSingle,
     UsbTestSubmenuIndexVcpDual,
     UsbTestSubmenuIndexHid,
@@ -27,11 +27,11 @@ typedef enum {
 void usb_test_submenu_callback(void* context, uint32_t index) {
     furi_assert(context);
     UsbTestApp* app = context;
-    if(index == UsbTestSubmenuIndexEnable) {
+    if(index == UsbTestSubmenuIndexZapnout) {
         furi_hal_usb_enable();
-    } else if(index == UsbTestSubmenuIndexDisable) {
+    } else if(index == UsbTestSubmenuIndexVypnout) {
         furi_hal_usb_disable();
-    } else if(index == UsbTestSubmenuIndexRestart) {
+    } else if(index == UsbTestSubmenuIndexRestartovat) {
         furi_hal_usb_reinit();
     } else if(index == UsbTestSubmenuIndexVcpSingle) {
         furi_hal_usb_set_config(&usb_cdc_single, NULL);
@@ -68,20 +68,20 @@ UsbTestApp* usb_test_app_alloc(void) {
     // Views
     app->submenu = submenu_alloc();
     submenu_add_item(
-        app->submenu, "Enable", UsbTestSubmenuIndexEnable, usb_test_submenu_callback, app);
+        app->submenu, "Zapnout", UsbTestSubmenuIndexZapnout, usb_test_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Disable", UsbTestSubmenuIndexDisable, usb_test_submenu_callback, app);
+        app->submenu, "Vypnout", UsbTestSubmenuIndexVypnout, usb_test_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Restart", UsbTestSubmenuIndexRestart, usb_test_submenu_callback, app);
+        app->submenu, "Restartovat", UsbTestSubmenuIndexRestartovat, usb_test_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Single VCP", UsbTestSubmenuIndexVcpSingle, usb_test_submenu_callback, app);
+        app->submenu, "Jeden VCP", UsbTestSubmenuIndexVcpSingle, usb_test_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "Dual VCP", UsbTestSubmenuIndexVcpDual, usb_test_submenu_callback, app);
+        app->submenu, "Dva VCP", UsbTestSubmenuIndexVcpDual, usb_test_submenu_callback, app);
     submenu_add_item(
-        app->submenu, "HID KB+Mouse", UsbTestSubmenuIndexHid, usb_test_submenu_callback, app);
+        app->submenu, "HID klavesnice+mys", UsbTestSubmenuIndexHid, usb_test_submenu_callback, app);
     submenu_add_item(
         app->submenu,
-        "HID KB+Mouse custom ID",
+        "HID klavesnice+mys s vlastnim ID",
         UsbTestSubmenuIndexHidWithParams,
         usb_test_submenu_callback,
         app);

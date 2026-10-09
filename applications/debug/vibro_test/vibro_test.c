@@ -9,11 +9,11 @@ void vibro_test_draw_callback(Canvas* canvas, void* ctx) {
     UNUSED(ctx);
     canvas_clear(canvas);
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 2, 10, "Vibro application");
+    canvas_draw_str(canvas, 2, 10, "Aplikace vibraci");
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 2, 22, "Press OK turns on vibro");
+    canvas_draw_str(canvas, 2, 22, "Stisknutim OK zapnes vibrace");
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 2, 34, "Release OK turns off vibro");
+    canvas_draw_str(canvas, 2, 34, "Uvolnenim OK vypnes vibrace");
 }
 
 void vibro_test_input_callback(InputEvent* input_event, void* ctx) {

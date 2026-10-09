@@ -5,28 +5,28 @@
 #include <gui/view_dispatcher.h>
 #include <gui/modules/submenu.h>
 
-#define TAG "CrashTest"
+#define TAG "PadTest"
 
 typedef struct {
     Gui* gui;
     ViewDispatcher* view_dispatcher;
     Submenu* submenu;
-} CrashTest;
+} PadTest;
 
 typedef enum {
-    CrashTestViewSubmenu,
-} CrashTestView;
+    PadTestViewSubmenu,
+} PadTestView;
 
 typedef enum {
-    CrashTestSubmenuCheck,
-    CrashTestSubmenuCheckMessage,
-    CrashTestSubmenuAssert,
-    CrashTestSubmenuAssertMessage,
-    CrashTestSubmenuCrash,
-    CrashTestSubmenuHalt,
-    CrashTestSubmenuHeapUnderflow,
-    CrashTestSubmenuHeapOverflow,
-} CrashTestSubmenu;
+    PadTestSubmenuKontrola,
+    PadTestSubmenuKontrolaMessage,
+    PadTestSubmenuAssert,
+    PadTestSubmenuAssertMessage,
+    PadTestSubmenuPad,
+    PadTestSubmenuZastavit,
+    PadTestSubmenuHeapUnderflow,
+    PadTestSubmenuHeapOverflow,
+} PadTestSubmenu;
 
 static void crash_test_corrupt_heap_underflow(void) {
     const size_t block_size = 1000;
@@ -41,7 +41,7 @@ static void crash_test_corrupt_heap_underflow(void) {
     free(block); // should crash here (if compiled with DEBUG=1)
 
     // If we got here, the heap wasn't able to detect our corruption and crash
-    furi_crash("Test failed, should've crashed with \"FreeRTOS Assert\" error");
+    furi_crash("Test selhal, mel nastat pad s chybou \"FreeRTOS Assert\"");
 }
 
 static void crash_test_corrupt_heap_overflow(void) {
@@ -64,36 +64,36 @@ static void crash_test_corrupt_heap_overflow(void) {
     free(block1);
 
     // If we got here, the heap wasn't able to detect our corruption and crash
-    furi_crash("Test failed, should've crashed with \"FreeRTOS Assert\" error");
+    furi_crash("Test selhal, mel nastat pad s chybou \"FreeRTOS Assert\"");
 }
 
 static void crash_test_submenu_callback(void* context, uint32_t index) {
-    CrashTest* instance = (CrashTest*)context;
+    PadTest* instance = (PadTest*)context;
     UNUSED(instance);
 
     switch(index) {
-    case CrashTestSubmenuCheck:
+    case PadTestSubmenuKontrola:
         furi_check(false);
         break;
-    case CrashTestSubmenuCheckMessage:
-        furi_check(false, "Crash test: furi_check with message");
+    case PadTestSubmenuKontrolaMessage:
+        furi_check(false, "Test padu: furi_check se zpravou");
         break;
-    case CrashTestSubmenuAssert:
+    case PadTestSubmenuAssert:
         furi_assert(false);
         break;
-    case CrashTestSubmenuAssertMessage:
-        furi_assert(false, "Crash test: furi_assert with message");
+    case PadTestSubmenuAssertMessage:
+        furi_assert(false, "Test padu: furi_assert se zpravou");
         break;
-    case CrashTestSubmenuCrash:
-        furi_crash("Crash test: furi_crash");
+    case PadTestSubmenuPad:
+        furi_crash("Test padu: furi_crash");
         break;
-    case CrashTestSubmenuHalt:
-        furi_halt("Crash test: furi_halt");
+    case PadTestSubmenuZastavit:
+        furi_halt("Test padu: furi_halt");
         break;
-    case CrashTestSubmenuHeapUnderflow:
+    case PadTestSubmenuHeapUnderflow:
         crash_test_corrupt_heap_underflow();
         break;
-    case CrashTestSubmenuHeapOverflow:
+    case PadTestSubmenuHeapOverflow:
         crash_test_corrupt_heap_overflow();
         break;
     default:
@@ -106,8 +106,8 @@ static uint32_t crash_test_exit_callback(void* context) {
     return VIEW_NONE;
 }
 
-CrashTest* crash_test_alloc(void) {
-    CrashTest* instance = malloc(sizeof(CrashTest));
+PadTest* crash_test_alloc(void) {
+    PadTest* instance = malloc(sizeof(PadTest));
 
     View* view = NULL;
 
@@ -120,45 +120,45 @@ CrashTest* crash_test_alloc(void) {
     instance->submenu = submenu_alloc();
     view = submenu_get_view(instance->submenu);
     view_set_previous_callback(view, crash_test_exit_callback);
-    view_dispatcher_add_view(instance->view_dispatcher, CrashTestViewSubmenu, view);
+    view_dispatcher_add_view(instance->view_dispatcher, PadTestViewSubmenu, view);
     submenu_add_item(
-        instance->submenu, "Check", CrashTestSubmenuCheck, crash_test_submenu_callback, instance);
+        instance->submenu, "Kontrola", PadTestSubmenuKontrola, crash_test_submenu_callback, instance);
     submenu_add_item(
         instance->submenu,
-        "Check with message",
-        CrashTestSubmenuCheckMessage,
+        "Kontrola se zpravou",
+        PadTestSubmenuKontrolaMessage,
         crash_test_submenu_callback,
         instance);
     submenu_add_item(
-        instance->submenu, "Assert", CrashTestSubmenuAssert, crash_test_submenu_callback, instance);
+        instance->submenu, "Assert", PadTestSubmenuAssert, crash_test_submenu_callback, instance);
     submenu_add_item(
         instance->submenu,
-        "Assert with message",
-        CrashTestSubmenuAssertMessage,
+        "Assert se zpravou",
+        PadTestSubmenuAssertMessage,
         crash_test_submenu_callback,
         instance);
     submenu_add_item(
-        instance->submenu, "Crash", CrashTestSubmenuCrash, crash_test_submenu_callback, instance);
+        instance->submenu, "Pad", PadTestSubmenuPad, crash_test_submenu_callback, instance);
     submenu_add_item(
-        instance->submenu, "Halt", CrashTestSubmenuHalt, crash_test_submenu_callback, instance);
+        instance->submenu, "Zastavit", PadTestSubmenuZastavit, crash_test_submenu_callback, instance);
     submenu_add_item(
         instance->submenu,
-        "Heap underflow",
-        CrashTestSubmenuHeapUnderflow,
+        "Podteceni haldy",
+        PadTestSubmenuHeapUnderflow,
         crash_test_submenu_callback,
         instance);
     submenu_add_item(
         instance->submenu,
-        "Heap overflow",
-        CrashTestSubmenuHeapOverflow,
+        "Preteceni haldy",
+        PadTestSubmenuHeapOverflow,
         crash_test_submenu_callback,
         instance);
 
     return instance;
 }
 
-void crash_test_free(CrashTest* instance) {
-    view_dispatcher_remove_view(instance->view_dispatcher, CrashTestViewSubmenu);
+void crash_test_free(PadTest* instance) {
+    view_dispatcher_remove_view(instance->view_dispatcher, PadTestViewSubmenu);
     submenu_free(instance->submenu);
 
     view_dispatcher_free(instance->view_dispatcher);
@@ -167,8 +167,8 @@ void crash_test_free(CrashTest* instance) {
     free(instance);
 }
 
-int32_t crash_test_run(CrashTest* instance) {
-    view_dispatcher_switch_to_view(instance->view_dispatcher, CrashTestViewSubmenu);
+int32_t crash_test_run(PadTest* instance) {
+    view_dispatcher_switch_to_view(instance->view_dispatcher, PadTestViewSubmenu);
     view_dispatcher_run(instance->view_dispatcher);
     return 0;
 }
@@ -176,7 +176,7 @@ int32_t crash_test_run(CrashTest* instance) {
 int32_t crash_test_app(void* p) {
     UNUSED(p);
 
-    CrashTest* instance = crash_test_alloc();
+    PadTest* instance = crash_test_alloc();
 
     int32_t ret = crash_test_run(instance);
 

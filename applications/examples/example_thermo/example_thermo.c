@@ -97,7 +97,7 @@ static void example_thermo_request_temperature(ExampleThermoContext* context) {
            The function will return true if a device responded with a presence pulse. */
         if(!onewire_host_reset(onewire)) break;
         /* After the reset, a ROM operation must follow.
-           If there is only one device connected, the "Skip ROM" command is most appropriate
+           If there is only one device connected, the "Preskocit ROM" command is most appropriate
            (it can also be used to address all of the connected devices in some cases).*/
         onewire_host_write(onewire, DS18B20_CMD_SKIP_ROM);
         /* After the ROM operation, a device-specific command is issued.
@@ -138,12 +138,12 @@ static void example_thermo_read_temperature(ExampleThermoContext* context) {
             if(!onewire_host_reset(onewire)) continue;
 
             /* After the reset, a ROM operation must follow.
-            If there is only one device connected, the "Skip ROM" command is most appropriate
+            If there is only one device connected, the "Preskocit ROM" command is most appropriate
             (it can also be used to address all of the connected devices in some cases).*/
             onewire_host_write(onewire, DS18B20_CMD_SKIP_ROM);
 
             /* After the ROM operation, a device-specific command is issued.
-            This time, it will be the "Read Scratchpad" command which will
+            This time, it will be the "Cist Scratchpad" command which will
             prepare the device's internal buffer memory for reading. */
             onewire_host_write(onewire, DS18B20_CMD_READ_SCRATCHPAD);
 
@@ -221,11 +221,11 @@ static void example_thermo_draw_callback(Canvas* canvas, void* ctx) {
     const size_t middle_x = canvas_width(canvas) / 2U;
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, middle_x, 12, AlignCenter, AlignBottom, "Thermometer Demo");
+    canvas_draw_str_aligned(canvas, middle_x, 12, AlignCenter, AlignBottom, "Ukazka teplomeru");
     canvas_draw_line(canvas, 0, 16, 128, 16);
 
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str_aligned(canvas, middle_x, 30, AlignCenter, AlignBottom, "Connect thermometer");
+    canvas_draw_str_aligned(canvas, middle_x, 30, AlignCenter, AlignBottom, "Pripoj teplomer");
 
     snprintf(
         text_store,
@@ -252,13 +252,13 @@ static void example_thermo_draw_callback(Canvas* canvas, void* ctx) {
             temp_units = 'F';
             break;
         default:
-            furi_crash("Illegal measurement units");
+            furi_crash("Neplatne jednotky mereni");
         }
         /* If a reading is available, display it */
         snprintf(text_store, TEXT_STORE_SIZE, "Temperature: %+.1f%c", (double)temp, temp_units);
     } else {
         /* Or show a message that no data is available */
-        strlcpy(text_store, "-- No data --", TEXT_STORE_SIZE);
+        strlcpy(text_store, "-- Zadna data --", TEXT_STORE_SIZE);
     }
 
     canvas_draw_str_aligned(canvas, middle_x, 58, AlignCenter, AlignBottom, text_store);
@@ -294,8 +294,8 @@ static void example_thermo_run(ExampleThermoContext* context) {
             continue;
         }
 
-        /* When the user presses the "Back" button, break the loop and exit the application. */
-        if(event.key == InputKeyBack) {
+        /* When the user presses the "Zpet" button, break the loop and exit the application. */
+        if(event.key == InputKeyZpet) {
             is_running = false;
         }
     }

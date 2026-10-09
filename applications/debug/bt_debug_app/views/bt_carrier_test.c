@@ -6,40 +6,40 @@
 struct BtCarrierTest {
     BtTest* bt_test;
     BtTestParam* bt_param_channel;
-    BtTestMode mode;
-    BtTestChannel channel;
-    BtTestPower power;
+    BtTestRezim mode;
+    BtTestKanal channel;
+    BtTestVykon power;
     FuriTimer* timer;
 };
 
 static BtTestParamValue bt_param_mode[] = {
-    {.value = BtTestModeRx, .str = "Rx"},
-    {.value = BtTestModeTx, .str = "Tx"},
-    {.value = BtTestModeTxHopping, .str = "Hopping Tx"},
+    {.value = BtTestRezimRx, .str = "Rx"},
+    {.value = BtTestRezimTx, .str = "Tx"},
+    {.value = BtTestRezimTxHopping, .str = "Vysilani s preladovanim"},
 };
 
 static BtTestParamValue bt_param_channel[] = {
-    {.value = BtTestChannel2402, .str = "2402 MHz"},
-    {.value = BtTestChannel2440, .str = "2440 MHz"},
-    {.value = BtTestChannel2480, .str = "2480 MHz"},
+    {.value = BtTestKanal2402, .str = "2402 MHz"},
+    {.value = BtTestKanal2440, .str = "2440 MHz"},
+    {.value = BtTestKanal2480, .str = "2480 MHz"},
 };
 
 static BtTestParamValue bt_param_power[] = {
-    {.value = BtPower0dB, .str = "0 dB"},
-    {.value = BtPower2dB, .str = "2 dB"},
-    {.value = BtPower4dB, .str = "4 dB"},
-    {.value = BtPower6dB, .str = "6 dB"},
+    {.value = BtVykon0dB, .str = "0 dB"},
+    {.value = BtVykon2dB, .str = "2 dB"},
+    {.value = BtVykon4dB, .str = "4 dB"},
+    {.value = BtVykon6dB, .str = "6 dB"},
 };
 
 static void bt_carrier_test_start(BtCarrierTest* bt_carrier_test) {
     furi_assert(bt_carrier_test);
-    if(bt_carrier_test->mode == BtTestModeRx) {
+    if(bt_carrier_test->mode == BtTestRezimRx) {
         furi_hal_bt_start_packet_rx(bt_carrier_test->channel, 1);
         furi_timer_start(bt_carrier_test->timer, furi_kernel_get_tick_frequency() / 4);
-    } else if(bt_carrier_test->mode == BtTestModeTxHopping) {
+    } else if(bt_carrier_test->mode == BtTestRezimTxHopping) {
         furi_hal_bt_start_tone_tx(bt_carrier_test->channel, bt_carrier_test->power);
         furi_timer_start(bt_carrier_test->timer, furi_kernel_get_tick_frequency() * 2);
-    } else if(bt_carrier_test->mode == BtTestModeTx) {
+    } else if(bt_carrier_test->mode == BtTestRezimTx) {
         furi_hal_bt_start_tone_tx(bt_carrier_test->channel, bt_carrier_test->power);
     }
 }
@@ -48,14 +48,14 @@ static void bt_carrier_test_switch_channel(BtCarrierTest* bt_carrier_test) {
     furi_assert(bt_carrier_test);
     furi_hal_bt_stop_tone_tx();
     uint8_t channel_i = 0;
-    if(bt_carrier_test->channel == BtTestChannel2402) {
-        bt_carrier_test->channel = BtTestChannel2440;
+    if(bt_carrier_test->channel == BtTestKanal2402) {
+        bt_carrier_test->channel = BtTestKanal2440;
         channel_i = 1;
-    } else if(bt_carrier_test->channel == BtTestChannel2440) {
-        bt_carrier_test->channel = BtTestChannel2480;
+    } else if(bt_carrier_test->channel == BtTestKanal2440) {
+        bt_carrier_test->channel = BtTestKanal2480;
         channel_i = 2;
-    } else if(bt_carrier_test->channel == BtTestChannel2480) {
-        bt_carrier_test->channel = BtTestChannel2402;
+    } else if(bt_carrier_test->channel == BtTestKanal2480) {
+        bt_carrier_test->channel = BtTestKanal2402;
         channel_i = 0;
     }
     furi_hal_bt_start_tone_tx(bt_carrier_test->channel, bt_carrier_test->power);
@@ -66,12 +66,12 @@ static void bt_carrier_test_switch_channel(BtCarrierTest* bt_carrier_test) {
 
 static void bt_carrier_test_stop(BtCarrierTest* bt_carrier_test) {
     furi_assert(bt_carrier_test);
-    if(bt_carrier_test->mode == BtTestModeTxHopping) {
+    if(bt_carrier_test->mode == BtTestRezimTxHopping) {
         furi_hal_bt_stop_tone_tx();
         furi_timer_stop(bt_carrier_test->timer);
-    } else if(bt_carrier_test->mode == BtTestModeTx) {
+    } else if(bt_carrier_test->mode == BtTestRezimTx) {
         furi_hal_bt_stop_tone_tx();
-    } else if(bt_carrier_test->mode == BtTestModeRx) {
+    } else if(bt_carrier_test->mode == BtTestRezimRx) {
         furi_hal_bt_stop_packet_test();
         furi_timer_stop(bt_carrier_test->timer);
     }
@@ -122,9 +122,9 @@ static void bt_carrier_test_exit_callback(void* context) {
 static void bt_test_carrier_timer_callback(void* context) {
     furi_assert(context);
     BtCarrierTest* bt_carrier_test = context;
-    if(bt_carrier_test->mode == BtTestModeRx) {
+    if(bt_carrier_test->mode == BtTestRezimRx) {
         bt_test_set_rssi(bt_carrier_test->bt_test, furi_hal_bt_get_rssi());
-    } else if(bt_carrier_test->mode == BtTestModeTxHopping) {
+    } else if(bt_carrier_test->mode == BtTestRezimTxHopping) {
         bt_carrier_test_switch_channel(bt_carrier_test);
     }
 }
@@ -140,34 +140,34 @@ BtCarrierTest* bt_carrier_test_alloc(void) {
     BtTestParam* param;
     param = bt_test_param_add(
         bt_carrier_test->bt_test,
-        "Mode",
+        "Rezim",
         COUNT_OF(bt_param_mode),
         bt_carrier_test_mode_changed,
         bt_carrier_test);
     bt_test_set_current_value_index(param, 0);
     bt_test_set_current_value_text(param, bt_param_mode[0].str);
-    bt_carrier_test->mode = BtTestModeRx;
+    bt_carrier_test->mode = BtTestRezimRx;
 
     param = bt_test_param_add(
         bt_carrier_test->bt_test,
-        "Channel",
+        "Kanal",
         COUNT_OF(bt_param_channel),
         bt_carrier_test_channel_changed,
         bt_carrier_test);
     bt_test_set_current_value_index(param, 0);
     bt_test_set_current_value_text(param, bt_param_channel[0].str);
-    bt_carrier_test->channel = BtTestChannel2402;
+    bt_carrier_test->channel = BtTestKanal2402;
     bt_carrier_test->bt_param_channel = param;
 
     param = bt_test_param_add(
         bt_carrier_test->bt_test,
-        "Power",
+        "Vykon",
         COUNT_OF(bt_param_power),
         bt_carrier_test_param_channel,
         bt_carrier_test);
     bt_test_set_current_value_index(param, 0);
     bt_test_set_current_value_text(param, bt_param_power[0].str);
-    bt_carrier_test->power = BtPower0dB;
+    bt_carrier_test->power = BtVykon0dB;
 
     bt_carrier_test->timer =
         furi_timer_alloc(bt_test_carrier_timer_callback, FuriTimerTypePeriodic, bt_carrier_test);

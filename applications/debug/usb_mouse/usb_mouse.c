@@ -22,10 +22,10 @@ static void usb_mouse_render_callback(Canvas* canvas, void* ctx) {
     canvas_clear(canvas);
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 0, 10, "USB Mouse Demo");
+    canvas_draw_str(canvas, 0, 10, "Ukazka USB mysi");
 
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 0, 63, "Hold [back] to exit");
+    canvas_draw_str(canvas, 0, 63, "Podrz [Zpet] pro ukonceni");
 }
 
 static void usb_mouse_input_callback(InputEvent* input_event, void* ctx) {

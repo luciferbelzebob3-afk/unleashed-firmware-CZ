@@ -6,7 +6,7 @@
 #include "toolbox/path.h"
 #include <dialogs/dialogs.h>
 
-#define TAG "Archive"
+#define TAG "Archiv"
 
 #define SCENE_RENAME_CUSTOM_EVENT (0UL)
 #define MAX_TEXT_INPUT_LEN        22

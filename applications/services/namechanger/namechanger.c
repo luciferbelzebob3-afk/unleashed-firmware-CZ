@@ -36,7 +36,7 @@ static bool namechanger_init() {
         if(furi_string_cmp_str(str, NAMECHANGER_HEADER)) break;
         if(version != NAMECHANGER_VERSION) break;
 
-        if(!flipper_format_read_string(file, "Name", str)) break;
+        if(!flipper_format_read_string(file, "Nazev", str)) break;
         // Check for size
         size_t temp_string_size = furi_string_size(str);
         if(temp_string_size > (size_t)8) break;

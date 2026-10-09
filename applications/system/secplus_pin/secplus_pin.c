@@ -64,7 +64,7 @@ typedef struct {
 /* ------------------------------------------------------------------ drawing */
 
 static void secplus_pin_draw_menu(Canvas* canvas, SecPlusPin* app) {
-    static const char* items[] = {"Open .sub file", "Exit"};
+    static const char* items[] = {"Otevrit soubor .sub", "Ukoncit"};
     for(uint8_t i = 0; i < COUNT_OF(items); i++) {
         if(i == app->menu_index) {
             canvas_draw_box(canvas, 0, 17 + i * 12, 128, 11);
@@ -74,12 +74,12 @@ static void secplus_pin_draw_menu(Canvas* canvas, SecPlusPin* app) {
         canvas_set_color(canvas, ColorBlack);
     }
     elements_frame(canvas, 0, 41, 128, 23);
-    canvas_draw_str(canvas, 4, 51, "86-bit keypad signals only");
+    canvas_draw_str(canvas, 4, 51, "Pouze 86bitove signaly klavesnice");
     canvas_draw_str(canvas, 4, 62, furi_string_get_cstr(app->status));
 }
 
 /*
- * Vertical budget below the title rule is y=13..51, with the Send button owning 52..64.
+ * Vertical budget below the title rule is y=13..51, with the Odeslat button owning 52..64.
  * FontBigNumbers is 15 tall, FontPrimary 8, FontSecondary 7, all measured up from the
  * baseline, so the digits get 14..29, the bordered info box 32..51, and the two lines
  * inside it sit on baselines 9 apart with no overlap.
@@ -120,8 +120,8 @@ static void secplus_pin_draw_edit(Canvas* canvas, SecPlusPin* app) {
     canvas_set_font(canvas, FontSecondary);
     /* Left and Right move the cursor, so only OK is free to carry a button and the two
      * hold actions have to be spelled out instead. */
-    canvas_draw_str_aligned(canvas, 64, 50, AlignCenter, AlignBottom, "hold OK sweep   < save");
-    elements_button_center(canvas, "Send");
+    canvas_draw_str_aligned(canvas, 64, 50, AlignCenter, AlignBottom, "Podrz OK: hledat   < ulozit");
+    elements_button_center(canvas, "Odeslat");
 }
 
 static void secplus_pin_draw_callback(Canvas* canvas, void* ctx) {
@@ -154,15 +154,15 @@ static bool secplus_pin_load(SecPlusPin* app, const char* path) {
 
     do {
         if(!flipper_format_file_open_existing(fff, path)) {
-            furi_string_set(app->status, "Cannot open file");
+            furi_string_set(app->status, "Soubor nelze otevrit");
             break;
         }
-        if(!flipper_format_read_string(fff, "Filetype", tmp)) {
-            furi_string_set(app->status, "Not a Flipper sub file");
+        if(!flipper_format_read_string(fff, "Typ souboru", tmp)) {
+            furi_string_set(app->status, "Neni to Flipper sub soubor");
             break;
         }
-        if(!flipper_format_read_string(fff, "Protocol", tmp)) {
-            furi_string_set(app->status, "No Protocol key");
+        if(!flipper_format_read_string(fff, "Protokol", tmp)) {
+            furi_string_set(app->status, "No Protokol key");
             break;
         }
         if(furi_string_cmp_str(tmp, SUBGHZ_PROTOCOL_SECPLUS_V2_NAME) != 0) {
@@ -252,7 +252,7 @@ static SecPlusPinTxStatus secplus_pin_transmit(SecPlusPin* app) {
 
     FlipperFormat* fff = flipper_format_string_alloc();
     do {
-        if(!flipper_format_write_string_cstr(fff, "Protocol", SUBGHZ_PROTOCOL_SECPLUS_V2_NAME))
+        if(!flipper_format_write_string_cstr(fff, "Protokol", SUBGHZ_PROTOCOL_SECPLUS_V2_NAME))
             break;
         if(!flipper_format_write_uint32(fff, "Bit", &app->bit_count, 1)) break;
         if(!flipper_format_write_hex(fff, "Key", app->key, sizeof(app->key))) break;
@@ -434,7 +434,7 @@ int32_t secplus_pin_app(void* p) {
                         secplus_pin_pin_step(app, -1);
                         break;
                     case InputKeyOk:
-                        furi_string_printf(app->status, "Sending %04u...", app->pin);
+                        furi_string_printf(app->status, "Odeslating %04u...", app->pin);
                         view_port_update(app->view_port);
                         furi_mutex_release(app->mutex);
                         SecPlusPinTxStatus sent = secplus_pin_transmit(app);

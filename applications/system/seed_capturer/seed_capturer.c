@@ -110,7 +110,7 @@ typedef struct {
 
 /* ------------------------------------------------------------------ drawing */
 
-static const char* const seed_menu[] = {"New capture", "Delete all captures", "Exit"};
+static const char* const seed_menu[] = {"Novy zaznam", "Delete all captures", "Exit"};
 
 static void seed_draw_menu(Canvas* canvas, const char* const* items, uint8_t count, uint8_t sel) {
     for(uint8_t i = 0; i < count; i++) {
