@@ -917,7 +917,7 @@ static void mf_classic_scene_show_keys_on_enter(NfcApp* instance) {
         bool key_b = FURI_BIT(mfc_data->key_b_mask, i);
 
         if(key_a || key_b) {
-            furi_string_cat_printf(instance->text_box_store, "\n  -> Sector %d\n\e*AccBits:", i);
+            furi_string_cat_printf(instance->text_box_store, "\n  -> Sektor %d\n\e*Bity pristupu:", i);
             for(uint8_t j = 0; j < MF_CLASSIC_ACCESS_BYTES_SIZE; j++) {
                 furi_string_cat_printf(
                     instance->text_box_store, " %02X", sec_tr->access_bits.data[j]);
