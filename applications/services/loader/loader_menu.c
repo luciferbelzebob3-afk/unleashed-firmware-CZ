@@ -108,7 +108,7 @@ static void loader_menu_build_menu(LoaderMenu* loader_menu) {
     }
 
     menu_add_item(
-        menu, "Settings", &A_Settings_14, i++, loader_menu_switch_to_settings, loader_menu);
+        menu, "Nastaveni", &A_Settings_14, i++, loader_menu_switch_to_settings, loader_menu);
 }
 
 static void loader_menu_build_submenu(Submenu* submenu, LoaderMenu* loader_menu) {
