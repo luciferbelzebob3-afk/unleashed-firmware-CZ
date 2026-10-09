@@ -124,8 +124,8 @@ void cli_command_help(PipeSide* pipe, FuriString* args, void* context) {
     if(shell->ext_config)
         printf(
             ANSI_RESET
-            "\r\nIf you added a new external command and can't see it above, run `reload_ext_cmds`");
-    printf(ANSI_RESET "\r\nFind out more: https://docs.flipper.net/zero/development/cli");
+            "\r\nPokud jsi pridal novy externi prikaz a nevidis ho vyse, spust `reload_ext_cmds`");
+    printf(ANSI_RESET "\r\nDalsi informace: https://docs.flipper.net/zero/development/cli");
 
     cli_registry_unlock(registry);
 }
@@ -172,7 +172,7 @@ void cli_shell_execute_command(CliShell* cli_shell, FuriString* command) {
         // find handler
         if(!cli_registry_get_command(cli_shell->registry, command_name, &command_data)) {
             printf(
-                ANSI_FG_RED "could not find command `%s`, try `help`" ANSI_RESET,
+                ANSI_FG_RED "Prikaz `%s` nebyl nalezen, zkus `help`" ANSI_RESET,
                 furi_string_get_cstr(command_name));
             break;
         }
@@ -214,7 +214,7 @@ void cli_shell_execute_command(CliShell* cli_shell, FuriString* command) {
             loader_locked = loader_lock(loader);
             if(!loader_locked) {
                 printf(ANSI_FG_RED
-                       "this command cannot be run while an application is open" ANSI_RESET);
+                       "Tento prikaz nelze spustit, kdyz je otevrena aplikace" ANSI_RESET);
                 break;
             }
         }

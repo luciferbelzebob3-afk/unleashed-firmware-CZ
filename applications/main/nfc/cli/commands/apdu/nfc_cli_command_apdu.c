@@ -22,11 +22,11 @@ typedef NfcCommand (
     *NfcCliApduProtocolHandler)(NfcGenericEvent event, NfcCliApduRequestResponse* instance);
 
 static const char* raw_error_names[] = {
-    [NfcCliApduErrorNone] = "None",
-    [NfcCliApduErrorTimeout] = "Timeout",
-    [NfcCliApduErrorProtocol] = "Internal protocol",
-    [NfcCliApduErrorWrongCrc] = "Wrong CRC",
-    [NfcCliApduErrorNotPresent] = "No card",
+    [NfcCliApduErrorNone] = "Bez chyby",
+    [NfcCliApduErrorTimeout] = "Casovy limit",
+    [NfcCliApduErrorProtocol] = "Chyba interniho protokolu",
+    [NfcCliApduErrorWrongCrc] = "Nespravne CRC",
+    [NfcCliApduErrorNotPresent] = "Zadna karta",
 };
 
 typedef enum {
@@ -256,7 +256,7 @@ static bool nfc_cli_apdu_parse_data(FuriString* value, void* output) {
         const size_t max_len = UINT16_MAX;
         if(data_length > max_len) {
             printf(
-                ANSI_FG_RED "\r\nData payload is too long, max length = %d bytes\r\n" ANSI_RESET,
+                ANSI_FG_RED "\r\nData jsou prilis dlouha, maximum je %d bajtu\r\n" ANSI_RESET,
                 max_len);
             break;
         }
@@ -275,14 +275,14 @@ const NfcCliKeyDescriptor apdu_keys[] = {
     {
         .long_name = "protocol",
         .short_name = "p",
-        .description = "set protocol (4a, 4b, 15) directly, otherwise autodetected",
+        .description = "nastav protokol (4a, 4b, 15) primo, jinak se urci automaticky",
         .features = {.parameter = true, .required = false},
         .parse = nfc_cli_apdu_parse_protocol,
     },
     {
         .long_name = "data",
         .short_name = "d",
-        .description = "apdu payloads in format p1 p2 p3",
+        .description = "data APDU ve formatu p1 p2 p3",
         .features = {.parameter = true, .multivalue = true, .required = true},
         .parse = nfc_cli_apdu_parse_data,
     },
@@ -290,7 +290,7 @@ const NfcCliKeyDescriptor apdu_keys[] = {
 
 const NfcCliActionDescriptor apdu_action = {
     .name = "apdu",
-    .description = "Send APDU data to iso14443_4a, iso14443_4b or iso15693_3",
+    .description = "Odesle data APDU do iso14443_4a, iso14443_4b nebo iso15693_3",
     .alloc = nfc_cli_apdu_alloc_ctx,
     .free = nfc_cli_apdu_free_ctx,
     .execute = nfc_cli_apdu_execute,

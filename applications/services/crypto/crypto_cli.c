@@ -12,12 +12,12 @@ void crypto_cli_print_usage(void) {
     printf("crypto <cmd> <args>\r\n");
     printf("Seznam prikazu:\r\n");
     printf(
-        "\tencrypt <key_slot:int> <iv:hex>\t - Using key from secure enclave and IV encrypt plain text with AES256CBC and encode to hex\r\n");
+        "\tencrypt <key_slot:int> <iv:hex>\t - Pomoci klice ze zabezpeceneho uloziste a IV zasifruje otevreny text pomoci AES256CBC a zakoduje ho do hexu\r\n");
     printf(
-        "\tdecrypt <key_slot:int> <iv:hex>\t - Using key from secure enclave and IV decrypt hex encoded encrypted with AES256CBC data to plain text\r\n");
+        "\tdecrypt <key_slot:int> <iv:hex>\t - Pomoci klice ze zabezpeceneho uloziste a IV rozsifruje data zakodovana v hexu pomoci AES256CBC na otevreny text\r\n");
     printf("\thas_key <key_slot:int>\t - Overit, zda zabezpeceny modul obsahuje klic ve slotu\r\n");
     printf(
-        "\tstore_key <key_slot:int> <key_type:str> <key_size:int> <key_data:hex>\t - Store key in secure enclave. !!! NON-REVERSIBLE OPERATION - READ MANUAL FIRST !!!\r\n");
+        "\tstore_key <key_slot:int> <key_type:str> <key_size:int> <key_data:hex>\t - Ulozi klic do zabezpeceneho uloziste. !!! NEVRATNA OPERACE - NEJDRIVE SI PRECTI NAVOD !!!\r\n");
 }
 
 void crypto_cli_encrypt(PipeSide* pipe, FuriString* args) {
@@ -37,7 +37,7 @@ void crypto_cli_encrypt(PipeSide* pipe, FuriString* args) {
         }
 
         if(!furi_hal_crypto_enclave_load_key(key_slot, iv)) {
-            printf("Unable to load key from slot %d", key_slot);
+            printf("Nepodarilo se nacist klic ze slotu %d", key_slot);
             break;
         }
         key_loaded = true;
@@ -183,7 +183,7 @@ void crypto_cli_has_key(PipeSide* pipe, FuriString* args) {
             break;
         }
 
-        printf("Successfully loaded key from slot %d", key_slot);
+        printf("Klic ze slotu %d byl uspesne nacten", key_slot);
 
         furi_hal_crypto_enclave_unload_key(key_slot);
     } while(0);
@@ -256,7 +256,7 @@ void crypto_cli_store_key(PipeSide* pipe, FuriString* args) {
             if(key_slot > 1) {
                 if(!furi_hal_crypto_enclave_load_key(key_slot - 1, iv)) {
                     printf(
-                        "Slot %d before %d is empty, which is not allowed",
+                        "Slot %d pred slotem %d je prazdny, coz neni povoleno",
                         key_slot - 1,
                         key_slot);
                     break;
@@ -266,7 +266,7 @@ void crypto_cli_store_key(PipeSide* pipe, FuriString* args) {
 
             if(furi_hal_crypto_enclave_load_key(key_slot, iv)) {
                 furi_hal_crypto_enclave_unload_key(key_slot);
-                printf("Key slot %d is already used", key_slot);
+                printf("Slot klice %d je jiz obsazen", key_slot);
                 break;
             }
         }
