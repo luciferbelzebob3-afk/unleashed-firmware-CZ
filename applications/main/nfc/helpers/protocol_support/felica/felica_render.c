@@ -138,9 +138,9 @@ void nfc_more_info_render_felica_dir(const FelicaSystem* system, FuriString* str
         furi_string_cat_printf(str, "No services or areas found.\n");
     } else {
         furi_string_cat_printf(
-            str, "%zu areas found.\n%zu services found.\n\n", area_count, service_count);
+            str, "Pocet oblasti: %zu.\nPocet sluzeb: %zu.\n\n", area_count, service_count);
         furi_string_cat_printf(
-            str, "::: ... are readable services\n||| ... are locked services\n");
+            str, "::: ... jsou citelne sluzby\n||| ... jsou zamcene sluzby\n");
     }
     felica_write_directory_tree(system, str);
 }

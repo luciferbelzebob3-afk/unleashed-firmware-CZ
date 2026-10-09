@@ -23,32 +23,32 @@ void nfc_render_iso14443_3b_info(
     furi_string_cat_printf(str, "\n::::::::::::::::[Protocol info]:::::::::::::::\n");
 
     if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRateBoth106Kbit)) {
-        furi_string_cat(str, "Bit rate PICC <-> PCD:\n  106 kBit/s supported\n");
+        furi_string_cat(str, "Prenosova rychlost PICC <-> PCD:\n  106 kBit/s podporovano\n");
     } else {
-        furi_string_cat(str, "Bit rate PICC -> PCD:\n");
+        furi_string_cat(str, "Prenosova rychlost PICC -> PCD:\n");
         if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRatePiccToPcd212Kbit)) {
-            furi_string_cat(str, "  212 kBit/s supported\n");
+            furi_string_cat(str, "  212 kBit/s podporovano\n");
         }
         if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRatePiccToPcd424Kbit)) {
-            furi_string_cat(str, "  424 kBit/s supported\n");
+            furi_string_cat(str, "  424 kBit/s podporovano\n");
         }
         if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRatePiccToPcd848Kbit)) {
-            furi_string_cat(str, "  848 kBit/s supported\n");
+            furi_string_cat(str, "  848 kBit/s podporovano\n");
         }
 
-        furi_string_cat(str, "Bit rate PICC <- PCD:\n");
+        furi_string_cat(str, "Prenosova rychlost PICC <- PCD:\n");
         if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRatePcdToPicc212Kbit)) {
-            furi_string_cat(str, "  212 kBit/s supported\n");
+            furi_string_cat(str, "  212 kBit/s podporovano\n");
         }
         if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRatePcdToPicc424Kbit)) {
-            furi_string_cat(str, "  424 kBit/s supported\n");
+            furi_string_cat(str, "  424 kBit/s podporovano\n");
         }
         if(iso14443_3b_supports_bit_rate(data, Iso14443_3bBitRatePcdToPicc848Kbit)) {
-            furi_string_cat(str, "  848 kBit/s supported\n");
+            furi_string_cat(str, "  848 kBit/s podporovano\n");
         }
     }
 
-    furi_string_cat(str, "Max frame size: ");
+    furi_string_cat(str, "Maximalni velikost ramce: ");
 
     const uint16_t max_frame_size = iso14443_3b_get_frame_size_max(data);
     if(max_frame_size != 0) {
@@ -62,7 +62,7 @@ void nfc_render_iso14443_3b_info(
     // double to keep the soft-float calls out of the render path.
     const uint32_t fwt_us = iso14443_3b_get_fwt_fc_max(data) * 25 / 339;
     furi_string_cat_printf(
-        str, "Max waiting time: %lu.%06lu s\n", fwt_us / 1000000UL, fwt_us % 1000000UL);
+        str, "Maximalni doba cekani: %lu.%06lu s\n", fwt_us / 1000000UL, fwt_us % 1000000UL);
 
     const char* nad_support_str =
         iso14443_3b_supports_frame_option(data, Iso14443_3bFrameOptionNad) ? "" : "not ";
