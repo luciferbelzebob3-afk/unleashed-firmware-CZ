@@ -85,7 +85,7 @@ static void
     char buffer[64];
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 0, ROW_0_Y + 15, "Time");
+    canvas_draw_str(canvas, 0, ROW_0_Y + 15, "Cas");
 
     snprintf(buffer, sizeof(buffer), "%02u", model->current.hour);
     clock_settings_module_draw_block(
@@ -109,7 +109,7 @@ static void
     char buffer[64];
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 0, ROW_1_Y + 9, "Date");
+    canvas_draw_str(canvas, 0, ROW_1_Y + 9, "Datum");
     // Day
     snprintf(buffer, sizeof(buffer), "%02u", model->current.day);
     clock_settings_module_draw_block(
@@ -131,7 +131,7 @@ static void
     char buffer[64];
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 0, ROW_2_Y + 9, "Alarm");
+    canvas_draw_str(canvas, 0, ROW_2_Y + 9, "Budik");
 
     snprintf(buffer, sizeof(buffer), "%02u", model->alarm.hour);
     clock_settings_module_draw_block(
