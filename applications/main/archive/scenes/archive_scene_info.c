@@ -16,7 +16,7 @@ void archive_scene_info_on_enter(void* context) {
     ArchiveApp* instance = context;
 
     widget_add_button_element(
-        instance->widget, GuiButtonTypeLeft, "Back", archive_scene_info_widget_callback, instance);
+        instance->widget, GuiButtonTypeLeft, "Zpet", archive_scene_info_widget_callback, instance);
 
     FuriString* filename;
     FuriString* dirname;
@@ -52,7 +52,7 @@ void archive_scene_info_on_enter(void* context) {
         snprintf(
             file_info_message,
             sizeof(file_info_message),
-            "Size: \e#%s\e# bytes\n%s",
+            "Velikost: \e#%s\e# bajtu\n%s",
             furi_string_get_cstr(str_size),
             furi_string_get_cstr(dirname));
     } else {
@@ -60,7 +60,7 @@ void archive_scene_info_on_enter(void* context) {
         snprintf(
             file_info_message,
             sizeof(file_info_message),
-            "Size: \e#%s\e# Kb.\n%s",
+            "Velikost: \e#%s\e# kB\n%s",
             furi_string_get_cstr(str_size),
             furi_string_get_cstr(dirname));
     }
