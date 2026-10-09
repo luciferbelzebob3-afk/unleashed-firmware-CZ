@@ -28,18 +28,18 @@ static void bt_cli_command_carrier_tx(PipeSide* pipe, FuriString* args, void* co
 
     do {
         if(!args_read_int_and_trim(args, &channel) && (channel < 0 || channel > 39)) {
-            printf("Incorrect or missing channel, expected int 0-39");
+            printf("Chybi nebo je neplatny kanal, ocekava se cele cislo 0-39");
             break;
         }
         if(!args_read_int_and_trim(args, &power) && (power < 0 || power > 6)) {
-            printf("Incorrect or missing power, expected int 0-6");
+            printf("Chybi nebo je neplatny vykon, ocekava se cele cislo 0-6");
             break;
         }
 
         Bt* bt = furi_record_open(RECORD_BT);
         bt_disconnect(bt);
         furi_hal_bt_reinit();
-        printf("Transmitting carrier at %d channel at %d dB power\r\n", channel, power);
+        printf("Vysilam nosnou na kanalu %d s vykonem %d dB\r\n", channel, power);
         printf("Stiskni CTRL+C pro zastaveni\r\n");
         furi_hal_bt_start_tone_tx(channel, 0x19 + power);
 
@@ -59,7 +59,7 @@ static void bt_cli_command_carrier_rx(PipeSide* pipe, FuriString* args, void* co
 
     do {
         if(!args_read_int_and_trim(args, &channel) && (channel < 0 || channel > 39)) {
-            printf("Incorrect or missing channel, expected int 0-39");
+            printf("Chybi nebo je neplatny kanal, ocekava se cele cislo 0-39");
             break;
         }
 
@@ -92,21 +92,21 @@ static void bt_cli_command_packet_tx(PipeSide* pipe, FuriString* args, void* con
 
     do {
         if(!args_read_int_and_trim(args, &channel) && (channel < 0 || channel > 39)) {
-            printf("Incorrect or missing channel, expected int 0-39");
+            printf("Chybi nebo je neplatny kanal, ocekava se cele cislo 0-39");
             break;
         }
         if(!args_read_int_and_trim(args, &pattern) && (pattern < 0 || pattern > 5)) {
-            printf("Incorrect or missing pattern, expected int 0-5 \r\n");
-            printf("0 - Pseudo-Random bit sequence 9\r\n");
-            printf("1 - Pattern of alternating bits '11110000'\r\n");
-            printf("2 - Pattern of alternating bits '10101010'\r\n");
-            printf("3 - Pseudo-Random bit sequence 15\r\n");
-            printf("4 - Pattern of All '1' bits\r\n");
-            printf("5 - Pattern of All '0' bits\r\n");
+            printf("Chybi nebo je neplatny vzor, ocekava se cele cislo 0-5\r\n");
+            printf("0 - Pseudonahodna bitova posloupnost 9\r\n");
+            printf("1 - Stridajici se bity '11110000'\r\n");
+            printf("2 - Stridajici se bity '10101010'\r\n");
+            printf("3 - Pseudonahodna bitova posloupnost 15\r\n");
+            printf("4 - Samé bity '1'\r\n");
+            printf("5 - Samé bity '0'\r\n");
             break;
         }
         if(!args_read_int_and_trim(args, &datarate) && (datarate < 1 || datarate > 2)) {
-            printf("Incorrect or missing datarate, expected int 1-2");
+            printf("Chybi nebo je neplatna rychlost prenosu, ocekava se cele cislo 1-2");
             break;
         }
 
@@ -114,7 +114,7 @@ static void bt_cli_command_packet_tx(PipeSide* pipe, FuriString* args, void* con
         bt_disconnect(bt);
         furi_hal_bt_reinit();
         printf(
-            "Transmitting %d pattern packet at %d channel at %d M datarate\r\n",
+            "Vysilam paket se vzorem %d na kanalu %d rychlosti %d M\r\n",
             pattern,
             channel,
             datarate);
@@ -125,7 +125,7 @@ static void bt_cli_command_packet_tx(PipeSide* pipe, FuriString* args, void* con
             furi_delay_ms(250);
         }
         furi_hal_bt_stop_packet_test();
-        printf("Transmitted %lu packets", furi_hal_bt_get_transmitted_packets());
+        printf("Odeslano paketu: %lu", furi_hal_bt_get_transmitted_packets());
 
         bt_profile_restore_default(bt);
         furi_record_close(RECORD_BT);
@@ -139,11 +139,11 @@ static void bt_cli_command_packet_rx(PipeSide* pipe, FuriString* args, void* con
 
     do {
         if(!args_read_int_and_trim(args, &channel) && (channel < 0 || channel > 39)) {
-            printf("Incorrect or missing channel, expected int 0-39");
+            printf("Chybi nebo je neplatny kanal, ocekava se cele cislo 0-39");
             break;
         }
         if(!args_read_int_and_trim(args, &datarate) && (datarate < 1 || datarate > 2)) {
-            printf("Incorrect or missing datarate, expected int 1-2");
+            printf("Chybi nebo je neplatna rychlost prenosu, ocekava se cele cislo 1-2");
             break;
         }
 
@@ -160,7 +160,7 @@ static void bt_cli_command_packet_rx(PipeSide* pipe, FuriString* args, void* con
             fflush(stdout);
         }
         uint16_t packets_received = furi_hal_bt_stop_packet_test();
-        printf("Received %hu packets", packets_received);
+        printf("Prijato paketu: %hu", packets_received);
 
         bt_profile_restore_default(bt);
         furi_record_close(RECORD_BT);
@@ -168,16 +168,16 @@ static void bt_cli_command_packet_rx(PipeSide* pipe, FuriString* args, void* con
 }
 
 static void bt_cli_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("bt <cmd> <args>\r\n");
-    printf("Cmd list:\r\n");
-    printf("\thci_info\t - HCI info\r\n");
+    printf("Seznam prikazu:\r\n");
+    printf("\thci_info\t - informace HCI\r\n");
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug) && furi_hal_bt_is_testing_supported()) {
-        printf("\ttx_carrier <channel:0-39> <power:0-6>\t - start tx carrier test\r\n");
-        printf("\trx_carrier <channel:0-39>\t - start rx carrier test\r\n");
+        printf("\ttx_carrier <kanal:0-39> <vykon:0-6>\t - spustit test vysilani nosne\r\n");
+        printf("\trx_carrier <kanal:0-39>\t - spustit test prijmu nosne\r\n");
         printf(
-            "\ttx_packet <channel:0-39> <pattern:0-5> <datarate:1-2>\t - start tx packet test\r\n");
-        printf("\trx_packet <channel:0-39> <datarate:1-2>\t - start rx packer test\r\n");
+            "\ttx_packet <kanal:0-39> <vzor:0-5> <rychlost:1-2>\t - spustit test vysilani paketu\r\n");
+        printf("\trx_packet <kanal:0-39> <rychlost:1-2>\t - spustit test prijmu paketu\r\n");
     }
 }
 
