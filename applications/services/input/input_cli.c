@@ -6,11 +6,11 @@
 #include <toolbox/pipe.h>
 
 static void input_cli_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("input <cmd> <args>\r\n");
-    printf("Cmd list:\r\n");
-    printf("\tdump\t\t\t - dump input events\r\n");
-    printf("\tsend <key> <type>\t - send input event\r\n");
+    printf("Seznam prikazu:\r\n");
+    printf("\tdump\t\t\t - vypsat udalosti vstupu\r\n");
+    printf("\tsend <key> <type>\t - odeslat vstupni udalost\r\n");
 }
 
 static void input_cli_dump_events_callback(const void* value, void* ctx) {
@@ -27,7 +27,7 @@ static void input_cli_dump(PipeSide* pipe, FuriString* args, FuriPubSub* event_p
         furi_pubsub_subscribe(event_pubsub, input_cli_dump_events_callback, input_queue);
 
     InputEvent input_event;
-    printf("Press CTRL+C to stop\r\n");
+    printf("Stiskni CTRL+C pro zastaveni\r\n");
     while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
         if(furi_message_queue_get(input_queue, &input_event, 100) == FuriStatusOk) {
             printf(
@@ -42,10 +42,10 @@ static void input_cli_dump(PipeSide* pipe, FuriString* args, FuriPubSub* event_p
 }
 
 static void input_cli_send_print_usage(void) {
-    printf("Invalid arguments. Usage:\r\n");
+    printf("Neplatne argumenty. Pouziti:\r\n");
     printf("\tinput send <key> <type>\r\n");
-    printf("\t\t <key>\t - one of 'up', 'down', 'left', 'right', 'back', 'ok'\r\n");
-    printf("\t\t <type>\t - one of 'press', 'release', 'short', 'long'\r\n");
+    printf("\t\t <key>\t - jedna z hodnot 'up', 'down', 'left', 'right', 'back', 'ok'\r\n");
+    printf("\t\t <type>\t - jedna z hodnot 'press', 'release', 'short', 'long'\r\n");
 }
 
 static void input_cli_send(PipeSide* pipe, FuriString* args, FuriPubSub* event_pubsub) {
