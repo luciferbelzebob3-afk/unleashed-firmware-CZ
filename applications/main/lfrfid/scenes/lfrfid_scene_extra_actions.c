@@ -22,25 +22,25 @@ void lfrfid_scene_extra_actions_on_enter(void* context) {
 
     submenu_add_item(
         submenu,
-        "Read ASK (FDX,Regular)",
+        "Cist ASK (FDX, Regular)",
         SubmenuIndexASK,
         lfrfid_scene_extra_actions_submenu_callback,
         app);
     submenu_add_item(
         submenu,
-        "Read PSK (Indala)",
+        "Cist PSK (Indala)",
         SubmenuIndexPSK,
         lfrfid_scene_extra_actions_submenu_callback,
         app);
     submenu_add_item(
         submenu,
-        "Clear T5577 Password",
+        "Smazat heslo T5577",
         SubmenuIndexClearT5577,
         lfrfid_scene_extra_actions_submenu_callback,
         app);
     submenu_add_item(
         submenu,
-        "Wipe T5577",
+        "Vymazat T5577",
         SubmenuIndexWipeT5577,
         lfrfid_scene_extra_actions_submenu_callback,
         app);
@@ -48,13 +48,13 @@ void lfrfid_scene_extra_actions_on_enter(void* context) {
     if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
         submenu_add_item(
             submenu,
-            "Read RAW RFID data",
+            "Cist RAW RFID data",
             SubmenuIndexRAW,
             lfrfid_scene_extra_actions_submenu_callback,
             app);
         submenu_add_item(
             submenu,
-            "Emulate RAW RFID data",
+            "Emulovat RAW RFID data",
             SubmenuIndexRAWEmulate,
             lfrfid_scene_extra_actions_submenu_callback,
             app);

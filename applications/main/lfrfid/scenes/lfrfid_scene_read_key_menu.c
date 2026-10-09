@@ -18,11 +18,11 @@ void lfrfid_scene_read_key_menu_on_enter(void* context) {
     Submenu* submenu = app->submenu;
 
     submenu_add_item(
-        submenu, "Save", SubmenuIndexSave, lfrfid_scene_read_key_menu_submenu_callback, app);
+        submenu, "Ulozit", SubmenuIndexSave, lfrfid_scene_read_key_menu_submenu_callback, app);
     submenu_add_item(
-        submenu, "Emulate", SubmenuIndexEmulate, lfrfid_scene_read_key_menu_submenu_callback, app);
+        submenu, "Emulovat", SubmenuIndexEmulate, lfrfid_scene_read_key_menu_submenu_callback, app);
     submenu_add_item(
-        submenu, "Write", SubmenuIndexWrite, lfrfid_scene_read_key_menu_submenu_callback, app);
+        submenu, "Zapsat", SubmenuIndexWrite, lfrfid_scene_read_key_menu_submenu_callback, app);
 
     submenu_set_selected_item(
         submenu, scene_manager_get_scene_state(app->scene_manager, LfRfidSceneReadKeyMenu));

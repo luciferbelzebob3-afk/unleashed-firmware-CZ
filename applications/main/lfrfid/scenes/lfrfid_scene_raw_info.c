@@ -7,7 +7,7 @@ void lfrfid_scene_raw_info_on_enter(void* context) {
     if(storage_sd_status(app->storage) != FSE_OK) {
         widget_add_icon_element(widget, 83, 22, &I_WarningDolphinFlip_45x42);
         widget_add_string_element(
-            widget, 64, 0, AlignCenter, AlignTop, FontPrimary, "No SD Card!");
+            widget, 64, 0, AlignCenter, AlignTop, FontPrimary, "Chybi SD karta!");
         widget_add_string_multiline_element(
             widget,
             0,
@@ -15,7 +15,7 @@ void lfrfid_scene_raw_info_on_enter(void* context) {
             AlignLeft,
             AlignTop,
             FontSecondary,
-            "Insert an SD card\n"
+            "Vloz SD kartu\n"
             "to use this function");
 
     } else {
@@ -27,10 +27,10 @@ void lfrfid_scene_raw_info_on_enter(void* context) {
             64,
             AlignLeft,
             AlignTop,
-            "\e#RAW RFID Data Reader\e#\n"
-            "1. Hold card next to Flipper\n"
-            "2. Press OK\n"
-            "3. Wait until data is read",
+            "\e#Cteni RAW RFID dat\e#\n"
+            "1. Priloz kartu k Flipperu\n"
+            "2. Stiskni OK\n"
+            "3. Pockej na nacteni dat",
             false);
 
         widget_add_button_element(widget, GuiButtonTypeCenter, "OK", lfrfid_widget_callback, app);
