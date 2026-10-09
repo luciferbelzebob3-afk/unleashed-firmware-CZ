@@ -201,10 +201,10 @@ void cli_command_sysctl_debug(PipeSide* pipe, FuriString* args, void* context) {
     UNUSED(context);
     if(!furi_string_cmp(args, "0")) {
         furi_hal_rtc_reset_flag(FuriHalRtcFlagDebug);
-        printf("Debug disabled.");
+        printf("Ladeni vypnuto.");
     } else if(!furi_string_cmp(args, "1")) {
         furi_hal_rtc_set_flag(FuriHalRtcFlagDebug);
-        printf("Debug enabled.");
+        printf("Ladeni zapnuto.");
     } else {
         cli_print_usage("sysctl debug", "<1|0>", furi_string_get_cstr(args));
     }
@@ -215,17 +215,17 @@ void cli_command_sysctl_heap_track(PipeSide* pipe, FuriString* args, void* conte
     UNUSED(context);
     if(!furi_string_cmp(args, "none")) {
         furi_hal_rtc_set_heap_track_mode(FuriHalRtcHeapTrackModeNone);
-        printf("Heap tracking disabled");
+        printf("Sledovani haldy vypnuto");
     } else if(!furi_string_cmp(args, "main")) {
         furi_hal_rtc_set_heap_track_mode(FuriHalRtcHeapTrackModeMain);
-        printf("Heap tracking enabled for application main thread");
+        printf("Sledovani haldy zapnuto pro hlavni vlakno aplikace");
 #ifdef FURI_DEBUG
     } else if(!furi_string_cmp(args, "tree")) {
         furi_hal_rtc_set_heap_track_mode(FuriHalRtcHeapTrackModeTree);
-        printf("Heap tracking enabled for application main and child threads");
+        printf("Sledovani haldy zapnuto pro hlavni a podrizena vlakna aplikace");
     } else if(!furi_string_cmp(args, "all")) {
         furi_hal_rtc_set_heap_track_mode(FuriHalRtcHeapTrackModeAll);
-        printf("Heap tracking enabled for all threads");
+        printf("Sledovani haldy zapnuto pro vsechna vlakna");
 #endif
     } else {
         cli_print_usage("sysctl heap_track", "<none|main|tree|all>", furi_string_get_cstr(args));
@@ -233,13 +233,13 @@ void cli_command_sysctl_heap_track(PipeSide* pipe, FuriString* args, void* conte
 }
 
 void cli_command_sysctl_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("sysctl <cmd> <args>\r\n");
-    printf("Cmd list:\r\n");
+    printf("Seznam prikazu:\r\n");
 
-    printf("\tdebug <0|1>\t - Enable or disable system debug\r\n");
+    printf("\tdebug <0|1>\t - Zapnout nebo vypnout ladeni systemu\r\n");
 #ifdef FURI_DEBUG
-    printf("\theap_track <none|main|tree|all>\t - Set heap allocation tracking mode\r\n");
+    printf("\theap_track <none|main|tree|all>\t - Nastavit rezim sledovani alokaci haldy\r\n");
 #else
     printf("\theap_track <none|main>\t - Set heap allocation tracking mode\r\n");
 #endif
@@ -281,7 +281,7 @@ void cli_command_vibro(PipeSide* pipe, FuriString* args, void* context) {
         furi_record_close(RECORD_NOTIFICATION);
     } else if(!furi_string_cmp(args, "1")) {
         if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagStealthMode)) {
-            printf("Flipper is in stealth mode. Unmute the device to control vibration.");
+            printf("Flipper je v tichém rezimu. Zapni zvuk zarizeni pro ovladani vibraci.");
             return;
         }
 
@@ -289,7 +289,7 @@ void cli_command_vibro(PipeSide* pipe, FuriString* args, void* context) {
         if(notification->settings.vibro_on) {
             notification_message_block(notification, &sequence_set_vibro_on);
         } else {
-            printf("Vibro is disabled in settings. Enable it to control vibration.");
+            printf("Vibrace jsou vypnute v nastaveni. Zapni je pro ovladani vibraci.");
         }
 
         furi_record_close(RECORD_NOTIFICATION);
