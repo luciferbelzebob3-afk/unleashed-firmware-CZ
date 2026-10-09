@@ -24,7 +24,7 @@ void subghz_scene_need_saving_on_enter(void* context) {
         AlignCenter,
         AlignCenter,
         FontSecondary,
-        "All unsaved data\nwill be lost!");
+        "Neulozena data\nbudou ztracena!");
 
     widget_add_button_element(
         subghz->widget, GuiButtonTypeRight, "Zustat", subghz_scene_need_saving_callback, subghz);
