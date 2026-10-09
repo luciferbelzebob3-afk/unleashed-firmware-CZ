@@ -65,21 +65,21 @@ void desktop_lock_menu_draw_callback(Canvas* canvas, void* model) {
         //if(i == DesktopLockMenuIndexLock) {
         if(i == DesktopLockMenuIndexBt) {
             if(m->bt_mode) {
-                str = "Turn Bluetooth Off";
+                str = "Vypnout Bluetooth";
             } else {
-                str = "Turn Bluetooth On";
+                str = "Zapnout Bluetooth";
             }
         } else if(i == DesktopLockMenuIndexStealth) {
             if(m->stealth_mode) {
-                str = "Unmute";
+                str = "Zapnout zvuk";
             } else {
-                str = "Mute";
+                str = "Ztlumit zvuk";
             }
         } else if(i == DesktopLockMenuIndexDummy) { //-V547
             if(m->dummy_mode) {
-                str = "Default Mode";
+                str = "Vychozi rezim";
             } else {
-                str = "Dummy Mode";
+                str = "Rezim Dummy";
             }
         }
 
