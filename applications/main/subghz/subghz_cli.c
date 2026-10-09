@@ -88,7 +88,7 @@ void subghz_cli_command_tx_carrier(PipeSide* pipe, FuriString* args, void* conte
         }
         if(!furi_hal_subghz_is_frequency_valid(frequency)) {
             printf(
-                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR ", ne %lu\r\n",
+                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR ", nikoli %lu\r\n",
                 frequency);
             return;
         }
@@ -131,7 +131,7 @@ void subghz_cli_command_rx_carrier(PipeSide* pipe, FuriString* args, void* conte
         }
         if(!furi_hal_subghz_is_frequency_valid(frequency)) {
             printf(
-                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n,
+                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR ", nikoli %lu\r\n",
                 frequency);
             return;
         }
@@ -234,7 +234,7 @@ void subghz_cli_command_tx(PipeSide* pipe, FuriString* args, void* context) {
     const SubGhzDevice* device = subghz_cli_command_get_device(&device_ind);
     if(!subghz_devices_is_frequency_valid(device, frequency)) {
         printf(
-            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n, frequency);
+            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR ", nikoli %lu\r\n", frequency);
         subghz_devices_deinit();
         subghz_cli_radio_device_power_off();
         return;
@@ -360,7 +360,7 @@ void subghz_cli_command_rx(PipeSide* pipe, FuriString* args, void* context) {
     const SubGhzDevice* device = subghz_cli_command_get_device(&device_ind);
     if(!subghz_devices_is_frequency_valid(device, frequency)) {
         printf(
-            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n, frequency);
+            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR ", nikoli %lu\r\n", frequency);
         subghz_devices_deinit();
         subghz_cli_radio_device_power_off();
         return;
@@ -443,7 +443,7 @@ void subghz_cli_command_rx_raw(PipeSide* pipe, FuriString* args, void* context) 
         }
         if(!furi_hal_subghz_is_frequency_valid(frequency)) {
             printf(
-                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n,
+                "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR ", nikoli %lu\r\n",
                 frequency);
             return;
         }
@@ -990,7 +990,7 @@ static void subghz_cli_command_chat(PipeSide* pipe, FuriString* args) {
     const SubGhzDevice* device = subghz_cli_command_get_device(&device_ind);
     if(!subghz_devices_is_frequency_valid(device, frequency)) {
         printf(
-            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR , nikoli %lu\r\n, frequency);
+            "Frekvence musi byt v rozsahu " SUBGHZ_FREQUENCY_RANGE_STR ", nikoli %lu\r\n", frequency);
         subghz_devices_deinit();
         subghz_cli_radio_device_power_off();
         return;
