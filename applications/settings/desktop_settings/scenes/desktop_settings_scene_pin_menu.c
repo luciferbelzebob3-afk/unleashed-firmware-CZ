@@ -27,20 +27,20 @@ void desktop_settings_scene_pin_menu_on_enter(void* context) {
     } else {
         submenu_add_item(
             submenu,
-            "Change PIN",
+            "Zmenit PIN",
             DesktopSettingsCustomEventChangePin,
             desktop_settings_scene_pin_menu_submenu_callback,
             app);
 
         submenu_add_item(
             submenu,
-            "Remove PIN",
+            "Odebrat PIN",
             DesktopSettingsCustomEventDisablePin,
             desktop_settings_scene_pin_menu_submenu_callback,
             app);
     }
 
-    submenu_set_header(app->submenu, "PIN Code Settings");
+    submenu_set_header(app->submenu, "Nastaveni PINu");
     submenu_set_selected_item(app->submenu, app->pin_menu_idx);
     view_dispatcher_switch_to_view(app->view_dispatcher, DesktopSettingsAppViewMenu);
 }

@@ -52,7 +52,7 @@ void nfc_scene_extra_actions_on_enter(void* context) {
         instance);
     submenu_add_item(
         submenu,
-        "Unlock NTAG/Ultralight",
+        "Odemknout NTAG/Ultralight",
         SubmenuIndexMfUltralightUnlock,
         nfc_scene_extra_actions_submenu_callback,
         instance);

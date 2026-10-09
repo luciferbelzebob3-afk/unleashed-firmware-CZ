@@ -103,7 +103,7 @@ void subghz_read_raw_update_sample_write(SubGhzReadRAW* instance, size_t sample)
         SubGhzReadRAWModel * model,
         {
             model->not_showing_samples = false;
-            furi_string_printf(model->sample_write, "%zu spl.", sample);
+            furi_string_printf(model->sample_write, "%zu vz.", sample);
         },
         false);
 }
@@ -128,7 +128,7 @@ void subghz_read_raw_stop_send(SubGhzReadRAW* instance) {
                 break;
 
             default:
-                FURI_LOG_W(TAG, "unknown status");
+                FURI_LOG_W(TAG, "neznamy stav");
                 model->status = SubGhzReadRAWStatusIDLE;
                 break;
             }
@@ -581,7 +581,7 @@ void subghz_read_raw_set_status(
         break;
 
     default:
-        FURI_LOG_W(TAG, "unknown status");
+        FURI_LOG_W(TAG, "neznamy stav");
         break;
     }
 }

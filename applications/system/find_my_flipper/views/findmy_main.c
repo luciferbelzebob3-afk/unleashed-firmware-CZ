@@ -64,20 +64,20 @@ static void findmy_main_draw_callback(Canvas* canvas, void* _model) {
     }
     canvas_set_font(canvas, FontSecondary);
     if(model->active) {
-        canvas_draw_str(canvas, 4, 49, "Broadcast Active");
+        canvas_draw_str(canvas, 4, 49, "Vysilani aktivni");
         canvas_draw_icon(canvas, 78, 41, &I_Ok_btn_9x9);
     } else {
-        canvas_draw_str(canvas, 4, 49, "Broadcast Inactive");
+        canvas_draw_str(canvas, 4, 49, "Vysilani neaktivni");
     }
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 4, 21, "Press <- to run in background");
+    canvas_draw_str(canvas, 4, 21, "Stiskni <- pro beh na pozadi");
     canvas_set_font(canvas, FontSecondary);
     char interval_str[20];
-    snprintf(interval_str, sizeof(interval_str), "Ping Interval: %ds", model->interval);
+    snprintf(interval_str, sizeof(interval_str), "Interval pingu: %d s", model->interval);
     canvas_draw_str(canvas, 4, 62, interval_str);
 
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 100, 61, "Config");
+    canvas_draw_str(canvas, 100, 61, "Nastaveni");
     canvas_draw_line(canvas, 100, 51, 127, 51);
     canvas_draw_line(canvas, 97, 53, 97, 63);
     canvas_draw_line(canvas, 97, 53, 99, 51);

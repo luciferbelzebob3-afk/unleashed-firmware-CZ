@@ -34,7 +34,7 @@ void desktop_settings_scene_change_name_on_enter(void* context) {
     DesktopSettingsApp* app = context;
     TextInput* text_input = app->text_input;
 
-    text_input_set_header_text(text_input, "Leave empty for default");
+    text_input_set_header_text(text_input, "Pro vychozi nazev ponech prazdne");
 
     text_input_set_validator(text_input, desktop_settings_scene_change_name_validator, NULL);
 

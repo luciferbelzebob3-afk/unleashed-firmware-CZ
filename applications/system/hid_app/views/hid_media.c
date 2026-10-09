@@ -125,7 +125,7 @@ static void hid_media_draw_callback(Canvas* canvas, void* context) {
 
     canvas_draw_icon(canvas, 0, 54, &I_Pin_back_arrow_10x8);
     canvas_set_font(canvas, FontSecondary);
-    elements_multiline_text_aligned(canvas, 13, 62, AlignLeft, AlignBottom, "Hold to exit");
+    elements_multiline_text_aligned(canvas, 13, 62, AlignLeft, AlignBottom, "Podrz pro ukonceni");
 }
 
 static void hid_media_process_press(HidMedia* hid_media, InputEvent* event) {

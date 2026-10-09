@@ -63,7 +63,7 @@ static void nfc_protocol_support_on_enter_load_failed(NfcApp* instance) {
     widget_reset(instance->widget);
     widget_add_icon_element(instance->widget, 83, 22, &I_WarningDolphinFlip_45x42);
     widget_add_string_element(
-        instance->widget, 3, 4, AlignLeft, AlignTop, FontPrimary, "Plugin Not Loaded");
+        instance->widget, 3, 4, AlignLeft, AlignTop, FontPrimary, "Plugin neni nacten");
     widget_add_string_multiline_element(
         instance->widget,
         4,
@@ -385,7 +385,7 @@ static void nfc_protocol_support_scene_info_on_enter(NfcApp* instance) {
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeRight,
-            "More",
+            "Vice",
             nfc_protocol_support_common_widget_callback,
             instance);
     }
@@ -454,7 +454,7 @@ static void nfc_protocol_support_scene_read_on_enter(NfcApp* instance) {
         return;
     }
 
-    popup_set_header(instance->popup, "Don't move", 85, 27, AlignCenter, AlignTop);
+    popup_set_header(instance->popup, "Nehybejte kartou", 85, 27, AlignCenter, AlignTop);
     popup_set_icon(instance->popup, 12, 23, &A_Loading_24);
 
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewPopup);
@@ -532,7 +532,7 @@ static bool nfc_protocol_support_scene_read_on_event(NfcApp* instance, SceneMana
 static void nfc_protocol_support_scene_read_on_exit(NfcApp* instance) {
     popup_reset(instance->popup);
     // This scene can show the plugin failure screen, which draws into the widget. Leave it
-    // behind and the next card's success screen renders on top of "Plugin Not Loaded".
+    // behind and the next card's success screen renders on top of "Plugin neni nacten".
     widget_reset(instance->widget);
 
     nfc_blink_stop(instance);
@@ -552,7 +552,7 @@ static void nfc_protocol_support_scene_read_menu_on_enter(NfcApp* instance) {
 
     submenu_add_item(
         submenu,
-        "Save",
+        "Ulozit",
         SubmenuIndexCommonSave,
         nfc_protocol_support_common_submenu_callback,
         instance);
@@ -560,7 +560,7 @@ static void nfc_protocol_support_scene_read_menu_on_enter(NfcApp* instance) {
     if(scene_manager_has_previous_scene(instance->scene_manager, NfcSceneGenerateInfo)) {
         submenu_add_item(
             submenu,
-            "Change UID",
+            "Zmenit UID",
             SubmenuIndexCommonEdit,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -569,7 +569,7 @@ static void nfc_protocol_support_scene_read_menu_on_enter(NfcApp* instance) {
     if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureEmulateUid)) {
         submenu_add_item(
             submenu,
-            "Emulate UID",
+            "Emulovat UID",
             SubmenuIndexCommonEmulate,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -577,7 +577,7 @@ static void nfc_protocol_support_scene_read_menu_on_enter(NfcApp* instance) {
     } else if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureEmulateFull)) {
         submenu_add_item(
             submenu,
-            "Emulate",
+            "Emulovat",
             SubmenuIndexCommonEmulate,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -586,7 +586,7 @@ static void nfc_protocol_support_scene_read_menu_on_enter(NfcApp* instance) {
     if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureWrite)) {
         submenu_add_item(
             submenu,
-            "Write",
+            "Zapsat",
             SubmenuIndexCommonWrite,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -596,7 +596,7 @@ static void nfc_protocol_support_scene_read_menu_on_enter(NfcApp* instance) {
 
     submenu_add_item(
         submenu,
-        "Info",
+        "Informace",
         SubmenuIndexCommonInfo,
         nfc_protocol_support_common_submenu_callback,
         instance);
@@ -656,7 +656,7 @@ static void nfc_protocol_support_scene_read_saved_menu_on_exit(NfcApp* instance)
 static void nfc_protocol_support_scene_read_success_on_enter(NfcApp* instance) {
     Widget* widget = instance->widget;
 
-    popup_set_header(instance->popup, "Parsing", 85, 27, AlignCenter, AlignTop);
+    popup_set_header(instance->popup, "Analyzuji", 85, 27, AlignCenter, AlignTop);
     popup_set_icon(instance->popup, 12, 23, &A_Loading_24);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewPopup);
 
@@ -672,9 +672,9 @@ static void nfc_protocol_support_scene_read_success_on_enter(NfcApp* instance) {
     furi_string_free(temp_str);
 
     widget_add_button_element(
-        widget, GuiButtonTypeLeft, "Retry", nfc_protocol_support_common_widget_callback, instance);
+        widget, GuiButtonTypeLeft, "Znovu", nfc_protocol_support_common_widget_callback, instance);
     widget_add_button_element(
-        widget, GuiButtonTypeRight, "More", nfc_protocol_support_common_widget_callback, instance);
+        widget, GuiButtonTypeRight, "Vice", nfc_protocol_support_common_widget_callback, instance);
 
     notification_message_block(instance->notifications, &sequence_set_green_255);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewWidget);
@@ -725,7 +725,7 @@ static void nfc_protocol_support_scene_saved_menu_on_enter(NfcApp* instance) {
     if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureEmulateUid)) {
         submenu_add_item(
             submenu,
-            "Emulate UID",
+            "Emulovat UID",
             SubmenuIndexCommonEmulate,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -733,7 +733,7 @@ static void nfc_protocol_support_scene_saved_menu_on_enter(NfcApp* instance) {
     } else if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureEmulateFull)) {
         submenu_add_item(
             submenu,
-            "Emulate",
+            "Emulovat",
             SubmenuIndexCommonEmulate,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -742,7 +742,7 @@ static void nfc_protocol_support_scene_saved_menu_on_enter(NfcApp* instance) {
     if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureWrite)) {
         submenu_add_item(
             submenu,
-            "Write",
+            "Zapsat",
             SubmenuIndexCommonWrite,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -751,7 +751,7 @@ static void nfc_protocol_support_scene_saved_menu_on_enter(NfcApp* instance) {
     if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureEditUid)) {
         submenu_add_item(
             submenu,
-            "Edit UID",
+            "Upravit UID",
             SubmenuIndexCommonEdit,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -764,7 +764,7 @@ static void nfc_protocol_support_scene_saved_menu_on_enter(NfcApp* instance) {
     if(nfc_has_shadow_file(instance)) {
         submenu_add_item(
             submenu,
-            "Restore to Original State",
+            "Obnovit puvodni stav",
             SubmenuIndexCommonRestore,
             nfc_protocol_support_common_submenu_callback,
             instance);
@@ -772,19 +772,19 @@ static void nfc_protocol_support_scene_saved_menu_on_enter(NfcApp* instance) {
 
     submenu_add_item(
         submenu,
-        "Rename",
+        "Prejmenovat",
         SubmenuIndexCommonRename,
         nfc_protocol_support_common_submenu_callback,
         instance);
     submenu_add_item(
         submenu,
-        "Delete",
+        "Smazat",
         SubmenuIndexCommonDelete,
         nfc_protocol_support_common_submenu_callback,
         instance);
     submenu_add_item(
         submenu,
-        "Info",
+        "Informace",
         SubmenuIndexCommonInfo,
         nfc_protocol_support_common_submenu_callback,
         instance);
@@ -871,7 +871,7 @@ static void nfc_protocol_support_scene_save_name_on_enter(NfcApp* instance) {
         path_extract_dirname(furi_string_get_cstr(instance->file_path), folder_path);
     }
 
-    text_input_set_header_text(text_input, "Name the card");
+    text_input_set_header_text(text_input, "Zadej nazev karty");
     text_input_set_result_callback(
         text_input,
         nfc_protocol_support_common_text_input_done_callback,
@@ -998,7 +998,7 @@ static void nfc_protocol_support_scene_emulate_on_enter(NfcApp* instance) {
 
     if(nfc_protocol_support_has_feature(protocol, instance, NfcProtocolFeatureEmulateUid)) {
         widget_add_string_element(
-            widget, 90, 26, AlignCenter, AlignCenter, FontPrimary, "Emulating UID");
+            widget, 90, 26, AlignCenter, AlignCenter, FontPrimary, "Emuluji UID");
 
         size_t uid_len;
         const uint8_t* uid = nfc_device_get_uid(instance->nfc_device, &uid_len);
@@ -1162,7 +1162,7 @@ static void nfc_protocol_support_scene_write_setup_view(NfcApp* instance) {
     NfcView view = NfcViewPopup;
 
     if(state == NfcSceneWriteStateSearching) {
-        popup_set_header(popup, "Writing", 95, 20, AlignCenter, AlignCenter);
+        popup_set_header(popup, "Zapisuji", 95, 20, AlignCenter, AlignCenter);
         popup_set_text(
             popup,
             furi_string_get_cstr(instance->text_box_store),
@@ -1184,7 +1184,7 @@ static void nfc_protocol_support_scene_write_setup_view(NfcApp* instance) {
     } else if(state == NfcSceneWriteStateFailure) {
         view = NfcViewWidget;
         widget_add_string_element(
-            widget, 7, 4, AlignLeft, AlignTop, FontPrimary, "Writing gone wrong!");
+            widget, 7, 4, AlignLeft, AlignTop, FontPrimary, "Chyba pri zapisu!");
         widget_add_string_multiline_element(
             widget,
             7,
@@ -1197,12 +1197,12 @@ static void nfc_protocol_support_scene_write_setup_view(NfcApp* instance) {
         widget_add_button_element(
             widget,
             GuiButtonTypeLeft,
-            "Retry",
+            "Znovu",
             nfc_protocol_support_scene_write_widget_callback,
             instance);
     } else if(state == NfcSceneWriteStateWrongCard) {
         view = NfcViewWidget;
-        widget_add_string_element(widget, 3, 4, AlignLeft, AlignTop, FontPrimary, "Wrong card!");
+        widget_add_string_element(widget, 3, 4, AlignLeft, AlignTop, FontPrimary, "Spatna karta!");
         widget_add_string_multiline_element(
             widget,
             4,
@@ -1215,7 +1215,7 @@ static void nfc_protocol_support_scene_write_setup_view(NfcApp* instance) {
         widget_add_button_element(
             widget,
             GuiButtonTypeLeft,
-            "Retry",
+            "Znovu",
             nfc_protocol_support_scene_write_widget_callback,
             instance);
     }
@@ -1361,12 +1361,12 @@ static bool nfc_protocol_support_scene_rpc_on_event(NfcApp* instance, SceneManag
                         rpc_system_app_set_error_code(
                             instance->rpc_ctx, RpcAppSystemErrorCodeInternalParse);
                         rpc_system_app_set_error_text(
-                            instance->rpc_ctx, "Cannot load protocol plugin");
+                            instance->rpc_ctx, "Nelze nacist plugin protokolu");
                     }
                 } else {
                     rpc_system_app_set_error_code(
                         instance->rpc_ctx, RpcAppSystemErrorCodeParseFile);
-                    rpc_system_app_set_error_text(instance->rpc_ctx, "Cannot load key file");
+                    rpc_system_app_set_error_text(instance->rpc_ctx, "Nelze nacist soubor s klicem");
                 }
             }
             rpc_system_app_confirm(instance->rpc_ctx, success);

@@ -125,16 +125,16 @@ static void nfc_render_mf_ultralight_aes_config(const MfUltralightData* data, Fu
     } else {
         furi_string_cat_printf(str, "\nAuth limit: %u (locks!)", authlim);
     }
-    furi_string_cat_printf(str, "\nUser cfg: %s", user_cfg_locked ? "locked" : "open");
+    furi_string_cat_printf(str, "\nUser cfg: %s", user_cfg_locked ? "zamceno" : "otevreno");
     furi_string_cat_printf(
         str,
         "\nCounter 2: rd %s / inc %s",
-        cnt2_rd_open ? "open" : "auth",
-        cnt2_inc_open ? "open" : "auth");
-    furi_string_cat_printf(str, "\nRandom ID: %s", random_id ? "on" : "off");
-    furi_string_cat_printf(str, "\nSecure msg: %s", secure_msg ? "on" : "off");
+        cnt2_rd_open ? "otevreno" : "autentizace",
+        cnt2_inc_open ? "otevreno" : "autentizace");
+    furi_string_cat_printf(str, "\nRandom ID: %s", random_id ? "zapnuto" : "vypnuto");
+    furi_string_cat_printf(str, "\nSecure msg: %s", secure_msg ? "zapnuto" : "vypnuto");
     furi_string_cat_printf(
-        str, "\nKey lock: DP %s / UID %s", dp_key_locked ? "Y" : "N", uid_key_locked ? "Y" : "N");
+        str, "\nKey lock: DP %s / UID %s", dp_key_locked ? "A" : "N", uid_key_locked ? "A" : "N");
 }
 
 void nfc_render_mf_ultralight_info(

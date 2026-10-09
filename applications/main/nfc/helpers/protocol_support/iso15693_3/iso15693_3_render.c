@@ -32,7 +32,7 @@ void nfc_render_iso15693_3_brief(const Iso15693_3Data* data, FuriString* str) {
         const uint8_t block_size = iso15693_3_get_block_size(data);
 
         furi_string_cat_printf(str, "\nMemory: %u bytes\n", block_count * block_size);
-        furi_string_cat_printf(str, "(%u blocks x %u bytes)", block_count, block_size);
+        furi_string_cat_printf(str, "(%u bloku x %u bajtu)", block_count, block_size);
     }
 }
 
@@ -62,7 +62,7 @@ void nfc_render_iso15693_3_system_info(const Iso15693_3Data* data, FuriString* s
         if(block_count != display_block_count) {
             furi_string_cat_printf(
                 str,
-                "(Data is too big. Showing only the first %u bytes.)",
+                "(Data jsou prilis velka. Zobrazuji pouze prvnich %u bajtu.)",
                 display_block_count * block_size);
         }
     } else {

@@ -315,10 +315,10 @@ static void hid_keyboard_draw_callback(Canvas* canvas, void* context) {
 
         canvas_draw_icon(canvas, 68, 3, &I_Pin_back_arrow_10x8);
         canvas_set_font(canvas, FontSecondary);
-        elements_multiline_text_aligned(canvas, 127, 4, AlignRight, AlignTop, "Hold to exit");
+        elements_multiline_text_aligned(canvas, 127, 4, AlignRight, AlignTop, "Podrz pro ukonceni");
 
         elements_multiline_text_aligned(
-            canvas, 4, 60, AlignLeft, AlignBottom, "Waiting for Connection...");
+            canvas, 4, 60, AlignLeft, AlignBottom, "Cekam na pripojeni...");
         return; // Dont render the keyboard if we are not yet connected
     }
 #endif

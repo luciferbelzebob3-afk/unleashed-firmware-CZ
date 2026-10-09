@@ -201,7 +201,7 @@ const char* subghz_txrx_get_preset_name(SubGhzTxRx* instance, const char* preset
     } else if(!strcmp(preset, "FuriHalSubGhzPresetCustom")) {
         preset_name = "CUSTOM";
     } else {
-        FURI_LOG_E(TAG, "Unknown preset");
+        FURI_LOG_E(TAG, "Neznamy preset");
     }
     return preset_name;
 }
@@ -417,7 +417,7 @@ SubGhzTxRxStartTxState subghz_txrx_tx_start(SubGhzTxRx* instance, FlipperFormat*
                             instance->setting, furi_string_get_cstr(preset->name)));
                     if(preset->frequency) {
                         if(!subghz_txrx_tx(instance, preset->frequency)) {
-                            FURI_LOG_E(TAG, "Only Rx");
+                            FURI_LOG_E(TAG, "Pouze prijem");
                             ret = SubGhzTxRxStartTxStateErrorOnlyRx;
                         }
                     } else {

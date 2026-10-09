@@ -556,34 +556,34 @@ static void render_callback(Canvas* const canvas, void* ctx) {
         snprintf(
             draw_str,
             sizeof(draw_str),
-            "Cracking: %d/%d - in prog.",
+            "Louskani: %d/%d - probiha",
             program_state->num_completed,
             program_state->total);
         elements_progress_bar_with_text(canvas, 5, 18, 118, progress, draw_str);
         snprintf(
             draw_str,
             sizeof(draw_str),
-            "Round: %d/%d - ETA %02d Sec",
+            "Kolo: %d/%d - odhad %02d s",
             (program_state->search) + 1, // Zero indexed
             256 / MSB_LIMIT,
             program_state->eta_round);
         elements_progress_bar_with_text(canvas, 5, 31, 118, eta_round, draw_str);
-        snprintf(draw_str, sizeof(draw_str), "Total ETA %03d Sec", program_state->eta_total);
+        snprintf(draw_str, sizeof(draw_str), "Celkovy odhad %03d s", program_state->eta_total);
         elements_progress_bar_with_text(canvas, 5, 44, 118, eta_total, draw_str);
     } else if(program_state->mfkey_state == DictionaryAttack) {
         snprintf(
-            draw_str, sizeof(draw_str), "Dict solves: %d (in progress)", program_state->cracked);
+            draw_str, sizeof(draw_str), "Nalezeno ve slovniku: %d (probiha)", program_state->cracked);
         canvas_draw_str_aligned(canvas, 10, 18, AlignLeft, AlignTop, draw_str);
-        snprintf(draw_str, sizeof(draw_str), "Keys in dict: %d", program_state->dict_count);
+        snprintf(draw_str, sizeof(draw_str), "Klice ve slovniku: %d", program_state->dict_count);
         canvas_draw_str_aligned(canvas, 26, 28, AlignLeft, AlignTop, draw_str);
     } else if(program_state->mfkey_state == Complete) {
         // TODO: Scrollable list view to see cracked keys if user presses down
         elements_progress_bar(canvas, 5, 18, 118, 1);
-        canvas_draw_str_aligned(canvas, 64, 31, AlignCenter, AlignTop, "Complete");
+        canvas_draw_str_aligned(canvas, 64, 31, AlignCenter, AlignTop, "Dokonceno");
         snprintf(
             draw_str,
             sizeof(draw_str),
-            "Keys added to user dict: %d",
+            "Klice pridane do uzivatelskeho slovniku: %d",
             program_state->unique_cracked);
         canvas_draw_str_aligned(canvas, 64, 41, AlignCenter, AlignTop, draw_str);
         if(program_state->num_candidates > 0) {
@@ -595,22 +595,22 @@ static void render_callback(Canvas* const canvas, void* ctx) {
             canvas_draw_str_aligned(canvas, 64, 51, AlignCenter, AlignTop, draw_str);
         }
     } else if(program_state->mfkey_state == Ready) {
-        canvas_draw_str_aligned(canvas, 50, 30, AlignLeft, AlignTop, "Ready");
+        canvas_draw_str_aligned(canvas, 50, 30, AlignLeft, AlignTop, "Pripraveno");
         elements_button_center(canvas, "Spustit");
-        elements_button_right(canvas, "Help");
+        elements_button_right(canvas, "Napoveda");
     } else if(program_state->mfkey_state == Help) {
-        canvas_draw_str_aligned(canvas, 7, 20, AlignLeft, AlignTop, "Collect nonces by reading");
-        canvas_draw_str_aligned(canvas, 7, 30, AlignLeft, AlignTop, "tag or reader in NFC app:");
+        canvas_draw_str_aligned(canvas, 7, 20, AlignLeft, AlignTop, "Ziskej nonce ctenim");
+        canvas_draw_str_aligned(canvas, 7, 30, AlignLeft, AlignTop, "tagu nebo ctecky v aplikaci NFC:");
         canvas_draw_str_aligned(canvas, 7, 40, AlignLeft, AlignTop, "https://docs.flipper.net/");
         canvas_draw_str_aligned(canvas, 7, 50, AlignLeft, AlignTop, "nfc/mfkey32");
     } else if(program_state->mfkey_state == Error) {
         canvas_draw_str_aligned(canvas, 50, 25, AlignLeft, AlignTop, "Chyba");
         if(program_state->err == MissingNonces) {
-            canvas_draw_str_aligned(canvas, 25, 36, AlignLeft, AlignTop, "No nonces found");
+            canvas_draw_str_aligned(canvas, 25, 36, AlignLeft, AlignTop, "Nenalezeny zadne nonce");
         } else if(program_state->err == ZeroNonces) {
-            canvas_draw_str_aligned(canvas, 15, 36, AlignLeft, AlignTop, "Nonces already cracked");
+            canvas_draw_str_aligned(canvas, 15, 36, AlignLeft, AlignTop, "Nonce jiz byly prolomeny");
         } else if(program_state->err == InsufficientRAM) {
-            canvas_draw_str_aligned(canvas, 35, 36, AlignLeft, AlignTop, "No free RAM");
+            canvas_draw_str_aligned(canvas, 35, 36, AlignLeft, AlignTop, "Nedostatek volne RAM");
         } else {
             // Unhandled error
         }

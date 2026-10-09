@@ -132,7 +132,7 @@ static DialogMessageButton hw_version_screen(DialogsApp* dialogs, DialogMessage*
         furi_hal_version_get_hw_body(),
         furi_hal_version_get_hw_connect(),
         furi_hal_version_get_hw_region_name_otp(),
-        my_name ? my_name : "Unknown");
+        my_name ? my_name : "Neznamy");
 
     furi_string_cat_printf(buffer, "Serial Number:\n");
     const uint8_t* uid = furi_hal_version_uid();
@@ -140,7 +140,7 @@ static DialogMessageButton hw_version_screen(DialogsApp* dialogs, DialogMessage*
         furi_string_cat_printf(buffer, "%02X", uid[i]);
     }
 
-    dialog_message_set_header(message, "HW Version Info:", 0, 0, AlignLeft, AlignTop);
+    dialog_message_set_header(message, "Informace o verzi HW:", 0, 0, AlignLeft, AlignTop);
     dialog_message_set_text(message, furi_string_get_cstr(buffer), 0, 13, AlignLeft, AlignTop);
     result = dialog_message_show(dialogs, message);
     dialog_message_set_text(message, NULL, 0, 0, AlignLeft, AlignTop);
@@ -179,7 +179,7 @@ static DialogMessageButton fw_version_screen(DialogsApp* dialogs, DialogMessage*
             version_get_gitbranch(ver));
     }
 
-    dialog_message_set_header(message, "FW Version Info:", 0, 0, AlignLeft, AlignTop);
+    dialog_message_set_header(message, "Informace o verzi FW:", 0, 0, AlignLeft, AlignTop);
     dialog_message_set_text(message, furi_string_get_cstr(buffer), 0, 13, AlignLeft, AlignTop);
     result = dialog_message_show(dialogs, message);
     dialog_message_set_text(message, NULL, 0, 0, AlignLeft, AlignTop);
@@ -217,11 +217,11 @@ int32_t about_settings_app(void* p) {
 
     while(1) {
         if(screen_index >= COUNT_OF(about_screens) - 1) {
-            dialog_message_set_buttons(message, "Prev.", NULL, NULL);
+            dialog_message_set_buttons(message, "Predchozi", NULL, NULL);
         } else if(screen_index == 0) {
-            dialog_message_set_buttons(message, NULL, NULL, "Next");
+            dialog_message_set_buttons(message, NULL, NULL, "Dalsi");
         } else {
-            dialog_message_set_buttons(message, "Prev.", NULL, "Next");
+            dialog_message_set_buttons(message, "Predchozi", NULL, "Dalsi");
         }
 
         screen_result = about_screens[screen_index](dialogs, message);

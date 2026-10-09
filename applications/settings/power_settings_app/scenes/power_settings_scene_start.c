@@ -10,14 +10,14 @@ enum PowerSettingsSubmenuIndex {
 
 #define AUTO_POWEROFF_DELAY_COUNT 8
 const char* const auto_poweroff_delay_text[AUTO_POWEROFF_DELAY_COUNT] =
-    {"OFF", "5min", "10min", "15min", "30min", "45min", "60min", "90min"};
+    {"Vypnuto", "5min", "10min", "15min", "30min", "45min", "60min", "90min"};
 
 const uint32_t auto_poweroff_delay_value[AUTO_POWEROFF_DELAY_COUNT] =
     {0, 300000, 600000, 900000, 1800000, 2700000, 3600000, 5400000};
 
 #define CHARGE_SUPRESS_PERCENT_COUNT 6
 const char* const charge_supress_percent_text[CHARGE_SUPRESS_PERCENT_COUNT] =
-    {"OFF", "90%", "85%", "80%", "75%", "70%"};
+    {"Vypnuto", "90%", "85%", "80%", "75%", "70%"};
 
 const uint32_t charge_supress_percent_value[CHARGE_SUPRESS_PERCENT_COUNT] = {0, 90, 85, 80, 75, 70};
 
@@ -50,16 +50,16 @@ void power_settings_scene_start_on_enter(void* context) {
     PowerSettingsApp* app = context;
     VariableItemList* variable_item_list = app->variable_item_list;
 
-    variable_item_list_add(variable_item_list, "Battery Info", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Informace o baterii", 1, NULL, NULL);
     variable_item_list_add(variable_item_list, "Restartovat", 1, NULL, NULL);
-    variable_item_list_add(variable_item_list, "Power OFF", 1, NULL, NULL);
+    variable_item_list_add(variable_item_list, "Vypnout", 1, NULL, NULL);
 
     VariableItem* item;
     uint8_t value_index;
 
     item = variable_item_list_add(
         variable_item_list,
-        "Auto PowerOff",
+        "Automaticke vypnuti",
         AUTO_POWEROFF_DELAY_COUNT,
         power_settings_scene_start_auto_poweroff_delay_changed,
         app);
@@ -73,7 +73,7 @@ void power_settings_scene_start_on_enter(void* context) {
 
     item = variable_item_list_add(
         variable_item_list,
-        "Limit Charge",
+        "Omezit nabijeni",
         CHARGE_SUPRESS_PERCENT_COUNT,
         power_settings_scene_start_charge_supress_percent_changed,
         app);

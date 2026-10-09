@@ -104,7 +104,7 @@ static void mf_ultralight_scene_c_dict_attack_prepare_view(NfcApp* instance) {
                 state = DictAttackStateSystemDictInProgress;
                 break;
             }
-            dict_attack_set_header(instance->dict_attack, "MFUL C User Dictionary");
+            dict_attack_set_header(instance->dict_attack, "Uzivatelsky slovnik MFUL C");
         } while(false);
     }
     if(state == DictAttackStateSystemDictInProgress) {
@@ -112,7 +112,7 @@ static void mf_ultralight_scene_c_dict_attack_prepare_view(NfcApp* instance) {
             NFC_APP_MF_ULTRALIGHT_C_DICT_SYSTEM_PATH,
             KeysDictModeOpenExisting,
             sizeof(MfUltralightC3DesAuthKey));
-        dict_attack_set_header(instance->dict_attack, "MFUL C System Dictionary");
+        dict_attack_set_header(instance->dict_attack, "Systemovy slovnik MFUL C");
     }
 
     instance->mf_ultralight_c_dict_context.dict_keys_total =
@@ -340,7 +340,7 @@ static void mf_ultralight_scene_aes_dict_attack_prepare_view(NfcApp* instance) {
                 state = DictAttackStateSystemDictInProgress;
                 break;
             }
-            dict_attack_set_header(instance->dict_attack, "MFUL AES User Dictionary");
+            dict_attack_set_header(instance->dict_attack, "Uzivatelsky slovnik MFUL AES");
         } while(false);
     }
     if(state == DictAttackStateSystemDictInProgress) {
@@ -348,7 +348,7 @@ static void mf_ultralight_scene_aes_dict_attack_prepare_view(NfcApp* instance) {
             NFC_APP_MF_ULTRALIGHT_AES_DICT_SYSTEM_PATH,
             KeysDictModeOpenExisting,
             sizeof(MfUltralightAesKey));
-        dict_attack_set_header(instance->dict_attack, "MFUL AES System Dictionary");
+        dict_attack_set_header(instance->dict_attack, "Systemovy slovnik MFUL AES");
     }
 
     instance->mf_ultralight_aes_dict_context.dict_keys_total =
@@ -489,7 +489,7 @@ static void mf_ultralight_scene_unlock_menu_on_enter(NfcApp* nfc) {
         if(mfu_data->type != MfUltralightTypeMfulC) {
             submenu_add_item(
                 submenu,
-                "Unlock With Reader",
+                "Odemknout pomoci ctecky",
                 SubmenuIndexMfUlUnlockMenuReader,
                 mf_ultralight_scene_unlock_menu_submenu_callback,
                 nfc);
@@ -497,19 +497,19 @@ static void mf_ultralight_scene_unlock_menu_on_enter(NfcApp* nfc) {
     }
     submenu_add_item(
         submenu,
-        "Auth As Ameebo",
+        "Autentizovat jako Ameebo",
         SubmenuIndexMfUlUnlockMenuAmeebo,
         mf_ultralight_scene_unlock_menu_submenu_callback,
         nfc);
     submenu_add_item(
         submenu,
-        "Auth As Xiaomi Air Purifier",
+        "Autentizovat jako cisticka Xiaomi",
         SubmenuIndexMfUlUnlockMenuXiaomi,
         mf_ultralight_scene_unlock_menu_submenu_callback,
         nfc);
     submenu_add_item(
         submenu,
-        "Enter Password Manually",
+        "Zadat heslo rucne",
         SubmenuIndexMfUlUnlockMenuManual,
         mf_ultralight_scene_unlock_menu_submenu_callback,
         nfc);
@@ -573,18 +573,18 @@ static void mf_ultralight_scene_unlock_warn_on_enter(NfcApp* nfc) {
         nfc_text_store_set(nfc, furi_string_get_cstr(password_str));
         furi_string_free(password_str);
 
-        const char* message = (type == MfUltralightAuthTypeReader) ? "Password Captured!" :
-                                                                     "Risky Action!";
+        const char* message = (type == MfUltralightAuthTypeReader) ? "Heslo zachyceno!" :
+                                                                     "Rizikova akce!";
         dialog_ex_set_header(dialog_ex, message, 64, 0, AlignCenter, AlignTop);
         dialog_ex_set_text(dialog_ex, nfc->text_store, 64, 10, AlignCenter, AlignTop);
-        dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-        dialog_ex_set_right_button_text(dialog_ex, "Continue");
+        dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+        dialog_ex_set_right_button_text(dialog_ex, "Pokracovat");
 
         if(type == MfUltralightAuthTypeReader) {
             notification_message(nfc->notifications, &sequence_set_green_255);
         }
     } else {
-        dialog_ex_set_header(dialog_ex, "Risky action!", 64, 4, AlignCenter, AlignTop);
+        dialog_ex_set_header(dialog_ex, "Rizikova akce!", 64, 4, AlignCenter, AlignTop);
         dialog_ex_set_text(
             dialog_ex, "Wrong password\ncan block your\ncard.", 4, 18, AlignLeft, AlignTop);
         dialog_ex_set_icon(dialog_ex, 83, 22, &I_WarningDolphinFlip_45x42);
@@ -652,7 +652,7 @@ static void mf_ultralight_scene_key_input_byte_input_callback(void* context) {
 static void mf_ultralight_scene_key_input_on_enter(NfcApp* nfc) {
     // Setup view
     ByteInput* byte_input = nfc->byte_input;
-    byte_input_set_header_text(byte_input, "Enter the password in hex");
+    byte_input_set_header_text(byte_input, "Zadej heslo v hexadecimalnim tvaru");
     byte_input_set_result_callback(
         byte_input,
         mf_ultralight_scene_key_input_byte_input_callback,
@@ -762,11 +762,11 @@ static void mf_ultralight_scene_aes_dict_attack_warn_on_enter(NfcApp* nfc) {
     dialog_ex_set_result_callback(
         dialog_ex, mf_ultralight_scene_aes_dict_attack_warn_dialog_callback);
 
-    dialog_ex_set_header(dialog_ex, "Risky action!", 64, 4, AlignCenter, AlignTop);
+    dialog_ex_set_header(dialog_ex, "Rizikova akce!", 64, 4, AlignCenter, AlignTop);
     dialog_ex_set_text(dialog_ex, "Wrong keys can\nblock this card", 4, 18, AlignLeft, AlignTop);
     dialog_ex_set_icon(dialog_ex, 83, 22, &I_WarningDolphinFlip_45x42);
-    dialog_ex_set_left_button_text(dialog_ex, "Cancel");
-    dialog_ex_set_right_button_text(dialog_ex, "Continue");
+    dialog_ex_set_left_button_text(dialog_ex, "Zrusit");
+    dialog_ex_set_right_button_text(dialog_ex, "Pokracovat");
 
     view_dispatcher_switch_to_view(nfc->view_dispatcher, NfcViewDialogEx);
 }

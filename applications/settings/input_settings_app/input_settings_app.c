@@ -8,7 +8,7 @@
 
 // vibro touch human readable levels
 const char* const vibro_touch_level_text[VIBRO_TOUCH_LEVEL_COUNT] = {
-    "OFF",
+    "Vypnuto",
     "1",
     "2",
     "3",
@@ -25,8 +25,8 @@ const uint32_t vibro_touch_level_value[VIBRO_TOUCH_LEVEL_COUNT] =
 // vibro touch trigger mask human readable values
 const char* const vibro_touch_trigger_mask_text[VIBRO_TOUCH_TRIGGER_MASK_COUNT] = {
     "Stiskni",
-    "Release",
-    "Both",
+    "Uvolnit",
+    "Oboji",
 };
 // vibro touch trigger mask values
 const uint32_t vibro_touch_trigger_mask_value[VIBRO_TOUCH_TRIGGER_MASK_COUNT] = {
@@ -82,7 +82,7 @@ InputSettingsApp* input_settings_app_alloc(void) {
 
     item = variable_item_list_add(
         app->variable_item_list,
-        "Buttons Vibro",
+        "Vibrace tlacitek",
         VIBRO_TOUCH_LEVEL_COUNT,
         input_settings_vibro_touch_level_changed,
         app);
@@ -94,7 +94,7 @@ InputSettingsApp* input_settings_app_alloc(void) {
 
     item = variable_item_list_add(
         app->variable_item_list,
-        "Vibro Trigger",
+        "Spoustec vibraci",
         VIBRO_TOUCH_TRIGGER_MASK_COUNT,
         input_settings_vibro_touch_trigger_mask_changed,
         app);

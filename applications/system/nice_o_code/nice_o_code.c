@@ -108,7 +108,7 @@ static void nice_o_draw_callback(Canvas* canvas, void* ctx) {
 
     switch(app->scene) {
     case NiceOSceneMenu: {
-        static const char* items[] = {"Capture remote", "Exit"};
+        static const char* items[] = {"Zachytit ovladac", "Odejit"};
         for(uint8_t i = 0; i < COUNT_OF(items); i++) {
             if(i == app->menu_index) {
                 canvas_draw_box(canvas, 0, 17 + i * 12, 128, 11);
@@ -118,8 +118,8 @@ static void nice_o_draw_callback(Canvas* canvas, void* ctx) {
             canvas_set_color(canvas, ColorBlack);
         }
         elements_frame(canvas, 0, 41, 128, 23);
-        canvas_draw_str(canvas, 4, 51, "Press the button 4+ times,");
-        canvas_draw_str(canvas, 4, 62, "do not hold. 433.92 AM650");
+        canvas_draw_str(canvas, 4, 51, "Stiskni tlacitko alespon 4x,");
+        canvas_draw_str(canvas, 4, 62, "nedrz ho. 433.92 AM650");
         break;
     }
 
@@ -141,14 +141,14 @@ static void nice_o_draw_callback(Canvas* canvas, void* ctx) {
         canvas_draw_str(canvas, 4, 49, furi_string_get_cstr(app->status));
 
         if(app->key_count >= NICE_O_MIN_KEYS) {
-            elements_button_center(canvas, "Solve");
+            elements_button_center(canvas, "Vyresit");
         }
         elements_button_left(canvas, "Zpet");
         break;
     }
 
     case NiceOSceneSolve: {
-        canvas_draw_str(canvas, 2, 26, "Trying installer codes");
+        canvas_draw_str(canvas, 2, 26, "Zkousim instalacni kody");
         snprintf(buf, sizeof(buf), "%lu / %u", app->sweep_ic, NICE_O_SWEEP_TOTAL);
         elements_progress_bar_with_text(
             canvas, 2, 32, 124, (float)app->sweep_ic / (float)NICE_O_SWEEP_TOTAL, buf);
@@ -163,7 +163,7 @@ static void nice_o_draw_callback(Canvas* canvas, void* ctx) {
             snprintf(buf, sizeof(buf), "IC  %04X", app->ic);
             canvas_draw_str(canvas, 6, 30, buf);
             canvas_set_font(canvas, FontSecondary);
-            snprintf(buf, sizeof(buf), "Serial  %07lX", app->serial);
+            snprintf(buf, sizeof(buf), "Seriove cislo  %07lX", app->serial);
             canvas_draw_str(canvas, 6, 42, buf);
             elements_button_center(canvas, "Ulozit");
         } else {
@@ -264,7 +264,7 @@ static void
             app->status, "Press %u: %010llX", app->key_count, key & 0xFFFFFFFFFFULL);
         notification_message(app->notifications, &sequence_blink_green_10);
     } else {
-        furi_string_printf(app->status, "Same press, ignored");
+        furi_string_printf(app->status, "Stejny stisk, ignorovan");
     }
     furi_mutex_release(app->mutex);
 }
@@ -332,13 +332,13 @@ static void nice_o_rx_stop(NiceOCode* app) {
  * candidate would turn a sub second search into one that never seems to end. */
 static bool nice_o_solve_begin(NiceOCode* app) {
     if(app->key_count < NICE_O_MIN_KEYS) {
-        furi_string_set(app->status, "Need 4+ packets");
+        furi_string_set(app->status, "Je potreba alespon 4 paketu");
         return false;
     }
     /* warm the lib side table cache once so the sweep never touches the card */
     if(subghz_protocol_nice_flor_s_decrypt_ic(app->keys[0], 0, NICE_O_KEYSTORE) ==
        SUBGHZ_NO_NICE_FLOR_S_RAINBOW_TABLE) {
-        furi_string_set(app->status, "No rainbow table");
+        furi_string_set(app->status, "Chybi rainbow tabulka");
         return false;
     }
 
@@ -387,15 +387,15 @@ static bool nice_o_solve_step(NiceOCode* app) {
 static void nice_o_solve_finish(NiceOCode* app) {
     if(app->sweep_ambiguous) {
         app->solved = false;
-        furi_string_set(app->status, "Ambiguous, capture more");
+        furi_string_set(app->status, "Nejednoznacne, zachyt vice");
     } else if(app->sweep_found) {
         app->solved = true;
         app->ic = app->sweep_ic_found;
         app->serial = app->sweep_serial;
-        furi_string_set(app->status, "Found");
+        furi_string_set(app->status, "Nalezeno");
     } else {
         app->solved = false;
-        furi_string_set(app->status, "No code fits, not O-Code?");
+        furi_string_set(app->status, "Zadny kod neodpovida, nejde o O-Code?");
     }
 }
 
@@ -423,7 +423,7 @@ static bool nice_o_ask_name(NiceOCode* app, char* name, size_t name_size) {
 
     NiceONameCtx ctx = {.done = furi_semaphore_alloc(1, 0), .accepted = false};
     TextInput* text_input = text_input_alloc();
-    text_input_set_header_text(text_input, "Name the .sub file");
+    text_input_set_header_text(text_input, "Nazev souboru .sub");
     text_input_set_result_callback(text_input, nice_o_name_done, &ctx, name, name_size, false);
 
     ValidatorIsFile* validator = validator_is_file_alloc_init(NICE_O_FOLDER, NICE_O_EXT, NULL);
@@ -458,7 +458,7 @@ static bool nice_o_save(NiceOCode* app) {
     char name[NICE_O_NAME_LEN];
     name_generator_make_random_prefixed(name, sizeof(name), "NiceO");
     if(!nice_o_ask_name(app, name, sizeof(name))) {
-        nice_o_set_status(app, "Save cancelled");
+        nice_o_set_status(app, "Ukladani zruseno");
         return false;
     }
 
@@ -492,7 +492,7 @@ static bool nice_o_save(NiceOCode* app) {
 
     flipper_format_free(fff);
     char msg[NICE_O_NAME_LEN + 16];
-    snprintf(msg, sizeof(msg), ok ? "Saved %s%s" : "Save failed: %s%s", name, NICE_O_EXT);
+    snprintf(msg, sizeof(msg), ok ? "Ulozeno %s%s" : "Ulozeni selhalo: %s%s", name, NICE_O_EXT);
     nice_o_set_status(app, msg);
     furi_string_free(path);
     return ok;
@@ -510,7 +510,7 @@ int32_t nice_o_code_app(void* p) {
     app->storage = furi_record_open(RECORD_STORAGE);
     app->dialogs = furi_record_open(RECORD_DIALOGS);
     app->notifications = furi_record_open(RECORD_NOTIFICATION);
-    app->status = furi_string_alloc_set("Idle");
+    app->status = furi_string_alloc_set("Neaktivni");
     app->scene = NiceOSceneMenu;
 
     app->view_port = view_port_alloc();
@@ -552,12 +552,12 @@ int32_t nice_o_code_app(void* p) {
                             app->key_count = 0;
                             app->packets = 0;
                             app->solved = false;
-                            furi_string_set(app->status, "Listening 433.92");
+                            furi_string_set(app->status, "Nasloucham 433.92");
                             app->scene = NiceOSceneCapture;
                             furi_mutex_release(app->mutex);
                             if(!nice_o_rx_start(app)) {
                                 furi_mutex_acquire(app->mutex, FuriWaitForever);
-                                furi_string_set(app->status, "Radio busy");
+                                furi_string_set(app->status, "Radio je obsazene");
                                 app->scene = NiceOSceneMenu;
                                 furi_mutex_release(app->mutex);
                             }
@@ -588,7 +588,7 @@ int32_t nice_o_code_app(void* p) {
 
                 case NiceOSceneSolve:
                     if((event.key == InputKeyBack) || (event.key == InputKeyLeft)) {
-                        furi_string_set(app->status, "Cancelled");
+                        furi_string_set(app->status, "Zruseno");
                         app->solved = false;
                         app->scene = NiceOSceneResult;
                     }

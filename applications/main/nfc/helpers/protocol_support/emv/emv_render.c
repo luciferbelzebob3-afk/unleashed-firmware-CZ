@@ -58,7 +58,7 @@ void nfc_render_emv_application_interchange_profile(const EmvApplication* apl, F
         return;
     }
 
-    furi_string_cat_printf(str, "Interchange profile: ");
+    furi_string_cat_printf(str, "Profil vymeny: ");
     for(uint8_t i = 0; i < 2; i++)
         furi_string_cat_printf(str, "%02X", apl->application_interchange_profile[i]);
     furi_string_cat_printf(str, "\n");

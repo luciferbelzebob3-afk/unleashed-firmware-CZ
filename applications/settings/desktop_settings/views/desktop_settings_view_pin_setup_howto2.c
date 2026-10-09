@@ -29,10 +29,10 @@ static void desktop_settings_view_pin_setup_howto2_draw(Canvas* canvas, void* mo
         AlignTop,
         "Forgotten PIN can only be\n"
         "reset with entire device.\n"
-        "Read docs How to reset PIN.");
+        "Precti si dokumentaci: Jak resetovat PIN.");
 
     elements_button_right(canvas, "OK");
-    elements_button_left(canvas, "Cancel");
+    elements_button_left(canvas, "Zrusit");
 }
 
 static bool desktop_settings_view_pin_setup_howto2_input(InputEvent* event, void* context) {

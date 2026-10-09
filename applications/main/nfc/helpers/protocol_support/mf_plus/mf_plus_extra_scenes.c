@@ -208,7 +208,7 @@ static void mf_plus_scene_dict_attack_setup_dicts(NfcApp* instance) {
     // The dict_attack view is shared; its type persists from whichever scene last used it (e.g. the
     // Ultralight-C scene never resets it), so set the sector-oriented layout explicitly on entry.
     dict_attack_set_type(instance->dict_attack, DictAttackTypeMfClassic);
-    dict_attack_set_header(instance->dict_attack, "MF Plus Dictionary");
+    dict_attack_set_header(instance->dict_attack, "Slovnik MF Plus");
     dict_attack_set_total_dict_keys(instance->dict_attack, ctx->dict_keys_total);
     dict_attack_set_current_dict_key(instance->dict_attack, 0);
     dict_attack_set_callback(
@@ -386,7 +386,7 @@ static void mf_plus_scene_show_keys_on_enter(NfcApp* instance) {
 
     widget_add_text_scroll_element(instance->widget, 2, 2, 124, 60, furi_string_get_cstr(str));
     widget_add_button_element(
-        instance->widget, GuiButtonTypeLeft, "Back", mf_plus_scene_show_keys_callback, instance);
+        instance->widget, GuiButtonTypeLeft, "Zpet", mf_plus_scene_show_keys_callback, instance);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewWidget);
 }
 
@@ -402,10 +402,10 @@ static void mf_plus_scene_show_keys_on_exit(NfcApp* instance) {
 }
 
 // ---- more_info ---------------------------------------------------------
-// "More info" hub, reached from the Info screen's "More" button (mf_plus's scene_more_info jumps
+// "More info" hub, reached from the Info screen's "Vice" button (mf_plus's scene_more_info jumps
 // straight here, DESFire-style). It splits the recovered SL3 block dump from the protocol details:
-// "View Dump" is shown in a memory-light text_box within this scene (see nfc_render_mf_plus_dump for
-// why a text_box and not a text-scroll widget); "ISO14443-4 Data" opens its own scene.
+// "Zobrazit dump" is shown in a memory-light text_box within this scene (see nfc_render_mf_plus_dump for
+// why a text_box and not a text-scroll widget); "Data ISO14443-4" opens its own scene.
 
 static void mf_plus_scene_more_info_on_enter(NfcApp* instance) {
     Submenu* submenu = instance->submenu;
@@ -416,14 +416,14 @@ static void mf_plus_scene_more_info_on_enter(NfcApp* instance) {
     if(data->security_level == MfPlusSecurityLevel3) {
         submenu_add_item(
             submenu,
-            "View Dump",
+            "Zobrazit dump",
             SubmenuIndexViewDump,
             nfc_protocol_support_common_submenu_callback,
             instance);
     }
     submenu_add_item(
         submenu,
-        "ISO14443-4 Data",
+        "Data ISO14443-4",
         SubmenuIndexIso14443,
         nfc_protocol_support_common_submenu_callback,
         instance);
@@ -491,7 +491,7 @@ static void mf_plus_scene_more_info_on_exit(NfcApp* instance) {
 }
 
 // ---- iso4_info ---------------------------------------------------------
-// "ISO14443-4 Data" page: the ISO14443-4 protocol details as a scrollable widget, with a "More"
+// "Data ISO14443-4" page: the ISO14443-4 protocol details as a scrollable widget, with a "Vice"
 // button to the GetVersion page. The ISO14443-4 text is small (a screen or two), so the text-scroll
 // widget's per-line copy is harmless here -- unlike the multi-KB block dump, which uses a text_box.
 static void mf_plus_scene_iso4_info_on_enter(NfcApp* instance) {
@@ -505,7 +505,7 @@ static void mf_plus_scene_iso4_info_on_enter(NfcApp* instance) {
     widget_add_button_element(
         instance->widget,
         GuiButtonTypeRight,
-        "More",
+        "Vice",
         nfc_protocol_support_common_widget_callback,
         instance);
 
@@ -527,7 +527,7 @@ static void mf_plus_scene_iso4_info_on_exit(NfcApp* instance) {
 }
 
 // ---- version -----------------------------------------------------------
-// GetVersion page, reached from the "ISO14443-4 Data" page's "More" button: the GetVersion fields,
+// GetVersion page, reached from the "Data ISO14443-4" page's "Vice" button: the GetVersion fields,
 // or a note when the card doesn't answer GetVersion (e.g. an SL3 EV0 that only speaks the Plus
 // command set). Kept off the ISO14443-4 Data page so that view stays a clean protocol summary.
 static void mf_plus_scene_version_on_enter(NfcApp* instance) {
