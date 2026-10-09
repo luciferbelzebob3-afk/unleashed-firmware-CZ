@@ -64,7 +64,7 @@ static void blink_test_draw_callback(Canvas* canvas, void* ctx) {
     UNUSED(ctx);
     canvas_clear(canvas);
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 2, 10, "Blink application");
+    canvas_draw_str(canvas, 2, 10, "Aplikace blikani");
 }
 
 static void blink_test_input_callback(InputEvent* input_event, void* ctx) {
