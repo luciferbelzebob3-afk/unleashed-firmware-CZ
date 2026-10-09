@@ -112,15 +112,15 @@ static void bad_apple_draw_callback(Canvas* canvas, void* context) {
         if(ssd) bad_apple_pack_ssd(app->fb, ssd);
     } else {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 11, AlignCenter, AlignBottom, "Bad Apple (save)");
+        canvas_draw_str_aligned(canvas, 64, 11, AlignCenter, AlignBottom, "Bad Apple (ulozeni)");
         canvas_set_font(canvas, FontSecondary);
-        const char* status = "Starting...";
+        const char* status = "Spoustim...";
         if(app->state == BadAppleNoBridge)
-            status = "No USB/BLE connection";
+            status = "Neni pripojeni USB/BLE";
         else if(app->state == BadAppleDownloading)
-            status = "Downloading on companion...";
+            status = "Stahuji z doprovodne aplikace...";
         else if(app->state == BadAppleDownloaded)
-            status = "Preparing playback...";
+            status = "Pripravuji prehravani...";
         else if(app->state == BadAppleError) {
             status = app->status_message[0] ? app->status_message :
                                               network_error_to_string(app->error);

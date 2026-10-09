@@ -147,22 +147,22 @@ static void ws_test_draw_callback(Canvas* canvas, void* context) {
     char line[64];
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, 64, 10, AlignCenter, AlignBottom, "WS echo test");
+    canvas_draw_str_aligned(canvas, 64, 10, AlignCenter, AlignBottom, "Echo test WS");
 
     canvas_set_font(canvas, FontSecondary);
-    const char* status = "Starting...";
+    const char* status = "Spoustim...";
     switch(app->state) {
     case WsNoBridge:
-        status = "No USB/BLE connection";
+        status = "Neni pripojeni USB/BLE";
         break;
     case WsConnecting:
-        status = "Connecting...";
+        status = "Pripojuji...";
         break;
     case WsWaiting:
-        status = "Waiting for echo...";
+        status = "Cekam na echo...";
         break;
     case WsDone:
-        status = "Echo OK, closed";
+        status = "Echo OK, spojeni ukonceno";
         break;
     case WsError:
         status = network_error_to_string(app->error);
@@ -172,13 +172,13 @@ static void ws_test_draw_callback(Canvas* canvas, void* context) {
     }
     canvas_draw_str_aligned(canvas, 0, 22, AlignLeft, AlignBottom, status);
 
-    snprintf(line, sizeof(line), "TX: %lu bytes", (unsigned long)app->tx_bytes);
+    snprintf(line, sizeof(line), "TX: %lu bajtu", (unsigned long)app->tx_bytes);
     canvas_draw_str_aligned(canvas, 0, 33, AlignLeft, AlignBottom, line);
 
     snprintf(
         line,
         sizeof(line),
-        "RX: %lu bytes  %lu ms",
+        "RX: %lu bajtu  %lu ms",
         (unsigned long)app->rx_bytes,
         (unsigned long)app->elapsed_ticks);
     canvas_draw_str_aligned(canvas, 0, 44, AlignLeft, AlignBottom, line);

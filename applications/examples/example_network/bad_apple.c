@@ -139,19 +139,19 @@ static void bad_apple_draw_callback(Canvas* canvas, void* context) {
         canvas_set_font(canvas, FontPrimary);
         canvas_draw_str_aligned(canvas, 64, 11, AlignCenter, AlignBottom, "Bad Apple");
         canvas_set_font(canvas, FontSecondary);
-        const char* status = "Starting...";
+        const char* status = "Spoustim...";
         if(app->state == BadAppleNoBridge)
-            status = "No USB/BLE connection";
+            status = "Neni pripojeni USB/BLE";
         else if(app->state == BadAppleDownloading)
-            status = "Downloading GIF...";
+            status = "Stahuji GIF...";
         else if(app->state == BadAppleDownloaded)
-            status = "Preparing playback...";
+            status = "Pripravuji prehravani...";
         else if(app->state == BadAppleError) {
             status = app->status_message[0] ? app->status_message :
                                               network_error_to_string(app->error);
         }
         canvas_draw_str_aligned(canvas, 64, 28, AlignCenter, AlignBottom, status);
-        snprintf(line, sizeof(line), "%lu bytes saved", (unsigned long)app->bytes_saved);
+        snprintf(line, sizeof(line), "%lu bajtu ulozeno", (unsigned long)app->bytes_saved);
         canvas_draw_str_aligned(canvas, 64, 42, AlignCenter, AlignBottom, line);
         canvas_draw_str_aligned(canvas, 64, 58, AlignCenter, AlignBottom, BAD_APPLE_SAVE_PATH);
     }

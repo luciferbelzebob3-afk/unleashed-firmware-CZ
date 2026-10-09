@@ -66,7 +66,7 @@ static void render_callback(Canvas* canvas, void* context) {
     char buffer[64];
 
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str_aligned(canvas, 64, 10, AlignCenter, AlignBottom, "Internet test");
+    canvas_draw_str_aligned(canvas, 64, 10, AlignCenter, AlignBottom, "Test internetu");
 
     canvas_set_font(canvas, FontSecondary);
     canvas_draw_str_aligned(canvas, 64, 21, AlignCenter, AlignBottom, NETWORK_TEST_URL);
@@ -74,14 +74,14 @@ static void render_callback(Canvas* canvas, void* context) {
     const char* status;
     switch(test->state) {
     case AppStateNoBridge:
-        status = "No USB/BLE connection";
+        status = "Neni pripojeni USB/BLE";
         break;
     case AppStateInit:
     case AppStateRequesting:
-        status = "Requesting...";
+        status = "Odesilam pozadavek...";
         break;
     case AppStateDone:
-        status = "Internet available";
+        status = "Internet je dostupny";
         break;
     case AppStateError:
         status = network_error_to_string(test->error);
@@ -98,7 +98,7 @@ static void render_callback(Canvas* canvas, void* context) {
     }
 
     if(test->state == AppStateDone) {
-        const char* tail = test->saved_to_file ? "saved to SD" : "received";
+        const char* tail = test->saved_to_file ? "ulozeno na SD" : "prijato";
         snprintf(buffer, sizeof(buffer), "%lu bytes %s", (unsigned long)test->body_size, tail);
         canvas_draw_str_aligned(canvas, 64, 55, AlignCenter, AlignBottom, buffer);
     }
