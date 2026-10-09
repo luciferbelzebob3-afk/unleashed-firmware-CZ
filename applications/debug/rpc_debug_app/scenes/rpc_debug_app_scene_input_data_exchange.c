@@ -8,7 +8,7 @@ static void rpc_debug_app_scene_input_data_exchange_result_callback(void* contex
 
 void rpc_debug_app_scene_input_data_exchange_on_enter(void* context) {
     RpcDebugApp* app = context;
-    byte_input_set_header_text(app->byte_input, "Enter data to exchange");
+    byte_input_set_header_text(app->byte_input, "Zadej data k vymene");
     byte_input_set_result_callback(
         app->byte_input,
         rpc_debug_app_scene_input_data_exchange_result_callback,
