@@ -267,7 +267,7 @@ static void nfc_make_app_folders(NfcApp* instance) {
     furi_assert(instance);
 
     if(!storage_simply_mkdir(instance->storage, NFC_APP_FOLDER)) {
-        dialog_message_show_storage_error(instance->dialogs, "Cannot create\napp folder");
+        dialog_message_show_storage_error(instance->dialogs, "Nelze vytvorit\nslozku aplikace");
     }
 }
 
@@ -278,7 +278,7 @@ bool nfc_save_file(NfcApp* instance, FuriString* path) {
     bool result = nfc_device_save(instance->nfc_device, furi_string_get_cstr(path));
 
     if(!result) {
-        dialog_message_show_storage_error(instance->dialogs, "Cannot save\nkey file");
+        dialog_message_show_storage_error(instance->dialogs, "Nelze ulozit\nsoubor klice");
     }
 
     return result;
@@ -385,7 +385,7 @@ bool nfc_load_file(NfcApp* instance, FuriString* path, bool show_dialog) {
     }
 
     if((!result) && (show_dialog)) {
-        dialog_message_show_storage_error(instance->dialogs, "Cannot load\nkey file");
+        dialog_message_show_storage_error(instance->dialogs, "Nelze nacist\nsoubor klice");
     }
 
     furi_string_free(load_path);
