@@ -431,7 +431,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
         value_index = subghz_scene_receiver_config_hopper_value_index(subghz);
         item = variable_item_list_add(
             subghz->variable_item_list,
-            value_index ? "Hopping RSSI" : "Hopping",
+            value_index ? "Preladovani RSSI" : "Preladovani",
             HOPPING_MODE_COUNT,
             subghz_scene_receiver_config_set_hopping,
             subghz);
@@ -564,7 +564,7 @@ void subghz_scene_receiver_config_on_enter(void* context) {
        SubGhzCustomEventManagerSet) {
         item = variable_item_list_add(
             subghz->variable_item_list,
-            "Pr ag RSSI:",
+            "Prah RSSI:",
             RAW_THRESHOLD_RSSI_COUNT,
             subghz_scene_receiver_config_set_raw_threshold_rssi,
             subghz);
