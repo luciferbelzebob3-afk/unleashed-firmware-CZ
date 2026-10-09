@@ -1135,7 +1135,7 @@ bool mosgortrans_parse_transport_block(const MfClassicBlock* block, FuriString* 
             card_use_before_date_s.month,
             card_use_before_date_s.year);
         //remaining_funds
-        furi_string_cat_printf(result, "Balance: %ld rub", data_block.remaining_funds / 100);
+        furi_string_cat_printf(result, "Zustatek: %ld rub", data_block.remaining_funds / 100);
         //start_trip_minutes
         if(data_block.start_trip_minutes) {
             DateTime card_start_trip_minutes_s = {0};

@@ -222,7 +222,7 @@ static bool banapass_parse(const NfcDevice* device, FuriString* parsed_data) {
                 // banapass access code is stored as decimal hex representation in block 2, starts from byte 6, len 10 bytes
                 uint8_t access_code[10];
 
-                furi_string_cat_printf(parsed_data, "\nAccess Code:\n");
+                furi_string_cat_printf(parsed_data, "\nPristupovy kod:\n");
                 bool access_code_is_bcd = true;
 
                 for(int i = 0; i < 10; i++) {

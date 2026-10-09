@@ -551,8 +551,8 @@ static void parse_access_code(const uint8_t* access_code, FuriString* parsed_dat
 
     furi_string_cat_printf(
         parsed_data,
-        "CRC check: %s\n",
-        check_access_code_crc(access_code, decrypted, crc) ? "Passed" : "Invalid");
+        "Kontrola CRC: %s\n",
+        check_access_code_crc(access_code, decrypted, crc) ? "Platny" : "Neplatny");
 }
 
 bool aic_parse(const NfcDevice* device, FuriString* parsed_data) {

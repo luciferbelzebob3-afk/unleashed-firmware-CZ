@@ -273,8 +273,8 @@ static bool clipper_parse(const NfcDevice* device, FuriString* parsed_data) {
             parsed_data,
             "\e#Clipper\n"
             "Serial: %" PRIu32 "\n"
-            "Balance: $%d.%02u\n"
-            "Type: %s\n"
+            "Zustatek: $%d.%02u\n"
+            "Typ: %s\n"
             "\e#Posledni aktualizace\n",
             info.serial_number,
             balance_usd,
@@ -282,7 +282,7 @@ static bool clipper_parse(const NfcDevice* device, FuriString* parsed_data) {
             device_description);
         if(info.last_updated_tm_1900 != 0)
             furi_string_cat_timestamp(
-                parsed_data, "Date: ", "\nTime: ", info.last_updated_tm_1900);
+                parsed_data, "Datum: ", "\nTime: ", info.last_updated_tm_1900);
         else
             furi_string_cat_str(parsed_data, "Never");
         furi_string_cat_printf(
@@ -477,7 +477,7 @@ static bool dump_ride_event(const uint8_t* record, FuriString* parsed_data) {
     }
 
     furi_string_cat_str(parsed_data, "\e#Ride Record\n");
-    furi_string_cat_timestamp(parsed_data, "Date: ", "\nTime: ", time_on_raw);
+    furi_string_cat_timestamp(parsed_data, "Datum: ", "\nTime: ", time_on_raw);
     furi_string_cat_printf(
         parsed_data,
         "\n"

@@ -117,9 +117,9 @@ bool csc_parse(const NfcDevice* device, FuriString* parsed_data) {
                 parsed_data,
                 "\e#CSC Service Works\n"
                 "UID: %lu\n"
-                "New Card\n"
+                "Nova karta\n"
                 "Hodnota karty: %lu.%02u USD\n"
-                "Card Usages Left: %s",
+                "Zbyvajici pouziti karty: %s",
                 card_uid,
                 refilled_balance_dollar,
                 refilled_balance_cent,
@@ -134,9 +134,9 @@ bool csc_parse(const NfcDevice* device, FuriString* parsed_data) {
                 "\e#CSC Service Works\n"
                 "UID: %lu\n"
                 "Zustatek: %lu.%02u USD\n"
-                "Last Top-up: %lu.%02u USD\n"
-                "Top-up Count: %lu\n"
-                "Card Usages Left: %s",
+                "Posledni dobijeni: %lu.%02u USD\n"
+                "Pocet dobijeni: %lu\n"
+                "Zbyvajici pouziti karty: %s",
                 card_uid,
                 current_balance_dollar,
                 current_balance_cent,

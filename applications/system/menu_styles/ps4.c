@@ -53,7 +53,7 @@ static void menu_style_ps4_draw(Canvas* canvas, MenuModel* model) {
             canvas_draw_box(canvas, x - width / 2, y + height / 2, width, 9);
             canvas_set_color(canvas, ColorWhite);
             canvas_set_font(canvas, FontBatteryPercent);
-            canvas_draw_str_aligned(canvas, x, y + height / 2 + 1, AlignCenter, AlignTop, "Start");
+            canvas_draw_str_aligned(canvas, x, y + height / 2 + 1, AlignCenter, AlignTop, "Spustit");
 
             canvas_set_color(canvas, ColorBlack);
             canvas_set_font(canvas, FontSecondary);

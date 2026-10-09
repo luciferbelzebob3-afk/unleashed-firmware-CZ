@@ -261,7 +261,7 @@ static void
     if((app->key_count < NICE_O_MAX_KEYS) && nice_o_key_adds_info(app, key)) {
         app->keys[app->key_count++] = key;
         furi_string_printf(
-            app->status, "Press %u: %010llX", app->key_count, key & 0xFFFFFFFFFFULL);
+            app->status, "Stisk %u: %010llX", app->key_count, key & 0xFFFFFFFFFFULL);
         notification_message(app->notifications, &sequence_blink_green_10);
     } else {
         furi_string_printf(app->status, "Stejny stisk, ignorovan");
