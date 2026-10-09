@@ -456,7 +456,7 @@ int32_t secplus_pin_app(void* p) {
                         app->loaded = false;
                         /* "315MHz ready" describes a file that is no longer open; a save
                          * result is the outcome the user was after, so that one stays */
-                        if(!app->pin_saved) furi_string_set(app->status, "No file loaded");
+                        if(!app->pin_saved) furi_string_set(app->status, "Neni nacten zadny soubor");
                         break;
                     default:
                         break;
