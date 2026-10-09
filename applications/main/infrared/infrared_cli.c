@@ -101,16 +101,16 @@ static void infrared_cli_print_universal_remotes(void) {
 }
 
 static void infrared_cli_print_usage(void) {
-    printf("Usage:\r\n");
+    printf("Pouziti:\r\n");
     printf("\tir rx [raw]\r\n");
     printf("\tir tx <protocol> <address> <command>\r\n");
-    printf("\t<command> and <address> are hex-formatted\r\n");
-    printf("\tAvailable protocols:");
+    printf("\t<command> a <address> musi byt v sestnactkove soustave\r\n");
+    printf("\tDostupne protokoly:");
     for(int i = 0; infrared_is_protocol_valid((InfraredProtocol)i); ++i) {
         printf(" %s", infrared_get_protocol_name((InfraredProtocol)i));
     }
     printf("\r\n");
-    printf("\tRaw format:\r\n");
+    printf("\tSurovy format:\r\n");
     printf("\tir tx RAW F:<frequency> DC:<duty_cycle> <sample0> <sample1>...\r\n");
     printf(
         "\tFrekvence (%d - %d), strida (0 - 100), max. 512 vzorku\r\n",
@@ -119,7 +119,7 @@ static void infrared_cli_print_usage(void) {
     printf("\tir decode <input_file> [<output_file>]\r\n");
     printf("\tir universal <remote_name> <signal_name>\r\n");
     printf("\tir universal list <remote_name>\r\n");
-    printf("\tAvailable universal remotes: ");
+    printf("\tDostupne univerzalni ovladace: ");
 
     infrared_cli_print_universal_remotes();
 }
@@ -131,7 +131,7 @@ static void infrared_cli_start_ir_rx(PipeSide* pipe, FuriString* args) {
         if(!furi_string_cmp_str(args, "raw")) {
             enable_decoding = false;
         } else {
-            printf("Wrong arguments.\r\n");
+            printf("Nespravne argumenty.\r\n");
             infrared_cli_print_usage();
             return;
         }
@@ -142,7 +142,7 @@ static void infrared_cli_start_ir_rx(PipeSide* pipe, FuriString* args) {
     infrared_worker_rx_start(worker);
     infrared_worker_rx_set_received_signal_callback(worker, signal_received_callback, pipe);
 
-    printf("Receiving %s INFRARED...\r\nPress Ctrl+C to abort\r\n", enable_decoding ? "" : "RAW");
+    printf("Prijimam signal %s...\r\nStiskni Ctrl+C pro preruseni\r\n", enable_decoding ? "" : "RAW");
     while(!cli_is_pipe_broken_or_is_etx_next_char(pipe)) {
         furi_delay_ms(50);
     }
@@ -303,7 +303,7 @@ static bool infrared_cli_decode_file(FlipperFormat* input_file, FlipperFormat* o
     while(infrared_signal_read(signal, input_file, tmp) == InfraredErrorCodeNone) {
         ret = false;
         if(!infrared_signal_is_valid(signal)) {
-            printf("Invalid signal\r\n");
+            printf("Neplatny signal\r\n");
             break;
         }
         if(!infrared_signal_is_raw(signal)) {
@@ -311,7 +311,7 @@ static bool infrared_cli_decode_file(FlipperFormat* input_file, FlipperFormat* o
                !infrared_cli_save_signal(signal, output_file, furi_string_get_cstr(tmp))) {
                 break;
             } else {
-                printf("Skipping decoded signal\r\n");
+                printf("Preskakuji dekodovany signal\r\n");
                 continue;
             }
         }
@@ -366,7 +366,7 @@ static void infrared_cli_process_decode(PipeSide* pipe, FuriString* args) {
             break;
         }
         if(!furi_string_empty(output_path)) {
-            printf("Writing output to file: \"%s\"\r\n", furi_string_get_cstr(output_path));
+            printf("Zapisuji vystup do souboru: \"%s\"\r\n", furi_string_get_cstr(output_path));
             output_file = flipper_format_file_alloc(storage);
         }
         if(output_file &&
@@ -384,7 +384,7 @@ static void infrared_cli_process_decode(PipeSide* pipe, FuriString* args) {
         if(!infrared_cli_decode_file(input_file, output_file)) {
             break;
         }
-        printf("File successfully decoded.\r\n");
+        printf("Soubor byl uspesne dekodovan.\r\n");
     } while(false);
 
     furi_string_free(tmp);
@@ -399,7 +399,7 @@ static void infrared_cli_process_decode(PipeSide* pipe, FuriString* args) {
 
 static void infrared_cli_list_remote_signals(FuriString* remote_name) {
     if(furi_string_empty(remote_name)) {
-        printf("Missing remote name.\r\n");
+        printf("Chybi nazev ovladace.\r\n");
         return;
     }
 
@@ -413,7 +413,7 @@ static void infrared_cli_list_remote_signals(FuriString* remote_name) {
 
     do {
         if(!flipper_format_buffered_file_open_existing(ff, furi_string_get_cstr(remote_path))) {
-            printf("Invalid remote name.\r\n");
+            printf("Neplatny nazev ovladace.\r\n");
             break;
         }
 
@@ -423,7 +423,7 @@ static void infrared_cli_list_remote_signals(FuriString* remote_name) {
         FuriString* key = furi_string_alloc();
         FuriString* signal_name = furi_string_alloc();
 
-        printf("Valid signals:\r\n");
+        printf("Platne signaly:\r\n");
         int max = 1;
         while(flipper_format_read_string(ff, "name", signal_name)) {
             furi_string_set_str(key, furi_string_get_cstr(signal_name));
@@ -467,7 +467,7 @@ static void infrared_cli_brute_force_signals(
 
     do {
         if(furi_string_empty(signal_name)) {
-            printf("Missing signal name.\r\n");
+            printf("Chybi nazev signalu.\r\n");
             break;
         }
         if(infrared_brute_force_calculate_messages(brute_force) != InfraredErrorCodeNone) {
@@ -480,12 +480,12 @@ static void infrared_cli_brute_force_signals(
             brute_force, INFRARED_BRUTE_FORCE_DUMMY_INDEX, &signal_count);
 
         if(signal_count <= 0) {
-            printf("Invalid signal name.\r\n");
+            printf("Neplatny nazev signalu.\r\n");
             break;
         }
 
-        printf("Sending %lu signal(s)...\r\n", signal_count);
-        printf("Press Ctrl-C to stop.\r\n");
+        printf("Odesilam signaly (%lu)...\r\n", signal_count);
+        printf("Stiskni Ctrl+C pro zastaveni.\r\n");
 
         while(running) {
             running = infrared_brute_force_send(brute_force, current_signal);
@@ -529,7 +529,7 @@ static void infrared_cli_process_universal(PipeSide* pipe, FuriString* args) {
 static void execute(PipeSide* pipe, FuriString* args, void* context) {
     UNUSED(context);
     if(furi_hal_infrared_is_busy()) {
-        printf("INFRARED is busy. Exiting.");
+        printf("Infrared je obsazene. Ukoncuji.");
         return;
     }
 
