@@ -227,8 +227,8 @@ bool archive_scene_browser_on_event(void* context, SceneManagerEvent event) {
                     dialog_msg = furi_string_alloc();
                     furi_string_cat_printf(
                         dialog_msg,
-                        "Cannot %s:\n%s",
-                        copy ? "copy" : "move",
+                        "Nelze %s:\n%s",
+                        copy ? "kopirovat" : "presunout",
                         storage_error_get_desc(error));
                     dialog_message_show_storage_error(
                         archive->dialogs, furi_string_get_cstr(dialog_msg));
