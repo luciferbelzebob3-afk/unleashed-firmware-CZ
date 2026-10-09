@@ -44,7 +44,7 @@ void infrared_scene_edit_delete_on_enter(void* context) {
         if(INFRARED_ERROR_PRESENT(error)) {
             const char* format =
                 (INFRARED_ERROR_CHECK(error, InfraredErrorCodeSignalRawUnableToReadTooLongData)) ?
-                    "Failed to delete\n\"%s\" is too long.\nTry to edit file from pc" :
+                    "Nelze smazat\n\"%s\": nazev je prilis dlouhy.\nUprav soubor v pocitaci" :
                     "Nelze nacist\n\"%s\"";
             infrared_show_error_message(
                 infrared, format, infrared_remote_get_signal_name(remote, current_button_index));
