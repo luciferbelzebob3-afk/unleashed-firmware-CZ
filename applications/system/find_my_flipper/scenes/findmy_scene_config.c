@@ -51,14 +51,14 @@ void findmy_scene_config_on_enter(void* context) {
     if(app->state.tag_type == FindMyTypeGoogle) {
         item = variable_item_list_add(
             var_item_list,
-            "Broadcast Interval",
+            "Interval vysilani",
             2,
             findmy_scene_config_broadcast_interval_changed,
             app);
     } else {
         item = variable_item_list_add(
             var_item_list,
-            "Broadcast Interval",
+            "Interval vysilani",
             10,
             findmy_scene_config_broadcast_interval_changed,
             app);
@@ -70,15 +70,15 @@ void findmy_scene_config_on_enter(void* context) {
     variable_item_set_current_value_text(item, interval_str);
 
     item = variable_item_list_add(
-        var_item_list, "Transmit Power", 7, findmy_scene_config_transmit_power_changed, app);
+        var_item_list, "Vysilaci vykon", 7, findmy_scene_config_transmit_power_changed, app);
     variable_item_set_current_value_index(item, app->state.transmit_power);
     char power_str[7];
     snprintf(power_str, sizeof(power_str), "%ddBm", app->state.transmit_power);
     variable_item_set_current_value_text(item, power_str);
 
-    item = variable_item_list_add(var_item_list, "Register Tag", 0, NULL, NULL);
+    item = variable_item_list_add(var_item_list, "Registrovat stitek", 0, NULL, NULL);
 
-    item = variable_item_list_add(var_item_list, "Show MAC", 2, findmy_scene_config_show_mac, app);
+    item = variable_item_list_add(var_item_list, "Zobrazit MAC", 2, findmy_scene_config_show_mac, app);
     variable_item_set_current_value_index(item, app->state.show_mac);
     variable_item_set_current_value_text(item, app->state.show_mac ? "Ano" : "Ne");
 
@@ -88,7 +88,7 @@ void findmy_scene_config_on_enter(void* context) {
         1,
         NULL,
         NULL);
-    variable_item_set_current_value_text(item, "Credits");
+    variable_item_set_current_value_text(item, "Autori");
 
     variable_item_list_set_enter_callback(var_item_list, findmy_scene_config_callback, app);
 

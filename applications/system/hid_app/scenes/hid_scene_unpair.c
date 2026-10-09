@@ -29,9 +29,9 @@ void hid_scene_unpair_on_enter(void* context) {
     dialog_ex_reset(app->dialog);
     dialog_ex_set_result_callback(app->dialog, hid_scene_unpair_dialog_callback);
     dialog_ex_set_context(app->dialog, app);
-    dialog_ex_set_header(app->dialog, "Unpair All Devices?", 64, 3, AlignCenter, AlignTop);
+    dialog_ex_set_header(app->dialog, "Zrusit parovani vsech zarizeni?", 64, 3, AlignCenter, AlignTop);
     dialog_ex_set_text(
-        app->dialog, "All previous pairings\nwill be lost!", 64, 22, AlignCenter, AlignTop);
+        app->dialog, "Vsechna predchozi parovani\nbudou ztracena!", 64, 22, AlignCenter, AlignTop);
     dialog_ex_set_left_button_text(app->dialog, "Zpet");
     dialog_ex_set_right_button_text(app->dialog, "Zrusit sparovani");
 

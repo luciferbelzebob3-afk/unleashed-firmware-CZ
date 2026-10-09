@@ -49,18 +49,18 @@ static void js_callback(JsThreadEvent event, const char* msg, void* context) {
 
     if(event == JsThreadEventDone) {
         FURI_LOG_I(TAG, "Script done");
-        console_view_print(app->console_view, "--- DONE ---");
+        console_view_print(app->console_view, "--- DOKONCENO ---");
     } else if(event == JsThreadEventPrint) {
         console_view_print(app->console_view, msg);
     } else if(event == JsThreadEventError) {
-        console_view_print(app->console_view, "--- ERROR ---");
+        console_view_print(app->console_view, "--- CHYBA ---");
         console_view_print(app->console_view, msg);
     } else if(event == JsThreadEventErrorTrace) {
         FuriString* compact_trace = furi_string_alloc_set_str(msg);
         js_app_compact_trace(compact_trace);
         console_view_print(app->console_view, furi_string_get_cstr(compact_trace));
         furi_string_free(compact_trace);
-        console_view_print(app->console_view, "See logs for full trace");
+        console_view_print(app->console_view, "Podrobnosti najdes v zaznamech");
     }
 }
 
@@ -151,12 +151,12 @@ static void js_cli_callback(JsThreadEvent event, const char* msg, void* context)
     JsCliContext* ctx = context;
     switch(event) {
     case JsThreadEventError:
-        js_cli_print(ctx, "---- ERROR ----\r\n");
+        js_cli_print(ctx, "---- CHYBA ----\r\n");
         js_cli_print(ctx, msg);
         js_cli_print(ctx, "\r\n");
         break;
     case JsThreadEventErrorTrace:
-        js_cli_print(ctx, "Trace:\r\n");
+        js_cli_print(ctx, "Vypis:\r\n");
         js_cli_print(ctx, msg);
         js_cli_print(ctx, "\r\n");
 
@@ -167,7 +167,7 @@ static void js_cli_callback(JsThreadEvent event, const char* msg, void* context)
         js_cli_print(ctx, "\r\n");
         break;
     case JsThreadEventDone:
-        js_cli_print(ctx, "Script done!\r\n");
+        js_cli_print(ctx, "Skript dokoncen!\r\n");
 
         js_cli_exit(ctx);
         break;
