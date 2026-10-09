@@ -42,7 +42,7 @@ int32_t infrared_test_app(void* arg) {
         .level = true,
     };
 
-    FURI_LOG_I(TAG, "Starting test signal on PA7");
+    FURI_LOG_I(TAG, "Spoustim testovaci signal na PA7");
 
     furi_hal_infrared_set_tx_output(FuriHalInfraredTxPinExtPA7);
     furi_hal_infrared_async_tx_set_data_isr_callback(infrared_test_app_tx_data_callback, &app);
@@ -50,7 +50,7 @@ int32_t infrared_test_app(void* arg) {
     furi_hal_infrared_async_tx_wait_termination();
     furi_hal_infrared_set_tx_output(FuriHalInfraredTxPinInternal);
 
-    FURI_LOG_I(TAG, "Test signal end");
+    FURI_LOG_I(TAG, "Konec testovaciho signalu");
     FURI_LOG_I(
         TAG,
         "The measured signal should be %luus +-%.1fus",
