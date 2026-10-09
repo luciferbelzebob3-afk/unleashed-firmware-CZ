@@ -357,7 +357,7 @@ bool mf_plus_security_level_save(const MfPlusSecurityLevel* data, FlipperFormat*
         furi_string_cat(security_level_string, "SL3");
         break;
     default:
-        furi_string_cat(security_level_string, "Unknown");
+        furi_string_cat(security_level_string, "Neznamy");
         break;
     }
 
@@ -391,7 +391,7 @@ bool mf_plus_type_save(const MfPlusType* data, FlipperFormat* ff) {
         furi_string_cat(type_string, "Mifare Plus EV2");
         break;
     default:
-        furi_string_cat(type_string, "Unknown");
+        furi_string_cat(type_string, "Neznamy");
         break;
     }
 
@@ -415,7 +415,7 @@ bool mf_plus_size_save(const MfPlusSize* data, FlipperFormat* ff) {
         furi_string_cat(size_string, "4K");
         break;
     default:
-        furi_string_cat(size_string, "Unknown");
+        furi_string_cat(size_string, "Neznamy");
         break;
     }
 
