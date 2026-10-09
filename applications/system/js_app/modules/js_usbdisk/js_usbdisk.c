@@ -143,7 +143,7 @@ static void js_usbdisk_was_ejected(struct mjs* mjs) {
     furi_assert(usbdisk);
 
     if(!usbdisk->usb) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "SCSI is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "SCSI neni spusteno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
@@ -157,7 +157,7 @@ static void js_usbdisk_stop(struct mjs* mjs) {
     furi_assert(usbdisk);
 
     if(!usbdisk->usb) {
-        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "SCSI is not started");
+        mjs_prepend_errorf(mjs, MJS_INTERNAL_ERROR, "SCSI neni spusteno");
         mjs_return(mjs, MJS_UNDEFINED);
         return;
     }
