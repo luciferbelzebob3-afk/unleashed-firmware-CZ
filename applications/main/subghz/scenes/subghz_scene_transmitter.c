@@ -96,7 +96,7 @@ bool subghz_scene_transmitter_on_event(void* context, SceneManagerEvent event) {
                 subghz->scene_manager, SubGhzSceneStart);
             return true;
         } else if(event.event == SubGhzCustomEventViewTransmitterError) {
-            furi_string_set(subghz->error_str, "Protocol not\nfound!");
+            furi_string_set(subghz->error_str, "Protokol nebyl\nnalezen!");
             scene_manager_next_scene(subghz->scene_manager, SubGhzSceneShowErrorSub);
         }
     } else if(event.type == SceneManagerEventTypeTick) {
