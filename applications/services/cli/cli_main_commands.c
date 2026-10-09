@@ -241,7 +241,7 @@ void cli_command_sysctl_print_usage(void) {
 #ifdef FURI_DEBUG
     printf("\theap_track <none|main|tree|all>\t - Nastavit rezim sledovani alokaci haldy\r\n");
 #else
-    printf("\theap_track <none|main>\t - Set heap allocation tracking mode\r\n");
+    printf("\theap_track <none|main>\t - Nastavit rezim sledovani haldy\r\n");
 #endif
 }
 
@@ -370,7 +370,7 @@ static void cli_command_top(PipeSide* pipe, FuriString* args, void* context) {
 
         uint32_t uptime = tick / furi_kernel_get_tick_frequency();
         printf(
-            "Threads: %zu, ISR Time: %0.2f%%, Uptime: %luh%lum%lus" ANSI_ERASE_LINE(
+            "Vlakna: %zu, cas ISR: %0.2f%%, doba behu: %luh%lum%lus" ANSI_ERASE_LINE(
                 ANSI_ERASE_FROM_CURSOR_TO_END) "\r\n",
             furi_thread_list_size(thread_list),
             (double)furi_thread_list_get_isr_time(thread_list),
@@ -379,7 +379,7 @@ static void cli_command_top(PipeSide* pipe, FuriString* args, void* context) {
             uptime % 60);
 
         printf(
-            "Heap: total %zu, free %zu, minimum %zu, max block %zu" ANSI_ERASE_LINE(
+            "Halda: celkem %zu, volno %zu, minimum %zu, max. blok %zu" ANSI_ERASE_LINE(
                 ANSI_ERASE_FROM_CURSOR_TO_END) "\r\n" ANSI_ERASE_LINE(ANSI_ERASE_FROM_CURSOR_TO_END) "\r\n",
             memmgr_get_total_heap(),
             memmgr_get_free_heap(),
@@ -389,14 +389,14 @@ static void cli_command_top(PipeSide* pipe, FuriString* args, void* context) {
         printf(
             "%-17s %-20s %-10s %5s %12s %6s %10s %7s %5s" ANSI_ERASE_LINE(
                 ANSI_ERASE_FROM_CURSOR_TO_END) "\r\n",
-            "AppID",
-            "Name",
-            "State",
-            "Prio",
-            "Stack start",
-            "Stack",
-            "Stack Min",
-            "Heap",
+            "ID aplikace",
+            "Nazev",
+            "Stav",
+            "Priorita",
+            "Zacatek zasobniku",
+            "Zasobnik",
+            "Min. zasobnik",
+            "Halda",
             "%CPU");
 
         for(size_t i = 0; i < furi_thread_list_size(thread_list); i++) {
@@ -428,13 +428,13 @@ void cli_command_free(PipeSide* pipe, FuriString* args, void* context) {
     UNUSED(args);
     UNUSED(context);
 
-    printf("Free heap size: %zu\r\n", memmgr_get_free_heap());
-    printf("Total heap size: %zu\r\n", memmgr_get_total_heap());
-    printf("Minimum heap size: %zu\r\n", memmgr_get_minimum_free_heap());
-    printf("Maximum heap block: %zu\r\n", memmgr_heap_get_max_free_block());
+    printf("Volna pamet haldy: %zu\r\n", memmgr_get_free_heap());
+    printf("Celkem pameti haldy: %zu\r\n", memmgr_get_total_heap());
+    printf("Minimum volne haldy: %zu\r\n", memmgr_get_minimum_free_heap());
+    printf("Nejvetsi blok haldy: %zu\r\n", memmgr_heap_get_max_free_block());
 
-    printf("Pool free: %zu\r\n", memmgr_pool_get_free());
-    printf("Maximum pool block: %zu\r\n", memmgr_pool_get_max_block());
+    printf("Volna pamet poolu: %zu\r\n", memmgr_pool_get_free());
+    printf("Nejvetsi blok poolu: %zu\r\n", memmgr_pool_get_max_block());
 }
 
 void cli_command_free_blocks(PipeSide* pipe, FuriString* args, void* context) {
@@ -451,8 +451,8 @@ void cli_command_i2c(PipeSide* pipe, FuriString* args, void* context) {
     UNUSED(context);
 
     furi_hal_i2c_acquire(&furi_hal_i2c_handle_external);
-    printf("Scanning external i2c on PC0(SCL)/PC1(SDA)\r\n"
-           "Clock: 100khz, 7bit address\r\n"
+    printf("Skenuji externi I2C na PC0(SCL)/PC1(SDA)\r\n"
+           "Takt: 100 kHz, 7bitova adresa\r\n"
            "\r\n");
     printf("  | 0 1 2 3 4 5 6 7 8 9 A B C D E F\r\n");
     printf("--+--------------------------------\r\n");
