@@ -16,7 +16,7 @@ void infrared_scene_ask_back_on_enter(void* context) {
     }
 
     dialog_ex_set_text(
-        dialog_ex, "All unsaved data\nwill be lost!", 64, 25, AlignCenter, AlignTop);
+        dialog_ex, "Neulozena data\nbudou ztracena!", 64, 25, AlignCenter, AlignTop);
     dialog_ex_set_icon(dialog_ex, 0, 0, NULL);
     dialog_ex_set_left_button_text(dialog_ex, "Odejit");
     dialog_ex_set_center_button_text(dialog_ex, NULL);
