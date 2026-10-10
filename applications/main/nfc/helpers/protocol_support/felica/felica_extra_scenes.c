@@ -124,7 +124,7 @@ static void felica_scene_system_on_enter(NfcApp* nfc) {
 
     submenu_add_item(
         submenu,
-        "Directory",
+        "Adresar",
         FelicaSystemSubmenuIndexDirectory,
         felica_scene_system_submenu_callback,
         nfc);
@@ -138,7 +138,7 @@ static void felica_scene_system_on_enter(NfcApp* nfc) {
         if(!is_public) {
             continue;
         }
-        furi_string_printf(label, "Readable serv %04X", service->code);
+        furi_string_printf(label, "Sluzba ke cteni %04X", service->code);
         submenu_add_item(
             submenu,
             furi_string_get_cstr(label),
