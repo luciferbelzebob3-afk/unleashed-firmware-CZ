@@ -10,10 +10,10 @@ void nfc_scene_save_confirm_on_enter(void* context) {
     NfcApp* nfc = context;
     DialogEx* dialog_ex = nfc->dialog_ex;
 
-    dialog_ex_set_left_button_text(dialog_ex, "Skip");
-    dialog_ex_set_right_button_text(dialog_ex, "Save");
-    dialog_ex_set_header(dialog_ex, "Save the Key?", 64, 0, AlignCenter, AlignTop);
-    dialog_ex_set_text(dialog_ex, "All unsaved data will be lost", 64, 12, AlignCenter, AlignTop);
+    dialog_ex_set_left_button_text(dialog_ex, "Preskocit");
+    dialog_ex_set_right_button_text(dialog_ex, "Ulozit");
+    dialog_ex_set_header(dialog_ex, "Ulozit klic?", 64, 0, AlignCenter, AlignTop);
+    dialog_ex_set_text(dialog_ex, "Neulozena data budou ztracena", 64, 12, AlignCenter, AlignTop);
     dialog_ex_set_context(dialog_ex, nfc);
     dialog_ex_set_result_callback(dialog_ex, nfc_scene_save_confirm_dialog_callback);
 
