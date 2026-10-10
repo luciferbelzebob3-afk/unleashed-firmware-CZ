@@ -12,7 +12,7 @@ typedef enum {
 static const char* vcp_ch[] = {"0 (CLI)", "1"};
 static const char* uart_ch[] = {"13,14", "15,16"};
 static const char* flow_pins[] = {"Zadny", "2,3", "6,7", "16,15"};
-static const char* baudrate_mode[] = {"Host"};
+static const char* baudrate_mode[] = {"Dle hostitele"};
 static const uint32_t baudrate_list[] = {
     1200,
     2400,
