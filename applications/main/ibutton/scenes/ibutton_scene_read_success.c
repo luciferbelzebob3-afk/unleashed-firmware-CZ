@@ -12,9 +12,9 @@ void ibutton_scene_read_success_on_enter(void* context) {
     const iButtonProtocolId protocol_id = ibutton_key_get_protocol_id(key);
 
     widget_add_button_element(
-        widget, GuiButtonTypeLeft, "Retry", ibutton_widget_callback, context);
+        widget, GuiButtonTypeLeft, "Znovu", ibutton_widget_callback, context);
     widget_add_button_element(
-        widget, GuiButtonTypeRight, "More", ibutton_widget_callback, context);
+        widget, GuiButtonTypeRight, "Dalsi", ibutton_widget_callback, context);
 
     furi_string_printf(
         tmp,
