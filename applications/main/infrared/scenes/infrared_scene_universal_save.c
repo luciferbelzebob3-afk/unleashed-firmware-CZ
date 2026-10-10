@@ -38,7 +38,7 @@ static void infrared_scene_universal_save_add_to_existing(InfraredApp* infrared)
 
     if(INFRARED_ERROR_PRESENT(error)) {
         infrared_show_error_message(
-            infrared, "Failed to add to\n\"%s\"", furi_string_get_cstr(infrared->file_path));
+            infrared, "Nelze pridat do\n\"%s\"", furi_string_get_cstr(infrared->file_path));
     } else {
         scene_manager_next_scene(infrared->scene_manager, InfraredSceneUniversalSaveDone);
     }
