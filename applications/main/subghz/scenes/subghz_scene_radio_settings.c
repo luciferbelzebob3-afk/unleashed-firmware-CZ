@@ -17,7 +17,7 @@ const uint32_t radio_device_value[RADIO_DEVICE_COUNT] = {
 #define ON_OFF_COUNT 2
 const char* const on_off_text[ON_OFF_COUNT] = {
     "VYP",
-    "ON",
+    "ZAP",
 };
 
 #define DEBUG_P_COUNT 2
