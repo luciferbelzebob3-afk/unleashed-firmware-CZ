@@ -41,7 +41,7 @@ void ibutton_scene_info_on_enter(void* context) {
     if(ibutton_protocols_get_features(ibutton->protocols, protocol_id) &
        iButtonProtocolFeatureExtData) {
         widget_add_button_element(
-            widget, GuiButtonTypeRight, "More", ibutton_widget_callback, context);
+            widget, GuiButtonTypeRight, "Dalsi", ibutton_widget_callback, context);
     }
 
     view_dispatcher_switch_to_view(ibutton->view_dispatcher, iButtonViewWidget);
