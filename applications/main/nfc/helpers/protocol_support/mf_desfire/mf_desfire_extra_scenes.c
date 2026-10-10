@@ -26,7 +26,7 @@ static void mf_desfire_scene_more_info_on_enter(NfcApp* nfc) {
 
     submenu_add_item(
         submenu,
-        "Card info",
+        "Info o karte",
         MoreInfoSubmenuIndexCardInfo,
         nfc_protocol_support_common_submenu_callback,
         nfc);
@@ -125,7 +125,7 @@ static void mf_desfire_scene_app_on_enter(NfcApp* nfc) {
     text_box_set_font(nfc->text_box, TextBoxFontHex);
     submenu_add_item(
         nfc->submenu,
-        "App info",
+        "Info o aplikaci",
         AppSubmenuIndexAppInfo,
         mf_desfire_scene_app_submenu_callback,
         nfc);
