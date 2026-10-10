@@ -16,7 +16,7 @@ void ibutton_scene_write_success_on_enter(void* context) {
     // just made.
     const char* chip = ibutton_worker_get_write_chip_name(ibutton->worker);
     if(chip[0] != '\0') {
-        snprintf(ibutton->text_store, IBUTTON_TEXT_STORE_SIZE, "Written to\n%s!", chip);
+        snprintf(ibutton->text_store, IBUTTON_TEXT_STORE_SIZE, "Zapsano na\n%s!", chip);
         popup_set_text(popup, ibutton->text_store, 40, 12, AlignLeft, AlignBottom);
     } else {
         popup_set_text(popup, "Zapis uspesny!", 40, 12, AlignLeft, AlignBottom);
