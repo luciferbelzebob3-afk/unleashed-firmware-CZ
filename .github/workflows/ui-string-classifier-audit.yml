@@ -1,0 +1,39 @@
+name: Audit klasifikace UI retezcu
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+      - cz-translation-phase1
+      - ui-string-classifier-audit
+
+permissions:
+  contents: read
+
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Nacist zdrojovy kod
+        uses: actions/checkout@v4
+      - name: Nastavit Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Vytvorit report klasifikace
+        run: |
+          python .translation-audit/classify_ui_strings.py \
+            --root . \
+            --out reports/ui-string-audit.md \
+            --json reports/ui-string-audit.json
+      - name: Ulozit report jako artefakt
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-string-classification-report
+          path: |
+            reports/ui-string-audit.md
+            reports/ui-string-audit.json
+          if-no-files-found: error
+          retention-days: 14
