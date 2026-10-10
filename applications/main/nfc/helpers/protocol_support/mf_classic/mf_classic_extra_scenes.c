@@ -304,7 +304,7 @@ static void mf_classic_scene_dict_attack_prepare_view(NfcApp* instance) {
             }
 
             instance->nfc_dict_context.dict = dict;
-            dict_attack_set_header(instance->dict_attack, "MF Classic CUID Dictionary");
+            dict_attack_set_header(instance->dict_attack, "Slovnik CUID MF Classic");
             instance->nfc_dict_context.current_key_idx = 0; // Initialize key index for CUID mode
         } while(false);
 
@@ -346,13 +346,13 @@ static void mf_classic_scene_dict_attack_prepare_view(NfcApp* instance) {
                 break;
             }
 
-            dict_attack_set_header(instance->dict_attack, "MF Classic User Dictionary");
+            dict_attack_set_header(instance->dict_attack, "Uzivatelsky slovnik MF Classic");
         } while(false);
     }
     if(state == DictAttackStateSystemDictInProgress) {
         instance->nfc_dict_context.dict = keys_dict_alloc(
             NFC_APP_MF_CLASSIC_DICT_SYSTEM_PATH, KeysDictModeOpenExisting, sizeof(MfClassicKey));
-        dict_attack_set_header(instance->dict_attack, "MF Classic System Dictionary");
+        dict_attack_set_header(instance->dict_attack, "Systemovy slovnik MF Classic");
     }
 
     instance->nfc_dict_context.dict_keys_total =
@@ -387,7 +387,7 @@ static void mf_classic_scene_dict_attack_on_enter(NfcApp* instance) {
     bool show_loading = keys_dict_check_presence(furi_string_get_cstr(cuid_dict_path));
     furi_string_free(cuid_dict_path);
 
-    if(show_loading) nfc_show_loading_label_popup(instance, "CUID dictionary\nis loading", true);
+    if(show_loading) nfc_show_loading_label_popup(instance, "Nacita se slovnik\nCUID", true);
     mf_classic_scene_dict_attack_prepare_view(instance);
     if(show_loading) nfc_show_loading_label_popup(instance, NULL, false);
 
@@ -747,7 +747,7 @@ static void
 
 static void mf_classic_scene_mfkey_complete_on_enter(NfcApp* instance) {
     widget_add_string_element(
-        instance->widget, 64, 0, AlignCenter, AlignTop, FontPrimary, "Completed!");
+        instance->widget, 64, 0, AlignCenter, AlignTop, FontPrimary, "Dokonceno!");
 
     NfcSceneMfClassicMfKeyCompleteState scene_state =
         storage_common_exists(instance->storage, NFC_MFKEY32_APP_PATH) ?
@@ -764,12 +764,12 @@ static void mf_classic_scene_mfkey_complete_on_enter(NfcApp* instance) {
             AlignCenter,
             AlignTop,
             FontSecondary,
-            "Now use Mfkey32 to extract \nkeys: r.flipper.net/nfc-tools");
+            "Ted pomoci Mfkey32 ziskej\nklice: r.flipper.net/nfc-tools");
         widget_add_icon_element(instance->widget, 50, 39, &I_MFKey_qr_25x25);
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeRight,
-            "Finish",
+            "Dokoncit",
             mf_classic_scene_mfkey_complete_callback,
             instance);
     } else {
@@ -780,12 +780,12 @@ static void mf_classic_scene_mfkey_complete_on_enter(NfcApp* instance) {
             AlignLeft,
             AlignTop,
             FontSecondary,
-            "Now run Mfkey32\n to extract \nkeys");
+            "Spust Mfkey32\npro ziskani klicu");
         widget_add_icon_element(instance->widget, 5, 18, &I_WarningDolphin_45x42);
         widget_add_button_element(
             instance->widget,
             GuiButtonTypeRight,
-            "Run",
+            "Spustit",
             mf_classic_scene_mfkey_complete_callback,
             instance);
     }
@@ -835,11 +835,11 @@ static void mf_classic_scene_mfkey_nonces_info_on_enter(NfcApp* instance) {
     FuriString* temp_str = furi_string_alloc();
 
     size_t mfkey_params_saved = mfkey32_logger_get_params_num(instance->mfkey32_logger);
-    furi_string_printf(temp_str, "Nonce pairs saved: %zu\n", mfkey_params_saved);
+    furi_string_printf(temp_str, "Ulozene pary nonce: %zu\n", mfkey_params_saved);
     widget_add_string_element(
         instance->widget, 0, 0, AlignLeft, AlignTop, FontPrimary, furi_string_get_cstr(temp_str));
     widget_add_string_element(
-        instance->widget, 0, 12, AlignLeft, AlignTop, FontSecondary, "Authenticated sectors:");
+        instance->widget, 0, 12, AlignLeft, AlignTop, FontSecondary, "Overene sektory:");
 
     mfkey32_logger_get_params_data(instance->mfkey32_logger, temp_str);
     widget_add_text_scroll_element(
@@ -949,7 +949,7 @@ static void mf_classic_scene_show_keys_on_enter(NfcApp* instance) {
     widget_add_text_scroll_element(
         instance->widget, 2, 2, 124, 60, furi_string_get_cstr(instance->text_box_store));
     widget_add_button_element(
-        instance->widget, GuiButtonTypeLeft, "Back", mf_classic_scene_show_keys_callback, instance);
+        instance->widget, GuiButtonTypeLeft, "Zpet", mf_classic_scene_show_keys_callback, instance);
     view_dispatcher_switch_to_view(instance->view_dispatcher, NfcViewWidget);
 }
 
@@ -1086,10 +1086,10 @@ static void mf_classic_scene_update_initial_setup_view(NfcApp* instance) {
 
     if(state == NfcSceneMfClassicUpdateInitialStateCardSearch) {
         popup_set_text(
-            instance->popup, "Use the source\ncard only", 128, 32, AlignRight, AlignCenter);
+            instance->popup, "Pouzij pouze\npuvodni kartu", 128, 32, AlignRight, AlignCenter);
         popup_set_icon(instance->popup, 0, 8, &I_NFC_manual_60x50);
     } else {
-        popup_set_header(popup, "Updating\nDon't move...", 52, 32, AlignLeft, AlignCenter);
+        popup_set_header(popup, "Aktualizace\nNehybej kartou...", 52, 32, AlignLeft, AlignCenter);
         popup_set_icon(popup, 12, 23, &A_Loading_24);
     }
 
