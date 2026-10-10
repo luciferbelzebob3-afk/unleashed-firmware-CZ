@@ -8,7 +8,7 @@ try:
  import tree_sitter_c,tree_sitter_cpp
 except ImportError:
  sys.exit("Install: pip install tree-sitter tree-sitter-c tree-sitter-cpp")
-EXTS={".c",".h",".cc",".cpp",".hpp"}; SKIP={".git","build","dist","vendor","submodules"}
+EXTS={".c",".h",".cc",".cpp",".hpp"}; SKIP={".git","build","dist","vendor","submodules","fbt","assets","documentation","docs"}; MAX_SOURCE_BYTES=750_000
 SINKS={"canvas_draw_str","canvas_draw_str_aligned","canvas_draw_str_with_max_width","submenu_set_header","submenu_add_item","dialog_ex_set_header","dialog_ex_set_text","dialog_ex_set_left_button_text","dialog_ex_set_right_button_text","dialog_message_set_header","dialog_message_set_text","text_input_set_header_text","popup_set_header","popup_set_text","widget_add_string_element","widget_add_text_box_element","widget_add_button_element","button_menu_add_item","button_menu_set_header","variable_item_set_current_value_text","text_box_set_text","byte_input_set_header_text","header_set_text","string_set","furi_string_set"}
 STR={"string_literal","concatenated_string"}; HUMAN=re.compile(r"[A-Za-z]{2,}(?:[ '-][A-Za-z]{2,}){0,8}")
 def walk(n):
