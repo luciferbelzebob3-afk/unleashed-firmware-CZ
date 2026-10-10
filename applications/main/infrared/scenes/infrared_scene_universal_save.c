@@ -53,13 +53,13 @@ void infrared_scene_universal_save_on_enter(void* context) {
     submenu_set_header(submenu, infrared->text_store[1]);
     submenu_add_item(
         submenu,
-        "Save as New Remote",
+        "Ulozit jako novy ovladac",
         SubmenuIndexSaveAsNewRemote,
         infrared_scene_universal_save_submenu_callback,
         context);
     submenu_add_item(
         submenu,
-        "Add to Existing Remote",
+        "Pridat do existujiciho ovladace",
         SubmenuIndexAddToExistingRemote,
         infrared_scene_universal_save_submenu_callback,
         context);
