@@ -1,4 +1,4 @@
-name: Audit klasifikace UI retezcu
+name: AST data-flow audit UI retezcu
 
 on:
   workflow_dispatch:
@@ -21,19 +21,23 @@ jobs:
       - name: Nastavit Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
+      - name: Instalovat AST parsery
+        run: python -m pip install --disable-pip-version-check tree-sitter tree-sitter-c tree-sitter-cpp
+      - name: Overit syntaxi analyzatoru
+        run: python -m py_compile .translation-audit/classify_ui_strings.py
       - name: Vytvorit report klasifikace
         run: |
           python .translation-audit/classify_ui_strings.py \
             --root . \
-            --out reports/ui-string-audit.md \
-            --json reports/ui-string-audit.json
+            --out reports/ui-dataflow-audit.md \
+            --json reports/ui-dataflow-audit.json
       - name: Ulozit report jako artefakt
         uses: actions/upload-artifact@v4
         with:
-          name: ui-string-classification-report
+          name: ui-dataflow-audit-report
           path: |
-            reports/ui-string-audit.md
-            reports/ui-string-audit.json
+            reports/ui-dataflow-audit.md
+            reports/ui-dataflow-audit.json
           if-no-files-found: error
           retention-days: 14
