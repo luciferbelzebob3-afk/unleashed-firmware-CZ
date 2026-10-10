@@ -27,12 +27,12 @@ def arguments(n):
 def main():
  p=argparse.ArgumentParser(); p.add_argument("--root",default="."); p.add_argument("--out",default="reports/ui-dataflow-audit.md"); p.add_argument("--json",default="reports/ui-dataflow-audit.json"); a=p.parse_args()
  root=Path(a.root).resolve(); files=[]; funcs=defaultdict(list); literals=[]; constants={}
- for file in root.rglob("*"):
+ for file in sorted(root.rglob("*")):
   if not file.is_file() or file.suffix.lower() not in EXTS or any(x in SKIP for x in file.parts): continue
   try: data=file.read_bytes()
   except OSError: continue
   lang=tree_sitter_c.language() if file.suffix.lower() in {".c",".h"} else tree_sitter_cpp.language()
-  tree=Parser(Language(lang)).parse(data); rel=str(file.relative_to(root)); files.append((rel,data,tree))
+  rel=str(file.relative_to(root)); print("PARSING",rel,len(data),flush=True); tree=Parser(Language(lang)).parse(data); files.append((rel,data,tree))
   for n in walk(tree.root_node):
    if n.type=="function_definition":
     dec=n.child_by_field_name("declarator"); params=[]
