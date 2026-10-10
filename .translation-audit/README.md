@@ -1,27 +1,26 @@
-# Agent pro audit textu uzivatelskeho rozhrani
+# AST agent pro audit UI retezcu a toku dat
 
-Nastroj tridi retezce v C/C++ souborech firmwaru na pravdepodobne UI texty, technicke retezce a nalezy vyzadujici rucni kontrolu. Je pouze analyzator: firmware neupravuje a nic automaticky nepreklada.
+Analyzator pouziva Tree-sitter AST pro C/C++, jednoduche sledovani hodnot promennych a interproceduralni shrnuti parametru wrapper funkci. Je report-only: nemeni zdrojaky, firmware ani preklady.
 
 ## Spusteni
 
-Z korenove slozky repozitare:
-
 ```bash
-python3 .translation-audit/classify_ui_strings.py --root . --out reports/ui-string-audit.md --json reports/ui-string-audit.json
+python -m pip install tree-sitter tree-sitter-c tree-sitter-cpp
+python .translation-audit/classify_ui_strings.py --root . --out reports/ui-dataflow-audit.md --json reports/ui-dataflow-audit.json
 ```
 
-Pouziva pouze standardni knihovnu Pythonu 3.
+## Kategorie nalezu
 
-## Kategorie
+- `UI_DATAFLOW_SINK`: retezec nebo alias se dostal do rozpoznaneho GUI API.
+- `UI_INTERPROCEDURAL_FLOW`: argument tece do parametru wrapper funkce, jehoz parametricky souhrn dosahuje GUI sinku.
+- `UNRESOLVED_STRING_LITERAL`: citelny literal bez nalezene cesty k rozpoznanemu GUI API; vyzaduje dohledani.
 
-- `UI_LIKELY`: rozpoznane GUI API na stejnem radku; stale je potreba overit tok dat.
-- `UI_REVIEW`: v blizkem kontextu je GUI API.
-- `POSSIBLE_UI_TEXT`: lidsky citelny text bez primeho dukazu vykresleni.
-- `TECHNICAL_REVIEW`: identifikator, cesta, URL nebo formatovaci token.
-- `TECHNICAL_OR_LOG`: text pobliz logovaciho nebo technickeho API.
-- `COMMENT_OR_DOC`, `BUILD_OR_MACRO`: komentare nebo preprocesor.
-- `UNCLASSIFIED`: nedostatek dukazu.
+## Co je sledovano
 
-## Dulezita omezeni
+AST volani GUI API, prime retezce, jednoduche lokalni prirazeni a aliasy, nektere souborove konstanty a propagace parametru wrapperu do pevneho bodu. Report obsahuje soubor, radek, funkci, sink, index argumentu, retezec, dukaz a doporucenou rucni kontrolu.
 
-Heuristiky nejsou dukazem, ze se retezec skutecne zobrazuje. Neprime vykreslovani, prekladove tabulky a texty sestavovane za behu mohou vyzadovat rucni dohledani. Zachovavej placeholdery jako `%s` a `%d`, escape sekvence, protokoly, nazvy souboru, ID a API. Pred sloucenim zmen prover diff a sestaveni firmwaru.
+## Limity
+
+Tohle jeste neni plnohodnotna formalni whole-program data-flow analyza. Neprovede uplnou kompilacni expanzi maker ani spolehlive nemodeluje pointer/heap aliasy, pole a struktury, vetveni a slucovani cest, callbacky, RTOS tasky, dynamicky generovane retezce, resource tabulky a vsechny projektove GUI wrappery. Volani sinku je silny staticky dukaz, ale nemusi znamenat, ze se text za behu skutecne vykresli. Nezname retezce se nesmeji automaticky prekladat bez potvrzeni toku do UI.
+
+CI overi syntaxi Python skriptu, spusti analyzu a ulozi Markdown/JSON artefakty na 14 dni. Nez se vysledky pouziji k prekladu, zkontroluj stav workflow a report.
