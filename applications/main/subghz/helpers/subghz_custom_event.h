@@ -138,6 +138,8 @@ typedef enum {
     SetTypeNiceSmilo_433_92,
     SetTypeNiceFlorS_433_92,
     SetTypeNiceOne_433_92,
+    SetTypeNiceOCode_433_92,
+    SetTypeNiceOCodeOne_433_92,
     SetTypeNiceFlo12bit,
     SetTypeNiceFlo24bit,
     SetTypeCAME12bit,
