@@ -26,6 +26,11 @@ void subghz_scene_set_seed_on_enter(void* context) {
         byte_ptr = (uint8_t*)&subghz->gen_info->keeloq_seed.seed;
         byte_count = sizeof(subghz->gen_info->keeloq_seed.seed);
         break;
+    case GenNiceFlorS:
+        // Nice O-Code only - plain Flor-S and Nice One never reach this scene
+        byte_ptr = (uint8_t*)&subghz->gen_info->nice_flor_s.ic;
+        byte_count = sizeof(subghz->gen_info->nice_flor_s.ic);
+        break;
     // Not needed for these types
     case GenKeeloq:
     case GenAlutechAt4n:
@@ -35,7 +40,6 @@ void subghz_scene_set_seed_on_enter(void* context) {
     case GenBenincaARC:
     case GenJarolift:
     case GenDitecGOL4:
-    case GenNiceFlorS:
     case GenSecPlus2:
     case GenPhoenixV2:
     case GenPrastel:
@@ -50,7 +54,11 @@ void subghz_scene_set_seed_on_enter(void* context) {
     furi_assert(byte_ptr);
     furi_assert(byte_count > 0);
 
-    *((uint32_t*)byte_ptr) = __bswap32(*((uint32_t*)byte_ptr)); // Convert
+    if(byte_count == 2) {
+        *((uint16_t*)byte_ptr) = __bswap16(*((uint16_t*)byte_ptr)); // Convert
+    } else {
+        *((uint32_t*)byte_ptr) = __bswap32(*((uint32_t*)byte_ptr)); // Convert
+    }
 
     // Setup view
     ByteInput* byte_input = subghz->byte_input;
@@ -94,6 +102,19 @@ bool subghz_scene_set_seed_on_event(void* context, SceneManagerEvent event) {
                     subghz->gen_info->keeloq_seed.seed,
                     subghz->gen_info->keeloq_seed.manuf);
                 break;
+            case GenNiceFlorS:
+                subghz->gen_info->nice_flor_s.ic = __bswap16(subghz->gen_info->nice_flor_s.ic);
+                generated_protocol = subghz_txrx_gen_nice_flor_s_protocol(
+                    subghz->txrx,
+                    subghz->gen_info->mod,
+                    subghz->gen_info->freq,
+                    subghz->gen_info->nice_flor_s.serial,
+                    subghz->gen_info->nice_flor_s.btn,
+                    subghz->gen_info->nice_flor_s.cnt,
+                    subghz->gen_info->nice_flor_s.nice_one,
+                    subghz->gen_info->nice_flor_s.o_code,
+                    subghz->gen_info->nice_flor_s.ic);
+                break;
             // Not needed for these types
             case GenKeeloq:
             case GenAlutechAt4n:
@@ -103,7 +124,6 @@ bool subghz_scene_set_seed_on_event(void* context, SceneManagerEvent event) {
             case GenBenincaARC:
             case GenJarolift:
             case GenDitecGOL4:
-            case GenNiceFlorS:
             case GenSecPlus2:
             case GenPhoenixV2:
             case GenPrastel:
